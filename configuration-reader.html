@@ -39,7 +39,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Elements that contain an array of values, either as a comma-separated list or multiple elements
          **/
-        _arrayNodes: ["categories", "stops", "margin"],
+        _arrayNodes: ["categories", "stops", "margin", "center"],
+
+        /**
+         * Elements whose text content should be set as text property value
+         **/
+        _textContentNodes: ["subtitle", "title"],
 
         /**
          * Transform the given string to camel-case
@@ -73,11 +78,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          **/
         _loadFromNode: function (dest, node) {
             for (var i in node.attributes) {
-                var attr = node.attributes[i].name;
-                if (attr !== undefined) {
-                    var val = node.getAttribute(attr);
-                    var res = this._parseAttribute(val);
-                    dest[this._toCamelCase(attr)] = res;
+                if (node.attributes.hasOwnProperty(i)) {
+                    var attr = node.attributes[i].name;
+                    if (attr !== undefined) {
+                        var val = node.getAttribute(attr);
+                        var res = this._parseAttribute(val);
+                        dest[this._toCamelCase(attr)] = res;
+                    }
                 }
             }
             if (this._hasOnlyTextContent(node)) {
@@ -169,9 +176,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                         result = result.length > 1 ? result : result[0];
 
                     } else if ('table' === name) {
+                        camelName = 'table';
                         result = node;
                     } else if (this._multivaluedNodes.indexOf(camelName) !== -1 || dest[camelName] === undefined) {
-                        if ('title' !== camelName && this._hasOnlyTextContent(node)) {
+                        if (this._textContentNodes.indexOf(camelName) === -1 && this._hasOnlyTextContent(node)) {
                             result = node.textContent;
                         } else {
                             result = {};
