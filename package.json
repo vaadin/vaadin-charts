@@ -3,7 +3,7 @@
   "version": "3.0.0-alpha3",
   "repository": "vaadin/charts-component",
   "scripts": {
-    "test": "wct --plugin sauce"
+    "test": "gulp format:verify && wct --plugin sauce"
   },
   "devDependencies": {
     "bower": "^1.4.1",
