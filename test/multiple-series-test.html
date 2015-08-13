@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,41 +8,34 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="pieWithSeries" vc-type="column">
-    <v-series vc-name="Browser share 2012" vc-values="[]">
-        <vc-data>["Firefox",   45.0],
-            ["IE",       26.8],
-            ["Chrome", 12.8],
-            ["Safari",    8.5],
-            ["Opera",     6.2],
-            ["Others",   0.7]</vc-data>
-    </v-series>
-    <v-series vc-name="Browser share 2013">
-        <vc-data>["Firefox",   45.0],
-            ["Chrome",       26.8],
-            ["IE", 12.8],
-            ["Safari",    10.5],
-            ["Opera",     4.2],
-            ["Others",   0.7]</vc-data>
-    </v-series>
-</v-chart>
-<script>
+    <v-chart id="pieWithSeries" vc-type="column">
+        <v-series vc-name="Browser share 2012" vc-values="[]">
+            <vc-data>["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera",
+                6.2], ["Others", 0.7]</vc-data>
+        </v-series>
+        <v-series vc-name="Browser share 2013">
+            <vc-data>["Firefox", 45.0], ["Chrome", 26.8], ["IE", 12.8], ["Safari", 10.5],
+                ["Opera", 4.2], ["Others", 0.7]</vc-data>
+        </v-series>
+    </v-chart>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('config with series', function() {
+                var chartwc = document.querySelector(
+                    '#pieWithSeries');
+                var conf = chartwc._chartConf;
+                expect(conf.series).to.exist;
+                expect(conf.series).not.to.be.empty;
+                expect(conf.series.length).to.equal(2);
+            });
 
-        test('config with series', function () {
-            var chartwc = document.querySelector('#pieWithSeries');
-            var conf = chartwc._chartConf;
-            expect(conf.series).to.exist;
-            expect(conf.series).not.to.be.empty;
-            expect(conf.series.length).to.equal(2);
+
         });
-
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,45 +8,57 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="plotOptionsWithFillColorStops" vc-type="line">
-    <vc-plot-options vc-line-width="1">
-        <!-- TODO should be area-->
-        <vc-series>
-            <vc-fill-color>
-                <vc-stops>0, #3090F0</vc-stops>
-                <vc-stops>0.5, #FF7D42</vc-stops>
-                <vc-stops>
-                    <vc-position>1</vc-position>
-                    <vc-color>rgba(200, 200, 200, 0.2)</vc-color>
-                </vc-stops>
-            </vc-fill-color>
-        </vc-series>
-    </vc-plot-options>
-</v-chart>
+    <v-chart id="plotOptionsWithFillColorStops" vc-type="line">
+        <vc-plot-options vc-line-width="1">
+            <!-- TODO should be area-->
+            <vc-series>
+                <vc-fill-color>
+                    <vc-stops>0, #3090F0</vc-stops>
+                    <vc-stops>0.5, #FF7D42</vc-stops>
+                    <vc-stops>
+                        <vc-position>1</vc-position>
+                        <vc-color>rgba(200, 200, 200, 0.2)</vc-color>
+                    </vc-stops>
+                </vc-fill-color>
+            </vc-series>
+        </vc-plot-options>
+    </v-chart>
 
-<script>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
-
-        test('chart fill color and stops', function () {
-            var chartwc = document.querySelector('#plotOptionsWithFillColorStops');
-            var conf = chartwc._chartConf;
-            expect(conf.plotOptions.series.fillColor).to.exist;
-            expect(conf.plotOptions.series.fillColor.stops).to.exist;
-            expect(conf.plotOptions.series.fillColor.stops).to.be.instanceof(Array);
-            expect(conf.plotOptions.series.fillColor.stops).to.not.be.empty;
-            expect(conf.plotOptions.series.fillColor.stops[0]).to.be.instanceof(Array);
-            expect(conf.plotOptions.series.fillColor.stops[0][0]).to.equal(0);
-            expect(conf.plotOptions.series.fillColor.stops[0][1]).to.equal("#3090F0");
-            expect(conf.plotOptions.series.fillColor.stops[1][0]).to.equal(0.5);
-            expect(conf.plotOptions.series.fillColor.stops[1][1]).to.equal("#FF7D42");
-            expect(conf.plotOptions.series.fillColor.stops[2][0]).to.equal(1);
-            expect(conf.plotOptions.series.fillColor.stops[2][1]).to.equal('rgba(200, 200, 200, 0.2)');
+            test('chart fill color and stops', function() {
+                var chartwc = document.querySelector(
+                    '#plotOptionsWithFillColorStops');
+                var conf = chartwc._chartConf;
+                expect(conf.plotOptions.series.fillColor).to.exist;
+                expect(conf.plotOptions.series.fillColor.stops)
+                    .to.exist;
+                expect(conf.plotOptions.series.fillColor.stops)
+                    .to.be.instanceof(Array);
+                expect(conf.plotOptions.series.fillColor.stops)
+                    .to.not.be.empty;
+                expect(conf.plotOptions.series.fillColor.stops[
+                    0]).to.be.instanceof(Array);
+                expect(conf.plotOptions.series.fillColor.stops[
+                    0][0]).to.equal(0);
+                expect(conf.plotOptions.series.fillColor.stops[
+                    0][1]).to.equal("#3090F0");
+                expect(conf.plotOptions.series.fillColor.stops[
+                    1][0]).to.equal(0.5);
+                expect(conf.plotOptions.series.fillColor.stops[
+                    1][1]).to.equal("#FF7D42");
+                expect(conf.plotOptions.series.fillColor.stops[
+                    2][0]).to.equal(1);
+                expect(conf.plotOptions.series.fillColor.stops[
+                    2][1]).to.equal(
+                    'rgba(200, 200, 200, 0.2)');
+            });
         });
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

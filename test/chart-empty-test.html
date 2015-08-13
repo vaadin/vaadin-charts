@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,26 +8,27 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="emptyPie" vc-type="pie">
-</v-chart>
-<script>
+    <v-chart id="emptyPie" vc-type="pie">
+    </v-chart>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('basic config parsed', function() {
+                var chartwc = document.querySelector(
+                    '#emptyPie');
+                var conf = chartwc._chartConf;
 
-        test('basic config parsed', function () {
-            var chartwc = document.querySelector('#emptyPie');
-            var conf = chartwc._chartConf;
+                expect(conf.chart.type).to.equal('pie');
+                expect(conf.series).to.be.undefined;
+                expect(conf.chart.renderTo).to.exist;
 
-            expect(conf.chart.type).to.equal('pie');
-            expect(conf.series).to.be.undefined;
-            expect(conf.chart.renderTo).to.exist;
+            });
 
         });
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

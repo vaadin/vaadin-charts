@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,38 +8,41 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="options3d" type="scatter">
-    <vc-chart vc-margin="100">
-        <vc-options3d vc-enabled="true"
-                   vc-alpha="60">
-            <vc-frame>
-                <vc-bottom vc-size="1" vc-color="rgba(0,0,0,0.02)"></vc-bottom>
-                <vc-back vc-size="1" vc-color="rgba(0,0,0,0.04)"></vc-back>
-                <vc-side vc-size="1" vc-color="rgba(0,0,0,0.06)"></vc-side>
-            </vc-frame>
-        </vc-options3d>
-    </vc-chart>
-</v-chart>
+    <v-chart id="options3d" type="scatter">
+        <vc-chart vc-margin="100">
+            <vc-options3d vc-enabled="true" vc-alpha="60">
+                <vc-frame>
+                    <vc-bottom vc-size="1" vc-color="rgba(0,0,0,0.02)"></vc-bottom>
+                    <vc-back vc-size="1" vc-color="rgba(0,0,0,0.04)"></vc-back>
+                    <vc-side vc-size="1" vc-color="rgba(0,0,0,0.06)"></vc-side>
+                </vc-frame>
+            </vc-options3d>
+        </vc-chart>
+    </v-chart>
 
-<script>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('chart 3d options', function() {
+                var chartwc = document.querySelector(
+                    '#options3d');
+                var conf = chartwc._chartConf;
+                expect(conf.chart.margin).to.equal(100);
+                expect(conf.chart.options3d).to.exist;
+                expect(conf.chart.options3d.enabled).to.equal(
+                    true);
+                expect(conf.chart.options3d.frame).to.exist;
+                expect(conf.chart.options3d.frame.bottom.size).to
+                    .equal(1);
+                expect(conf.chart.options3d.frame.bottom.color)
+                    .to.equal('rgba(0,0,0,0.02)');
 
-        test('chart 3d options', function () {
-            var chartwc = document.querySelector('#options3d');
-            var conf = chartwc._chartConf;
-            expect(conf.chart.margin).to.equal(100);
-            expect(conf.chart.options3d).to.exist;
-            expect(conf.chart.options3d.enabled).to.equal(true);
-            expect(conf.chart.options3d.frame).to.exist;
-            expect(conf.chart.options3d.frame.bottom.size).to.equal(1);
-            expect(conf.chart.options3d.frame.bottom.color).to.equal('rgba(0,0,0,0.02)');
-
+            });
         });
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

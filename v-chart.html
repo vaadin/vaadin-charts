@@ -48,7 +48,7 @@ Example:
         Polymer({
             is: 'v-chart',
 
-            behaviors: [ValoThemeBehavior,ConfigurationReaderBehavior],
+            behaviors: [ValoThemeBehavior, ConfigurationReaderBehavior],
 
             properties: {
 
@@ -57,7 +57,7 @@ Example:
                  **/
                 chart: {
                     type: Object,
-                    value: function () {
+                    value: function() {
                         return {};
                     }
                 },
@@ -74,8 +74,10 @@ Example:
                  **/
                 _chartConf: {
                     type: Object,
-                    value: function () {
-                        return {chart: {}};
+                    value: function() {
+                        return {
+                            chart: {}
+                        };
                     }
                 }
             },
@@ -84,7 +86,7 @@ Example:
             /**
              * Dynamically add a new Series to this chart
              **/
-            _addSeries: function (newSeries) {
+            _addSeries: function(newSeries) {
                 if (this._chartConf.series === undefined) {
                     this._chartConf.series = [];
                 }
@@ -94,7 +96,7 @@ Example:
             /**
              * Dynamically add a new Series to this chart's Drilldown configuration
              **/
-            _addDrilldownSeries: function (newSeries) {
+            _addDrilldownSeries: function(newSeries) {
                 if (!this._chartConf.drilldown) {
                     this._chartConf.drilldown = {};
                 }
@@ -105,20 +107,21 @@ Example:
             },
 
             /* ----------- lifecycle ----------- */
-            created: function () {
+            created: function() {
                 //Workaround to prevent _chartConf from being undefined when calling _addSeries from child component in FF
                 this._chartConf = {};
             },
 
-            attached: function () {
-                this.async(function () {
+            attached: function() {
+                this.async(function() {
                     this.chart = new Highcharts.Chart(this._chartConf);
                 }, 1);
             },
 
-            ready: function () {
+            ready: function() {
                 this._cleanNode(Polymer.dom(this));
-                this._loadConfiguration(this._chartConf, Polymer.dom(this));
+                this._loadConfiguration(this._chartConf, Polymer.dom(
+                    this));
 
                 if (!this._chartConf.chart) {
                     this._chartConf.chart = {};

@@ -32,7 +32,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Elements that should be mapped in to an array, e.g. two x-axis elements would be mapped to the same
          * array
          **/
-        _multivaluedNodes: ["xAxis", "yAxis", "plotBands", "plotLines", "background", "crosshairs", "stops", "levels", "pane", "items"],
+        _multivaluedNodes: ["xAxis", "yAxis", "plotBands", "plotLines",
+            "background", "crosshairs", "stops", "levels", "pane",
+            "items"
+        ],
 
         /**
          * Elements that contain an array of values, either as a comma-separated list or multiple elements
@@ -54,9 +57,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Check if the given attribute is valid as a Vaadin Charts configuration attribute
          **/
-        _isVaadinChartsAttribute: function (attName) {
+        _isVaadinChartsAttribute: function(attName) {
             return attName != undefined &&
-                    (attName.indexOf(this._vaadinChartsPrefix) === 0 || this._nodeValueAttributes.indexOf(attName) !== -1);
+                (attName.indexOf(this._vaadinChartsPrefix) === 0 ||
+                    this._nodeValueAttributes.indexOf(attName) !== -1);
         },
 
         /**
@@ -64,17 +68,19 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {string} str
          **/
-        _toCamelCase: function (str) {
+        _toCamelCase: function(str) {
             var out = "";
             if (this._nodeValueAttributes.indexOf(str) !== -1) {
                 out = str;
             } else {
                 str = str.substring(this._vaadinChartsPrefix.length);
-                str.split("-").forEach(function (word, idx) {
+                str.split("-").forEach(function(word, idx) {
                     var add = word.toLowerCase();
                     //first word always goes in lower case, the rest go with camelCase, except for _uppercaseWords
-                    if (idx === 0 || this._uppercaseWords.indexOf(add) === -1) {
-                        out += (idx === 0 ? add : add[0].toUpperCase() + add.slice(1));
+                    if (idx === 0 || this._uppercaseWords.indexOf(
+                            add) === -1) {
+                        out += (idx === 0 ? add : add[0].toUpperCase() +
+                            add.slice(1));
                     } else {
                         out += word.toUpperCase();
                     }
@@ -89,7 +95,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * @param {object} dest the chart configuration object
          * @param {node} parent the node that is parsed for configuration
          **/
-        _loadFromNode: function (dest, node) {
+        _loadFromNode: function(dest, node) {
             for (var i in node.attributes) {
                 if (node.attributes.hasOwnProperty(i)) {
                     var attr = node.attributes[i].name;
@@ -110,10 +116,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Removes all empty text and comment nodes.
          **/
-        _cleanNode: function (node) {
+        _cleanNode: function(node) {
             for (var n = 0; n < node.childNodes.length; n++) {
                 var child = node.childNodes[n];
-                if (child.nodeType === 8 || (child.nodeType === 3 && !/\S/.test(child.nodeValue))) {
+                if (child.nodeType === 8 || (child.nodeType === 3 && !
+                        /\S/.test(child.nodeValue))) {
                     node.removeChild(child);
                     n--;
                 } else if (child.nodeType === 1) {
@@ -127,7 +134,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Try JSON.parse, then eval if it's function, or return original value
          * @param {object} value to be set
          **/
-        _parseAttribute: function (val) {
+        _parseAttribute: function(val) {
             var res;
             try {
                 res = JSON.parse(val);
@@ -143,10 +150,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 }
             }
             return res;
-        }
-        ,
+        },
 
-        _evalJavascript: function (val) {
+        _evalJavascript: function(val) {
             //if it's a function eval
             return val.indexOf('function') === 0;
         },
@@ -157,8 +163,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {node} the node to check
          **/
-        _hasOnlyTextContent: function (node) {
-            return node.hasChildNodes() && node.childNodes.length == 1 && node.childNodes[0].nodeType == 3 && node.textContent.trim() != "";
+        _hasOnlyTextContent: function(node) {
+            return node.hasChildNodes() && node.childNodes.length == 1 &&
+                node.childNodes[0].nodeType == 3 && node.textContent.trim() !=
+                "";
         },
 
         /**
@@ -167,7 +175,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * @param {object} dest the chart configuration object
          * @param {node} parent the node that contains the configuration elements
          **/
-        _loadConfiguration: function (dest, parent) {
+        _loadConfiguration: function(dest, parent) {
             for (var n = 0; n < parent.childNodes.length; n++) {
                 var node = parent.childNodes[n];
                 var name = node.nodeName.toLowerCase();
@@ -180,21 +188,30 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                         if (this._arrayNodes.indexOf(camelName) !== -1) {
                             result = [];
                             if (this._hasOnlyTextContent(node)) {
-                                node.textContent.split(/\s*,\s*/).forEach(function (word) {
-                                    result.push(this._parseAttribute(word));
-                                }, this);
+                                node.textContent.split(/\s*,\s*/).forEach(
+                                    function(word) {
+                                        result.push(this._parseAttribute(
+                                            word));
+                                    }, this);
                             } else {
                                 for (var i = 0; i < node.childNodes.length; i++) {
                                     var child = node.childNodes[i];
-                                    result.push(this._parseAttribute(child.textContent));
+                                    result.push(this._parseAttribute(
+                                        child.textContent));
                                 }
                             }
-                            result = result.length > 1 ? result : result[0];
+                            result = result.length > 1 ? result :
+                                result[0];
 
-                        } else if (this._nodeValueAttributes.indexOf(name) !== -1) {
+                        } else if (this._nodeValueAttributes.indexOf(
+                                name) !== -1) {
                             result = node;
-                        } else if (this._multivaluedNodes.indexOf(camelName) !== -1 || dest[camelName] === undefined) {
-                            if (this._textContentNodes.indexOf(camelName) === -1 && this._hasOnlyTextContent(node)) {
+                        } else if (this._multivaluedNodes.indexOf(
+                                camelName) !== -1 || dest[camelName] ===
+                            undefined) {
+                            if (this._textContentNodes.indexOf(
+                                    camelName) === -1 && this._hasOnlyTextContent(
+                                    node)) {
                                 result = node.textContent;
                             } else {
                                 result = {};
@@ -204,7 +221,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                         }
 
                         //put result in to the correct place
-                        if (this._multivaluedNodes.indexOf(camelName) !== -1) {
+                        if (this._multivaluedNodes.indexOf(camelName) !==
+                            -1) {
                             if (dest[camelName] === undefined) {
                                 dest[camelName] = [result];
                             } else {

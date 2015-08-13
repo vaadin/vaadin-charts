@@ -22,15 +22,13 @@
     <vc-tooltip vc-shared="true"></vc-tooltip>
     <vc-plot-options>
         <vc-column>
-            <vc-tooltip
-                    vc-point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f} mm</b>"></vc-tooltip>
+            <vc-tooltip vc-point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f} mm</b>"></vc-tooltip>
         </vc-column>
         <vc-errorbar>
             <vc-tooltip vc-point-format=" (error range: {point.low}-{point.high} mm)<br/>"></vc-tooltip>
         </vc-errorbar>
         <vc-spline>
-            <vc-tooltip
-                    vc-point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f}°C</b>"></vc-tooltip>
+            <vc-tooltip vc-point-format="<span style='font-weight: bold; color: {series.color}'>{series.name}</span>: <b>{point.y:.1f}°C</b>"></vc-tooltip>
         </vc-spline>
     </vc-plot-options>
     <v-series vc-name="Rainfall" vc-type="column" vc-y-axis="1">
@@ -41,8 +39,8 @@
 
     <v-series vc-name="Rainfall error" vc-y-axis="1">
         <vc-data>
-            [48, 51], [68, 73], [92, 110], [128, 136], [140, 150], [171, 179], [135, 143], [142, 149], [204, 220], [189,
-            199], [95, 110], [52, 56]
+            [48, 51], [68, 73], [92, 110], [128, 136], [140, 150], [171, 179], [135, 143], [142,
+            149], [204, 220], [189, 199], [95, 110], [52, 56]
         </vc-data>
     </v-series>
 

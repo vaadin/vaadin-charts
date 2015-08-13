@@ -35,7 +35,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              **/
             _seriesConf: {
                 type: Object,
-                value: function () {
+                value: function() {
                     return {};
                 }
             }
@@ -47,12 +47,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Overrides behavior, for v-series all values should be evaluated as javascript
          **/
-        _evalJavascript: function (val) {
+        _evalJavascript: function(val) {
             //always eval
             return true;
         },
 
-        _parentChart: function () {
+        _parentChart: function() {
             var parent = Polymer.dom(this.root).parentNode;
             while (parent._addSeries === undefined) {
                 parent = parent.parentNode;
@@ -63,7 +63,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Load the configuration from the element attributes and the light-DOM elements.
          **/
-        _loadData: function () {
+        _loadData: function() {
             var element = Polymer.dom(this);
 
             for (var n = 0; n < element.childNodes.length; n++) {
@@ -75,7 +75,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     if (this._hasPointNodes(node)) {
                         value = [];
                         for (var o = 0; o < node.childNodes.length; o++) {
-                            value.push(this._parsePoint(node.childNodes[o]));
+                            value.push(this._parsePoint(node.childNodes[
+                                o]));
                         }
                     } else {
                         value = '[' + node.textContent + ']';
@@ -89,30 +90,38 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Creates a point object from a point node.
          **/
-        _parsePoint: function (pointNode) {
+        _parsePoint: function(pointNode) {
             var result = {};
 
             for (var n = 0; n < pointNode.childNodes.length; n++) {
                 var node = pointNode.childNodes[n];
                 if (this._hasOnlyTextContent(node)) {
-                    var camelName = this._toCamelCase(node.nodeName.toLowerCase());
+                    var camelName = this._toCamelCase(node.nodeName
+                        .toLowerCase());
                     if ('date' === camelName) {
                         if (result['x'] === undefined) {
                             var parsedDate = this._parseDate(node.textContent);
                             if (parsedDate !== undefined) {
                                 result['x'] = parsedDate;
                             } else {
-                                console.log('Unable to parse date: ' + node.textContent);
+                                console.log(
+                                    'Unable to parse date: ' +
+                                    node.textContent);
                             }
                         } else {
-                            console.log('x value is already defined for this point, \'' +
-                                    node.textContent + '\' couldn\'t be set');
+                            console.log(
+                                'x value is already defined for this point, \'' +
+                                node.textContent +
+                                '\' couldn\'t be set');
                         }
                     } else if (result[camelName] === undefined) {
-                        result[camelName] = this._parseAttribute(node.textContent);
+                        result[camelName] = this._parseAttribute(
+                            node.textContent);
                     } else {
-                        console.log(camelName + ' value is already defined for this point, \'' +
-                                node.textContent + '\' couldn\'t be set');
+                        console.log(camelName +
+                            ' value is already defined for this point, \'' +
+                            node.textContent +
+                            '\' couldn\'t be set');
                     }
                 }
             }
@@ -121,18 +130,20 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return result;
         },
 
-        _parseDate: function (dateString) {
+        _parseDate: function(dateString) {
             if (this._isValidDate(dateString)) {
                 return Date.parse(dateString);
             }
         },
 
-        _isValidDate: function (dateString) {
+        _isValidDate: function(dateString) {
             try {
                 var dateValue = new Date(dateString);
                 //If dateValue is invalid getTime is NaN
-                return (dateValue.toISOString().indexOf(dateString) === 0 ) &&
-                        Object.prototype.toString.call(dateValue) === "[object Date]" && !isNaN(dateValue.getTime());
+                return (dateValue.toISOString().indexOf(dateString) ===
+                        0) &&
+                    Object.prototype.toString.call(dateValue) ===
+                    "[object Date]" && !isNaN(dateValue.getTime());
             } catch (e) {
 
             }
@@ -143,8 +154,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /**
          * Checks if nodes has child nodes that correspond to points.
          **/
-        _hasPointNodes: function (node) {
-            return node.childNodes.length > 0 && 'vc-point' === node.childNodes[0].nodeName.toLowerCase();
+        _hasPointNodes: function(node) {
+            return node.childNodes.length > 0 && 'vc-point' ===
+                node.childNodes[0].nodeName.toLowerCase();
         },
 
 
@@ -153,20 +165,21 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * @param {string} name
          * @param {object} value to be set
          **/
-        _setProperty: function (name, value) {
+        _setProperty: function(name, value) {
             var parsedValue = this._parseAttribute(value);
             //if value is undefined it shouldn't be set to keep _seriesConf minimal
             if (undefined !== parsedValue) {
                 if (undefined === this._seriesConf[name]) {
                     this._seriesConf[name] = parsedValue;
                 } else if (name === 'data') {
-                    Array.prototype.push.apply(this._seriesConf[name], parsedValue);
+                    Array.prototype.push.apply(this._seriesConf[
+                        name], parsedValue);
                 }
             }
         },
 
 
-        ready: function () {
+        ready: function() {
             var element = Polymer.dom(this);
             this._cleanNode(element);
             this._loadFromNode(this._seriesConf, element.node);

@@ -4,28 +4,26 @@
     <vc-x-axis>
         <vc-categories>Printer, Coffee machine</vc-categories>
     </vc-x-axis>
-    <vc-y-axis vc-type="datetime"><vc-title>Time</vc-title></vc-y-axis>
-    <vc-tooltip
-            vc-formatter="function () {return this.series.name +': '+ Highcharts.dateFormat('%H:%M', this.point.low) + ' - ' + Highcharts.dateFormat('%H:%M', this.point.high)}"></vc-tooltip>
+    <vc-y-axis vc-type="datetime">
+        <vc-title>Time</vc-title>
+    </vc-y-axis>
+    <vc-tooltip vc-formatter="function () {return this.series.name +': '+ Highcharts.dateFormat('%H:%M', this.point.low) + ' - ' + Highcharts.dateFormat('%H:%M', this.point.high)}"></vc-tooltip>
     <vc-plot-options>
         <vc-columnrange vc-grouping="false">
-            <vc-data-labels vc-enabled="true" vc-inside="true" vc-color="white"
-                         vc-formatter="function () {return this.y == this.point.low ? '' : this.series.name;}"></vc-data-labels>
+            <vc-data-labels vc-enabled="true" vc-inside="true" vc-color="white" vc-formatter="function () {return this.y == this.point.low ? '' : this.series.name;}"></vc-data-labels>
 
         </vc-columnrange>
     </vc-plot-options>
     <v-series vc-name="Team Alpha">
         <vc-color>rgba(255, 60, 125, 0.8)</vc-color>
         <vc-data>
-            [Date.UTC(2013,05,07,12,00,00),Date.UTC(2013,05,07,15,00,00)],
-            [Date.UTC(2013,05,07,13,00,00),Date.UTC(2013,05,07,17,00,00)]
+            [Date.UTC(2013,05,07,12,00,00),Date.UTC(2013,05,07,15,00,00)], [Date.UTC(2013,05,07,13,00,00),Date.UTC(2013,05,07,17,00,00)]
         </vc-data>
     </v-series>
     <v-series vc-name="Team Beta">
         <vc-color>rgba(60, 125, 255, 0.8)</vc-color>
         <vc-data>
-            [Date.UTC(2013,05,07,16,00,00),Date.UTC(2013,05,07,17,00,00)],
-            [Date.UTC(2013,05,07,12,00,00),Date.UTC(2013,05,07,14,00,00)]
+            [Date.UTC(2013,05,07,16,00,00),Date.UTC(2013,05,07,17,00,00)], [Date.UTC(2013,05,07,12,00,00),Date.UTC(2013,05,07,14,00,00)]
         </vc-data>
     </v-series>
 

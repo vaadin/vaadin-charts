@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,60 +8,18 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
 
-<table id="datatable">
-    <thead>
-    <tr>
-        <th></th>
-        <th>Jane</th>
-        <th>John</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th>Apples</th>
-        <td>3</td>
-        <td>4</td>
-    </tr>
-    <tr>
-        <th>Pears</th>
-        <td>2</td>
-        <td>0</td>
-    </tr>
-    <tr>
-        <th>Plums</th>
-        <td>5</td>
-        <td>11</td>
-    </tr>
-    <tr>
-        <th>Bananas</th>
-        <td>1</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <th>Oranges</th>
-        <td>2</td>
-        <td>4</td>
-    </tr>
-    </tbody>
-</table>
-
-<v-chart id="data-table-id" vc-type="column">
-    <vc-data vc-table="datatable"></vc-data>
-</v-chart>
-
-<v-chart id="data-table-node" vc-type="column">
-    <vc-data>
-        <table>
-            <thead>
+    <table id="datatable">
+        <thead>
             <tr>
                 <th></th>
                 <th>Jane</th>
                 <th>John</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             <tr>
                 <th>Apples</th>
                 <td>3</td>
@@ -86,13 +45,56 @@
                 <td>2</td>
                 <td>4</td>
             </tr>
-            </tbody>
-        </table>
-    </vc-data>
-</v-chart>
+        </tbody>
+    </table>
 
-<v-chart id="data-csv" vc-type="areaspline">
-    <vc-data vc-csv="Year,Annual mean,5 year mean
+    <v-chart id="data-table-id" vc-type="column">
+        <vc-data vc-table="datatable"></vc-data>
+    </v-chart>
+
+    <v-chart id="data-table-node" vc-type="column">
+        <vc-data>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Jane</th>
+                        <th>John</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Apples</th>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <th>Pears</th>
+                        <td>2</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>Plums</th>
+                        <td>5</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <th>Bananas</th>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>Oranges</th>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </vc-data>
+    </v-chart>
+
+    <v-chart id="data-csv" vc-type="areaspline">
+        <vc-data vc-csv="Year,Annual mean,5 year mean
 1880,-0.31,
 1881,-0.22,
 1882,-0.28,-0.29
@@ -226,40 +228,44 @@
 2010,0.64,0.54
 2011,0.52,
 2012,0.52,"></vc-data>
-</v-chart>
-<script>
+    </v-chart>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('data with table id', function() {
+                var chartwc = document.querySelector(
+                    '#data-table-id');
+                var conf = chartwc._chartConf;
 
-        test('data with table id', function () {
-            var chartwc = document.querySelector('#data-table-id');
-            var conf = chartwc._chartConf;
+                expect(conf.data.table).to.exist;
+                expect(conf.data.table).to.equal('datatable');
+            });
 
-            expect(conf.data.table).to.exist;
-            expect(conf.data.table).to.equal('datatable');
+            test('data with table node', function() {
+                var chartwc = document.querySelector(
+                    '#data-table-node');
+                var conf = chartwc._chartConf;
+
+                expect(conf.data.table).to.exist;
+
+                var tmp = document.createElement("div");
+                tmp.appendChild(conf.data.table);
+
+                expect(tmp.innerHTML).to.equal(
+                    '<table><thead><tr><th></th><th>Jane</th><th>John</th></tr></thead><tbody><tr><th>Apples</th><td>3</td><td>4</td></tr><tr><th>Pears</th><td>2</td><td>0</td></tr><tr><th>Plums</th><td>5</td><td>11</td></tr><tr><th>Bananas</th><td>1</td><td>1</td></tr><tr><th>Oranges</th><td>2</td><td>4</td></tr></tbody></table>'
+                );
+            });
+
+            test('data with CSV', function() {
+                var chartwc = document.querySelector(
+                    '#data-csv');
+                var conf = chartwc._chartConf;
+
+                expect(conf.data.csv).to.exist;
+            });
         });
-
-        test('data with table node', function () {
-            var chartwc = document.querySelector('#data-table-node');
-            var conf = chartwc._chartConf;
-
-            expect(conf.data.table).to.exist;
-
-            var tmp = document.createElement("div");
-            tmp.appendChild(conf.data.table);
-
-            expect(tmp.innerHTML).to.equal('<table><thead><tr><th></th><th>Jane</th><th>John</th></tr></thead><tbody><tr><th>Apples</th><td>3</td><td>4</td></tr><tr><th>Pears</th><td>2</td><td>0</td></tr><tr><th>Plums</th><td>5</td><td>11</td></tr><tr><th>Bananas</th><td>1</td><td>1</td></tr><tr><th>Oranges</th><td>2</td><td>4</td></tr></tbody></table>');
-        });
-
-        test('data with CSV', function () {
-            var chartwc = document.querySelector('#data-csv');
-            var conf = chartwc._chartConf;
-
-            expect(conf.data.csv).to.exist;
-        });
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

@@ -3,41 +3,39 @@
 
 <dom-module id="demo-menu">
 
-  <style>
-    .content ::content div[role=tree]  * {
-      padding-left: 20px;
-      cursor: pointer;
-    }
+    <style>
+        .content::content div[role=tree] * {
+            padding-left: 20px;
+            cursor: pointer;
+        }
+        
+        .content::content div[role=tree] > .iron-selected {
+            color: white;
+            background-color: #464646;
+        }
+    </style>
 
-    .content ::content div[role=tree] > .iron-selected {
-      color: white;
-      background-color: #464646;
-    }
-  </style>
-
-  <template>
-    <div class="content">
-      <div class="v-tree">
-        <div role="tree">
-          <content></content>
+    <template>
+        <div class="content">
+            <div class="v-tree">
+                <div role="tree">
+                    <content></content>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-  </template>
+    </template>
 
 </dom-module>
 
 <script>
+    (function() {
+        Polymer({
+            is: 'demo-menu',
+            behaviors: [
+                Polymer.IronMenuBehavior
+            ],
+        });
 
-(function() {
-  Polymer({
-    is: 'demo-menu',
-    behaviors: [
-      Polymer.IronMenuBehavior
-    ],
-  });
-
-})();
-
+    })();
 </script>

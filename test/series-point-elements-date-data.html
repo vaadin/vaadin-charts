@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,94 +8,100 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="chartWithValidDates" vc-type="scatter">
-    <vc-x-axis vc-type="datetime">
-    </vc-x-axis>
-    <v-series id="seriesId">
-        <vc-data>
-            <vc-point>
-                <vc-date>2014-12-03</vc-date>
-                <vc-y>2</vc-y>
-                <vc-name>Foobar</vc-name>
-                <vc-color>#00FF00</vc-color>
-            </vc-point>
-            <vc-point>
-                <vc-x>1418515200000</vc-x>
-                <vc-date>2014-12-10</vc-date>
-                <vc-y>5</vc-y>
-                <vc-name>Barfoo</vc-name>
-            </vc-point>
-            <vc-point>
-                <vc-date>2014-12-24</vc-date>
-                <vc-y>4</vc-y>
-                <vc-name>Barfoo2</vc-name>
-            </vc-point>
-            <vc-point>
-                <vc-date>2014-12-31</vc-date>
-                <vc-x>1418428800000</vc-x>
-                <vc-y>7</vc-y>
-            </vc-point>
-        </vc-data>
-    </v-series>
-</v-chart>
+    <v-chart id="chartWithValidDates" vc-type="scatter">
+        <vc-x-axis vc-type="datetime">
+        </vc-x-axis>
+        <v-series id="seriesId">
+            <vc-data>
+                <vc-point>
+                    <vc-date>2014-12-03</vc-date>
+                    <vc-y>2</vc-y>
+                    <vc-name>Foobar</vc-name>
+                    <vc-color>#00FF00</vc-color>
+                </vc-point>
+                <vc-point>
+                    <vc-x>1418515200000</vc-x>
+                    <vc-date>2014-12-10</vc-date>
+                    <vc-y>5</vc-y>
+                    <vc-name>Barfoo</vc-name>
+                </vc-point>
+                <vc-point>
+                    <vc-date>2014-12-24</vc-date>
+                    <vc-y>4</vc-y>
+                    <vc-name>Barfoo2</vc-name>
+                </vc-point>
+                <vc-point>
+                    <vc-date>2014-12-31</vc-date>
+                    <vc-x>1418428800000</vc-x>
+                    <vc-y>7</vc-y>
+                </vc-point>
+            </vc-data>
+        </v-series>
+    </v-chart>
 
-<v-chart id="chartWithInvalidDates" vc-type="scatter">
-    <vc-x-axis vc-type="datetime">
-    </vc-x-axis>
-    <v-series id="seriesId">
-        <vc-data>
-            <vc-point>
-                <vc-date>2014-123-17</vc-date>
-                <vc-y>6</vc-y>
-                <vc-name>Foobar</vc-name>
-                <vc-color>#00FFFF</vc-color>
-            </vc-point>
-            <vc-point>
-                <vc-date>2014-12-1</vc-date>
-                <vc-y>6</vc-y>
-                <vc-name>Foobar</vc-name>
-                <vc-color>#00FFFF</vc-color>
-            </vc-point>
-        </vc-data>
-    </v-series>
-</v-chart>
-<script>
+    <v-chart id="chartWithInvalidDates" vc-type="scatter">
+        <vc-x-axis vc-type="datetime">
+        </vc-x-axis>
+        <v-series id="seriesId">
+            <vc-data>
+                <vc-point>
+                    <vc-date>2014-123-17</vc-date>
+                    <vc-y>6</vc-y>
+                    <vc-name>Foobar</vc-name>
+                    <vc-color>#00FFFF</vc-color>
+                </vc-point>
+                <vc-point>
+                    <vc-date>2014-12-1</vc-date>
+                    <vc-y>6</vc-y>
+                    <vc-name>Foobar</vc-name>
+                    <vc-color>#00FFFF</vc-color>
+                </vc-point>
+            </vc-data>
+        </v-series>
+    </v-chart>
+    <script>
+        suite('<v-series>', function() {
 
-    suite('<v-series>', function () {
+            test('valid date values parsed', function() {
+                var chartswc = document.querySelector(
+                    '#chartWithValidDates');
+                var conf = chartswc._chartConf;
+                expect(conf.series).to.exist;
+                expect(conf.series).not.to.be.empty;
+                expect(conf.series[0].data).to.exist;
+                expect(conf.series[0].data).not.to.be.empty;
+                expect(conf.series[0].data).to.have.length(4);
+                expect(conf.series[0].data[0].x).to.equal(Date.UTC(
+                    2014, 11, 3));
+                //2014-12-10 is not set because x is already defined as 1418515200000
+                expect(conf.series[0].data[1].x).to.equal(
+                    1418515200000);
+                expect(conf.series[0].data[1].y).to.equal(5);
+                expect(conf.series[0].data[2].x).to.equal(Date.UTC(
+                    2014, 11, 24));
+                //1418428800000 is not set because x is already defined as 2014-12-31
+                expect(conf.series[0].data[3].x).to.equal(Date.UTC(
+                    2014, 11, 31));
+            });
 
-        test('valid date values parsed', function () {
-            var chartswc = document.querySelector('#chartWithValidDates');
-            var conf = chartswc._chartConf;
-            expect(conf.series).to.exist;
-            expect(conf.series).not.to.be.empty;
-            expect(conf.series[0].data).to.exist;
-            expect(conf.series[0].data).not.to.be.empty;
-            expect(conf.series[0].data).to.have.length(4);
-            expect(conf.series[0].data[0].x).to.equal(Date.UTC(2014, 11, 3));
-            //2014-12-10 is not set because x is already defined as 1418515200000
-            expect(conf.series[0].data[1].x).to.equal(1418515200000);
-            expect(conf.series[0].data[1].y).to.equal(5);
-            expect(conf.series[0].data[2].x).to.equal(Date.UTC(2014, 11, 24));
-            //1418428800000 is not set because x is already defined as 2014-12-31
-            expect(conf.series[0].data[3].x).to.equal(Date.UTC(2014, 11, 31));
+            test('invalid date values not parsed', function() {
+                var chartswc = document.querySelector(
+                    '#chartWithInvalidDates');
+                var conf = chartswc._chartConf;
+                expect(conf.series).to.exist;
+                expect(conf.series).not.to.be.empty;
+                expect(conf.series[0].data).to.exist;
+                expect(conf.series[0].data).not.to.be.empty;
+                expect(conf.series[0].data).to.have.length(2);
+                expect(conf.series[0].data[0].x).to.be.undefined;
+                expect(conf.series[0].data[1].x).to.be.undefined;
+            });
+
         });
-
-        test('invalid date values not parsed', function () {
-            var chartswc = document.querySelector('#chartWithInvalidDates');
-            var conf = chartswc._chartConf;
-            expect(conf.series).to.exist;
-            expect(conf.series).not.to.be.empty;
-            expect(conf.series[0].data).to.exist;
-            expect(conf.series[0].data).not.to.be.empty;
-            expect(conf.series[0].data).to.have.length(2);
-            expect(conf.series[0].data[0].x).to.be.undefined;
-            expect(conf.series[0].data[1].x).to.be.undefined;
-        });
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

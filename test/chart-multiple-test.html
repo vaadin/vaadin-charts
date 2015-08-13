@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,40 +8,41 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="emptyPie" vc-type="pie">
-</v-chart>
-<v-chart id="pieWithSeries" vc-type="pie">
-    <v-series vc-name="Browser share">
-        <vc-data>
-            ["Firefox",   45.0],
-            ["IE",       26.8],
-            ["Chrome", 12.8],
-            ["Safari",    8.5],
-            ["Opera",     6.2],
-            ["Others",   0.7]
-        </vc-data>
-    </v-series>
-</v-chart>
-<script>
+    <v-chart id="emptyPie" vc-type="pie">
+    </v-chart>
+    <v-chart id="pieWithSeries" vc-type="pie">
+        <v-series vc-name="Browser share">
+            <vc-data>
+                ["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera", 6.2],
+                ["Others", 0.7]
+            </vc-data>
+        </v-series>
+    </v-chart>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('different amount of series', function() {
+                var emptyChart = document.querySelector(
+                    '#emptyPie');
+                var nonEmptyChart = document.querySelector(
+                    '#pieWithSeries');
 
-        test('different amount of series', function () {
-            var emptyChart = document.querySelector('#emptyPie');
-            var nonEmptyChart = document.querySelector('#pieWithSeries');
+                expect(emptyChart._chartConf.series).to.be.undefined;
+                expect(nonEmptyChart._chartConf.series).to.exist;
+                expect(nonEmptyChart._chartConf.series).not.to.be
+                    .empty;
+                expect(nonEmptyChart._chartConf.series[0].data)
+                    .to.exist;
+                expect(nonEmptyChart._chartConf.series[0].data)
+                    .not.to.be.empty;
+            });
 
-            expect(emptyChart._chartConf.series).to.be.undefined;
-            expect(nonEmptyChart._chartConf.series).to.exist;
-            expect(nonEmptyChart._chartConf.series).not.to.be.empty;
-            expect(nonEmptyChart._chartConf.series[0].data).to.exist;
-            expect(nonEmptyChart._chartConf.series[0].data).not.to.be.empty;
+
         });
-
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

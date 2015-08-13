@@ -1,5 +1,6 @@
 <v-chart id="clock" vc-type="gauge">
-    <vc-chart vc-plot-background-color="null" vc-plot-background-image="null" vc-plot-border-width="0" vc-plot-shadow="false"></vc-chart>
+    <vc-chart vc-plot-background-color="null" vc-plot-background-image="null" vc-plot-border-width="0"
+    vc-plot-shadow="false"></vc-chart>
     <vc-title>Vaadin Charts Clock</vc-title>
     <vc-pane>
         <vc-background>
@@ -20,9 +21,10 @@
         </vc-background>
     </vc-pane>
     <vc-y-axis vc-min="0" vc-max="12" vc-grid-line-width="0" vc-line-width="0" vc-show-first-label="false"
-            vc-minor-tick-interval="0.166666" vc-minor-tick-width="1" vc-minor-tick-lenght="5" vc-minor-tick-position="inside"
-            vc-minor-grid-line-width="0" vc-minor-tick-color="#666"
-            vc-tick-interval="1" vc-tick-width="2" vc-tick-position="inside" vc-tick-length="10" vc-tick-color="#666">
+    vc-minor-tick-interval="0.166666" vc-minor-tick-width="1" vc-minor-tick-lenght="5"
+    vc-minor-tick-position="inside" vc-minor-grid-line-width="0" vc-minor-tick-color="#666"
+    vc-tick-interval="1" vc-tick-width="2" vc-tick-position="inside" vc-tick-length="10"
+    vc-tick-color="#666">
         <vc-labels vc-distance="-20"></vc-labels>
     </vc-y-axis>
     <vc-tooltip vc-enabled="false"></vc-tooltip>
@@ -33,31 +35,12 @@
     </vc-plot-options>
     <v-series>
         <vc-data>
-            {
-            id: 'hour',
-            y: new Date().getHours() + new Date().getMinutes() / 60,
-            dial: {
-            radius: '60%',
-            baseWidth: 4,
-            baseLength: '95%',
-            rearLength: 0
-            }
-            }, {
-            id: 'minute',
-            y: new Date().getMinutes() * 12 / 60 + new Date().getSeconds() * 12 / 3600,
-            dial: {
-            baseLength: '95%',
-            rearLength: 0
-            }
-            }, {
-            id: 'second',
-            y: new Date().getSeconds() * 12 / 60,
-            dial: {
-            radius: '100%',
-            baseWidth: 1,
-            rearLength: '20%'
-            }
-            }
+            { id: 'hour', y: new Date().getHours() + new Date().getMinutes() / 60, dial: { radius:
+            '60%', baseWidth: 4, baseLength: '95%', rearLength: 0 } }, { id: 'minute',
+            y: new Date().getMinutes() * 12 / 60 + new Date().getSeconds() * 12 /
+            3600, dial: { baseLength: '95%', rearLength: 0 } }, { id: 'second', y:
+            new Date().getSeconds() * 12 / 60, dial: { radius: '100%', baseWidth:
+            1, rearLength: '20%' } }
         </vc-data>
     </v-series>
 </v-chart>

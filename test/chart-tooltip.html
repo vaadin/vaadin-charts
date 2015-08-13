@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,34 +8,37 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="tooltipWithComplexPointFormat" vc-type="line">
-    <vc-tooltip vc-point-format="x = {point.x}, y = {point.y}"></vc-tooltip>
-</v-chart>
+    <v-chart id="tooltipWithComplexPointFormat" vc-type="line">
+        <vc-tooltip vc-point-format="x = {point.x}, y = {point.y}"></vc-tooltip>
+    </v-chart>
 
-<v-chart id="tooltipWithHtmlSet" vc-type="line">
-    <vc-tooltip vc-use-html="true"></vc-tooltip>
-</v-chart>
-<script>
+    <v-chart id="tooltipWithHtmlSet" vc-type="line">
+        <vc-tooltip vc-use-html="true"></vc-tooltip>
+    </v-chart>
+    <script>
+        suite('<v-chart>', function() {
 
-    suite('<v-chart>', function () {
+            test('tooltip with complex format', function() {
+                var chartwc = document.querySelector(
+                    '#tooltipWithComplexPointFormat');
+                var conf = chartwc._chartConf;
+                expect(conf.tooltip.pointFormat).to.equal(
+                    "x = {point.x}, y = {point.y}");
+            });
 
-        test('tooltip with complex format', function () {
-            var chartwc = document.querySelector('#tooltipWithComplexPointFormat');
-            var conf = chartwc._chartConf;
-            expect(conf.tooltip.pointFormat).to.equal("x = {point.x}, y = {point.y}");
+            test('tooltip with HTML enabled', function() {
+                var chartwc = document.querySelector(
+                    '#tooltipWithHtmlSet');
+                var conf = chartwc._chartConf;
+                expect(conf.tooltip.useHTML).to.be.true;
+            });
+
+
         });
-
-        test('tooltip with HTML enabled', function () {
-            var chartwc = document.querySelector('#tooltipWithHtmlSet');
-            var conf = chartwc._chartConf;
-            expect(conf.tooltip.useHTML).to.be.true;
-        });
-
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>

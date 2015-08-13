@@ -3,8 +3,7 @@
 <link rel="import" href="../../paper-tabs/paper-tabs.html">
 <link rel="import" href="../../iron-ajax/iron-ajax.html">
 <link rel="import" href="../v-chart.html">
-<link rel="import" href="prettify-element.html">
-"
+<link rel="import" href="prettify-element.html"> "
 
 <!--
 This component allows viewing demo HTML files, so that the actual demo and the source are shown different pages. The file name, without the ".html" suffix, should be passed to the "source" property. The loaded DOM is inserted directly into the demo page, while the HTML text is loaded into the source page (using iron-ajax).
@@ -21,11 +20,7 @@ This component allows viewing demo HTML files, so that the actual demo and the s
         }
     </style>
     <template>
-        <iron-ajax
-                id="sourceFetcher"
-                handle-as="text"
-                last-response="{{htmlValue}}"
-                debounce-duration="300"></iron-ajax>
+        <iron-ajax id="sourceFetcher" handle-as="text" last-response="{{htmlValue}}" debounce-duration="300"></iron-ajax>
 
         <paper-tabs id="tabs" selected="{{selected}}" noink>
             <paper-tab>Example</paper-tab>
@@ -40,7 +35,7 @@ This component allows viewing demo HTML files, so that the actual demo and the s
 </dom-module>
 
 <script>
-    (function () {
+    (function() {
         var demoId2dom = {};
         Polymer({
             is: "sourcing-component",
@@ -59,7 +54,7 @@ This component allows viewing demo HTML files, so that the actual demo and the s
                 htmlValue: String
             },
 
-            updateDemo: function (demoId) {
+            updateDemo: function(demoId) {
                 if (demoId2dom[demoId]) {
                     // Clear example tab
                     var pageNode = Polymer.dom(this.$.page1)
@@ -76,15 +71,16 @@ This component allows viewing demo HTML files, so that the actual demo and the s
                 }
             },
 
-            _sourceChanged: function (newValue, oldValue) {
+            _sourceChanged: function(newValue, oldValue) {
                 if (demoId2dom[newValue]) {
                     this.updateDemo(newValue);
-                }
-                else {
-                    this.importHref(newValue + ".html", function (result) {
-                        demoId2dom[newValue] = result.target.import.body;
-                        this.updateDemo(newValue);
-                    });
+                } else {
+                    this.importHref(newValue + ".html",
+                        function(result) {
+                            demoId2dom[newValue] = result.target
+                                .import.body;
+                            this.updateDemo(newValue);
+                        });
                 }
             }
         });

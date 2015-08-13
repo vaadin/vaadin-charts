@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -7,57 +8,60 @@
 
     <link rel="import" href="../v-chart.html">
 </head>
+
 <body>
-<v-chart id="chartId">
-    <v-series id="seriesId">
-        <vc-data>
-            <vc-point>
-                <vc-x>4</vc-x>
-                <vc-y>2</vc-y>
-                <vc-name>Foobar</vc-name>
-                <vc-color>#00FF00</vc-color>
-            </vc-point>
-            <vc-point>
-                <vc-x>6</vc-x>
-                <vc-y>5</vc-y>
-                <vc-name>Barfoo</vc-name>
-            </vc-point>
-            <vc-point>
-                <vc-x>3</vc-x>
-                <vc-y>6</vc-y>
-                <vc-name>Foobar</vc-name>
-                <vc-color>#00FFFF</vc-color>
-            </vc-point>
-            <vc-point>
-                <vc-x>5</vc-x>
-                <vc-y>4</vc-y>
-                <vc-name>Barfoo2</vc-name>
-            </vc-point>
-        </vc-data>
-    </v-series>
-</v-chart>
-<script>
+    <v-chart id="chartId">
+        <v-series id="seriesId">
+            <vc-data>
+                <vc-point>
+                    <vc-x>4</vc-x>
+                    <vc-y>2</vc-y>
+                    <vc-name>Foobar</vc-name>
+                    <vc-color>#00FF00</vc-color>
+                </vc-point>
+                <vc-point>
+                    <vc-x>6</vc-x>
+                    <vc-y>5</vc-y>
+                    <vc-name>Barfoo</vc-name>
+                </vc-point>
+                <vc-point>
+                    <vc-x>3</vc-x>
+                    <vc-y>6</vc-y>
+                    <vc-name>Foobar</vc-name>
+                    <vc-color>#00FFFF</vc-color>
+                </vc-point>
+                <vc-point>
+                    <vc-x>5</vc-x>
+                    <vc-y>4</vc-y>
+                    <vc-name>Barfoo2</vc-name>
+                </vc-point>
+            </vc-data>
+        </v-series>
+    </v-chart>
+    <script>
+        suite('<v-series>', function() {
 
-    suite('<v-series>', function () {
+            test('series config parsed', function() {
+                var chartswc = document.querySelector(
+                    '#chartId');
+                var conf = chartswc._chartConf;
+                expect(conf.series).to.exist;
+                expect(conf.series).not.to.be.empty;
+                expect(conf.series[0].data).to.exist;
+                expect(conf.series[0].data).not.to.be.empty;
+                expect(conf.series[0].data).to.have.length(4);
+                expect(conf.series[0].data[1].x).to.equal(6);
+                expect(conf.series[0].data[1].y).to.equal(5);
+                expect(conf.series[0].data[1].name).to.equal(
+                    'Barfoo');
+                expect(conf.series[0].data[2].color).to.equal(
+                    '#00FFFF');
 
-        test('series config parsed', function () {
-            var chartswc = document.querySelector('#chartId');
-            var conf = chartswc._chartConf;
-            expect(conf.series).to.exist;
-            expect(conf.series).not.to.be.empty;
-            expect(conf.series[0].data).to.exist;
-            expect(conf.series[0].data).not.to.be.empty;
-            expect(conf.series[0].data).to.have.length(4);
-            expect(conf.series[0].data[1].x).to.equal(6);
-            expect(conf.series[0].data[1].y).to.equal(5);
-            expect(conf.series[0].data[1].name).to.equal('Barfoo');
-            expect(conf.series[0].data[2].color).to.equal('#00FFFF');
+            });
 
         });
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>
