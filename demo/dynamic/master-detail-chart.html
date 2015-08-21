@@ -44,7 +44,10 @@
                             masterData.forEach(function (point) {
                                 detailData.push([point.x, point.y]);
                             });
-
+                            if(xAxis.plotLinesAndBands.length > 0){
+                               xAxis.removePlotBand('mask-before');
+                               xAxis.removePlotBand('mask-after');
+                            }
                             xAxis.addPlotBand({
                                 id: 'mask-before',
                                 from: masterData[0].x,
