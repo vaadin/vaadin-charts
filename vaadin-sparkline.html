@@ -1,6 +1,27 @@
+<!--
+@license
+Vaadin Charts
+
+Copyright (C) 2015 Vaadin Ltd
+
+This program is available under Commercial Vaadin Add-On License 3.0 (CVALv3).
+
+See the file LICENSE.md distributed with this software for more information about licensing.
+
+See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete license.
+-->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="v-chart.html">
 
+<!--
+An element that helps creating <a href="https://en.wikipedia.org/wiki/Sparkline">Sparklines</a>.
+Uses vaadin-charts elements.
+
+Example:
+
+<vaadin-sparkline data="10, 20, 14, 12, 30, 50, 80, 2"></vaadin-sparkline>
+
+-->
 <dom-module id="vaadin-sparkline">
 
     <template>
@@ -47,7 +68,7 @@
                 <vc-labels enabled="false"></vc-labels>
             </vc-y-axis>
 
-            <data-series type="line" data="[[arrayData]]"></data-series>
+            <data-series type="line" data="[[_arrayData]]"></data-series>
         </v-chart>
 
     </template>
@@ -58,19 +79,34 @@
             is: 'vaadin-sparkline',
 
             properties: {
+                /**
+                 * Data contents of the sparkline. The sparkline is updated when this changes
+                 *
+                 */
                 data: String,
+
+                /**
+                 * Array representation of the data contents, to allow setting the values
+                 * as comma separated numbers.
+                 *
+                 * @private
+                 */
                 arrayData: {
                     type: Array,
                     computed: '_arrayFromData(data)'
                 }
             },
 
+            /**
+             * Force a String to be a JS array.
+             *
+             * @param data
+             * @private
+             */
             _arrayFromData: function (data) {
                 return JSON.parse('[' + data + ']');
             }
         });
 
-
     </script>
-
 </dom-module>

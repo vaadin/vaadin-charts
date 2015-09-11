@@ -46,6 +46,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             /**
              * Initial chart configuration before initial rendering.
+             *
+             * @private
              **/
             _seriesConf: {
                 type: Object,
@@ -56,6 +58,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             /**
              * Index the series was given in the chart series array
+             *
+             * @private
              */
             _seriesIndex: Number
 
@@ -66,8 +70,26 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             '_dataChanged(data.splices)'
         ],
 
+        ready: function () {
+            this._initConfiguration();
+            if (this.drilldown) {
+                this._seriesIndex = this._parentChart()._addDrilldownSeries(this._seriesConf);
+            } else {
+                this._seriesIndex = this._parentChart()._addSeries(this._seriesConf);
+            }
+        },
+
+        /**
+         * Nodes that are ignored when parsing
+         *
+         * @private
+         **/
+        _ignoredNodes: ["#text", "#comment", "vc-data"],
+
         /**
          * Reloads the series with the original configuration defined in elements and its attributes.
+         *
+         * @private
          */
         _reloadConfiguration: function () {
             this._seriesConf = {};
@@ -84,6 +106,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Updates chart data when series data changes
+         *
+         * @private
          */
         _dataChanged: function () {
             if (this._seriesIndex != undefined && this._parentChart().initialized) {
@@ -97,10 +121,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
         },
 
-        _ignoredNodes: ["#text", "#comment", "vc-data"],
-
         /**
          * Overrides behavior, for data-series all values should be evaluated as javascript
+         *
+         * @private
          **/
         _evalJavascript: function (val) {
             // only eval when needed
@@ -110,6 +134,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     || val.indexOf('[') === 0;
         },
 
+        /**
+         * Retrieves the parent chart element
+         *
+         * @private
+         **/
         _parentChart: function () {
             var parent = Polymer.dom(this.root).parentNode;
             while (parent._addSeries === undefined) {
@@ -120,6 +149,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Load the configuration from the element attributes and the light-DOM elements.
+         *
+         * @private
          **/
         _loadData: function () {
             var element = Polymer.dom(this);
@@ -146,6 +177,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Creates a point object from a point node.
+         *
+         * @private
          **/
         _parsePoint: function (pointNode) {
             var result = {};
@@ -179,12 +212,22 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return result;
         },
 
+        /**
+         * Parse a date string
+         *
+         * @private
+         **/
         _parseDate: function (dateString) {
             if (this._isValidDate(dateString)) {
                 return Date.parse(dateString);
             }
         },
 
+        /**
+         * Check if a string is a valid date
+         *
+         * @private
+         **/
         _isValidDate: function (dateString) {
             try {
                 var dateValue = new Date(dateString);
@@ -200,6 +243,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Checks if nodes has child nodes that correspond to points.
+         *
+         * @private
          **/
         _hasPointNodes: function (node) {
             return node.childNodes.length > 0 && 'vc-point' === node.childNodes[0].nodeName.toLowerCase();
@@ -208,8 +253,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Set single property in series configuration.
+         *
          * @param {string} name
          * @param {object} value to be set
+         * @private
          **/
         _setProperty: function (name, value) {
             var parsedValue = this._parseAttribute(value);
@@ -223,18 +270,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
         },
 
-
-        ready: function () {
-            this._initConfiguration();
-            if (this.drilldown) {
-                this._seriesIndex = this._parentChart()._addDrilldownSeries(this._seriesConf);
-            } else {
-                this._seriesIndex = this._parentChart()._addSeries(this._seriesConf);
-            }
-        },
-
         /**
          * Initializes the series json configuration.
+         *
+         * @private
          */
         _initConfiguration: function () {
             var element = Polymer.dom(this);

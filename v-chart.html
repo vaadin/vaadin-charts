@@ -86,12 +86,6 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
 
             behaviors: [ValoThemeBehavior, ConfigurationReaderBehavior],
 
-            /**
-             * Fired when the chart has been fully loaded.
-             *
-             * @event chart-loaded
-             */
-
             properties: {
 
                 /**
@@ -143,6 +137,8 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
 
                 /**
                  * Initial chart configuration before initial rendering.
+                 *
+                 * @private
                  **/
                 _chartConf: {
                     type: Object,
@@ -152,43 +148,21 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 }
             },
 
-            /**
-             *  Name of the chart events to add to the configuration and its corresponding event for v-chart
-             **/
-            _chartEventNames: {
-                addSeries: "add-series",
-                afterPrint: "after-print",
-                beforePrint: "before-print",
-                click: "chart-click",
-                drilldown: "drilldown",
-                drillup: "drillup",
-                redraw: "redraw",
-                selection: "selection"
+            created: function () {
+                //Workaround to prevent _chartConf from being undefined when calling _addSeries from child component in FF
+                this._chartConf = {};
             },
-            /**
-             *  Name of the series events to add to the configuration and its corresponding event for v-chart
-             **/
-            _seriesEventNames: {
-                afterAnimate: "series-after-animate",
-                checkboxClick: "series-checkbox-click",
-                click: "series-click",
-                hide: "series-hide",
-                legendItemClick: "series-legend-item-click",
-                mouseOut: "series-mouse-out",
-                mouseOver: "series-mouse-over",
-                show: "series-show"
+
+            attached: function () {
+                this._initChart();
             },
-            /**
-             *  Name of the point events to add to the configuration and its corresponding event for v-chart
-             **/
-            _pointEventNames: {
-                click: "point-click",
-                mouseOut: "point-mouse-out",
-                mouseOver: "point-mouse-over",
-                remove: "point-remove",
-                select: "point-select",
-                unselect: "point-unselect",
-                update: "point-update"
+
+            ready: function () {
+                this._initConfiguration();
+
+                if (this._loadTheme) {
+                    this._loadTheme();
+                }
             },
 
             /**
@@ -204,7 +178,54 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
             },
 
             /**
+             *  Name of the chart events to add to the configuration and its corresponding event for v-chart
+             *
+             *  @private
+             **/
+            _chartEventNames: {
+                addSeries: "add-series",
+                afterPrint: "after-print",
+                beforePrint: "before-print",
+                click: "chart-click",
+                drilldown: "drilldown",
+                drillup: "drillup",
+                redraw: "redraw",
+                selection: "selection"
+            },
+            /**
+             *  Name of the series events to add to the configuration and its corresponding event for v-chart
+             *
+             *  @private
+             **/
+            _seriesEventNames: {
+                afterAnimate: "series-after-animate",
+                checkboxClick: "series-checkbox-click",
+                click: "series-click",
+                hide: "series-hide",
+                legendItemClick: "series-legend-item-click",
+                mouseOut: "series-mouse-out",
+                mouseOver: "series-mouse-over",
+                show: "series-show"
+            },
+            /**
+             *  Name of the point events to add to the configuration and its corresponding event for v-chart
+             *
+             *  @private
+             **/
+            _pointEventNames: {
+                click: "point-click",
+                mouseOut: "point-mouse-out",
+                mouseOver: "point-mouse-over",
+                remove: "point-remove",
+                select: "point-select",
+                unselect: "point-unselect",
+                update: "point-update"
+            },
+
+            /**
              * Reload all the chart's series
+             *
+             * @private
              */
             _reloadSeries: function () {
                 var series = Polymer.dom(this).querySelectorAll('data-series');
@@ -216,6 +237,8 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
             /**
              * Dynamically add a new Series to this chart
              * @return The index of the added series in the series array
+             *
+             * @private
              **/
             _addSeries: function (newSeries) {
                 if (this._chartConf.series === undefined) {
@@ -227,6 +250,8 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
 
             /**
              * Dynamically add a new Series to this chart's Drilldown configuration
+             *
+             * @private
              * @return The index of the added series in the drilldown series array
              **/
             _addDrilldownSeries: function (newSeries) {
@@ -240,18 +265,10 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 return this._chartConf.drilldown.series.length - 1;
             },
 
-            /* ----------- lifecycle ----------- */
-            created: function () {
-                //Workaround to prevent _chartConf from being undefined when calling _addSeries from child component in FF
-                this._chartConf = {};
-            },
-
-            attached: function () {
-                this._initChart();
-            },
-
             /**
              * Initializes the chart property using the json configuration.
+             *
+             * @private
              */
             _initChart: function () {
                 //Only initialize once
@@ -262,16 +279,10 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 }
             },
 
-            ready: function () {
-                this._initConfiguration();
-
-                if (this._loadTheme) {
-                    this._loadTheme();
-                }
-            },
-
             /**
              * Initializes the chart json configuration.
+             *
+             * @private
              */
             _initConfiguration: function () {
                 this._cleanNode(Polymer.dom(this));
@@ -286,6 +297,11 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 this._chartConf.chart.renderTo = this.$.chartContainer;
             },
 
+            /**
+             * Initialize the Highcharts -> Polymer listeners
+             *
+             * @private
+             */
             _initEventListeners: function () {
                 this._chartConf.chart.events = {};
                 for (var key in this._chartEventNames) {
@@ -311,6 +327,13 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 }
             },
 
+            /**
+             * Add an event to the charts object
+             *
+             * @param highchartsName
+             * @param vaadinChartsName
+             * @private
+             */
             _addChartEvent: function (highchartsName, vaadinChartsName) {
                 var self = this;
                 this._chartConf.chart.events[highchartsName] = function (e) {
@@ -318,6 +341,13 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 };
             },
 
+            /**
+             * Add an event to the plotOptions object
+             *
+             * @param highchartsName
+             * @param vaadinChartsName
+             * @private
+             */
             _addSeriesEvent: function (highchartsName, vaadinChartsName) {
                 var self = this;
                 this._chartConf.plotOptions.series.events[highchartsName] = function (e) {
@@ -325,6 +355,12 @@ Event names can be checked in _chartEventNames, _seriesEventNames and _pointEven
                 };
             },
 
+            /**
+             * Add an event to the plotOptions.series.point object
+             * @param highchartsName
+             * @param vaadinChartsName
+             * @private
+             */
             _addPointEvent: function (highchartsName, vaadinChartsName) {
                 var self = this;
                 this._chartConf.plotOptions.series.point.events[highchartsName] = function (e) {

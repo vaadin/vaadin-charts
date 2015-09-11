@@ -22,39 +22,59 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Elements that should be ignored when mapping
+         *
+         * @private
          **/
         _ignoredNodes: ["#text", "#comment", "data-series"],
 
         /**
          * List of words that will always be uppercased, instead of camel-cased
+         *
+         * @private
          **/
         _uppercaseWords: ["html"],
 
         /**
          * Elements that should be mapped in to an array, e.g. two x-axis elements would be mapped to the same
          * array
+         *
+         * @private
          **/
         _multivaluedNodes: ["xAxis", "yAxis", "plotBands", "plotLines", "background", "crosshairs", "stops", "levels", "pane", "items"],
 
         /**
          * Elements that contain an array of values, either as a comma-separated list or multiple elements
+         *
+         * @private
          **/
         _arrayNodes: ["categories", "stops", "margin", "center"],
 
         /**
          * Elements whose text content should be set as text property value
+         *
+         * @private
          **/
         _textContentNodes: ["subtitle", "title"],
 
         /**
          * Elements where the whole node is going to be used as value, their name is always valid
+         *
+         * @private
          **/
         _nodeValueAttributes: ["table"],
 
+        /**
+         * Prefix for Vaadin Charts elements
+         *
+         * @private
+         * @type String
+         **/
         _vaadinChartsPrefix: "vc-",
 
         /**
          * Check if the given attribute is valid as a Vaadin Charts configuration attribute
+         *
+         * @private
          **/
         _isVaadinChartsProperty: function (attName) {
             return attName != undefined &&
@@ -65,6 +85,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Transform the given string to camel-case
          *
          * @param {string} str
+         * @private
          **/
         _toCamelCase: function (str, isElement) {
             var out = "";
@@ -92,6 +113,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {object} dest the chart configuration object
          * @param {node} parent the node that is parsed for configuration
+         * @private
          **/
         _loadFromNode: function (dest, node) {
             for (var i in node.attributes) {
@@ -111,6 +133,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Removes all empty text and comment nodes.
+         *
+         * @private
          **/
         _cleanNode: function (node) {
             for (var n = 0; n < node.childNodes.length; n++) {
@@ -128,6 +152,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Parse String attribute to most specific type possible.
          * Try JSON.parse, then eval if it's function, or return original value
          * @param {object} value to be set
+         *
+         * @private
          **/
         _parseAttribute: function (val) {
             var res;
@@ -148,6 +174,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
         ,
 
+        /**
+         * Check if val should be evaled
+         *
+         * @private
+         **/
         _evalJavascript: function (val) {
             //if it's a function eval
             return val.indexOf('function') === 0;
@@ -158,6 +189,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Return true if node has a single child with nodeType TEXT_NODE (3) and non-empty value.
          *
          * @param {node} the node to check
+         * @private
          **/
         _hasOnlyTextContent: function (node) {
             return node.hasChildNodes() && node.childNodes.length == 1 && node.childNodes[0].nodeType == 3 && node.textContent.trim() != "";
@@ -168,6 +200,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {object} dest the chart configuration object
          * @param {node} parent the node that contains the configuration elements
+         * @private
          **/
         _loadConfiguration: function (dest, parent) {
             for (var n = 0; n < parent.childNodes.length; n++) {
@@ -223,6 +256,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /**
          * Creates the missing objects to ensure the path exists
+         *
+         * @private
          **/
         _ensureObjectStructure: function (obj, path) {
             var parts = path.split(".");
