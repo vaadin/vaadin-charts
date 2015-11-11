@@ -35,14 +35,13 @@
   "devDependencies": {
     "vaadin-components": "^0.3.0",
     "google-code-prettify": "*",
+    // iron-selector 1.0.8 requires polymer 1.2 which brokes the sizing (CHARTS-278)
+    "iron-selector": "PolymerElements/iron-selector#v1.0.7",
     "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^1.0.0",
     "iron-menu-behavior": "PolymerElements/iron-menu-behavior#^1.0.0",
     "iron-pages": "PolymerElements/iron-pages#^1.0.0",
     "paper-tabs": "PolymerElements/paper-tabs#^1.0.0",
     "web-component-tester": "*"
-  },
-  "resolutions": {
-    "polymer": "^1.2.0"
   }
 }
