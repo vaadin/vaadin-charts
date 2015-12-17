@@ -3,6 +3,8 @@
 
 # Vaadin Charts Web Component
 
+[![Join the chat at https://gitter.im/vaadin/charts-component](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/charts-component?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A Web Component for high quality charts. Uses the [Highcharts](http://www.highcharts.com/) JavaScript library.
 
 ## Overview of the repository
