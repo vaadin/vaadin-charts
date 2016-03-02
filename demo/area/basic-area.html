@@ -1,11 +1,11 @@
 <vaadin-area-chart id="basic-area">
-    <title>US and USSR nuclear stockpiles</title>
+    <chart-title>US and USSR nuclear stockpiles</chart-title>
     <subtitle>Source: thebulletin.metapress.com</subtitle>
     <x-axis allow-decimals="false">
         <labels formatter="function () { return this.value; }"></labels>
     </x-axis>
     <y-axis min="0">
-        <title>Nuclear weapon states</title>
+        <chart-title>Nuclear weapon states</chart-title>
         <labels formatter="function () { return this.value / 1000 + 'k'; }"></labels>
     </y-axis>
     <tooltip point-format="{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}"></tooltip>
