@@ -165,6 +165,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return node.hasChildNodes() && node.childNodes.length == 1 && node.childNodes[0].nodeType == 3 && node.textContent.trim() != "";
         },
 
+
         /**
          * Returns a boolean value if text content is 'true' or 'false'. Otherwise, the return value is the text content itself.
          *
@@ -177,6 +178,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
             if ("false" == content) {
                 return false;
+            }
+            try {
+                content = JSON.parse(content);
+            } catch (e) {
+                content = node.textContent;
             }
             return content;
         },
@@ -215,7 +221,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     } else if (this._multivaluedNodes.indexOf(camelName) !== -1 || dest[camelName] === undefined) {
                         if (this._textContentNodes.indexOf(camelName) === -1 && this._hasOnlyTextContent(node)) {
                             result = this._parseTextContent(node);
-                        } else {
+                        }
+                        else {
                             result = {};
                             this._loadFromNode(result, node);
                             this._loadConfiguration(result, node);
