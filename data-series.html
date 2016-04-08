@@ -86,14 +86,23 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Updates chart data when series data changes
          */
         _dataChanged: function () {
+            var tmpData=this.data;
+            //if data is sent as a string try to parse it as an array.
+            if(typeof(this.data)==="string") {
+                try {
+                    tmpData = JSON.parse("[" + this.data + "]");
+                } catch (err) {
+                }
+            }
+
             if (this._seriesIndex != undefined && this._parentChart().isInitialized()) {
                 if (this.drilldown) {
-                    this._parentChart().chart.drilldown.series[this._seriesIndex].setData(this.data);
+                    this._parentChart().chart.drilldown.series[this._seriesIndex].setData(tmpData);
                 } else {
-                    this._parentChart().chart.series[this._seriesIndex].setData(this.data);
+                    this._parentChart().chart.series[this._seriesIndex].setData(tmpData);
                 }
             } else {
-                this._seriesConf['data'] = this.data;
+                this._seriesConf['data'] = tmpData;
             }
         },
 
