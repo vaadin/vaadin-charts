@@ -88,8 +88,16 @@ export class DataSeries implements OnInit, DoCheck {
     //This is needed to be able to specify data as a string, because differ.diff, raises an exception
     // when getting string as an input.
     //<data-series data="[123,32,42,11]"> </data-series> won't work without it
-    if(typeof(this.data)==="string") {
-      this.data=JSON.parse(this.data);
+    if (typeof (this.data) === 'string') {
+      try {
+        this.data = JSON.parse(this.data);
+      } catch (err) {
+        try {
+          this.data = JSON.parse('[' + this.data + ']');
+        } catch (err) {
+          return;
+        }
+      }
     }
     const changes = this._differ.diff(this.data);
     if (changes) {
