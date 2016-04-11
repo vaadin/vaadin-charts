@@ -22,6 +22,20 @@ System.config({
 });
 ```
 
+Import Web Component polyfills and Polymer library.
+```html
+<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="bower_components/polymer/polymer.html">
+```
+
+You also need to wrap the application startup into `WebComponentsReady` event
+listener. For example as follows:
+```javascript
+window.addEventListener('WebComponentsReady', function() {
+  System.import('app/main').then(null, console.error.bind(console));
+});
+```
+
 After the configuration is in place, you can import the directive into your
 own Angular 2 component as follows.
 
