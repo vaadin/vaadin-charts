@@ -42,7 +42,7 @@ declare var Polymer;
 export class VaadinCharts implements OnInit {
 
   private _element;
-  public imported;
+  private _imported;
 
   constructor(private _el: ElementRef) {
   }
@@ -52,7 +52,7 @@ export class VaadinCharts implements OnInit {
   }
 
   import() {
-    this.imported = false;
+    this._imported = false;
     this._element = this._el.nativeElement;
     Polymer.Base.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html', this.onImport.bind(this));
   }
@@ -62,7 +62,11 @@ export class VaadinCharts implements OnInit {
       // Charts need reloadConfiguration called if light dom configuration changes dynamically
       this._element.reloadConfiguration();
     }
-    this.imported = true;
+    this._imported = true;
+  }
+
+  isImported() {
+    return this._imported;
   }
 }
 
@@ -88,7 +92,7 @@ export class DataSeries implements OnInit, DoCheck {
   ngDoCheck() {
     //TODO This method is invoked on every event, this may effect performance. TEST IT.
 
-    if(!this._chart.imported) {
+    if(!this._chart.isImported()) {
       return;
     }
 
