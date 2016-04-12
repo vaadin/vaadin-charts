@@ -1,11 +1,11 @@
 import {
-  Directive,
-  ElementRef,
-  OnInit,
-  Input,
-  Component,
-  DoCheck,
-  IterableDiffers
+Directive,
+ElementRef,
+OnInit,
+Input,
+Component,
+DoCheck,
+IterableDiffers
 } from 'angular2/core';
 declare var Polymer;
 
@@ -92,16 +92,19 @@ export class DataSeries implements OnInit, DoCheck {
   ngDoCheck() {
     //TODO This method is invoked on every event, this may effect performance. TEST IT.
 
-    if(!this._chart.isImported()) {
+    if (!this._chart.isImported()) {
       return;
     }
 
     //This is needed to be able to specify data as a string, because differ.diff, raises an exception
     // when getting string as an input.
     //<data-series data="[123,32,42,11]"> </data-series> won't work without it
-    if (typeof (this.data) === 'string') {
+    if (typeof (this.data) !== 'object') {
       try {
         this.data = JSON.parse(this.data);
+        if (typeof (this.data) !== 'object') {
+          throw 'type is not object';
+        }
       } catch (err) {
         try {
           this.data = JSON.parse('[' + this.data + ']');
