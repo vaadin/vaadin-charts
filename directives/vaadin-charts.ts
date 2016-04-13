@@ -5,7 +5,9 @@ OnInit,
 Input,
 Component,
 DoCheck,
-IterableDiffers
+IterableDiffers,
+Output,
+EventEmitter
 } from 'angular2/core';
 
 @Directive({
@@ -43,6 +45,8 @@ export class VaadinCharts implements OnInit {
   private _element;
   private _imported;
 
+  @Output() importReady: EventEmitter<any> = new EventEmitter(false);
+
   constructor(private _el: ElementRef) {
   }
 
@@ -66,6 +70,7 @@ export class VaadinCharts implements OnInit {
 
   onImport() {
     this._imported = true;
+    this.importReady.emit(true);
   }
 
   isImported() {
