@@ -57,7 +57,8 @@ export class VaadinCharts implements OnInit {
   import() {
     this._imported = false;
     this._element = this._el.nativeElement;
-    this.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html');
+    //TODO This is only for test purpose. Not working with real version.
+    this.importHref('../' + this._element.tagName.toLowerCase() + '.html');
   }
 
   importHref(href) {
