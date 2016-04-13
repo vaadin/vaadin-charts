@@ -14,6 +14,10 @@ System.config({
     'vaadin-charts': 'bower_components/vaadin-charts/directives'
   },
   packages: {
+    app: {
+      format: 'register',
+      defaultExtension: 'js'
+    },
     'vaadin-charts': {
       defaultExtension: 'js',
       main: 'vaadin-charts.js'
@@ -22,21 +26,12 @@ System.config({
 });
 ```
 
-Import Web Component polyfills and Polymer library.
+Import Web Component polyfills in your `index.html` file's `<head>`.
 ```html
 <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<link rel="import" href="bower_components/polymer/polymer.html">
 ```
 
-You also need to wrap the application startup into `WebComponentsReady` event
-listener. For example as follows:
-```javascript
-window.addEventListener('WebComponentsReady', function() {
-  System.import('app/main').then(null, console.error.bind(console));
-});
-```
-
-After the configuration is in place, you can import the directive into your
+After the configuration is in place, you can import the directives into your
 own Angular 2 component as follows.
 
 ```javascript

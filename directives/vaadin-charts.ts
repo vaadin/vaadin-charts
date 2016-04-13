@@ -7,7 +7,6 @@ Component,
 DoCheck,
 IterableDiffers
 } from 'angular2/core';
-declare var Polymer;
 
 @Directive({
   selector: `
@@ -54,14 +53,18 @@ export class VaadinCharts implements OnInit {
   import() {
     this._imported = false;
     this._element = this._el.nativeElement;
-    Polymer.Base.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html', this.onImport.bind(this));
+    this.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html');
   }
 
-  onImport(e) {
-    if (this._element.reloadConfiguration) {
-      // Charts need reloadConfiguration called if light dom configuration changes dynamically
-      this._element.reloadConfiguration();
-    }
+  importHref(href) {
+    const link = document.createElement('link');
+    link.rel = 'import';
+    link.href = href;
+    link.onload = this.onImport.bind(this)
+    document.head.appendChild(link);
+  }
+
+  onImport() {
     this._imported = true;
   }
 
