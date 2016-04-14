@@ -19,8 +19,9 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             }],
         execute: function() {
             VaadinCharts = (function () {
-                function VaadinCharts(_el) {
+                function VaadinCharts(_el, zone) {
                     this._el = _el;
+                    this.zone = zone;
                     this.importReady = new core_1.EventEmitter(false);
                 }
                 VaadinCharts.prototype.ngOnInit = function () {
@@ -41,9 +42,28 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 VaadinCharts.prototype.onImport = function () {
                     this._imported = true;
                     this.importReady.emit(true);
+                    setTimeout(function () {
+                        this.fixLightDom();
+                    }.bind(this));
                 };
                 VaadinCharts.prototype.isImported = function () {
                     return this._imported;
+                };
+                VaadinCharts.prototype.fixLightDom = function () {
+                    var _this = this;
+                    // Move all elements targeted to light dom to the actual light dom with Polymer apis
+                    var misplaced = this._element.querySelectorAll("*:not(.style-scope)");
+                    [].forEach.call(misplaced, function (e) {
+                        if (e.parentElement === _this._element) {
+                            Polymer.dom(_this._element).appendChild(e);
+                        }
+                    });
+                    if (this._element.reloadConfiguration) {
+                        var self = this;
+                        this.zone.runOutsideAngular(function () {
+                            self._element.reloadConfiguration();
+                        });
+                    }
                 };
                 __decorate([
                     core_1.Output(), 
@@ -53,7 +73,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     core_1.Directive({
                         selector: "\n  vaadin-area-chart,\n  vaadin-arearange-chart,\n  vaadin-areaspline-chart,\n  vaadin-areasplinerange-chart,\n  vaadin-bar-chart,\n  vaadin-boxplot-chart,\n  vaadin-bubble-chart,\n  vaadin-candlestick-chart,\n  vaadin-column-chart,\n  vaadin-columnrange-chart,\n  vaadin-errorbar-chart,\n  vaadin-flags-chart,\n  vaadin-funnel-chart,\n  vaadin-gauge-chart,\n  vaadin-heatmap-chart,\n  vaadin-line-chart,\n  vaadin-ohlc-chart,\n  vaadin-pie-chart,\n  vaadin-polygon-chart,\n  vaadin-pyramid-chart,\n  vaadin-scatter-chart,\n  vaadin-solidgauge-chart,\n  vaadin-sparkline,\n  vaadin-spline-chart,\n  vaadin-treemap-chart,\n  vaadin-waterfall-chart\n  "
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef])
+                    __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
                 ], VaadinCharts);
                 return VaadinCharts;
             }());

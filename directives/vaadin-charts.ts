@@ -7,7 +7,8 @@ Component,
 DoCheck,
 IterableDiffers,
 Output,
-EventEmitter
+EventEmitter,
+NgZone
 } from 'angular2/core';
 
 @Directive({
@@ -47,7 +48,7 @@ export class VaadinCharts implements OnInit {
 
   @Output() importReady: EventEmitter<any> = new EventEmitter(false);
 
-  constructor(private _el: ElementRef) {
+  constructor(private _el: ElementRef, private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -64,17 +65,36 @@ export class VaadinCharts implements OnInit {
     const link = document.createElement('link');
     link.rel = 'import';
     link.href = href;
-    link.onload = this.onImport.bind(this)
+    link.onload = this.onImport.bind(this);
     document.head.appendChild(link);
   }
 
   onImport() {
     this._imported = true;
     this.importReady.emit(true);
+    setTimeout(function(){
+      this.fixLightDom();
+    }.bind(this));
   }
 
   isImported() {
     return this._imported;
+  }
+
+  fixLightDom() {
+    // Move all elements targeted to light dom to the actual light dom with Polymer apis
+    const misplaced = this._element.querySelectorAll("*:not(.style-scope)");
+    [].forEach.call(misplaced, (e) => {
+      if (e.parentElement === this._element) {
+        Polymer.dom(this._element).appendChild(e);
+      }
+    });
+    if (this._element.reloadConfiguration) {
+      var self = this;
+      this.zone.runOutsideAngular(() => {
+        self._element.reloadConfiguration();
+      });
+    }
   }
 }
 
