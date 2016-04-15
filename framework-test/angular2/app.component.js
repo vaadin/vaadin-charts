@@ -31,6 +31,7 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                         ["Consumers", 6.2],
                         ["Subsidies", 0.7]
                     ];
+                    vaadin_charts_1.VaadinCharts.path = '../';
                 }
                 AppComponent.prototype.chartReady = function () {
                     var event = new Event('chartsReady');

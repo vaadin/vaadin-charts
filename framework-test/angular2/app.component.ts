@@ -32,6 +32,10 @@ export class AppComponent {
       ["Subsidies", 0.7]
   ];
 
+  constructor() {
+    VaadinCharts.path = '../';
+  }
+
   chartReady() {
     var event = new Event('chartsReady');
     document.querySelector('my-app').dispatchEvent(event);
