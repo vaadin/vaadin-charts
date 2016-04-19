@@ -46,6 +46,8 @@ export class VaadinCharts implements OnInit {
   private _element;
   private _imported;
 
+  public static path = 'bower_components/vaadin-charts/';
+
   @Output() importReady: EventEmitter<any> = new EventEmitter(false);
 
   constructor(private _el: ElementRef, private zone: NgZone) {
@@ -58,7 +60,7 @@ export class VaadinCharts implements OnInit {
   import() {
     this._imported = false;
     this._element = this._el.nativeElement;
-    this.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html');
+    this.importHref(VaadinCharts.path + this._element.tagName.toLowerCase() + '.html');
   }
 
   importHref(href) {
@@ -77,19 +79,17 @@ export class VaadinCharts implements OnInit {
     }.bind(this));
   }
 
-  isImported() {
-    return this._imported;
-  }
-
   fixLightDom() {
     // Move all elements targeted to light dom to the actual light dom with Polymer apis
     const misplaced = this._element.querySelectorAll("*:not(.style-scope)");
+    var chartFound = false;
     [].forEach.call(misplaced, (e) => {
       if (e.parentElement === this._element) {
         Polymer.dom(this._element).appendChild(e);
+        chartFound = true;
       }
     });
-    if (this._element.reloadConfiguration) {
+    if (this._element.reloadConfiguration && chartFound) {
       var self = this;
       this.zone.runOutsideAngular(() => {
         self._element.reloadConfiguration();
@@ -105,6 +105,7 @@ export class DataSeries implements OnInit, DoCheck {
 
   private _element;
   private _differ;
+  private _chartImported = false;
 
   @Input()
   data: any;
@@ -115,12 +116,18 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngOnInit() {
     this._element = this._el.nativeElement;
+    var self = this;
+    this._chart.importReady.subscribe((imported) => {
+      if (imported) {
+        this._chartImported = true;
+        this.ngDoCheck();
+      }
+    });
   }
 
   ngDoCheck() {
     //TODO This method is invoked on every event, this may effect performance. TEST IT.
-
-    if (!this._chart.isImported()) {
+    if (!this._chartImported) {
       return;
     }
 

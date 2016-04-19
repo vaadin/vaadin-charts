@@ -30,7 +30,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 VaadinCharts.prototype.import = function () {
                     this._imported = false;
                     this._element = this._el.nativeElement;
-                    this.importHref('bower_components/vaadin-charts/' + this._element.tagName.toLowerCase() + '.html');
+                    this.importHref(VaadinCharts.path + this._element.tagName.toLowerCase() + '.html');
                 };
                 VaadinCharts.prototype.importHref = function (href) {
                     var link = document.createElement('link');
@@ -46,25 +46,25 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         this.fixLightDom();
                     }.bind(this));
                 };
-                VaadinCharts.prototype.isImported = function () {
-                    return this._imported;
-                };
                 VaadinCharts.prototype.fixLightDom = function () {
                     var _this = this;
                     // Move all elements targeted to light dom to the actual light dom with Polymer apis
                     var misplaced = this._element.querySelectorAll("*:not(.style-scope)");
+                    var chartFound = false;
                     [].forEach.call(misplaced, function (e) {
                         if (e.parentElement === _this._element) {
                             Polymer.dom(_this._element).appendChild(e);
+                            chartFound = true;
                         }
                     });
-                    if (this._element.reloadConfiguration) {
+                    if (this._element.reloadConfiguration && chartFound) {
                         var self = this;
                         this.zone.runOutsideAngular(function () {
                             self._element.reloadConfiguration();
                         });
                     }
                 };
+                VaadinCharts.path = 'bower_components/vaadin-charts/';
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', core_1.EventEmitter)
@@ -82,14 +82,23 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function DataSeries(_el, differs, _chart) {
                     this._el = _el;
                     this._chart = _chart;
+                    this._chartImported = false;
                     this._differ = differs.find([]).create(null);
                 }
                 DataSeries.prototype.ngOnInit = function () {
+                    var _this = this;
                     this._element = this._el.nativeElement;
+                    var self = this;
+                    this._chart.importReady.subscribe(function (imported) {
+                        if (imported) {
+                            _this._chartImported = true;
+                            _this.ngDoCheck();
+                        }
+                    });
                 };
                 DataSeries.prototype.ngDoCheck = function () {
                     //TODO This method is invoked on every event, this may effect performance. TEST IT.
-                    if (!this._chart.isImported()) {
+                    if (!this._chartImported) {
                         return;
                     }
                     //This is needed to be able to specify data as a string, because differ.diff, raises an exception
