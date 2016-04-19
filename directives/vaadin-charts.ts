@@ -89,10 +89,12 @@ export class VaadinCharts implements OnInit {
         chartFound = true;
       }
     });
+
+    // Reload Chart if needed.
     if (this._element.reloadConfiguration && chartFound) {
-      var self = this;
+    // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
       this.zone.runOutsideAngular(() => {
-        self._element.reloadConfiguration();
+        this._element.reloadConfiguration();
       });
     }
   }
@@ -116,24 +118,23 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngOnInit() {
     this._element = this._el.nativeElement;
-    var self = this;
     this._chart.importReady.subscribe((imported) => {
       if (imported) {
         this._chartImported = true;
+        // Set data to chart when import is ready.
         this.ngDoCheck();
       }
     });
   }
 
   ngDoCheck() {
-    //TODO This method is invoked on every event, this may effect performance. TEST IT.
+    // Don't update data if charts are not imported
     if (!this._chartImported) {
       return;
     }
 
-    //This is needed to be able to specify data as a string, because differ.diff, raises an exception
-    // when getting string as an input.
-    //<data-series data="[123,32,42,11]"> </data-series> won't work without it
+    // This is needed to be able to specify data as a string.
+    // <data-series data="[123,32,42,11]"> </data-series> won't work without it.
     if (typeof (this.data) !== 'object') {
       try {
         this.data = JSON.parse(this.data);
@@ -149,10 +150,9 @@ export class DataSeries implements OnInit, DoCheck {
       }
     }
     const changes = this._differ.diff(this.data);
-    if (changes) {
 
-      // The items property must be set to a clone of the collection because of
-      // how iron-list behaves.
+    if (changes) {
+      // The data property must be set to a clone of the collection.
       this._element.data = changes.collection.slice(0);
     }
   }

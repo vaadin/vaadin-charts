@@ -57,10 +57,11 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                             chartFound = true;
                         }
                     });
+                    // Reload Chart if needed.
                     if (this._element.reloadConfiguration && chartFound) {
-                        var self = this;
+                        // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
                         this.zone.runOutsideAngular(function () {
-                            self._element.reloadConfiguration();
+                            _this._element.reloadConfiguration();
                         });
                     }
                 };
@@ -88,22 +89,21 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 DataSeries.prototype.ngOnInit = function () {
                     var _this = this;
                     this._element = this._el.nativeElement;
-                    var self = this;
                     this._chart.importReady.subscribe(function (imported) {
                         if (imported) {
                             _this._chartImported = true;
+                            // Set data to chart when import is ready.
                             _this.ngDoCheck();
                         }
                     });
                 };
                 DataSeries.prototype.ngDoCheck = function () {
-                    //TODO This method is invoked on every event, this may effect performance. TEST IT.
+                    // Don't update data if charts are not imported
                     if (!this._chartImported) {
                         return;
                     }
-                    //This is needed to be able to specify data as a string, because differ.diff, raises an exception
-                    // when getting string as an input.
-                    //<data-series data="[123,32,42,11]"> </data-series> won't work without it
+                    // This is needed to be able to specify data as a string.
+                    // <data-series data="[123,32,42,11]"> </data-series> won't work without it.
                     if (typeof (this.data) !== 'object') {
                         try {
                             this.data = JSON.parse(this.data);
@@ -122,8 +122,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     }
                     var changes = this._differ.diff(this.data);
                     if (changes) {
-                        // The items property must be set to a clone of the collection because of
-                        // how iron-list behaves.
+                        // The data property must be set to a clone of the collection.
                         this._element.data = changes.collection.slice(0);
                     }
                 };
