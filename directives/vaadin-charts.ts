@@ -49,7 +49,7 @@ export class VaadinCharts implements OnInit {
 
   public static path = 'bower_components/vaadin-charts/';
 
-  @Output() importReady: EventEmitter<any> = new EventEmitter(false);
+  @Output() _importReady: EventEmitter<any> = new EventEmitter(false);
 
   constructor(private _el: ElementRef, private zone: NgZone) {
   }
@@ -74,7 +74,7 @@ export class VaadinCharts implements OnInit {
 
   onImport() {
     this._imported = true;
-    this.importReady.emit(true);
+    this._importReady.emit(true);
     setTimeout(function(){
       this.fixLightDom();
     }.bind(this));
@@ -119,7 +119,7 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngOnInit() {
     this._element = this._el.nativeElement;
-    this._chart.importReady.subscribe((imported) => {
+    this._chart._importReady.subscribe((imported) => {
       if (imported) {
         this._chartImported = true;
         // Set data to chart when import is ready.

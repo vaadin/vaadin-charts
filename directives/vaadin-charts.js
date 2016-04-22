@@ -22,7 +22,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function VaadinCharts(_el, zone) {
                     this._el = _el;
                     this.zone = zone;
-                    this.importReady = new core_1.EventEmitter(false);
+                    this._importReady = new core_1.EventEmitter(false);
                 }
                 VaadinCharts.prototype.ngOnInit = function () {
                     this.import();
@@ -41,7 +41,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 };
                 VaadinCharts.prototype.onImport = function () {
                     this._imported = true;
-                    this.importReady.emit(true);
+                    this._importReady.emit(true);
                     setTimeout(function () {
                         this.fixLightDom();
                     }.bind(this));
@@ -69,7 +69,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', core_1.EventEmitter)
-                ], VaadinCharts.prototype, "importReady", void 0);
+                ], VaadinCharts.prototype, "_importReady", void 0);
                 VaadinCharts = __decorate([
                     core_1.Directive({
                         selector: "\n  vaadin-area-chart,\n  vaadin-arearange-chart,\n  vaadin-areaspline-chart,\n  vaadin-areasplinerange-chart,\n  vaadin-bar-chart,\n  vaadin-boxplot-chart,\n  vaadin-bubble-chart,\n  vaadin-candlestick-chart,\n  vaadin-column-chart,\n  vaadin-columnrange-chart,\n  vaadin-errorbar-chart,\n  vaadin-flags-chart,\n  vaadin-funnel-chart,\n  vaadin-gauge-chart,\n  vaadin-heatmap-chart,\n  vaadin-line-chart,\n  vaadin-ohlc-chart,\n  vaadin-pie-chart,\n  vaadin-polygon-chart,\n  vaadin-pyramid-chart,\n  vaadin-scatter-chart,\n  vaadin-solidgauge-chart,\n  vaadin-sparkline,\n  vaadin-spline-chart,\n  vaadin-treemap-chart,\n  vaadin-waterfall-chart\n  "
@@ -89,7 +89,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 DataSeries.prototype.ngOnInit = function () {
                     var _this = this;
                     this._element = this._el.nativeElement;
-                    this._chart.importReady.subscribe(function (imported) {
+                    this._chart._importReady.subscribe(function (imported) {
                         if (imported) {
                             _this._chartImported = true;
                             // Set data to chart when import is ready.
