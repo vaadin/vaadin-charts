@@ -50,6 +50,7 @@
 
                 var myApp = document.querySelector("my-app");
                 myApp.addEventListener('chartsReady', function() {
+                    //TODO try to get rid of setTimeout in the tests
                     setTimeout(function() {
                         var elementChart = document.querySelector("vaadin-pie-chart");
                         expect(elementChart.chart.redraw).to.exist;
@@ -64,6 +65,17 @@
                         var chartSlices = document.querySelectorAll(".highcharts-series path");
                         expect(chartSlices).to.have.length(6);
                         done();
+                    }, 100)
+                });
+            });
+
+            test('Verify chart has full size', function() {
+                var myApp = document.querySelector("my-app");
+                myApp.addEventListener('chartsReady', function() {
+                    setTimeout(function() {
+                        var highchartsContainer = document.querySelector(".highcharts-container");
+                        expect(highchartsContainer).to.exist;
+                        expect(highchartsContainer.offsetWidth).to.equal(window.innerWidth);
                     }, 100)
                 });
             });
