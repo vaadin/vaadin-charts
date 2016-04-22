@@ -10,6 +10,7 @@ Output,
 EventEmitter,
 NgZone
 } from 'angular2/core';
+declare var Polymer;
 
 @Directive({
   selector: `
