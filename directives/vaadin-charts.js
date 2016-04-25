@@ -22,29 +22,31 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function VaadinCharts(_el, zone) {
                     this._el = _el;
                     this.zone = zone;
-                    this.importReady = new core_1.EventEmitter(false);
+                    this._chartReady = new core_1.EventEmitter(false);
+                    this._element = this._el.nativeElement;
                 }
                 VaadinCharts.prototype.ngOnInit = function () {
-                    this.import();
+                    var _this = this;
+                    // Check that isInitialized is a function so directive can be used without
+                    // wrapping application start in WebComponentsReady event
+                    if (this._element.isInitialized && this._element.isInitialized()) {
+                        this.initChart();
+                    }
+                    else {
+                        this._element.addEventListener('chart-loaded', function () {
+                            if (!_this._loaded) {
+                                _this.initChart();
+                            }
+                        });
+                    }
                 };
-                VaadinCharts.prototype.import = function () {
-                    this._imported = false;
-                    this._element = this._el.nativeElement;
-                    this.importHref(VaadinCharts.path + this._element.tagName.toLowerCase() + '.html');
-                };
-                VaadinCharts.prototype.importHref = function (href) {
-                    var link = document.createElement('link');
-                    link.rel = 'import';
-                    link.href = href;
-                    link.onload = this.onImport.bind(this);
-                    document.head.appendChild(link);
-                };
-                VaadinCharts.prototype.onImport = function () {
-                    this._imported = true;
-                    this.importReady.emit(true);
+                VaadinCharts.prototype.initChart = function () {
+                    var _this = this;
+                    this._loaded = true;
+                    this.fixLightDom();
                     setTimeout(function () {
-                        this.fixLightDom();
-                    }.bind(this));
+                        _this._chartReady.emit(true);
+                    });
                 };
                 VaadinCharts.prototype.fixLightDom = function () {
                     var _this = this;
@@ -65,11 +67,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         });
                     }
                 };
-                VaadinCharts.path = 'bower_components/vaadin-charts/';
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', core_1.EventEmitter)
-                ], VaadinCharts.prototype, "importReady", void 0);
+                ], VaadinCharts.prototype, "_chartReady", void 0);
                 VaadinCharts = __decorate([
                     core_1.Directive({
                         selector: "\n  vaadin-area-chart,\n  vaadin-arearange-chart,\n  vaadin-areaspline-chart,\n  vaadin-areasplinerange-chart,\n  vaadin-bar-chart,\n  vaadin-boxplot-chart,\n  vaadin-bubble-chart,\n  vaadin-candlestick-chart,\n  vaadin-column-chart,\n  vaadin-columnrange-chart,\n  vaadin-errorbar-chart,\n  vaadin-flags-chart,\n  vaadin-funnel-chart,\n  vaadin-gauge-chart,\n  vaadin-heatmap-chart,\n  vaadin-line-chart,\n  vaadin-ohlc-chart,\n  vaadin-pie-chart,\n  vaadin-polygon-chart,\n  vaadin-pyramid-chart,\n  vaadin-scatter-chart,\n  vaadin-solidgauge-chart,\n  vaadin-sparkline,\n  vaadin-spline-chart,\n  vaadin-treemap-chart,\n  vaadin-waterfall-chart\n  "
@@ -83,15 +84,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function DataSeries(_el, differs, _chart) {
                     this._el = _el;
                     this._chart = _chart;
-                    this._chartImported = false;
+                    this._chartReady = false;
                     this._differ = differs.find([]).create(null);
                 }
                 DataSeries.prototype.ngOnInit = function () {
                     var _this = this;
                     this._element = this._el.nativeElement;
-                    this._chart.importReady.subscribe(function (imported) {
+                    this._chart._chartReady.subscribe(function (imported) {
                         if (imported) {
-                            _this._chartImported = true;
+                            _this._chartReady = true;
                             // Set data to chart when import is ready.
                             _this.ngDoCheck();
                         }
@@ -99,7 +100,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 };
                 DataSeries.prototype.ngDoCheck = function () {
                     // Don't update data if charts are not imported
-                    if (!this._chartImported) {
+                    if (!this._chartReady) {
                         return;
                     }
                     // This is needed to be able to specify data as a string.
