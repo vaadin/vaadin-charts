@@ -34,8 +34,6 @@ export class AppComponent {
 
   chartReady() {
     var event = new Event('chartsReady');
-    setTimeout(() => {
-      document.querySelector('my-app').dispatchEvent(event);
-    }, 1000);
+    document.querySelector('my-app').dispatchEvent(event);
   }
 }

@@ -54,17 +54,7 @@ export class VaadinCharts implements OnInit {
   }
 
   ngOnInit() {
-    // Check that isInitialized is a function so directive can be used without
-    // wrapping application start in WebComponentsReady event
-    if (this._element.isInitialized && this._element.isInitialized()) {
-      this.initChart();
-    } else {
-      this._element.addEventListener('chart-loaded',( ) => {
-        if (!this._loaded) {
-          this.initChart();
-        }
-      });
-    }
+    this.initChart();
   }
 
   initChart() {
@@ -87,8 +77,8 @@ export class VaadinCharts implements OnInit {
     });
 
     // Reload Chart if needed.
-    if (this._element.reloadConfiguration && chartFound) {
-    // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
+    if (this._element.isInitialized && this._element.isInitialized()) {
+      // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
       this.zone.runOutsideAngular(() => {
         this._element.reloadConfiguration();
       });

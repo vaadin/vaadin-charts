@@ -34,9 +34,7 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                 }
                 AppComponent.prototype.chartReady = function () {
                     var event = new Event('chartsReady');
-                    setTimeout(function () {
-                        document.querySelector('my-app').dispatchEvent(event);
-                    }, 1000);
+                    document.querySelector('my-app').dispatchEvent(event);
                 };
                 AppComponent = __decorate([
                     core_1.Component({

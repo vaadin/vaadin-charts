@@ -21,6 +21,7 @@
 
     <!-- 2. Configure SystemJS -->
     <script>
+    document.addEventListener('WebComponentsReady', function() {
         System.config({
             map: {
                 'vaadin-charts': '../directives'
@@ -36,8 +37,9 @@
                 }
             }
         });
-        System.import('angular2/main.js')
-            .then(null, console.error.bind(console));
+          System.import('angular2/main.js')
+              .then(null, console.error.bind(console));
+        });
     </script>
 </head>
 
