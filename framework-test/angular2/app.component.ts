@@ -4,7 +4,7 @@ import {VaadinCharts, DataSeries} from 'vaadin-charts';
 @Component({
   selector: 'my-app',
   template: `
-  <vaadin-pie-chart (importReady)="chartReady()">
+  <vaadin-pie-chart on-chart-loaded="chartReady()">
       <chart-title>Revenue by industry</chart-title>
       <subtitle>2015</subtitle>
       <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
@@ -31,10 +31,6 @@ export class AppComponent {
       ["Consumers", 6.2],
       ["Subsidies", 0.7]
   ];
-
-  constructor() {
-    VaadinCharts.path = '../';
-  }
 
   chartReady() {
     var event = new Event('chartsReady');

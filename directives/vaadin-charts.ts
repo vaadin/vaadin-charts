@@ -45,39 +45,24 @@ declare var Polymer;
 export class VaadinCharts implements OnInit {
 
   private _element;
-  private _imported;
+  private _loaded;
 
-  public static path = 'bower_components/vaadin-charts/';
-
-  @Output() importReady: EventEmitter<any> = new EventEmitter(false);
+  @Output() _chartReady: EventEmitter<any> = new EventEmitter(false);
 
   constructor(private _el: ElementRef, private zone: NgZone) {
+    this._element = this._el.nativeElement;
   }
 
   ngOnInit() {
-    this.import();
+    this.initChart();
   }
 
-  import() {
-    this._imported = false;
-    this._element = this._el.nativeElement;
-    this.importHref(VaadinCharts.path + this._element.tagName.toLowerCase() + '.html');
-  }
-
-  importHref(href) {
-    const link = document.createElement('link');
-    link.rel = 'import';
-    link.href = href;
-    link.onload = this.onImport.bind(this);
-    document.head.appendChild(link);
-  }
-
-  onImport() {
-    this._imported = true;
-    this.importReady.emit(true);
-    setTimeout(function(){
-      this.fixLightDom();
-    }.bind(this));
+  initChart() {
+    this._loaded = true;
+    this.fixLightDom();
+    setTimeout(()=> {
+      this._chartReady.emit(true);
+    });
   }
 
   fixLightDom() {
@@ -92,8 +77,8 @@ export class VaadinCharts implements OnInit {
     });
 
     // Reload Chart if needed.
-    if (this._element.reloadConfiguration && chartFound) {
-    // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
+    if (this._element.isInitialized && this._element.isInitialized()) {
+      // Reload outside of Angular to prevent DataSeries.ngDoCheck being called on every mouse event.
       this.zone.runOutsideAngular(() => {
         this._element.reloadConfiguration();
       });
@@ -108,7 +93,7 @@ export class DataSeries implements OnInit, DoCheck {
 
   private _element;
   private _differ;
-  private _chartImported = false;
+  private _chartReady = false;
 
   @Input()
   data: any;
@@ -119,9 +104,9 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngOnInit() {
     this._element = this._el.nativeElement;
-    this._chart.importReady.subscribe((imported) => {
+    this._chart._chartReady.subscribe((imported) => {
       if (imported) {
-        this._chartImported = true;
+        this._chartReady = true;
         // Set data to chart when import is ready.
         this.ngDoCheck();
       }
@@ -130,7 +115,7 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngDoCheck() {
     // Don't update data if charts are not imported
-    if (!this._chartImported) {
+    if (!this._chartReady) {
       return;
     }
 

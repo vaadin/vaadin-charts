@@ -31,7 +31,6 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                         ["Consumers", 6.2],
                         ["Subsidies", 0.7]
                     ];
-                    vaadin_charts_1.VaadinCharts.path = '../';
                 }
                 AppComponent.prototype.chartReady = function () {
                     var event = new Event('chartsReady');
@@ -40,7 +39,7 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <vaadin-pie-chart (importReady)=\"chartReady()\">\n      <chart-title>Revenue by industry</chart-title>\n      <subtitle>2015</subtitle>\n      <tooltip point-format=\"<b>{point.percentage:.1f}%</b>\"></tooltip>\n      <plot-options>\n          <pie allow-point-select=\"true\" show-in-legend=\"true\"\n               cursor=\"pointer\">\n              <data-labels enabled=\"true\"\n                           format=\"{point.name}: {point.y:.1f} M\u20AC\">\n              </data-labels>\n          </pie>\n      </plot-options>\n      <data-series name=\"Revenue share\" [data]=\"dataSeries\"></data-series>\n  </vaadin-pie-chart>\n    ",
+                        template: "\n  <vaadin-pie-chart on-chart-loaded=\"chartReady()\">\n      <chart-title>Revenue by industry</chart-title>\n      <subtitle>2015</subtitle>\n      <tooltip point-format=\"<b>{point.percentage:.1f}%</b>\"></tooltip>\n      <plot-options>\n          <pie allow-point-select=\"true\" show-in-legend=\"true\"\n               cursor=\"pointer\">\n              <data-labels enabled=\"true\"\n                           format=\"{point.name}: {point.y:.1f} M\u20AC\">\n              </data-labels>\n          </pie>\n      </plot-options>\n      <data-series name=\"Revenue share\" [data]=\"dataSeries\"></data-series>\n  </vaadin-pie-chart>\n    ",
                         directives: [vaadin_charts_1.VaadinCharts, vaadin_charts_1.DataSeries]
                     }), 
                     __metadata('design:paramtypes', [])
