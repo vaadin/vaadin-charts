@@ -22,29 +22,22 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function VaadinCharts(_el, zone) {
                     this._el = _el;
                     this.zone = zone;
-                    this._chartReady = new core_1.EventEmitter(false);
                     this._element = this._el.nativeElement;
                 }
                 VaadinCharts.prototype.ngOnInit = function () {
-                    this.initChart();
-                };
-                VaadinCharts.prototype.initChart = function () {
-                    var _this = this;
-                    this._loaded = true;
+                    if (!window.Polymer || !Polymer.isInstance(this._element)) {
+                        console.error("vaadin-charts has not been registered yet, please remember to import vaadin-charts in your main HTML page. http://webcomponents.org/polyfills/html-imports/");
+                        return;
+                    }
                     this.fixLightDom();
-                    setTimeout(function () {
-                        _this._chartReady.emit(true);
-                    });
                 };
                 VaadinCharts.prototype.fixLightDom = function () {
                     var _this = this;
                     // Move all elements targeted to light dom to the actual light dom with Polymer apis
                     var misplaced = this._element.querySelectorAll("*:not(.style-scope)");
-                    var chartFound = false;
                     [].forEach.call(misplaced, function (e) {
                         if (e.parentElement === _this._element) {
                             Polymer.dom(_this._element).appendChild(e);
-                            chartFound = true;
                         }
                     });
                     // Reload Chart if needed.
@@ -55,10 +48,6 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         });
                     }
                 };
-                __decorate([
-                    core_1.Output(), 
-                    __metadata('design:type', core_1.EventEmitter)
-                ], VaadinCharts.prototype, "_chartReady", void 0);
                 VaadinCharts = __decorate([
                     core_1.Directive({
                         selector: "\n  vaadin-area-chart,\n  vaadin-arearange-chart,\n  vaadin-areaspline-chart,\n  vaadin-areasplinerange-chart,\n  vaadin-bar-chart,\n  vaadin-boxplot-chart,\n  vaadin-bubble-chart,\n  vaadin-candlestick-chart,\n  vaadin-column-chart,\n  vaadin-columnrange-chart,\n  vaadin-errorbar-chart,\n  vaadin-flags-chart,\n  vaadin-funnel-chart,\n  vaadin-gauge-chart,\n  vaadin-heatmap-chart,\n  vaadin-line-chart,\n  vaadin-ohlc-chart,\n  vaadin-pie-chart,\n  vaadin-polygon-chart,\n  vaadin-pyramid-chart,\n  vaadin-scatter-chart,\n  vaadin-solidgauge-chart,\n  vaadin-sparkline,\n  vaadin-spline-chart,\n  vaadin-treemap-chart,\n  vaadin-waterfall-chart\n  "
@@ -72,25 +61,12 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function DataSeries(_el, differs, _chart) {
                     this._el = _el;
                     this._chart = _chart;
-                    this._chartReady = false;
                     this._differ = differs.find([]).create(null);
                 }
                 DataSeries.prototype.ngOnInit = function () {
-                    var _this = this;
                     this._element = this._el.nativeElement;
-                    this._chart._chartReady.subscribe(function (imported) {
-                        if (imported) {
-                            _this._chartReady = true;
-                            // Set data to chart when import is ready.
-                            _this.ngDoCheck();
-                        }
-                    });
                 };
                 DataSeries.prototype.ngDoCheck = function () {
-                    // Don't update data if charts are not imported
-                    if (!this._chartReady) {
-                        return;
-                    }
                     // This is needed to be able to specify data as a string.
                     // <data-series data="[123,32,42,11]"> </data-series> won't work without it.
                     if (typeof (this.data) !== 'object') {
