@@ -3,11 +3,8 @@ Directive,
 ElementRef,
 OnInit,
 Input,
-Component,
 DoCheck,
 IterableDiffers,
-Output,
-EventEmitter,
 NgZone
 } from 'angular2/core';
 declare var Polymer;
@@ -45,34 +42,25 @@ declare var Polymer;
 export class VaadinCharts implements OnInit {
 
   private _element;
-  private _loaded;
-
-  @Output() _chartReady: EventEmitter<any> = new EventEmitter(false);
 
   constructor(private _el: ElementRef, private zone: NgZone) {
     this._element = this._el.nativeElement;
   }
 
   ngOnInit() {
-    this.initChart();
-  }
-
-  initChart() {
-    this._loaded = true;
+    if (!(<any>window).Polymer || !Polymer.isInstance(this._element)) {
+      console.error("vaadin-charts has not been registered yet, please remember to import vaadin-charts in your main HTML page. http://webcomponents.org/polyfills/html-imports/");
+      return;
+    }
     this.fixLightDom();
-    setTimeout(()=> {
-      this._chartReady.emit(true);
-    });
   }
 
   fixLightDom() {
     // Move all elements targeted to light dom to the actual light dom with Polymer apis
     const misplaced = this._element.querySelectorAll("*:not(.style-scope)");
-    var chartFound = false;
     [].forEach.call(misplaced, (e) => {
       if (e.parentElement === this._element) {
         Polymer.dom(this._element).appendChild(e);
-        chartFound = true;
       }
     });
 
@@ -93,7 +81,6 @@ export class DataSeries implements OnInit, DoCheck {
 
   private _element;
   private _differ;
-  private _chartReady = false;
 
   @Input()
   data: any;
@@ -104,21 +91,9 @@ export class DataSeries implements OnInit, DoCheck {
 
   ngOnInit() {
     this._element = this._el.nativeElement;
-    this._chart._chartReady.subscribe((imported) => {
-      if (imported) {
-        this._chartReady = true;
-        // Set data to chart when import is ready.
-        this.ngDoCheck();
-      }
-    });
   }
 
   ngDoCheck() {
-    // Don't update data if charts are not imported
-    if (!this._chartReady) {
-      return;
-    }
-
     // This is needed to be able to specify data as a string.
     // <data-series data="[123,32,42,11]"> </data-series> won't work without it.
     if (typeof (this.data) !== 'object') {
