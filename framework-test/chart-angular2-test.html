@@ -10,36 +10,20 @@
     <!-- browser tester -->
     <script src="../../web-component-tester/browser.js"></script>
 
-    <!-- IE required polyfills, in this exact order -->
+    <!-- Polyfill(s) for older browsers -->
     <script src="../node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="../node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="../node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <script src="../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="../node_modules/systemjs/dist/system.js"></script>
+    <script src="../node_modules/typescript/lib/typescript.js"></script>
 
     <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
     <script>
     document.addEventListener('WebComponentsReady', function() {
-        System.config({
-            map: {
-                'vaadin-charts': '../directives'
-            },
-            packages: {
-                app: {
-                    format: 'register',
-                    defaultExtension: 'js'
-                },
-                'vaadin-charts': {
-                    defaultExtension: 'js',
-                    main: 'vaadin-charts.js'
-                }
-            }
-        });
-          System.import('angular2/main.js')
-              .then(null, console.error.bind(console));
-        });
+      System.import('angular2').catch(function(err){ console.error(err);  });
+    });
     </script>
 </head>
 
@@ -74,13 +58,11 @@
 
             test('Verify chart has full size', function() {
                 var myApp = document.querySelector("my-app");
-                myApp.addEventListener('chartsReady', function() {
-                    setTimeout(function() {
-                        var highchartsContainer = document.querySelector(".highcharts-container");
-                        expect(highchartsContainer).to.exist;
-                        expect(highchartsContainer.offsetWidth).to.equal(window.innerWidth);
-                    }, 100)
-                });
+                setTimeout(function() {
+                    var highchartsContainer = document.querySelector(".highcharts-container");
+                    expect(highchartsContainer).to.exist;
+                    expect(highchartsContainer.offsetWidth).to.equal(window.innerWidth);
+                }, 100);
             });
 
         });
