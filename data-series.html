@@ -41,7 +41,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * - [[Date.UTC(2013,5,2), 0.7695], [Date.UTC(2013,5,3), 0.7648]]
              **/
             data: {
-                type: Array
+                /*type: Array*/
             },
 
             /**
@@ -91,11 +91,33 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Updates chart data when series data changes
          */
         _dataChanged: function () {
+            if (typeof this.data !== 'object' && typeof this.data !== 'array') {
+              this._fixDataToArray();
+            }
             if (this._seriesIndex != undefined && this._parentChart().isInitialized()) {
                 this._updateChartData(this.data);
             } else {
                 this._seriesConf['data'] = this.data;
             }
+        },
+
+        _fixDataToArray: function () {
+            var data = this.data;
+            var newArrayData = [];
+            try {
+                newArrayData = JSON.parse(data);
+            } catch(e) {
+                try {
+                    var data = '[' + data +  ']';
+                    newArrayData = JSON.parse(data);
+                } catch(e) {
+                    newArrayData = null;
+                    console.warn('Polymer::Attributes: Couldn`t decode Array as JSON');
+                }
+            }
+            setTimeout(function() {
+                this.data = newArrayData;
+            }.bind(this), 1);
         },
 
         _updateChartData: function (newData) {

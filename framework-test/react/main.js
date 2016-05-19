@@ -1,4 +1,4 @@
-require('./../../react-component/'); // Must be loaded before React
+require('./../../react-component/');
 var React = require('./../../node_modules/react');
 var ReactDOM = require('./../../node_modules/react-dom');
 
@@ -19,8 +19,7 @@ var PieWithLegend = React.createClass({
                   <data-labels enabled={true} format="{point.name}: {point.y:.1f} M€"></data-labels>
               </pie>
           </plot-options>
-          <data-series name="Revenue share">
-              <data>{this.props.data.map(JSON.stringify).join(',')}</data>
+          <data-series name="Revenue share" data={this.props.data.map(JSON.stringify).join(',')}>
           </data-series>
       </vaadin-pie-chart>
     )
