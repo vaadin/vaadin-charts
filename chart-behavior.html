@@ -199,19 +199,24 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         },
 
         attached: function () {
-            if (!this.isInitialized()) {
-                this._initLocalDom();
-                this._initConfiguration();
-                Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
-                    if (ds._initialize) {
-                        ds._initialize();
-                    }
-                });
-                if (this._loadTheme) {
-                    this._loadTheme();
-                }
-                this._initChart();
-            }
+          // There are no guarantees with regard to initialization timing between sibling elements.
+          // https://www.polymer-project.org/1.0/docs/devguide/registering-elements#initialization-timing-for-siblings
+          this.async(function() {
+              if (!this.isInitialized()) {
+                  this._initLocalDom();
+                  this._initConfiguration();
+                  Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
+                      if (ds._initialize) {
+                          ds._initialize();
+                      }
+                  });
+                  if (this._loadTheme) {
+                      this._loadTheme();
+                  }
+                  this._initChart();
+              }
+          });
+
         },
 
         /**
