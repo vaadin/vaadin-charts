@@ -199,19 +199,30 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         },
 
         attached: function () {
-            if (!this.isInitialized()) {
-                this._initLocalDom();
-                this._initConfiguration();
-                Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
-                    if (ds._initialize) {
-                        ds._initialize();
-                    }
-                });
-                if (this._loadTheme) {
-                    this._loadTheme();
-                }
-                this._initChart();
-            }
+          var attach = function() {
+              if (!this.isInitialized()) {
+                  this._initLocalDom();
+                  this._initConfiguration();
+                  Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
+                      if (ds._initialize) {
+                          ds._initialize();
+                      }
+                  });
+                  if (this._loadTheme) {
+                      this._loadTheme();
+                  }
+                  this._initChart();
+              }
+          }.bind(this);
+
+          // Workaround for initializing chart when you are using Polymer.Base.importHref dynamic importing.
+          try {
+              attach();
+          } catch (e) {
+              this.async(function() {
+                  attach();
+              });
+          }
         },
 
         /**
