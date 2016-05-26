@@ -199,19 +199,36 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         },
 
         attached: function () {
-            if (!this.isInitialized()) {
-                this._initLocalDom();
-                this._initConfiguration();
-                Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
-                    if (ds._initialize) {
-                        ds._initialize();
-                    }
-                });
-                if (this._loadTheme) {
-                    this._loadTheme();
-                }
+          var reloadDataSeries = false;
+
+          if (!this.isInitialized()) {
+              this._initLocalDom();
+              this._initConfiguration();
+              Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
+                  if (ds._initialize && ds._seriesConf) {
+                      ds._initialize();
+                  } else {
+                      reloadDataSeries = true;
+                  }
+              });
+              if (this._loadTheme) {
+                  this._loadTheme();
+              }
+              if (!reloadDataSeries) {
                 this._initChart();
-            }
+              }
+          }
+          // Workaround to reload DataSeries when using dynamic importing with Polymer.Base.importHref
+          if (reloadDataSeries) {
+              this.async(function() {
+                  Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
+                      if (ds._initialize) {
+                          ds._initialize();
+                      }
+                  });
+                  this._initChart();
+              });
+          }
         },
 
         /**
