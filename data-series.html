@@ -52,7 +52,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 reflectToAttribute:false,
                 value: function () {
                     return {};
-                }
+                },
+                observer: '_initialize'
             },
 
             /**
@@ -63,7 +64,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             /**
              * MutatorObserver used to observe changes in data element
              */
-            _observer: Object
+            _observer: Object,
+
+            _initialized: {
+                type: Boolean,
+                value: false
+            }
 
         },
 
@@ -257,6 +263,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             } else {
                 this._seriesIndex = this._parentChart()._addSeries(this._seriesConf);
             }
+
+            this._initialized = true;
         },
 
         /**

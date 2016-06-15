@@ -202,16 +202,25 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             if (!this.isInitialized()) {
                 this._initLocalDom();
                 this._initConfiguration();
-                Polymer.dom(this).querySelectorAll("data-series").forEach(function (ds) {
-                    if (ds._initialize) {
-                        ds._initialize();
-                    }
-                });
+                
                 if (this._loadTheme) {
                     this._loadTheme();
                 }
-                this._initChart();
+
+                setTimeout(this._initializeDataSeries.bind(this), 50);
             }
+        },
+
+        _initializeDataSeries: function() {
+          var notInitialized = Polymer.dom(this).querySelectorAll("data-series").filter(function (ds) {
+              return !ds._initialized;
+          });
+
+          if (notInitialized.length === 0) {
+            this._initChart();
+          } else {
+            setTimeout(this._initializeDataSeries.bind(this), 50);
+          }
         },
 
         /**
