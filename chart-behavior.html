@@ -248,13 +248,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          */
         _updateStyles: function (chartContainer) {
             var isFlex = false;
+            var isInsideFlexContainer = false;
             this._copyStyleProperties.forEach(function (property) {
                 //Chrome returns default value if property is not set
                 //check if flex is defined for chart, and different than default value
-                if (getComputedStyle(this)[property] && getComputedStyle(this)[property] != "0 1 auto") {
+                if (getComputedStyle(this)[property] !== undefined && getComputedStyle(this)[property] != "0 1 auto") {
                     isFlex = true;
                 }
             }, this);
+
             //If chart element is a flexible item the chartContainer should be flex too
             if (isFlex) {
                 chartContainer.setAttribute("style", "flex: 1; -webkit-flex: 1; -ms-flex: 1; ");
@@ -268,7 +270,20 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 style += "display: -ms-flexbox; display: -webkit-flex; display: flex;";
                 this.setAttribute("style", style);
             } else {
-                chartContainer.setAttribute("style", "height:100%; width:100%;");
+                // Make sure that styles are added to element and to parentNodes
+                this.async(function(){
+                    var currentElement = this;
+                    // Check if vaadin-charts is inside a flex container
+                    while (currentElement.parentNode && currentElement.parentNode.tagName){
+                        currentElement = currentElement.parentNode;
+                        if (getComputedStyle(currentElement)['display'] === 'flex' || getComputedStyle(currentElement)['display'] === 'inline-flex') {
+                            isInsideFlexContainer = true;
+                        }
+                    }
+                    if (!isInsideFlexContainer) {
+                        chartContainer.setAttribute("style", "height:100%; width:100%;");
+                    }
+                });
             }
         },
 
