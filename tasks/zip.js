@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var config = require('config');
-
+var war = require('gulp-war');
+var zip = require('gulp-zip');
 var bower = require('gulp-bower');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
@@ -9,6 +10,13 @@ var deleteLines = require('gulp-delete-lines');
 
 var zipDest = config.dest + '/zip/';
 var zipTemp = config.temp + '/zip/';
+
+gulp.task('zip:war',['zip:stage'], function () {
+    gulp.src(["./target/zip/**/*"])
+        .pipe(zip('vaadin-charts-demo.war'))
+        .pipe(gulp.dest("./target/dist"));
+
+});
 
 gulp.task('zip:stage', ['zip:vulcanize-sources', 'zip:copy-sources', 'zip:copy-demo', 'zip:copy-doc', 'zip:copy-directives', 'zip:copy-react']);
 
