@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var config = require('config');
-
 var bower = require('gulp-bower');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
