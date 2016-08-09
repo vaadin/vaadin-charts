@@ -20,8 +20,37 @@ A tree menu for selecting categories and demos.
             overflow: hidden;
         }
 
+        .category {
+          position: relative;
+        }
+
+        .category.open .category-items.menu-tree {
+          margin-bottom: 10px;
+        }
+
         .category.closed .category-items {
             max-height: 0px;
+        }
+
+        .category.closed .tree-arrow-closed,
+        .category.open .tree-arrow-open {
+          position: absolute;
+          left: 20px;
+          top: 7px;
+          width: 14px;
+          height: 14px;
+          background: transparent url("img/icon-chevron-white.svg") no-repeat 0 0;
+          background-size: 14px 14px;
+          margin: 0 10px 0 0;
+          color: transparent;
+        }
+
+        .category.open .tree-arrow-open {
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          transform: rotate(90deg);
         }
 
         .category.open .tree-arrow-closed {
@@ -32,15 +61,47 @@ A tree menu for selecting categories and demos.
             display: none;
         }
 
-        .category-item {
+        /*.category-item {
             padding-left: 30px;
+        }
+*/
+
+        .category-item {
+          color: rgba(255,255,255,.4);
+          background-color: rgba(0,0,0,0);
+          transition: background-color 0.2s;
+          cursor: pointer;
+          line-height: 20px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+        }
+
+        .category-item:hover {
+          background-color: rgba(0,0,0,.1);
         }
 
         .category-item.selected {
-            color: white;
-            background-color: black;
+          color: #FFFFFF;
+          border-radius: 0;
+          background: #00B4F0 !important;
         }
 
+        .category-caption {
+          font-family: "montserrat-light", sans-serif;
+          font-size: 16px;
+          line-height: 20px;
+          padding: 5px 20px 5px 45px;
+          color: #FFFFFF;
+          display: block;
+          cursor: pointer;
+        }
+
+        .category-item-caption {
+          font-family: "montserrat-regular", sans-serif;
+          font-size: 12px;
+          line-height: 20px;
+          padding: 10px 10px 10px 45px;
+        }
 
     </style>
 

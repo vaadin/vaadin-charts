@@ -12,13 +12,69 @@ This component allows viewing demo HTML files, so that the actual demo and the s
 -->
 <dom-module id="sourcing-component">
     <style>
-        :host .sourcecode {
+        :host {
+          --paper-tabs-selection-bar: {
+            background: #00B4F0;
+            height: 1px;
+          };
+          --paper-tab-content: {
+            font-weight: normal !important;
+          };
+          --paper-tab-content-unselected: {
+            opacity: 1;
+          };
+        }
+
+        .sourcecode {
             cursor: text;
             padding-left: 20px;
             -moz-user-select: text;
             -webkit-user-select: text;
             -ms-user-select: text;
         }
+
+        .tabs {
+          background: #1B2021;
+          padding-top: 10px;
+          height: 50px;
+          width: auto;
+        }
+
+        iron-pages {
+          padding: 10px 40px 0;
+        }
+
+        paper-tabs {
+          margin-left: 40px;
+          width: 200px;
+          height: 30px;
+        }
+
+        paper-tabs #tabsContainer.paper-tabs {
+          height: auto !important;
+        }
+
+        paper-tab {
+          font-family: "montserrat-regular", sans-serif;
+          font-size: 12px;
+          line-height: 20px;
+          letter-spacing: 0.1rem;
+          text-transform: uppercase;
+          padding: 0 !important;
+          color: #00B4F0 !important;
+          transition: color 0.1s;
+          height: 25px;
+          opacity: 1 !important;
+        }
+
+        paper-tab:hover {
+          color: rgba( 255,255,255, .9 ) !important;
+        }
+
+        paper-tab.iron-selected {
+          color: #FFFFFF !important;
+        }
+
     </style>
     <template>
         <iron-ajax
@@ -27,10 +83,12 @@ This component allows viewing demo HTML files, so that the actual demo and the s
                 last-response="{{htmlValue}}"
                 debounce-duration="300"></iron-ajax>
 
-        <paper-tabs id="tabs" selected="{{selected}}" noink>
-            <paper-tab>Example</paper-tab>
-            <paper-tab>Source</paper-tab>
-        </paper-tabs>
+          <div class="tabs">
+            <paper-tabs id="tabs" selected="{{selected}}" noink>
+                <paper-tab>Example</paper-tab>
+                <paper-tab>Source</paper-tab>
+            </paper-tabs>
+          </div>
 
         <iron-pages id="pages" selected="{{selected}}">
             <div id="page1"></div>
