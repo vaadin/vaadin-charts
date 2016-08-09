@@ -1,9 +1,9 @@
 /* Additional styles for the demo */
 /* Should be combined with Valo */
 
-#tabs #selectionBar {
+/*#tabs #selectionBar {
     background-color: #197de1;
-}
+}*/
 
 @font-face {
     font-family: 'Vaadin-Icons';
