@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'vaadin-charts'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(['@angular/core', 'vaadin-charts'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, vaadin_charts_1;
+    var core_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (vaadin_charts_1_1) {
-                vaadin_charts_1 = vaadin_charts_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -39,8 +36,7 @@ System.register(['@angular/core', 'vaadin-charts'], function(exports_1, context_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n  <vaadin-pie-chart on-chart-loaded=\"chartReady()\">\n      <chart-title>Revenue by industry</chart-title>\n      <subtitle>2015</subtitle>\n      <tooltip point-format=\"<b>{point.percentage:.1f}%</b>\"></tooltip>\n      <plot-options>\n          <pie allow-point-select=\"true\" show-in-legend=\"true\"\n               cursor=\"pointer\">\n              <data-labels enabled=\"true\"\n                           format=\"{point.name}: {point.y:.1f} M\u20AC\">\n              </data-labels>\n          </pie>\n      </plot-options>\n      <data-series name=\"Revenue share\" [data]=\"dataSeries\"></data-series>\n  </vaadin-pie-chart>\n    ",
-                        directives: [vaadin_charts_1.VaadinCharts, vaadin_charts_1.DataSeries]
+                        template: "\n    <vaadin-pie-chart on-chart-loaded=\"chartReady()\">\n        <chart-title>Revenue by industry</chart-title>\n        <subtitle>2015</subtitle>\n        <tooltip point-format=\"<b>{point.percentage:.1f}%</b>\"></tooltip>\n        <plot-options>\n            <pie allow-point-select=\"true\" show-in-legend=\"true\"\n                 cursor=\"pointer\">\n                <data-labels enabled=\"true\"\n                             format=\"{point.name}: {point.y:.1f} M\u20AC\">\n                </data-labels>\n            </pie>\n        </plot-options>\n        <data-series name=\"Revenue share\" [data]=\"dataSeries\"></data-series>\n    </vaadin-pie-chart>\n  "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
