@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Web Components -->
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+    <script>
+        window.Polymer = {
+            dom: 'shadow'
+        };
+    </script>
     <link rel="import" href="../vaadin-pie-chart.html">
-
     <!-- browser tester -->
     <script src="../../web-component-tester/browser.js"></script>
 
@@ -51,7 +55,7 @@
                     expect(chart.series[0].data).to.exist;
                     expect(chart.series[0].data).not.to.be.empty;
                     expect(chart.series[0].data).to.have.length(6);
-                    var chartSlices = document.querySelectorAll(".highcharts-series path");
+                    var chartSlices = Polymer.dom(elementChart.root).querySelectorAll(".highcharts-series path");
                     expect(chartSlices).to.have.length(6);
                     done();
                 }, 1);
@@ -59,7 +63,8 @@
         });
         test('Verify chart has full size', function(done) {
             setTimeout(function() {
-                var highchartsContainer = document.querySelector(".highcharts-container");
+                var elementChart = document.querySelector("vaadin-pie-chart");
+                var highchartsContainer = elementChart.$$(".highcharts-container");
                 expect(highchartsContainer).to.exist;
                 expect(highchartsContainer.offsetWidth).to.equal(document.body.clientWidth);
                 done();

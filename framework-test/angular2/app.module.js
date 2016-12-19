@@ -35,7 +35,7 @@ System.register(['@angular/core', '@angular/platform-browser', '@vaadin/angular2
                         imports: [platform_browser_1.BrowserModule],
                         declarations: [app_component_1.AppComponent, angular2_polymer_1.PolymerElement('vaadin-pie-chart')],
                         bootstrap: [app_component_1.AppComponent],
-                        schemas: [core_1.NO_ERRORS_SCHEMA]
+                        schemas: [core_1.NO_ERRORS_SCHEMA, core_1.CUSTOM_ELEMENTS_SCHEMA]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppModule);
