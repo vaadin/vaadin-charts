@@ -53,8 +53,9 @@
 
                 var chartSlices = document.querySelectorAll(".highcharts-series path");
                 expect(chartSlices).to.have.length(6);
+                done();
             }, 300);
-            done();
+
         });
 
     });

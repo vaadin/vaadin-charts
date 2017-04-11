@@ -92,7 +92,7 @@
 <script>
     suite('<vaadin-_-chart>', function () {
 
-        test('all chart events, declarative listeners', function () {
+        test('all chart events, declarative listeners', function (done) {
             var element = document.querySelector("eventful-chart-declarative-attribute");
             var elementChart = element.shadowRoot.querySelector("vaadin-line-chart");
             setTimeout(function() {
@@ -106,10 +106,11 @@
                 for (var key in eventNames) {
                     expect(element.eventCount[eventNames[key]]).to.equal(1);
                 }
+                done();
             });
         });
 
-        test('all chart events, programmatically added listeners', function () {
+        test('all chart events, programmatically added listeners', function (done) {
             var element = document.querySelector("programmatically-added-listeners");
             var elementChart = element.shadowRoot.querySelector("vaadin-line-chart");
             setTimeout(function() {
@@ -127,10 +128,11 @@
                 for (var key in eventNames) {
                     expect(element.eventCount[eventNames[key]]).to.equal(1);
                 }
+                done();
             });
         });
 
-        test('all series events, programmatically added listeners', function () {
+        test('all series events, programmatically added listeners', function (done) {
             var element = document.querySelector("programmatically-added-listeners");
             element.cleanCount();
             var elementChart = element.shadowRoot.querySelector("vaadin-line-chart");
@@ -149,10 +151,11 @@
                 for (var key in eventNames) {
                     expect(element.eventCount[eventNames[key]]).to.equal(1);
                 }
+                done();
             });
         });
 
-        test('all point events, programmatically added listeners', function () {
+        test('all point events, programmatically added listeners', function (done) {
             setTimeout(function() {
                 var element = document.querySelector("programmatically-added-listeners");
                 element.cleanCount();
@@ -171,6 +174,7 @@
                 for (var key in eventNames) {
                     expect(element.eventCount[eventNames[key]]).to.equal(1);
                 }
+                done();
             });
         });
 
