@@ -24,18 +24,20 @@
 
 
 <script>
+  $(window).on('WebComponentsReady', function () {
+    setTimeout(function () {
+      var chart = $('#pie-with-legend')[0].chart;
+      chart.series[0].setData([
+        ["Aerospace", 45.0],
+        ["Medical", 26.8],
+        ["Agriculture ", 12.8],
+        ["Automotive", 8.5],
+        ["Consumers", 6.2],
+        ["Subsidies", 0.7]
 
-    $(document).on('WebComponentsReady', function() {
-        var chart = $('#pie-with-legend')[0].chart;
-        chart.series[0].setData([
-            ["Aerospace", 45.0],
-            ["Medical", 26.8],
-            ["Agriculture ", 12.8],
-            ["Automotive", 8.5],
-            ["Consumers", 6.2],
-            ["Subsidies", 0.7]
-        ]);
-    });
+      ])
+    })
+  });
 
     suite('framework integration', function () {
 
@@ -51,10 +53,11 @@
                 expect(chart.series[0].data).not.to.be.empty;
                 expect(chart.series[0].data).to.have.length(6);
 
-                var chartSlices = document.querySelectorAll(".highcharts-series path");
+                var chartSlices = elementChart.shadowRoot.querySelectorAll(".highcharts-series path");
                 expect(chartSlices).to.have.length(6);
-            }, 300);
-            done();
+                done();
+            });
+
         });
 
     });

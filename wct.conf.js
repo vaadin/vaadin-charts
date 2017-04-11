@@ -18,7 +18,7 @@ module.exports = {
                 {
                     'browserName': 'Chrome',
                     'platform': 'Windows 10',
-                    'version': '55.0'
+                    'version': '56.0'
                 },
                 {
                     'browserName': 'Firefox',

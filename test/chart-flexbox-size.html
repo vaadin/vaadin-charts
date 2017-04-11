@@ -135,24 +135,25 @@
 
         test('line chart with flex in style is half height and half width', function (done) {
           setTimeout(function () {
+            debugger;
             var container = document.querySelector('#line').shadowRoot.querySelector("#chartContainer");
             checkSize(container, 2, 2);
             done();
-          }, 150);
+          });
         });
         test('pie chart with flex in class is half height and half width', function (done) {
           setTimeout(function () {
             var container = document.querySelector('#pie').shadowRoot.querySelector("#chartContainer");
             checkSize(container, 2, 2);
             done();
-          }, 300);
+          });
         });
         test('column chart is half height and full width', function (done) {
           setTimeout(function () {
             var container = document.querySelector('#column').shadowRoot.querySelector("#chartContainer");
             checkSize(container, 2, 1);
             done();
-          }, 300);
+          });
         });
       });
 
