@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="vaadin-line-chart.html">
 
 <!--
@@ -38,6 +38,7 @@ Example:
                     max-padding="0"
                     min-padding="0"
                     start-on-tick="false"
+                    line-color="#FFFFFF"
                     end-on-tick="false">
                 <labels enabled="false"></labels>
             </x-axis>
@@ -51,6 +52,7 @@ Example:
                     max-padding="0.1"
                     min-padding="0.1"
                     start-on-tick="false"
+                    line-color="#FFFFFF"
                     end-on-tick="false">
                 <labels enabled="false"></labels>
             </y-axis>
@@ -62,26 +64,34 @@ Example:
 
 
     <script>
-        VaadinSparkline = Polymer({
-            is: 'vaadin-sparkline',
+        class VaadinSparkline extends Polymer.Element {
 
-            properties: {
+            static get is() { return 'vaadin-sparkline'; }
+
+            constructor() {
+                super();
+            }
+
+            static get properties() {
                 /**
                  * The data content of the Sparkline's series as a String. Example:
                  * - '21.20,21.96,22.07,23.01'
                  **/
-                data: String,
-                _arrayData: {
-                    type: Array,
-                    computed: '_arrayFromData(data)'
-                }
-            },
+                return {
+                    data: String,
+                    _arrayData: {
+                        type: Array,
+                        computed: '_arrayFromData(data)'
+                    }
+                };
+            }
 
-            _arrayFromData: function (data) {
+            _arrayFromData(data) {
                 return JSON.parse('[' + data + ']');
             }
-        });
+        }
 
+        customElements.define(VaadinSparkline.is, VaadinSparkline);
 
     </script>
 
