@@ -25,6 +25,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <link rel="import" href="configuration-reader.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="valo-theme.html">
 
 <script>
     /**
@@ -32,7 +33,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
     *
     * @polymerBehavior
     */
-    const VaadinChartsMixin = superclass => class extends Polymer.mixinBehaviors([VaadinCharts.ConfigurationReaderBehavior, Polymer.IronResizableBehavior], superclass) {
+    const VaadinChart = class extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior, VaadinCharts.ValoThemeBehavior], VaadinChartsConfigurationReader(Polymer.Element)) {
         /**
          * Fired when the chart has been fully loaded.
          *
@@ -253,7 +254,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 chartContainer.id = "chartContainer";
                 this._updateStyles(chartContainer);
                 
-                !this.shadowRoot && this.createShadowRoot();
+                // !this.shadowRoot && this.createShadowRoot();
 
                 this.shadowRoot.appendChild(chartContainer);
                 var licenseChecker = document.createElement('vaadin-license-checker');
