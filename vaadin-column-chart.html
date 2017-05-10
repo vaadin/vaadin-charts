@@ -33,19 +33,27 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinColumnChart extends Vaadin.Charts.Base {
-            static get is() { return 'vaadin-column-chart'; }
+        (function () {
+            
+            class VaadinColumnChart extends Vaadin.Charts.Base {
+                static get is() { return 'vaadin-column-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'column';
+                }
+
             }
 
-            _getType() {
-                return 'column';
-            }
+            customElements.define(VaadinColumnChart.is, VaadinColumnChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Column = VaadinColumnChart;
 
-        customElements.define(VaadinColumnChart.is, VaadinColumnChart);
+        })();
     </script>
 </dom-module>

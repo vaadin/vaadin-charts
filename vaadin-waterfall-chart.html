@@ -58,20 +58,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinWaterfallChart extends Vaadin.Charts.Base {
+        (function () {
+            
+            class VaadinWaterfallChart extends Vaadin.Charts.Base {
 
-            static get is() { return 'vaadin-waterfall-chart'; }
+                static get is() { return 'vaadin-waterfall-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'waterfall';
+                }
+
             }
 
-            _getType() {
-                return 'waterfall';
-            }
+            customElements.define(VaadinWaterfallChart.is, VaadinWaterfallChart);
+                        
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Waterfall = VaadinWaterfallChart;
 
-        }
-
-        customElements.define(VaadinWaterfallChart.is, VaadinWaterfallChart);
+        })();
     </script>
 </dom-module>

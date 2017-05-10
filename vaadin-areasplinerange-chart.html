@@ -39,20 +39,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinAreasplinerangeChart extends Vaadin.Charts.Base {
+        (function () {
+            
+            class VaadinAreasplinerangeChart extends Vaadin.Charts.Base {
 
-            static get is() { return 'vaadin-areasplinerange-chart'; }
+                static get is() { return 'vaadin-areasplinerange-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'areasplinerange';
+                }
+
             }
 
-            _getType() {
-                return 'areasplinerange';
-            }
+            customElements.define(VaadinAreasplinerangeChart.is, VaadinAreasplinerangeChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Areasplinerange = VaadinAreasplinerangeChart;
 
-        customElements.define(VaadinAreasplinerangeChart.is, VaadinAreasplinerangeChart);
+        })();
     </script>
 </dom-module>

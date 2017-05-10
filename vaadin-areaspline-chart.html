@@ -33,20 +33,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinAreasplineChart extends Vaadin.Charts.Base {
+        (function () {
 
-            static get is() { return 'vaadin-areaspline-chart'; }
+            class VaadinAreasplineChart extends Vaadin.Charts.Base {
 
-            constructor() {
-                super();
+                static get is() { return 'vaadin-areaspline-chart'; }
+
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'areaspline';
+                }
+
             }
 
-            _getType() {
-                return 'areaspline';
-            }
+            customElements.define(VaadinAreasplineChart.is, VaadinAreasplineChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Areaspline = VaadinAreasplineChart;
 
-        customElements.define(VaadinAreasplineChart.is, VaadinAreasplineChart);
+        })();
     </script>
 </dom-module>

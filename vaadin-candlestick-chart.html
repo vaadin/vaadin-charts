@@ -41,20 +41,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinCandlestickChart extends Vaadin.Charts.Base {
+        (function () {
+            
+            class VaadinCandlestickChart extends Vaadin.Charts.Base {
 
-            static get is() { return 'vaadin-candlestick-chart'; }
+                static get is() { return 'vaadin-candlestick-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'candlestick';
+                }
+
             }
 
-            _getType() {
-                return 'candlestick';
-            }
+            customElements.define(VaadinCandlestickChart.is, VaadinCandlestickChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Candlestick = VaadinCandlestickChart;
 
-        customElements.define(VaadinCandlestickChart.is, VaadinCandlestickChart);
+        })();
     </script>
 </dom-module>

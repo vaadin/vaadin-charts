@@ -39,20 +39,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinBubbleChart extends Vaadin.Charts.Base {
+        (function () {
             
-            static get is() { return 'vaadin-bubble-chart'; }
+            class VaadinBubbleChart extends Vaadin.Charts.Base {
+                
+                static get is() { return 'vaadin-bubble-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'bubble';
+                }
+
             }
 
-            _getType() {
-                return 'bubble';
-            }
+            customElements.define(VaadinBubbleChart.is, VaadinBubbleChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Bubble = VaadinBubbleChart;
 
-        customElements.define(VaadinBubbleChart.is, VaadinBubbleChart);
+        })();
     </script>
 </dom-module>

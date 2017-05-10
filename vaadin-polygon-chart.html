@@ -37,20 +37,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinPolygonChart extends Vaadin.Charts.Base {
+        (function () {
+            
+            class VaadinPolygonChart extends Vaadin.Charts.Base {
 
-            static get is() { return 'vaadin-polygon-chart'; }
+                static get is() { return 'vaadin-polygon-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'polygon';
+                }
+
             }
 
-            _getType() {
-                return 'polygon';
-            }
+            customElements.define(VaadinPolygonChart.is, VaadinPolygonChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Polygon = VaadinPolygonChart;
 
-        customElements.define(VaadinPolygonChart.is, VaadinPolygonChart);
+        })();
     </script>
 </dom-module>

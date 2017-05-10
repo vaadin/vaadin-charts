@@ -62,34 +62,42 @@ Example:
 
 
     <script>
-        class VaadinSparkline extends Polymer.Element {
+        (function () {
+            
+            class VaadinSparkline extends Polymer.Element {
 
-            static get is() { return 'vaadin-sparkline'; }
+                static get is() { return 'vaadin-sparkline'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                static get properties() {
+                    /**
+                     * The data content of the Sparkline's series as a String. Example:
+                     * - '21.20,21.96,22.07,23.01'
+                     **/
+                    return {
+                        data: String,
+                        _arrayData: {
+                            type: Array,
+                            computed: '_arrayFromData(data)'
+                        }
+                    };
+                }
+
+                _arrayFromData(data) {
+                    return JSON.parse('[' + data + ']');
+                }
             }
 
-            static get properties() {
-                /**
-                 * The data content of the Sparkline's series as a String. Example:
-                 * - '21.20,21.96,22.07,23.01'
-                 **/
-                return {
-                    data: String,
-                    _arrayData: {
-                        type: Array,
-                        computed: '_arrayFromData(data)'
-                    }
-                };
-            }
+            customElements.define(VaadinSparkline.is, VaadinSparkline);
+                        
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Sparkline = VaadinSparkline;
 
-            _arrayFromData(data) {
-                return JSON.parse('[' + data + ']');
-            }
-        }
-
-        customElements.define(VaadinSparkline.is, VaadinSparkline);
+        })();
 
     </script>
 

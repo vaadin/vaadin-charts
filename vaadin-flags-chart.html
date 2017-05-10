@@ -55,20 +55,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinFlagsChart extends Vaadin.Charts.Base {
-
-            static get is() { return 'vaadin-flags-chart'; }
-
-            constructor () {
-                super();
-            }
-
-            _getType () {
-                return 'flags';
-            }
+        (function () {
             
-        }
+            class VaadinFlagsChart extends Vaadin.Charts.Base {
 
-        customElements.define(VaadinFlagsChart.is, VaadinFlagsChart);
+                static get is() { return 'vaadin-flags-chart'; }
+
+                constructor () {
+                    super();
+                }
+
+                _getType () {
+                    return 'flags';
+                }
+                
+            }
+
+            customElements.define(VaadinFlagsChart.is, VaadinFlagsChart);
+
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Flags = VaadinFlagsChart;
+
+        })();
     </script>
 </dom-module>

@@ -37,20 +37,28 @@ Example:
     <template>
     </template>
     <script>
-        class VaadinBoxplotChart extends Vaadin.Charts.Base {
+        (function () {
+            
+            class VaadinBoxplotChart extends Vaadin.Charts.Base {
 
-            static get is() { return 'vaadin-boxplot-chart'; }
+                static get is() { return 'vaadin-boxplot-chart'; }
 
-            constructor() {
-                super();
+                constructor() {
+                    super();
+                }
+
+                _getType() {
+                    return 'boxplot';
+                }
+
             }
 
-            _getType() {
-                return 'boxplot';
-            }
+            customElements.define(VaadinBoxplotChart.is, VaadinBoxplotChart);
 
-        }
+            window.Vaadin = window.Vaadin || {};
+            window.Vaadin.Charts = window.Vaadin.Charts || {};
+            window.Vaadin.Charts.Boxplot = VaadinBoxplotChart;
 
-        customElements.define(VaadinBoxplotChart.is, VaadinBoxplotChart);
+        })();
     </script>
 </dom-module>
