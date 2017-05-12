@@ -21,20 +21,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
   <template>
   </template>
   <script>
-    class DataSeries extends Vaadin.ConfigurationReaderMixin
-    (Polymer.Element)
-    {
-      static
-      get
-      is()
-      {
+    class DataSeries extends Vaadin.ConfigurationReaderMixin(Polymer.Element) {
+      static get is() {
         return 'data-series'
       }
 
-      static
-      get
-      properties()
-      {
+      static get properties() {
         return {
           /**
            * If this series is a  drilldown series
@@ -76,17 +68,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
       }
 
-      static
-      get
-      observers()
-      {
+      static get observers() {
         return [
           '_dataChanged(data.splices)'
         ]
       }
 
-      constructor()
-      {
+      constructor() {
         super();
         this._ignoredNodes = ["#text", "#comment", "data"]
         // Make sure that seriesConf is initialized
@@ -97,8 +85,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Reloads the series with the original configuration defined in elements and its attributes.
        */
-      _reloadConfiguration()
-      {
+      _reloadConfiguration() {
         this._seriesConf = {};
         this._initConfiguration();
         if (!this._seriesConf.hasOwnProperty('data') && this.data) {
@@ -114,8 +101,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Updates chart data when series data changes
        */
-      _dataChanged()
-      {
+      _dataChanged() {
         if (this._seriesIndex != undefined && this._parentChart().isInitialized()) {
           this._updateChartData(this.data);
         } else {
@@ -123,8 +109,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
       }
 
-      _updateChartData(newData)
-      {
+      _updateChartData(newData) {
         if (this.drilldown) {
           this._parentChart().chart.drilldown.series[this._seriesIndex].setData(newData);
         } else {
@@ -136,17 +121,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Overrides behavior, for data-series all values should be evaluated as javascript
        **/
-      _evalJavascript(val)
-      {
+      _evalJavascript(val) {
         // only eval when needed
         // functions, dates and arrays
         return val.indexOf('function') === 0
-                || val.indexOf('Date.UTC') === 0
-                || val.indexOf('[') === 0;
+          || val.indexOf('Date.UTC') === 0
+          || val.indexOf('[') === 0;
       }
 
-      _parentChart()
-      {
+      _parentChart() {
         var parent = this.parentNode;
         while (parent._addSeries === undefined) {
           parent = parent.parentNode;
@@ -157,8 +140,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Load the configuration from the element attributes and the light-DOM elements.
        **/
-      _loadData()
-      {
+      _loadData() {
         var element = this;
 
         for (var n = 0; n < element.childNodes.length; n++) {
@@ -188,8 +170,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Creates a point object from a point node.
        **/
-      _parsePoint(pointNode)
-      {
+      _parsePoint(pointNode) {
         var result = {};
 
         for (var n = 0; n < pointNode.childNodes.length; n++) {
@@ -206,13 +187,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 }
               } else {
                 console.log('x value is already defined for this point, \'' +
-                        node.textContent + '\' couldn\'t be set');
+                  node.textContent + '\' couldn\'t be set');
               }
             } else if (result[camelName] === undefined) {
               result[camelName] = this._parseAttribute(node.textContent);
             } else {
               console.log(camelName + ' value is already defined for this point, \'' +
-                      node.textContent + '\' couldn\'t be set');
+                node.textContent + '\' couldn\'t be set');
             }
           }
         }
@@ -221,20 +202,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         return result;
       }
 
-      _parseDate(dateString)
-      {
+      _parseDate(dateString) {
         if (this._isValidDate(dateString)) {
           return Date.parse(dateString);
         }
       }
 
-      _isValidDate(dateString)
-      {
+      _isValidDate(dateString) {
         try {
           var dateValue = new Date(dateString);
           //If dateValue is invalid getTime is NaN
           return (dateValue.toISOString().indexOf(dateString) === 0) &&
-                  Object.prototype.toString.call(dateValue) === "[object Date]" && !isNaN(dateValue.getTime());
+            Object.prototype.toString.call(dateValue) === "[object Date]" && !isNaN(dateValue.getTime());
         } catch (e) {
 
         }
@@ -245,8 +224,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Checks if nodes has child nodes that correspond to points.
        **/
-      _hasPointNodes(node)
-      {
+      _hasPointNodes(node) {
         var nodeChildrenArray = Array.prototype.slice.call(node.children, 0);
         return nodeChildrenArray.length > 0 && nodeChildrenArray.filter(this._isPointNode).length > 0;
       }
@@ -254,8 +232,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Checks if node is a point node.
        **/
-      _isPointNode(node)
-      {
+      _isPointNode(node) {
         return node.nodeType === 1 && 'point' === node.nodeName.toLowerCase();
       }
 
@@ -265,8 +242,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
        * @param {string} name
        * @param {object} value to be set
        **/
-      _setProperty(name, value)
-      {
+      _setProperty(name, value) {
         var parsedValue = this._parseAttribute(value);
         //if value is undefined it shouldn't be set to keep _seriesConf minimal
         if (undefined !== parsedValue) {
@@ -279,8 +255,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       }
 
       // Kind of attached but attached is not called then the element is only in the light DOM
-      _initialize()
-      {
+      _initialize() {
         this._initConfiguration();
         if (this.drilldown) {
           this._seriesIndex = this._parentChart()._addDrilldownSeries(this._seriesConf);
@@ -292,8 +267,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Initializes the series json configuration.
        */
-      _initConfiguration()
-      {
+      _initConfiguration() {
         var element = this;
         this._cleanNode(element);
         this._loadFromNode(this._seriesConf, element);
@@ -302,13 +276,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         this._addDataPointsObserver();
       }
 
-      _addDataPointsObserver()
-      {
+      _addDataPointsObserver() {
         if (MutationObserver && !this._observer) {
           var dataElements = this.querySelectorAll('data');
           if (dataElements && dataElements.length > 0) {
             this._observer = new MutationObserver(
-                    this._reloadData.bind(this));
+              this._reloadData.bind(this));
             for (var n = 0; n < dataElements.length; n++) {
               this._observer.observe(dataElements[n], {
                 attributes: false,
@@ -322,8 +295,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
       }
 
-      _reloadData()
-      {
+      _reloadData() {
         this._seriesConf.data = [];
         this._loadData();
         this._updateChartData(this._seriesConf.data);

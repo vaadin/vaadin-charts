@@ -44,12 +44,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
      *
      */
 
-    class BaseChartElement extends Polymer.mixinBehaviors
-    ([Polymer.IronResizableBehavior], Vaadin.ConfigurationReaderMixin(Polymer.Element))
-    {
+    class BaseChartElement extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Vaadin.ConfigurationReaderMixin(Polymer.Element)) {
 
-      constructor()
-      {
+      constructor() {
         super();
 
         /**
@@ -102,10 +99,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         this._chartConf = {};
       }
 
-      static
-      get
-      properties()
-      {
+      static get properties() {
         return {
 
           /**
@@ -163,16 +157,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Tells that the component has been initialized.
        **/
-      isInitialized()
-      {
+      isInitialized() {
         return Object.keys(this.chart).length !== 0;
       }
 
       /**
        * Reloads the chart with the original configuration defined in elements and its attributes.
        */
-      reloadConfiguration()
-      {
+      reloadConfiguration() {
         this._chartConf = {};
         this._initConfiguration();
         this.chart.destroy();
@@ -184,8 +176,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Reload all the chart's series
        */
-      _reloadSeries()
-      {
+      _reloadSeries() {
         var series = this.querySelectorAll('data-series');
         for (var i = 0; i < series.length; i++) {
           series[i]._reloadConfiguration();
@@ -196,8 +187,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
        * Dynamically add a new Series to this chart
        * @return The index of the added series in the series array
        **/
-      _addSeries(newSeries)
-      {
+      _addSeries(newSeries) {
         if (this._chartConf.series === undefined) {
           this._chartConf.series = [];
         }
@@ -209,8 +199,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
        * Dynamically add a new Series to this chart's Drilldown configuration
        * @return The index of the added series in the drilldown series array
        **/
-      _addDrilldownSeries(newSeries)
-      {
+      _addDrilldownSeries(newSeries) {
         if (!this._chartConf.drilldown) {
           this._chartConf.drilldown = {};
         }
@@ -222,27 +211,23 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       }
 
       /* ----------- lifecycle ----------- */
-      ready()
-      {
+      ready() {
         super.ready();
         this.addEventListener('iron-resize', this._onIronResize);
       }
 
-      _onIronResize()
-      {
+      _onIronResize() {
         if (this.chart.reflow) {
           this.chart.reflow();
         }
       }
 
-      connectedCallback()
-      {
+      connectedCallback() {
         super.connectedCallback();
         Polymer.RenderStatus.afterNextRender(this, this._afterRender);
       }
 
-      _afterRender()
-      {
+      _afterRender() {
         if (!this.isInitialized()) {
           this._initLocalDom();
           this._initConfiguration();
@@ -261,8 +246,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Initializes the chart property using the json configuration.
        */
-      _initChart()
-      {
+      _initChart() {
         if (this.timeline) {
           this._setChart(new Highcharts.StockChart(this._chartConf));
         } else {
@@ -271,8 +255,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         this.fire("chart-loaded");
       }
 
-      _initLocalDom()
-      {
+      _initLocalDom() {
         var chartContainer = document.createElement('div');
         chartContainer.id = "chartContainer";
         this._updateStyles(chartContainer);
@@ -290,8 +273,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Updates chartContainer and current chart style property depending on flex status
        */
-      _updateStyles(chartContainer)
-      {
+      _updateStyles(chartContainer) {
         var isFlex = false;
         this._copyStyleProperties.forEach(function (property) {
           //Chrome returns default value if property is not set
@@ -320,8 +302,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * Initializes the chart json configuration.
        */
-      _initConfiguration()
-      {
+      _initConfiguration() {
         //probably not needed anymore
         this._cleanNode(this);
         this._loadConfiguration(this._chartConf, this);
@@ -335,8 +316,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         this._chartConf.chart.renderTo = this.shadowRoot.querySelector('#chartContainer');
       }
 
-      _initEventListeners()
-      {
+      _initEventListeners() {
         this._chartConf.chart.events = {};
         for (var key in this._chartEventNames) {
           if (this._chartEventNames.hasOwnProperty(key)) {
@@ -361,40 +341,35 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
       }
 
-      _addChartEvent(highchartsName, vaadinChartsName)
-      {
+      _addChartEvent(highchartsName, vaadinChartsName) {
         var self = this;
         this._chartConf.chart.events[highchartsName] = function (e) {
-          self.fire(vaadinChartsName, {originalEvent: e, chart: this});
+          self.fire(vaadinChartsName, { originalEvent: e, chart: this });
         };
       }
 
-      _addSeriesEvent(highchartsName, vaadinChartsName)
-      {
+      _addSeriesEvent(highchartsName, vaadinChartsName) {
         var self = this;
         this._chartConf.plotOptions.series.events[highchartsName] = function (e) {
-          self.fire(vaadinChartsName, {originalEvent: e, series: this});
+          self.fire(vaadinChartsName, { originalEvent: e, series: this });
         };
       }
 
-      _addPointEvent(highchartsName, vaadinChartsName)
-      {
+      _addPointEvent(highchartsName, vaadinChartsName) {
         var self = this;
         this._chartConf.plotOptions.series.point.events[highchartsName] = function (e) {
-          self.fire(vaadinChartsName, {originalEvent: e, point: this});
+          self.fire(vaadinChartsName, { originalEvent: e, point: this });
         };
       }
 
-      _timelineChanged(newValue, oldValue)
-      {
+      _timelineChanged(newValue, oldValue) {
         // Observer might be called before _initChart
         if (this.isInitialized()) {
           this.reloadConfiguration();
         }
       }
 
-      _loadTheme()
-      {
+      _loadTheme() {
         Highcharts.setOptions({
           "colors": ["#3090F0", "#EC6464", "#98DF58", "#F9DD51", "#24DCD4",
             "#EC64A5", "#685CB0", "#FF7D42", "#336190", "#AA514D",
