@@ -6,14 +6,14 @@
 <dom-module id="demo-picker">
 
   <style>
-    :host .sidebar {
+     :host .sidebar {
       background-color: #2D343B;
       background-image: linear-gradient(to left, #2D343B 0px, #38414A 9px);
       color: #C5CACF;
       overflow: scroll;
     }
 
-    :host .logo {
+     :host .logo {
       color: white;
       font-weight: 400;
       text-align: center;
@@ -23,7 +23,7 @@
       margin-bottom: 4px;
     }
 
-    :host #main-content {
+     :host #main-content {
       position: absolute;
       top: 0px;
       left: 250px;
@@ -33,13 +33,13 @@
       background-color: white;
     }
 
-    :host .v-slot-links {
+     :host .v-slot-links {
       text-align: center;
       width: 100%;
       font: 300 16px/1.55 "Open Sans", sans-serif;
     }
 
-    :host .v-link {
+     :host .v-link {
       cursor: pointer;
       color: #59ACFF;
       text-decoration: none;
@@ -49,16 +49,16 @@
       transition: color 140ms;
     }
 
-    :host .v-link:hover {
+     :host .v-link:hover {
       color: #8cc6ff;
     }
 
-    :host .v-link.v-disabled {
+     :host .v-link.v-disabled {
       opacity: 0.5;
       filter: alpha(opacity=50);
     }
 
-    :host .v-link a {
+     :host .v-link a {
       cursor: inherit;
       color: inherit;
       text-decoration: inherit;
@@ -67,26 +67,26 @@
       transition: inherit;
     }
 
-    :host .v-link .v-icon {
+     :host .v-link .v-icon {
       cursor: inherit;
     }
 
-    :host .v-slot-links {
+     :host .v-slot-links {
       text-align: center;
     }
 
-    :host .links {
+     :host .links {
       font-size: 12px;
       font-weight: 400;
       margin: 0 auto;
     }
 
-    :host .links > .v-spacing {
+     :host .links>.v-spacing {
       text-align: center;
       width: 1.6em;
     }
 
-    :host .links > .v-spacing:before {
+     :host .links>.v-spacing:before {
       content: "\00b7";
     }
   </style>
@@ -100,16 +100,20 @@
         <div class="v-slot v-slot-links">
           <div class="v-horizontallayout v-layout v-horizontal v-widget links v-horizontallayout-links">
             <div class="v-slot">
-              <div class="v-link v-widget"><a href="https://vaadin.com/charts"><span>Home page</span></a></div>
+              <div class="v-link v-widget">
+                <a href="https://vaadin.com/charts"><span>Home page</span></a>
+              </div>
             </div>
             <div class="v-spacing"></div>
             <div class="v-slot">
-              <div class="v-link v-widget"><a href="http://demo.vaadin.com/vaadin-charts-api"><span>API</span></a></div>
+              <div class="v-link v-widget">
+                <a href="http://demo.vaadin.com/vaadin-charts-api"><span>API</span></a>
+              </div>
             </div>
             <div class="v-spacing"></div>
             <div class="v-slot">
-              <div class="v-link v-widget"><a
-                      href="https://vaadin.com/docs/-/part/charts/webcomponents-api/charts-getting-started.html"><span>Manual</span></a>
+              <div class="v-link v-widget">
+                <a href="https://vaadin.com/docs/-/part/charts/webcomponents-api/charts-getting-started.html"><span>Manual</span></a>
               </div>
             </div>
           </div>
@@ -127,7 +131,6 @@
 </dom-module>
 
 <script>
-
   Polymer({
 
     is: 'demo-picker',
