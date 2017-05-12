@@ -34,8 +34,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinColumnChart extends Vaadin.Charts.Base {
+
+            class ColumnChartElement extends Vaadin.Charts.Base {
                 static get is() { return 'vaadin-column-chart'; }
 
                 constructor() {
@@ -48,11 +48,10 @@ Example:
 
             }
 
-            customElements.define(VaadinColumnChart.is, VaadinColumnChart);
+            customElements.define(ColumnChartElement.is, ColumnChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Column = VaadinColumnChart;
+            window.Vaadin.ColumnChartElement = ColumnChartElement;
 
         })();
     </script>

@@ -40,8 +40,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinAreasplinerangeChart extends Vaadin.Charts.Base {
+
+            class AreasplinerangeChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-areasplinerange-chart'; }
 
@@ -55,11 +55,10 @@ Example:
 
             }
 
-            customElements.define(VaadinAreasplinerangeChart.is, VaadinAreasplinerangeChart);
+            customElements.define(AreasplinerangeChartElement.is, AreasplinerangeChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Areasplinerange = VaadinAreasplinerangeChart;
+            window.Vaadin.AreasplinerangeChartElement = AreasplinerangeChartElement;
 
         })();
     </script>

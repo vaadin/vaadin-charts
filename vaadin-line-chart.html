@@ -34,8 +34,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinLineChart extends Vaadin.Charts.Base {
+
+            class LineChartElement extends Vaadin.Charts.Base {
                 static get is() { return 'vaadin-line-chart'; }
 
                 constructor() {
@@ -47,11 +47,10 @@ Example:
                 }
             }
             
-            customElements.define(VaadinLineChart.is, VaadinLineChart);
+            customElements.define(LineChartElement.is, LineChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Line = VaadinLineChart;
+            window.Vaadin.LineChartElement = LineChartElement;
 
         })();
     </script>

@@ -41,8 +41,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinPieChart extends Vaadin.Charts.Base {
+
+            class PieChartElement extends Vaadin.Charts.Base {
                 static get is() { return 'vaadin-pie-chart'; }
 
                 constructor () {
@@ -54,11 +54,10 @@ Example:
                 }
             }
 
-            customElements.define(VaadinPieChart.is, VaadinPieChart);
+            customElements.define(PieChartElement.is, PieChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Pie = VaadinPieChart;
+            window.Vaadin.PieChartElement = PieChartElement;
 
         })();
     </script>

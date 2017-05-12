@@ -48,8 +48,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinHeatmapChart extends Vaadin.Charts.Base {
+
+            class HeatmapChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-heatmap-chart'; }
 
@@ -63,11 +63,10 @@ Example:
 
             }
 
-            customElements.define(VaadinHeatmapChart.is, VaadinHeatmapChart);
+            customElements.define(HeatmapChartElement.is, HeatmapChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Heatmap = VaadinHeatmapChart;
+            window.Vaadin.HeatmapChartElement = HeatmapChartElement;
 
         })();
     </script>

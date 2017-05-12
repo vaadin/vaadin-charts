@@ -34,8 +34,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinScatterChart extends Vaadin.Charts.Base {
+
+            class ScatterChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-scatter-chart'; }
 
@@ -49,11 +49,10 @@ Example:
 
             }
 
-            customElements.define(VaadinScatterChart.is, VaadinScatterChart);
+            customElements.define(ScatterChartElement.is, ScatterChartElement);
                         
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Scatter = VaadinScatterChart;
+            window.Vaadin.ScatterChartElement = ScatterChartElement;
 
         })();
     </script>

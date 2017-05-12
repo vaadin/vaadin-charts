@@ -42,8 +42,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinCandlestickChart extends Vaadin.Charts.Base {
+
+            class CandlestickChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-candlestick-chart'; }
 
@@ -57,11 +57,10 @@ Example:
 
             }
 
-            customElements.define(VaadinCandlestickChart.is, VaadinCandlestickChart);
+            customElements.define(CandlestickChartElement.is, CandlestickChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Candlestick = VaadinCandlestickChart;
+            window.Vaadin.CandlestickChartElement = CandlestickChartElement;
 
         })();
     </script>

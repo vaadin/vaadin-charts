@@ -42,8 +42,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinOhlcChart extends Vaadin.Charts.Base {
+
+            class OhlcChartElement extends Vaadin.Charts.Base {
                 static get is() { return 'vaadin-ohlc-chart'; }
 
                 constructor() {
@@ -55,11 +55,10 @@ Example:
                 }
             }
 
-            customElements.define(VaadinOhlcChart.is, VaadinOhlcChart);
+            customElements.define(OhlcChartElement.is, OhlcChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Ohlc = VaadinOhlcChart;
+            window.Vaadin.OhlcChartElement = OhlcChartElement;
 
         })();
     </script>

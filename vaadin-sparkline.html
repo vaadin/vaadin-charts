@@ -63,8 +63,8 @@ Example:
 
     <script>
         (function () {
-            
-            class VaadinSparkline extends Polymer.Element {
+
+            class SparklineChartElement extends Polymer.Element {
 
                 static get is() { return 'vaadin-sparkline'; }
 
@@ -91,11 +91,10 @@ Example:
                 }
             }
 
-            customElements.define(VaadinSparkline.is, VaadinSparkline);
+            customElements.define(SparklineChartElement.is, SparklineChartElement);
                         
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Sparkline = VaadinSparkline;
+            window.Vaadin.SparklineChartElement = SparklineChartElement;
 
         })();
 

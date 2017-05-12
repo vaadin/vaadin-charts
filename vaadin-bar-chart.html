@@ -35,7 +35,7 @@ Example:
     <script>
         (function() {
 
-            class VaadinBarChart extends Vaadin.Charts.Base {
+            class BarChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-bar-chart'; }
 
@@ -48,11 +48,10 @@ Example:
                 }
             }
 
-            customElements.define(VaadinBarChart.is, VaadinBarChart);
+            customElements.define(BarChartElement.is, BarChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Bar = VaadinBarChart;
+            window.Vaadin.BarChartElement = BarChartElement;
 
         })();
     </script>

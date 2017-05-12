@@ -51,8 +51,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinTreemapChart extends Vaadin.Charts.Base {
+
+            class TreemapChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-treemap-chart'; }
 
@@ -66,11 +66,10 @@ Example:
 
             }
 
-            customElements.define(VaadinTreemapChart.is, VaadinTreemapChart);
+            customElements.define(TreemapChartElement.is, TreemapChartElement);
                         
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Treemap = VaadinTreemapChart;
+            window.Vaadin.TreemapChartElement = TreemapChartElement;
 
         })();
     </script>

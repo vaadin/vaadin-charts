@@ -37,8 +37,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinColumnrangeChart extends Vaadin.Charts.Base {
+
+            class ColumnrangeChartElement extends Vaadin.Charts.Base {
 
                 static get is() { return 'vaadin-columnrange-chart'; }
 
@@ -52,11 +52,10 @@ Example:
 
             }
 
-            customElements.define(VaadinColumnrangeChart.is, VaadinColumnrangeChart);
+            customElements.define(ColumnrangeChartElement.is, ColumnrangeChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Columnrange = VaadinColumnrangeChart;
+            window.Vaadin.ColumnrangeChartElement = ColumnrangeChartElement;
 
         })();
     </script>

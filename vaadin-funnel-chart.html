@@ -40,8 +40,8 @@ Example:
     </template>
     <script>
         (function () {
-            
-            class VaadinFunnelChart extends Vaadin.Charts.Base {
+
+            class FunnelChartElement extends Vaadin.Charts.Base {
                 
                 static get is() { return 'vaadin-funnel-chart'; }
 
@@ -55,11 +55,10 @@ Example:
 
             }
 
-            customElements.define(VaadinFunnelChart.is, VaadinFunnelChart);
+            customElements.define(FunnelChartElement.is, FunnelChartElement);
 
             window.Vaadin = window.Vaadin || {};
-            window.Vaadin.Charts = window.Vaadin.Charts || {};
-            window.Vaadin.Charts.Funnel = VaadinFunnelChart;
+            window.Vaadin.FunnelChartElement = FunnelChartElement;
 
         })();
     </script>
