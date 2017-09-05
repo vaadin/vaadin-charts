@@ -1,35 +1,141 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>vaadin-board demo</title>
+  <title>vaadin-chart Basic Examples</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
-  <link rel="import" href="../vaadin-charts.html">
+  <link rel="import" href="common.html">
 </head>
 
 <body unresolved>
-  <vaadin-pie-chart id="pie-with-legend">
-    <chart-title>Browser market shares at a specific website, 2014</chart-title>
-    <tooltip value-decimals="1" point-format="{series.name}: <b>{point.percentage:.1f}%</b>">
-    </tooltip>
-    <plot-options>
-      <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
-        <data-labels enabled="true" format="<b>{point.name}</b>:    {point.percentage} %">
-        </data-labels>
-      </pie>
-    </plot-options>
+  <div class="vertical-section-container centered">
 
-    <data-series name="Browser share">
-      <data>
-        ["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera", 6.2], ["Others", 0.7],
-      </data>
-    </data-series>
-  </vaadin-pie-chart>
+    <demo-navigation></demo-navigation>
+
+    <h3>All declarative</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-chart id="mychart" title="The chart title" subtitle="Subtitle" x-labels='["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'
+          data="[29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]">
+        </vaadin-chart>
+      </template>
+    </demo-snippet>
+
+    <h3>All declarative binding</h3>
+    <demo-snippet>
+      <template>
+
+          <test-binding-element></test-binding-element>
+          <dom-module id="test-binding-element">
+            <template>
+              <vaadin-chart title="[[title]]" subtitle="[[subtitle]]" x-labels="[[labels]]"
+                data="[[data]]">
+              </vaadin-chart>
+            </template>
+
+            <script>
+              class TestBindingElement extends Polymer.Element {
+                static get is() {
+                  return 'test-binding-element';
+                }
+
+                constructor() {
+                  super();
+                  this.title = "The chart title";
+                  this.subtitle = "Subtitle";
+                  this.labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                  this.data = [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4];
+                }
+              }
+              addEventListener('WebComponentsReady', function () {
+                customElements.define(TestBindingElement.is, TestBindingElement);
+              });
+            </script>
+          </dom-module>
+        </template>
+    </demo-snippet>
+
+    <h3>All with update</h3>
+    <demo-snippet>
+      <template>
+        <test-update-element></test-update-element>
+        <dom-module id="test-update-element">
+          <template>
+            <vaadin-chart id="mychart"></vaadin-chart>
+          </template>
+
+          <script>
+                class TestUpdateElement extends Polymer.Element {
+                  static get is() {
+                    return 'test-update-element';
+                  }
+
+                  connectedCallback() {
+                    super.connectedCallback();
+                    this.$.mychart.update({
+                      title: {
+                        text: 'The chart title'
+                      },
+                      subtitle: {
+                        text: 'Subtitle'
+                      },
+                      xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                      },
+                      series: [{
+                        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                      }]
+                    });
+                  }
+                }
+                addEventListener('WebComponentsReady', function () {
+                  customElements.define(TestUpdateElement.is, TestUpdateElement);
+                });
+          </script>
+        </dom-module>
+      </template>
+    </demo-snippet>
+
+    <h3>All with configuration</h3>
+    <demo-snippet>
+      <template>
+        <test-configuration-element></test-configuration-element>
+        <dom-module id="test-configuration-element">
+          <template>
+            <vaadin-chart id="mychart"></vaadin-chart>
+          </template>
+
+          <script>
+            class TestConfigurationElement extends Polymer.Element {
+              static get is() {
+                return 'test-configuration-element';
+              }
+
+              connectedCallback() {
+                super.connectedCallback();
+                var configuration = this.$.mychart.configuration;
+                configuration.setTitle({ text: 'The chart title' });
+                configuration.xAxis[0].setCategories(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+                configuration.addSeries({
+                  data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                })
+
+              }
+            }
+            addEventListener('WebComponentsReady', function () {
+              customElements.define(TestConfigurationElement.is, TestConfigurationElement);
+            });
+          </script>
+        </dom-module>
+      </template>
+    </demo-snippet>
+
+  </div>
 </body>
 
 </html>

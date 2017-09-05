@@ -1,55 +1,36 @@
 {
-  "name": "vaadin-charts",
-  "description": "Vaadin Charts Web Components",
+  "name": "vaadin-chart",
+  "homepage": "https://vaadin.com/elements",
   "authors": [
     "Vaadin Ltd"
   ],
+  "description": "vaadin-chart",
+  "main": "vaadin-chart.html",
   "keywords": [
-    "web-component",
+    "Vaadin",
+    "vaadin-chart",
     "web-components",
-    "polymer",
-    "vaadin",
-    "charts",
-    "highcharts"
+    "web-component",
+    "polymer"
   ],
-  "main": "vaadin-charts.html",
   "license": "https://raw.githubusercontent.com/vaadin/vaadin-charts/master/LICENSE.txt",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:vaadin/vaadin-charts.git"
-  },
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "framework-test",
     "test",
-    "demo",
-    "index.html"
+    "gulpfile.js",
+    "package-lock.json",
+    "wct.conf.js"
   ],
   "dependencies": {
-    "highcharts": "highcharts/highcharts-dist#v4.2.6",
-    "polymer": "Polymer/polymer#^2.0.0",
-    "vaadin-license-checker": "vaadin/license-checker#^1.0.0",
-    "iron-resizable-behavior": "^2.0.0"
+    "polymer": "^2.0.0",
+    "highcharts": "^5.0.0"
   },
   "devDependencies": {
-    "google-code-prettify": "*",
-    "iron-selector": "PolymerElements/iron-selector#^2.0.0",
-    "iron-ajax": "PolymerElements/iron-ajax#^2.0.0",
-    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^2.0.0",
-    "iron-menu-behavior": "PolymerElements/iron-menu-behavior#^2.0.0",
-    "iron-pages": "PolymerElements/iron-pages#^2.0.0",
-    "paper-tabs": "PolymerElements/paper-tabs#^2.0.0",
-    "web-component-tester": "^6.1.5",
-    "jquery": "^2.2.2",
-    "webcomponentsjs": "^v1.0.0",
-    "vaadin-grid": "^3.0.0"
-  },
-  "resolutions": {
-    "polymer": "^2.0.0",
-    "webcomponentsjs": "^v1.0.0",
-    "iron-resizable-behavior": "^2.0.0",
-    "iron-ajax": "^2.0.0"
+    "elements-demo-resources": "^2.0.0",
+    "iron-component-page": "^3.0.0",
+    "iron-demo-helpers": "^2.0.0",
+    "web-component-tester": "^6.0.0"
   }
 }
