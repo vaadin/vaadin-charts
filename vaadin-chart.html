@@ -42,7 +42,7 @@ Commercial Vaadin Add-On License Version 3, available at https://vaadin.com/lice
      * @polymer
      * @demo demo/index.html
      */
-    class NewVaadinChart extends Polymer.Element {
+    class VaadinChart extends Polymer.Element {
       static get is() {
         return 'vaadin-chart';
       }
@@ -65,17 +65,33 @@ Commercial Vaadin Add-On License Version 3, available at https://vaadin.com/lice
       connectedCallback() {
         super.connectedCallback();
         //draw chart with initial config
-        const conf = this._computeConfiguration();
-        this.configuration = Highcharts.chart(this.$.chart, conf);
+        Polymer.RenderStatus.beforeNextRender(this, function () {
+          const conf = this._computeConfiguration();
+          if (!this.configuration) {
+            this.configuration = Highcharts.chart(this.$.chart, conf);
+          }
+        });
 
       }
 
       update(changes) {
-        if (changes.series) {
-          changes.series.forEach(this._addSeries.bind(this));
-          changes.series = undefined;
+        if (typeof changes === 'string') {
+          try {
+            changes = JSON.parse(changes);
+          } catch (e) {
+            //Invalid json
+            return;
+          }
         }
-        this.configuration && this.configuration.update(changes);
+        if (this.configuration) {
+          if (changes.series) {
+            changes.series.forEach(this._addSeries.bind(this));
+            changes.series = undefined;
+          }
+          this.configuration.update(changes);
+        } else {
+          this.configuration = Highcharts.chart(this.$.chart, changes);
+        }
       }
 
       _addSeries(series) {
@@ -99,12 +115,8 @@ Commercial Vaadin Add-On License Version 3, available at https://vaadin.com/lice
         console.log(result);
         return result;
       }
-
-      withConfiguration(conf) {
-      }
-
     }
 
-    customElements.define(NewVaadinChart.is, NewVaadinChart);
+    customElements.define(VaadinChart.is, VaadinChart);
   </script>
 </dom-module>
