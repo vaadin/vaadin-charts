@@ -78,7 +78,7 @@ Commercial Vaadin Add-On License Version 3, available at https://vaadin.com/lice
         this.configuration && this.configuration.update(changes);
       }
 
-      _addSeries(series){
+      _addSeries(series) {
         this.configuration && this.configuration.addSeries(series);
       }
 
@@ -90,11 +90,11 @@ Commercial Vaadin Add-On License Version 3, available at https://vaadin.com/lice
             enabled: false
           }
         };
-        if(this.data){
-          result.series = [{data:this.data}];
+        if (this.data) {
+          result.series = [{ data: this.data }];
         }
-        if(this.xLabels){
-          result.xAxis = [{categories:this.xLabels}];
+        if (this.xLabels) {
+          result.xAxis = [{ categories: this.xLabels }];
         }
         console.log(result);
         return result;
