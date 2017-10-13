@@ -11,11 +11,11 @@
 - **Trial license** https://vaadin.com/pro/licenses
 
 
-## Using Vaadin Board in your project
+## Using Vaadin Charts in your project
 
 ### Install Vaadin Charts
 ```
-$ bower install --save vaadin-charts#6.0-preview
+$ bower install --save vaadin-charts#6.0.0-aplha1
 ```
 
 ### Import Vaadin Charts
