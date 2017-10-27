@@ -101,6 +101,15 @@
         });
       });
 
+      it('should inflate function strings', function(done) {
+        chart.update({'tooltip':{'_fn_formatter': 'return "awesome chart"'}}, true);
+        setTimeout(function() {
+          expect(chart.configuration.tooltip.options.formatter).to.be.a('function');
+          expect(chart.configuration.tooltip.options).to.not.have.property('_fn_formatter');
+          done();
+        });
+      });
+
     });
   </script>
 </body>
