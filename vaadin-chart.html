@@ -197,7 +197,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             * For detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)
             * @readonly
             */
-            configuration: Object
+            _configuration: Object
           };
         }
 
@@ -215,6 +215,17 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
 //          this.configuration = Highcharts.chart(this.$.chart, this._baseConfig);
           this.__addLicenseChecker();
+        }
+
+        get configuration() {
+          if (this._configuration === undefined) {
+            this._configuration = Highcharts.chart(this.$.chart, this._baseConfig);
+          }
+          return this._configuration;
+        }
+
+        set configuration(value) {
+          this._configuration = value;
         }
 
         __addLicenseChecker() {
@@ -258,7 +269,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *    if existing configuration should be discarded.
         */
         update(jsonConfiguration, resetConfiguration) {
-          if (!this.configuration || resetConfiguration) {
+          if (!this._configuration || resetConfiguration) {
             this.configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
             this.__invertForBarSeries(jsonConfiguration.series);
             return;
