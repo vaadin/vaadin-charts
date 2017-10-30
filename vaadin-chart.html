@@ -213,7 +213,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         connectedCallback() {
           super.connectedCallback();
-          this.configuration = Highcharts.chart(this.$.chart, this._baseConfig);
+//          this.configuration = Highcharts.chart(this.$.chart, this._baseConfig);
           this.__addLicenseChecker();
         }
 
@@ -258,8 +258,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *    if existing configuration should be discarded.
         */
         update(jsonConfiguration, resetConfiguration) {
-          if (resetConfiguration) {
+          if (!this.configuration || resetConfiguration) {
             this.configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
+            this.__invertForBarSeries(jsonConfiguration.series);
             return;
           }
           this.configuration.update(jsonConfiguration);
@@ -304,14 +305,23 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (!Array.isArray(series)) {
             throw new Error('The type of jsonConfiguration.series should be Object[]');
           }
+          this.__invertForBarSeries(series);
           for (var i = 0; i < series.length; i++) {
             var currentSeries = series[i];
+            if (currentSeries.type === 'bar') currentSeries.type = 'column';
             if (this.configuration.series[i]) {
               this.configuration.series[i].update(currentSeries);
             } else {
               this.configuration.addSeries(currentSeries);
             }
           }
+        }
+
+        __invertForBarSeries(series) {
+          this.configuration.chart = this.configuration.chart || {};
+          this.configuration.chart.inverted = (series !== undefined) && Array.isArray(series)
+            && series.some(e => e.type === 'bar');
+          this.configuration.chart.type = this.configuration.chart.inverted ? 'column' : this.configuration.chart.type;
         }
       }
 
