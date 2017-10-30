@@ -283,7 +283,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             if (jsonConfiguration.hasOwnProperty(attr)) {
               const targetProperty = jsonConfiguration[attr];
               if (attr.startsWith('_fn_') && (typeof targetProperty === 'string' || targetProperty instanceof String)) {
-                jsonConfiguration[attr.substr(4)] = new Function(targetProperty);
+                try {
+                  jsonConfiguration[attr.substr(4)] = eval('(' + targetProperty + ')');
+                } catch (e) {
+                  jsonConfiguration[attr.substr(4)] = eval('(function(){' + targetProperty + '})');
+                }
                 delete jsonConfiguration[attr];
               } else if (targetProperty instanceof Object) {
                 this.__inflateFunctions(targetProperty);
