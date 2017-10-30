@@ -103,8 +103,17 @@
 
       it('should inflate function strings', function(done) {
         chart.update({'tooltip': {'_fn_formatter': 'function() {return "awesome chart"}'}}, true);
+        expect(chart.configuration.tooltip.options.formatter).to.be.a('function');
+        expect(chart.configuration.tooltip.options).to.not.have.property('_fn_formatter');
+
         chart.update({'tooltip': {'_fn_formatter': 'return "awesome chart"'}}, true);
+        expect(chart.configuration.tooltip.options.formatter).to.be.a('function');
+        expect(chart.configuration.tooltip.options).to.not.have.property('_fn_formatter');
+
         chart.update({'tooltip': {'_fn_formatter': 'x => x + x'}}, true);
+        expect(chart.configuration.tooltip.options.formatter).to.be.a('function');
+        expect(chart.configuration.tooltip.options).to.not.have.property('_fn_formatter');
+
         chart.update({'tooltip': {'_fn_formatter': ''}}, true);
         expect(chart.configuration.tooltip.options.formatter).to.be.a('function');
         expect(chart.configuration.tooltip.options).to.not.have.property('_fn_formatter');
