@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "vaadin-chart.html",
         "start": {
-          "line": 322,
+          "line": 344,
           "column": 6
         },
         "end": {
-          "line": 322,
+          "line": 344,
           "column": 42
         }
       },
@@ -23,18 +23,18 @@
           "path": "vaadin-chart.html",
           "properties": [
             {
-              "name": "configuration",
+              "name": "_configuration",
               "type": "Object",
-              "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
-              "privacy": "public",
+              "description": "",
+              "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 199,
+                  "line": 180,
                   "column": 12
                 },
                 "end": {
-                  "line": 199,
-                  "column": 33
+                  "line": 180,
+                  "column": 34
                 }
               },
               "metadata": {
@@ -49,11 +49,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 213,
+                  "line": 194,
                   "column": 8
                 },
                 "end": {
-                  "line": 217,
+                  "line": 198,
                   "column": 9
                 }
               },
@@ -66,11 +66,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 219,
+                  "line": 231,
                   "column": 8
                 },
                 "end": {
-                  "line": 225,
+                  "line": 237,
                   "column": 9
                 }
               },
@@ -83,11 +83,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 259,
+                  "line": 271,
                   "column": 8
                 },
                 "end": {
-                  "line": 277,
+                  "line": 290,
                   "column": 9
                 }
               },
@@ -111,11 +111,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 279,
+                  "line": 292,
                   "column": 8
                 },
                 "end": {
-                  "line": 285,
+                  "line": 298,
                   "column": 9
                 }
               },
@@ -132,11 +132,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 287,
+                  "line": 300,
                   "column": 8
                 },
                 "end": {
-                  "line": 300,
+                  "line": 313,
                   "column": 9
                 }
               },
@@ -156,11 +156,32 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 302,
+                  "line": 315,
                   "column": 8
                 },
                 "end": {
-                  "line": 314,
+                  "line": 329,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "series"
+                }
+              ]
+            },
+            {
+              "name": "__invertForBarSeries",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 331,
+                  "column": 8
+                },
+                "end": {
+                  "line": 336,
                   "column": 9
                 }
               },
@@ -186,31 +207,14 @@
               "column": 6
             },
             "end": {
-              "line": 315,
+              "line": 337,
               "column": 7
             }
           },
           "privacy": "public",
           "superclass": "HTMLElement",
           "name": "Vaadin.VaadinChart",
-          "attributes": [
-            {
-              "name": "configuration",
-              "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
-              "sourceRange": {
-                "start": {
-                  "line": 199,
-                  "column": 12
-                },
-                "end": {
-                  "line": 199,
-                  "column": 33
-                }
-              },
-              "metadata": {},
-              "type": "Object"
-            }
-          ],
+          "attributes": [],
           "events": [],
           "styling": {
             "cssVariables": [],
