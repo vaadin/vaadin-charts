@@ -28,6 +28,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return 'vaadin-chart-series';
         }
 
+        get options() {
+          return {
+            data: this.values
+          };
+        }
+
         static get properties() {
           return {
             values: {
@@ -43,15 +49,25 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           ];
         }
 
-        _valuesObserver() {
-          const changeEvent = new CustomEvent('chart-series-change', {bubbles: true, composed: false});
-          this.dispatchEvent(changeEvent);
+        disconnectedCallback() {
+          super.disconnectedCallback();
+          if (this.__hasSeriesConfig()) {
+            this._series.remove();
+          }
         }
 
-        get options() {
-          return {
-            data: this.values
-          };
+        setSeries(series) {
+          this._series = series;
+        }
+
+        _valuesObserver() {
+          if (this.__hasSeriesConfig()) {
+            this._series.setData(this.values);
+          }
+        }
+
+        __hasSeriesConfig() {
+          return this._series instanceof Highcharts.Series;
         }
         
       }
