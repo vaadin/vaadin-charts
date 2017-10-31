@@ -8,6 +8,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 -->
 
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/utils/flattened-nodes-observer.html">
 <link rel="import" href="../vaadin-themable-mixin/vaadin-themable-mixin.html">
 <link rel="import" href="../vaadin-license-checker/vaadin-license-checker.html">
 <link rel="import" href="vaadin-charts-default-theme.html">
@@ -31,6 +32,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       }
     </style>
     <div id="chart"></div>
+    <slot id="slot"></slot>
   </template>
 
   <script>
@@ -203,6 +205,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         constructor() {
           super();
+          this._series = new Map();
           this._baseConfig = {
             credits: {
               enabled: false
@@ -215,6 +218,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.configuration = Highcharts.chart(this.$.chart, this._baseConfig);
           this.__addLicenseChecker();
+          this.__addSeriesListeners();
         }
 
         __addLicenseChecker() {
@@ -223,6 +227,69 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           licenseChecker.productVersion = '6.0.0';
           licenseChecker.productCaption = 'Vaadin Charts';
           this.shadowRoot.appendChild(licenseChecker);
+        }
+
+        __addSeriesListeners() {
+          this._seriesObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
+            this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+            this.__removeSeries(info.removedNodes.filter(this.__filterSeriesNodes));
+          });
+          this.addEventListener('chart-series-change', this.__onChangeSeries);
+        }
+
+        __filterSeriesNodes(node) {
+          const chartSeriesTagName = 'vaadin-chart-series';
+          return node.nodeType === Node.ELEMENT_NODE && node.constructor.is === chartSeriesTagName;
+        }
+
+        __addSeries(series) {
+          if (this.__isSeriesEmpty(series)) {
+            return;
+          }
+          for (let i = 0, len = series.length; i < len; i++) {
+            const seriesElement = series[i];
+            const seriesAdded = this.configuration.addSeries(seriesElement.options);
+
+            this._series.set(seriesElement, seriesAdded);
+          }
+        }
+
+        __removeSeries(series) {
+          if (this.__isSeriesEmpty(series)) {
+            return;
+          }
+
+          for (let i = 0, len = series.length; i < len; i++) {
+            const seriesElement = series[i];
+            const seriesToRemove = this._series.get(seriesElement);
+
+            if (seriesToRemove) {
+              seriesToRemove.remove();
+              this._series.delete(seriesElement);
+            }
+          }
+        }
+
+        __isSeriesEmpty(series) {
+          if (series === null || series.length === 0) {
+            return true;
+          }
+          return false;
+        }
+
+        __onChangeSeries(event) {
+          const seriesElement = event.target;
+          const seriesToUpdate = this._series.get(seriesElement);
+
+          if (seriesToUpdate) {
+            seriesToUpdate.update(seriesElement.options);
+          }
+        }
+
+        disconnectedCalllback() {
+          super.disconnectedCalllback();
+          this._seriesObserver.disconnect();
+          this.removeEventListener('chart-series-change');
         }
 
         /**

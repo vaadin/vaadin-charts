@@ -1,0 +1,68 @@
+<!--
+@license
+Vaadin Charts
+Copyright (C) 2015 Vaadin Ltd
+This program is available under Commercial Vaadin Add-On License 3.0 (CVALv3).
+See the file LICENSE.md distributed with this software for more information about licensing.
+See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete license.
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="vaadin-chart-series">
+  <script>
+    if (!Polymer.Element) {
+      throw new Error(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
+    }
+
+    {
+      
+      /**
+       * `<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.
+       *
+       * @memberof Vaadin
+       * @demo demo/index.html
+       */
+      class VaadinChartSeries extends Polymer.Element {
+        static get is() {
+          return 'vaadin-chart-series';
+        }
+
+        static get properties() {
+          return {
+            values: {
+              type: Array,
+              value: () => []
+            }
+          };
+        }
+
+        static get observers() {
+          return [
+            '_valuesObserver(values.splices)'
+          ];
+        }
+
+        _valuesObserver() {
+          const changeEvent = new CustomEvent('chart-series-change', {bubbles: true, composed: false});
+          this.dispatchEvent(changeEvent);
+        }
+
+        get options() {
+          return {
+            data: this.values
+          };
+        }
+        
+      }
+
+      customElements.define(VaadinChartSeries.is, VaadinChartSeries);
+
+      /**
+       * @namespace Vaadin
+       */
+      window.Vaadin = window.Vaadin || {};
+      Vaadin.VaadinChartSeries = VaadinChartSeries;
+    }
+  </script>
+</dom-module>
