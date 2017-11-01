@@ -26,7 +26,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <dom-module id="vaadin-chart">
   <template>
     <style include="vaadin-charts-default-theme">
-       :host {
+      :host {
         display: block;
       }
     </style>
@@ -197,7 +197,25 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             * For detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)
             * @readonly
             */
-            configuration: Object
+            configuration: Object,
+
+            /**
+             * Represents the title of the chart.
+             */
+            title: {
+              type: String,
+              observer: '__updateTitle',
+              reflectToAttribute: true
+            },
+
+            /**
+             * Represents the subtitle of the chart.
+             */
+            subtitle: {
+              type: String,
+              observer: '__updateSubtitle',
+              reflectToAttribute: true
+            }
           };
         }
 
@@ -206,7 +224,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this._baseConfig = {
             credits: {
               enabled: false
-            },
+            }
           };
         }
 
@@ -331,6 +349,26 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               this.configuration.addSeries(currentSeries);
             }
           }
+        }
+
+        __updateTitle(newValue) {
+          Polymer.RenderStatus.afterNextRender(this.configuration, () => {
+            if (newValue && newValue.length > 0) {
+              this.configuration.title.update({text: newValue});
+            }
+          });
+        }
+
+        __updateSubtitle(newValue) {
+          Polymer.RenderStatus.afterNextRender(this.configuration, () => {
+            if (newValue && newValue.length > 0) {
+              if (!this.configuration.subtitle) {
+                this.configuration.setTitle(null, {text: newValue, y: 38});
+              } else {
+                this.configuration.subtitle.update({text: newValue});
+              }
+            }
+          });
         }
       }
 
