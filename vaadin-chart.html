@@ -363,7 +363,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.afterNextRender(this.configuration, () => {
             if (newValue && newValue.length > 0) {
               if (!this.configuration.subtitle) {
-                this.configuration.setTitle(null, {text: newValue, y: 38});
+                this.configuration.setSubtitle({text: newValue, y: 38});
               } else {
                 this.configuration.subtitle.update({text: newValue});
               }
