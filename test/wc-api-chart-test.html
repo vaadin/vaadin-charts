@@ -103,6 +103,22 @@
         });
       });
 
+      it('should remove series if element is removed from the tree', function(done) {
+        setTimeout(function() {
+          const series = chartContainer.querySelectorAll('.highcharts-series');
+          expect(series).to.have.lengthOf(1);
+
+          const seriesElement = chart.querySelector('vaadin-chart-series');
+          chart.removeChild(seriesElement);
+
+          Polymer.RenderStatus.beforeNextRender(this, () => {
+            const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
+            expect(seriesEmpty).to.have.lengthOf(0);
+  
+            done();
+          });
+        });
+      });
     });
   </script>
 </body>
