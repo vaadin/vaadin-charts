@@ -254,10 +254,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __isSeriesEmpty(series) {
-          if (series === null || series.length === 0) {
-            return true;
-          }
-          return false;
+          return series === null || series.length === 0;
         }
 
         /** @private */
