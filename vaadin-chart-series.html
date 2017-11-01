@@ -45,7 +45,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         static get observers() {
           return [
-            '_valuesObserver(values.splices)'
+            '__valuesObserver(values.splices)'
           ];
         }
 
@@ -60,7 +60,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this._series = series;
         }
 
-        _valuesObserver() {
+        __valuesObserver() {
           if (this.__hasSeriesConfig()) {
             this._series.setData(this.values);
           }
