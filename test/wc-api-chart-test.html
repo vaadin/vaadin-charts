@@ -21,7 +21,7 @@
           static get is() {
             return 'wc-api-demo';
           }
-          
+
           static get properties() {
             return {
               values: {
@@ -73,12 +73,12 @@
         setTimeout(function() {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
-          
+
           const firstSeries = series[0];
           // IE11 doesn't support SVGElement.classList 
           expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
           expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
-          
+
           done();
         });
       });
