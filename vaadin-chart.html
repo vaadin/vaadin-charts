@@ -352,7 +352,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateTitle(newValue) {
-          Polymer.RenderStatus.afterNextRender(this.configuration, () => {
+          Polymer.RenderStatus.beforeNextRender(this.configuration, () => {
             if (newValue && newValue.length > 0) {
               this.configuration.title.update({text: newValue});
             }
@@ -360,10 +360,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateSubtitle(newValue) {
-          Polymer.RenderStatus.afterNextRender(this.configuration, () => {
+          Polymer.RenderStatus.beforeNextRender(this.configuration, () => {
             if (newValue && newValue.length > 0) {
               if (!this.configuration.subtitle) {
-                this.configuration.setSubtitle({text: newValue, y: 38});
+                this.configuration.setSubtitle({text: newValue});
               } else {
                 this.configuration.subtitle.update({text: newValue});
               }
