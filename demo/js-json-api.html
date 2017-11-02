@@ -23,8 +23,7 @@
         <js-json-api-demo></js-json-api-demo>
         <dom-module id="js-json-api-demo">
           <template>
-            <vaadin-chart id="columnchart"></vaadin-chart>
-            <vaadin-chart id="barchart"></vaadin-chart>
+            <vaadin-chart id="mychart"></vaadin-chart>
           </template>
 
           <script>
@@ -34,7 +33,7 @@
               }
               connectedCallback() {
                 super.connectedCallback();
-                this.$.columnchart.update({
+                this.$.mychart.update({
                   title: {
                     text: 'Column chart'
                   },
@@ -49,7 +48,33 @@
                     data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
                   }]
                 });
+              }
+            }
+            addEventListener('WebComponentsReady', () => {
+              customElements.define(JSJSONApiDemoElement.is, JSJSONApiDemoElement);
+            });
+          </script>
+        </dom-module>
+      </template>
+    </demo-snippet>
 
+
+    <h3>Using JS JSON API with bar type</h3>
+    <demo-snippet>
+      <template>
+        <js-json-api-bar-demo> </js-json-api-bar-demo>
+        <dom-module id="js-json-api-bar-demo">
+          <template>
+            <vaadin-chart id="barchart"></vaadin-chart>
+          </template>
+
+          <script>
+            class JSJSONApiBarDemoElement extends Polymer.Element {
+              static get is() {
+                return 'js-json-api-bar-demo';
+              }
+              connectedCallback() {
+                super.connectedCallback();
                 this.$.barchart.update({
                   title: {
                     text: 'Bar chart'
@@ -65,7 +90,7 @@
               }
             }
             addEventListener('WebComponentsReady', () => {
-              customElements.define(JSJSONApiDemoElement.is, JSJSONApiDemoElement);
+              customElements.define(JSJSONApiBarDemoElement.is, JSJSONApiBarDemoElement);
             });
           </script>
         </dom-module>
