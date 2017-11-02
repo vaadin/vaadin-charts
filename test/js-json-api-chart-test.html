@@ -71,7 +71,7 @@
         });
       });
 
-      it('should not have credits', function(done) {
+      it('should not have credits by default', function(done) {
         setTimeout(function() {
           expect(chart.$.chart.querySelector('.highcharts-credits')).to.be.null;
           done();
