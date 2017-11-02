@@ -278,6 +278,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__inflateFunctions(jsonConfiguration);
           if (!this._dirty || resetConfiguration) {
             this.configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
+            this.__updateOrAddCredits({enabled: false});
             this.__invertForBarSeries(jsonConfiguration.series);
             return;
           }
