@@ -23,7 +23,8 @@
         <js-json-api-demo></js-json-api-demo>
         <dom-module id="js-json-api-demo">
           <template>
-            <vaadin-chart id="mychart"></vaadin-chart>
+            <vaadin-chart id="columnchart"></vaadin-chart>
+            <vaadin-chart id="barchart"></vaadin-chart>
           </template>
 
           <script>
@@ -33,9 +34,9 @@
               }
               connectedCallback() {
                 super.connectedCallback();
-                this.$.mychart.update({
+                this.$.columnchart.update({
                   title: {
-                    text: 'The chart title'
+                    text: 'Column chart'
                   },
                   subtitle: {
                     text: 'Subtitle'
@@ -43,16 +44,23 @@
                   xAxis: {
                     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                   },
-                  series: [
-                    {
-                      type: 'line',
-                      data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                    },
-                    {
-                      type: 'bar',
-                      data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                    }
-                  ]
+                  series: [{
+                    type: 'column',
+                    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                  }]
+                });
+
+                this.$.barchart.update({
+                  title: {
+                    text: 'Bar chart'
+                  },
+                  xAxis: {
+                    categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
+                  },
+                  series: [{
+                    type: 'bar',
+                    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+                  }]
                 });
               }
             }
