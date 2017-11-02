@@ -8,17 +8,17 @@
       "sourceRange": {
         "file": "vaadin-chart.html",
         "start": {
-          "line": 363,
+          "line": 446,
           "column": 6
         },
         "end": {
-          "line": 363,
+          "line": 446,
           "column": 42
         }
       },
       "elements": [
         {
-          "description": "`<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.\n\n### Basic use\n\nTo use `<vaadin-chart-series>`, simply add it inside a `<vaadin-chart>` element:\n\n```\n <vaadin-chart>\n   <vaadin-chart-series></vaadin-chart-series>\n </vaadin-chart>\n```\n\n`<vaadin-chart-series>` accepts `values` as an array attribute, so you can add it to your element definition:\n\n```\n <vaadin-chart-series values=\"[10,20,30,40,50]\"></vaadin-chart-series>\n```\n\nwich will add a new line series, where each value will be a data point. \nLook for the Properties session to see all available attributes.\n\n### Dinamically adding and removing series\n\nYou are also able to add and remove series by using DOM API.\n\nTo create a new series, simply call `document.createElement('vaadin-chart-series')` and append it to your `<vaadin-chart>`:\n\n```\n const chart = \\* a <vaadin-chart> reference *\\\n const newSeries = document.createElement('vaadin-chart-series');\n newSeries.values = [10,20,30,40,50];\n chart.appendChild(newSeries);\n```\n\nIn order to remove it, you should use the series to removed as a reference for the `#removeChild()` call:\n\n```\n const chart = \\* a <vaadin-chart> reference *\\\n const seriesToBeRemoved = \\* a <vaadin-chart-series> reference to remove*\\\n chart.removeChild(seriesToBeRemoved);\n```\n\n(There's an issue with `#remove()` method on Firefox, so we advice to remove the element from its parent)",
+          "description": "`<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.\n\n### Basic use\n\nTo use `<vaadin-chart-series>`, simply add it inside a `<vaadin-chart>` element:\n\n```\n <vaadin-chart>\n   <vaadin-chart-series></vaadin-chart-series>\n </vaadin-chart>\n```\n\n`<vaadin-chart-series>` accepts `values` as an array attribute, so you can add it to your element definition:\n\n```\n <vaadin-chart-series values=\"[10,20,30,40,50]\"></vaadin-chart-series>\n```\n\nwhich will add a new line series, where each value will be a data point. \nLook for the Properties session to see all available attributes.\n\n### Dynamically adding and removing series\n\nYou are also able to add and remove series by using DOM API.\n\nTo create a new series, simply call `document.createElement('vaadin-chart-series')` and append it to your `<vaadin-chart>`:\n\n```\n const chart = \\* a <vaadin-chart> reference *\\\n const newSeries = document.createElement('vaadin-chart-series');\n newSeries.values = [10,20,30,40,50];\n chart.appendChild(newSeries);\n```\n\nIn order to remove it, you should use the series to be removed as a reference for the `#removeChild()` call:\n\n```\n const chart = \\* a <vaadin-chart> reference *\\\n const seriesToBeRemoved = \\* a <vaadin-chart-series> reference to remove*\\\n chart.removeChild(seriesToBeRemoved);\n```\n\n(There's an issue with `#remove()` method on Firefox, so we advice to remove the element from its parent)",
           "summary": "",
           "path": "vaadin-chart-series.html",
           "properties": [
@@ -201,7 +201,7 @@
           "tagname": "vaadin-chart-series"
         },
         {
-          "description": "`<vaadin-chart>` is a Polymer 2 element for creating high quality charts.\n\n### Quick Start\n\n1. Create a Polymer application using [Polymer CLI](https://www.polymer-project.org/2.0/docs/tools/polymer-cli)\n```\nmkdir my-app\ncd my-app\npolymer init\nselect `polymer-2-application`\n```\n1. Install Vaadin Charts\n```\nbower install --save vaadin-charts#6.0-preview\n```\n1. Import `<vaadin-chart>` to your app\nEdit the file `src/my-app/my-app.html` and add the following snipped before the `<dom-module>` tag\n```html\n<link rel=\"import\" href=\"../../bower_components/vaadin-charts/vaadin-chart.html\">\n```\n1. Add your first `<vaadin-chart>`\nAlso in `my-app.html` add the following snippet before the `</template>` closing tag\n```html\n<vaadin-chart></vaadin-chart>\n```\n1. Run your app with: \n```\npolymer serve --open\n```\nCongratulations! You have your first Vaadin Chart setup.\n\n### Basic use\n\nNow that we covered the basic steps to create an empty chart, let us show how you can configure it.\n\nThere are two ways of configuring your `<vaadin-chart>` element: **JS API** and **JSON API**.\nNote that you can make use of both APIs in your element.\n\n#### Configuring your chart using JS API\n\nUsing as a base the project created with in Quick Start\n\nDo the following changes in `my-app.html`\n\n1. Set and id for the `<vaadin-chart>` in the template\n```html\n    <vaadin-chart id=\"mychart\"></vaadin-chart>\n```\n1. Add a function that uses `configuration` property (JS Api) to set chart title, categories and data\n```\ninitChartWithJSApi() {\n    const configuration = this.$.mychart.configuration;\n    configuration.setTitle({ text: 'The chart title' });\n    // By default there is one x axis, it is referenced by configuration.xAxis[0].\n    configuration.xAxis[0].setCategories(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);\n    configuration.addSeries({\n      type: 'column',\n      data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]\n    });\n}\n```\n1. Call that function from connectedCallback (when the element is added to a document)\n```\nconnectedCallback() {\n    super.connectedCallback();\n    this.initChartWithJSApi();\n}\n```\n1. And finally run your app with: \n```\npolymer serve --open\n```\n\n\n#### Configuring your chart using JS JSON API\n\nJS JSON API is a simple alternative to the JS API.\n\nUsing as a base the project created with in Quick Start\n\nDo the following changes in `my-app.html`\n\n1. Set and id for the `<vaadin-chart>` in the template\n```html\n    <vaadin-chart id=\"mychart\"></vaadin-chart>\n```\n1. Add a function that uses `update` method (JS JSON Api) to set chart title, categories and data\n```\ninitChartWithJSJSONApi() {\n    this.$.mychart.update({\n      title: {\n        text: 'The chart title'\n      },\n      subtitle: {\n        text: 'Subtitle'\n      },\n      xAxis: {\n        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n      },\n      series: [{\n        type: 'column',\n        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]\n      }]\n    });\n}\n```\n1. Call that function from connectedCallback (when the element is added to a document)\n```\nconnectedCallback() {\n    super.connectedCallback();\n    this.initChartWithJSJSONApi();\n}\n```\n1. And finally run your app with: \n```\npolymer serve --open\n```\n\n### Install License Key\nAfter one day using Vaadin Charts in a development environment you will see a pop-up that asks you to enter the license key. \n\nYou can get your trial key from [https://vaadin.com/pro/licenses](https://vaadin.com/pro/licenses).\n\nIf the license is valid, it will be saved to the local storage of the browser and you will not see the pop-up again",
+          "description": "`<vaadin-chart>` is a Polymer 2 element for creating high quality charts.\n\n### Quick Start\n\n1. Create a Polymer application using [Polymer CLI](https://www.polymer-project.org/2.0/docs/tools/polymer-cli)\n```\nmkdir my-app\ncd my-app\npolymer init\nselect `polymer-2-application`\n```\n1. Install Vaadin Charts\n```\nbower install --save vaadin-charts#6.0-preview\n```\n1. Import `<vaadin-chart>` to your app\nEdit the file `src/my-app/my-app.html` and add the following snipped before the `<dom-module>` tag\n```html\n<link rel=\"import\" href=\"../../bower_components/vaadin-charts/vaadin-chart.html\">\n```\n1. Add your first `<vaadin-chart>`\nAlso in `my-app.html` add the following snippet before the `</template>` closing tag\n```html\n<vaadin-chart></vaadin-chart>\n```\n1. Run your app with:\n```\npolymer serve --open\n```\nCongratulations! You have your first Vaadin Chart setup.\n\n### Basic use\n\nNow that we covered the basic steps to create an empty chart, let us show how you can configure it.\n\nThere are two ways of configuring your `<vaadin-chart>` element: **JS API** and **JSON API**.\nNote that you can make use of both APIs in your element.\n\n#### Configuring your chart using JS API\n\nUsing as a base the project created with in Quick Start\n\nDo the following changes in `my-app.html`\n\n1. Set and id for the `<vaadin-chart>` in the template\n```html\n    <vaadin-chart id=\"mychart\"></vaadin-chart>\n```\n1. Add a function that uses `configuration` property (JS Api) to set chart title, categories and data\n```\ninitChartWithJSApi() {\n    const configuration = this.$.mychart.configuration;\n    configuration.setTitle({ text: 'The chart title' });\n    // By default there is one x axis, it is referenced by configuration.xAxis[0].\n    configuration.xAxis[0].setCategories(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);\n    configuration.addSeries({\n      type: 'column',\n      data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]\n    });\n}\n```\n1. Call that function from connectedCallback (when the element is added to a document)\n```\nconnectedCallback() {\n    super.connectedCallback();\n    this.initChartWithJSApi();\n}\n```\n1. And finally run your app with:\n```\npolymer serve --open\n```\n\n\n#### Configuring your chart using JS JSON API\n\nJS JSON API is a simple alternative to the JS API.\n\nUsing as a base the project created with in Quick Start\n\nDo the following changes in `my-app.html`\n\n1. Set and id for the `<vaadin-chart>` in the template\n```html\n    <vaadin-chart id=\"mychart\"></vaadin-chart>\n```\n1. Add a function that uses `update` method (JS JSON Api) to set chart title, categories and data\n```\ninitChartWithJSJSONApi() {\n    this.$.mychart.update({\n      title: {\n        text: 'The chart title'\n      },\n      subtitle: {\n        text: 'Subtitle'\n      },\n      xAxis: {\n        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n      },\n      series: [{\n        type: 'column',\n        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]\n      }]\n    });\n}\n```\n1. Call that function from connectedCallback (when the element is added to a document)\n```\nconnectedCallback() {\n    super.connectedCallback();\n    this.initChartWithJSJSONApi();\n}\n```\n1. And finally run your app with:\n```\npolymer serve --open\n```\n\n### Install License Key\nAfter one day using Vaadin Charts in a development environment you will see a pop-up that asks you to enter the license key.\n\nYou can get your trial key from [https://vaadin.com/pro/licenses](https://vaadin.com/pro/licenses).\n\nIf the license is valid, it will be saved to the local storage of the browser and you will not see the pop-up again",
           "summary": "",
           "path": "vaadin-chart.html",
           "properties": [
@@ -212,16 +212,79 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 204,
+                  "line": 236,
+                  "column": 10
+                },
+                "end": {
+                  "line": 236,
+                  "column": 29
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": false
+                }
+              }
+            },
+            {
+              "name": "_configuration",
+              "type": "Object",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 184,
                   "column": 12
                 },
                 "end": {
-                  "line": 204,
-                  "column": 33
+                  "line": 184,
+                  "column": 34
                 }
               },
               "metadata": {
                 "polymer": {}
+              }
+            },
+            {
+              "name": "title",
+              "type": "string",
+              "description": "Represents the title of the chart.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 189,
+                  "column": 12
+                },
+                "end": {
+                  "line": 193,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"__updateTitle\""
+                }
+              }
+            },
+            {
+              "name": "subtitle",
+              "type": "string",
+              "description": "Represents the subtitle of the chart.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 198,
+                  "column": 12
+                },
+                "end": {
+                  "line": 202,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"__updateSubtitle\""
+                }
               }
             }
           ],
@@ -232,11 +295,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 218,
+                  "line": 240,
                   "column": 8
                 },
                 "end": {
-                  "line": 223,
+                  "line": 245,
                   "column": 9
                 }
               },
@@ -249,11 +312,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 225,
+                  "line": 260,
                   "column": 8
                 },
                 "end": {
-                  "line": 231,
+                  "line": 266,
                   "column": 9
                 }
               },
@@ -266,11 +329,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 233,
+                  "line": 268,
                   "column": 8
                 },
                 "end": {
-                  "line": 237,
+                  "line": 272,
                   "column": 9
                 }
               },
@@ -283,11 +346,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 239,
+                  "line": 274,
                   "column": 8
                 },
                 "end": {
-                  "line": 241,
+                  "line": 276,
                   "column": 9
                 }
               },
@@ -304,11 +367,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 243,
+                  "line": 278,
                   "column": 8
                 },
                 "end": {
-                  "line": 253,
+                  "line": 288,
                   "column": 9
                 }
               },
@@ -325,11 +388,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 255,
+                  "line": 290,
                   "column": 8
                 },
                 "end": {
-                  "line": 260,
+                  "line": 292,
                   "column": 9
                 }
               },
@@ -346,11 +409,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 263,
+                  "line": 295,
                   "column": 8
                 },
                 "end": {
-                  "line": 266,
+                  "line": 298,
                   "column": 9
                 }
               },
@@ -363,11 +426,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 300,
+                  "line": 332,
                   "column": 8
                 },
                 "end": {
-                  "line": 318,
+                  "line": 352,
                   "column": 9
                 }
               },
@@ -376,12 +439,54 @@
                 {
                   "name": "jsonConfiguration",
                   "type": "Object",
-                  "description": "Object chart configuration. Most important properties are:\n \n- chart `Object` with options regarding the chart area and plot area as well as general chart options.  \n   Detailed API for chart object is available in [API Site](http://api.highcharts.com/highcharts/chart)\n- credits `Object` with options regarding the chart area and plot area as well as general chart options.  \n   Detailed API for credits object is available in [API Site](http://api.highcharts.com/highcharts/credits)\n- labels `Object[]` with HTML labels that can be positioned anywhere in the chart area\n   Detailed API for labels object is available in [API Site](http://api.highcharts.com/highcharts/labels)\n- plotOptions `Object` wrapper for config objects for each series type.  \n   Detailed API for plotOptions object is available in [API Site](http://api.highcharts.com/highcharts/plotOptions)\n- series `Object[]` the actual series to append to the chart. \n   Detailed API for series object is available in [API Site](http://api.highcharts.com/highcharts/series)\n- subtitle `Object` the chart's subtitle.  \n   Detailed API for subtitle object is available in [API Site](http://api.highcharts.com/highcharts/subtitle)\n- title `Object` the chart's main title.\n   Detailed API for title object is available in [API Site](http://api.highcharts.com/highcharts/title)\n- tooltip `Object` Options for the tooltip that appears when the user hovers over a series or point.  \n   Detailed API for tooltip object is available in [API Site](http://api.highcharts.com/highcharts/tooltip)\n- xAxis `Object[]` The X axis or category axis. Normally this is the horizontal axis.  \n   Detailed API for xAxis object is available in [API Site](http://api.highcharts.com/highcharts/xAxis)\n- yAxis `Object[]` The Y axis or value axis. Normally this is the vertical axis.  \n   Detailed API for yAxis object is available in [API Site](http://api.highcharts.com/highcharts/yAxis)\n- zAxis `Object[]` The Z axis or depth axis for 3D plots.  \n   Detailed API for zAxis object is available in [API Site](http://api.highcharts.com/highcharts/zAxis)"
+                  "description": "Object chart configuration. Most important properties are:\n\n- chart `Object` with options regarding the chart area and plot area as well as general chart options.\n   Detailed API for chart object is available in [API Site](http://api.highcharts.com/highcharts/chart)\n- credits `Object` with options regarding the chart area and plot area as well as general chart options.\n   Detailed API for credits object is available in [API Site](http://api.highcharts.com/highcharts/credits)\n- labels `Object[]` with HTML labels that can be positioned anywhere in the chart area\n   Detailed API for labels object is available in [API Site](http://api.highcharts.com/highcharts/labels)\n- plotOptions `Object` wrapper for config objects for each series type.\n   Detailed API for plotOptions object is available in [API Site](http://api.highcharts.com/highcharts/plotOptions)\n- series `Object[]` the actual series to append to the chart.\n   Detailed API for series object is available in [API Site](http://api.highcharts.com/highcharts/series)\n- subtitle `Object` the chart's subtitle.\n   Detailed API for subtitle object is available in [API Site](http://api.highcharts.com/highcharts/subtitle)\n- title `Object` the chart's main title.\n   Detailed API for title object is available in [API Site](http://api.highcharts.com/highcharts/title)\n- tooltip `Object` Options for the tooltip that appears when the user hovers over a series or point.\n   Detailed API for tooltip object is available in [API Site](http://api.highcharts.com/highcharts/tooltip)\n- xAxis `Object[]` The X axis or category axis. Normally this is the horizontal axis.\n   Detailed API for xAxis object is available in [API Site](http://api.highcharts.com/highcharts/xAxis)\n- yAxis `Object[]` The Y axis or value axis. Normally this is the vertical axis.\n   Detailed API for yAxis object is available in [API Site](http://api.highcharts.com/highcharts/yAxis)\n- zAxis `Object[]` The Z axis or depth axis for 3D plots.\n   Detailed API for zAxis object is available in [API Site](http://api.highcharts.com/highcharts/zAxis)"
                 },
                 {
                   "name": "resetConfiguration",
                   "type": "Boolean",
-                  "description": "Optional boolean that should be set to true if no other chart configuration was set before or \n   if existing configuration should be discarded."
+                  "description": "Optional boolean that should be set to true if no other chart configuration was set before or\n   if existing configuration should be discarded."
+                }
+              ]
+            },
+            {
+              "name": "__inflateFunctions",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 354,
+                  "column": 8
+                },
+                "end": {
+                  "line": 370,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "jsonConfiguration"
+                }
+              ]
+            },
+            {
+              "name": "__invertForBarSeries",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 372,
+                  "column": 8
+                },
+                "end": {
+                  "line": 377,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "series"
                 }
               ]
             },
@@ -391,11 +496,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 320,
+                  "line": 379,
                   "column": 8
                 },
                 "end": {
-                  "line": 326,
+                  "line": 385,
                   "column": 9
                 }
               },
@@ -412,11 +517,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 328,
+                  "line": 387,
                   "column": 8
                 },
                 "end": {
-                  "line": 341,
+                  "line": 400,
                   "column": 9
                 }
               },
@@ -436,11 +541,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 343,
+                  "line": 402,
                   "column": 8
                 },
                 "end": {
-                  "line": 355,
+                  "line": 418,
                   "column": 9
                 }
               },
@@ -448,6 +553,48 @@
               "params": [
                 {
                   "name": "series"
+                }
+              ]
+            },
+            {
+              "name": "__updateTitle",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 420,
+                  "column": 8
+                },
+                "end": {
+                  "line": 426,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "newValue"
+                }
+              ]
+            },
+            {
+              "name": "__updateSubtitle",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 428,
+                  "column": 8
+                },
+                "end": {
+                  "line": 438,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "newValue"
                 }
               ]
             }
@@ -466,7 +613,7 @@
               "column": 6
             },
             "end": {
-              "line": 356,
+              "line": 439,
               "column": 7
             }
           },
@@ -475,20 +622,36 @@
           "name": "Vaadin.VaadinChart",
           "attributes": [
             {
-              "name": "configuration",
-              "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
+              "name": "title",
+              "description": "Represents the title of the chart.",
               "sourceRange": {
                 "start": {
-                  "line": 204,
+                  "line": 189,
                   "column": 12
                 },
                 "end": {
-                  "line": 204,
-                  "column": 33
+                  "line": 193,
+                  "column": 13
                 }
               },
               "metadata": {},
-              "type": "Object"
+              "type": "string"
+            },
+            {
+              "name": "subtitle",
+              "description": "Represents the subtitle of the chart.",
+              "sourceRange": {
+                "start": {
+                  "line": 198,
+                  "column": 12
+                },
+                "end": {
+                  "line": 202,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "string"
             }
           ],
           "events": [],
