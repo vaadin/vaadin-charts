@@ -267,8 +267,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __addChildObserver() {
-          this._childObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
-            this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+          Polymer.RenderStatus.beforeNextRender(this, () => {
+            this._childObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
+              this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+            });
           });
         }
 
