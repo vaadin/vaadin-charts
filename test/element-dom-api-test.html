@@ -25,7 +25,7 @@
       it('should be able to create a chart through DOM API', function() {
         const vaadinChart = document.createElement('vaadin-chart');
         expect(vaadinChart.$).to.be.undefined;
-        
+
         container.appendChild(vaadinChart);
 
         expect(vaadinChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Chart title');
@@ -34,20 +34,20 @@
       it('should be able to set custom properties', () => {
         const vaadinChart = document.createElement('vaadin-chart');
         vaadinChart.setAttribute('title', 'Custom title');
-        
+
         container.appendChild(vaadinChart);
-        
+
         expect(vaadinChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Custom title'); 
       });
 
       it('should be able to add series', function(done) {
         const vaadinChart = document.createElement('vaadin-chart');
-        
+
         const vaadinChartSeries = document.createElement('vaadin-chart-series');
         vaadinChartSeries.values = [10, 20, 30, 40, 50];
-        
+
         vaadinChart.appendChild(vaadinChartSeries);
-        
+
         container.appendChild(vaadinChart);
 
         setTimeout(function() {

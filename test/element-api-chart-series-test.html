@@ -98,7 +98,7 @@
           element.changeValues();
           const changedValues = chart.configuration.series[0].data.map(data => data.y);
           expect(changedValues).to.have.members(element.values);
-          
+
           done();
         });
       });
