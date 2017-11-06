@@ -44,12 +44,12 @@
         const vaadinChart = document.createElement('vaadin-chart');
         
         const vaadinChartSeries = document.createElement('vaadin-chart-series');
-        vaadinChartSeries.values = [10,20,30,40,50];
+        vaadinChartSeries.values = [10, 20, 30, 40, 50];
         
         vaadinChart.appendChild(vaadinChartSeries);
         
         container.appendChild(vaadinChart);
-        
+
         setTimeout(function() {
           expect(Array.from(vaadinChart.$.chart.querySelectorAll('.highcharts-series'))).to.have.lengthOf(1);
           done();
