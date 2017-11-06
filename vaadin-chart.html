@@ -240,9 +240,27 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         connectedCallback() {
           super.connectedCallback();
-          this._configuration = Highcharts.chart(this.$.chart, this._baseConfig);
           this.__addLicenseChecker();
           this.__addChildObserver();
+          this._configuration = Highcharts.chart(this.$.chart, this.options);
+        }
+
+        get options() {
+          const options = Object.assign({}, this._baseConfig);
+
+          if (this.title) {
+            options.title = {
+              text: this.title
+            };
+          }
+
+          if (this.subtitle) {
+            options.subtitle = {
+              text: this.subtitle
+            };
+          }
+
+          return options;
         }
 
         get configuration() {
@@ -421,23 +439,27 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateTitle(newValue) {
-          Polymer.RenderStatus.beforeNextRender(this.configuration, () => {
-            if (newValue && newValue.length > 0) {
-              this.configuration.title.update({text: newValue});
-            }
-          });
+          if (!this.configuration) {
+            return;
+          }
+
+          if (newValue && newValue.length > 0) {
+            this.configuration.title.update({text: newValue});
+          }
         }
 
-        __updateSubtitle(newValue) {
-          Polymer.RenderStatus.beforeNextRender(this.configuration, () => {
-            if (newValue && newValue.length > 0) {
-              if (!this.configuration.subtitle) {
-                this.configuration.setSubtitle({text: newValue});
-              } else {
-                this.configuration.subtitle.update({text: newValue});
-              }
+        __updateSubtitle(newValue) {     
+          if (!this.configuration) {
+            return;
+          }
+
+          if (newValue && newValue.length > 0) {
+            if (!this.configuration.subtitle) {
+              this.configuration.setSubtitle({text: newValue});
+            } else {
+              this.configuration.subtitle.update({text: newValue});
             }
-          });
+          }
         }
       }
 
