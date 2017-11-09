@@ -302,7 +302,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
           for (let i = 0, len = series.length; i < len; i++) {
             const seriesElement = series[i];
-            const seriesAdded = this.configuration.addSeries(seriesElement.options);
+            const seriesAdded = this._configuration.addSeries(seriesElement.options);
 
             seriesElement.setSeries(seriesAdded);
           }
@@ -359,14 +359,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         __internalUpdate(jsonConfiguration, resetConfiguration) {
           this.__inflateFunctions(jsonConfiguration);
           if (!this._dirty || resetConfiguration) {
-            this.configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
+            this._configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
             this.__invertForBarSeries(jsonConfiguration.series);
             if (!jsonConfiguration.credits) {
               this.__updateOrAddCredits({enabled: false});
             }
             return;
           }
-          this.configuration.update(jsonConfiguration);
+          this._configuration.update(jsonConfiguration);
           if (jsonConfiguration.credits) {
             this.__updateOrAddCredits(jsonConfiguration.credits);
           }
@@ -448,7 +448,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateTitle(newValue) {
-          if (!this.configuration) {
+          if (!this._configuration) {
             return;
           }
 
@@ -458,7 +458,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateSubtitle(newValue) {
-          if (!this.configuration) {
+          if (!this._configuration) {
             return;
           }
 
