@@ -28,7 +28,7 @@
 
       it('should have default title', done => {
         setTimeout(() => {
-          expect(element.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Chart title');
+          expect(element.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         });
       });

@@ -103,7 +103,7 @@
         // initialConfig true should reset the config
         chart.update({}, true);
         setTimeout(function() {
-          expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Chart title');
+          expect(chart.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         }, 20);
       });
