@@ -242,7 +242,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.__addLicenseChecker();
           this.__addChildObserver();
-          this.update(this.options, true);
+          this.__internalUpdate(this.options, true, true);
         }
 
         get options() {
@@ -302,7 +302,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
           for (let i = 0, len = series.length; i < len; i++) {
             const seriesElement = series[i];
-            const seriesAdded = this._configuration.addSeries(seriesElement.options);
+            const seriesAdded = this.configuration.addSeries(seriesElement.options);
 
             seriesElement.setSeries(seriesAdded);
           }
@@ -356,17 +356,17 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           });
         }
 
-        __internalUpdate(jsonConfiguration, resetConfiguration) {
+        __internalUpdate(jsonConfiguration, resetConfiguration, shouldNotDirty) {
           this.__inflateFunctions(jsonConfiguration);
           if (!this._dirty || resetConfiguration) {
             this._configuration = Highcharts.chart(this.$.chart, jsonConfiguration);
-            this.__invertForBarSeries(jsonConfiguration.series);
+            this._dirty = !shouldNotDirty;
             if (!jsonConfiguration.credits) {
               this.__updateOrAddCredits({enabled: false});
             }
             return;
           }
-          this._configuration.update(jsonConfiguration);
+          this.configuration.update(jsonConfiguration);
           if (jsonConfiguration.credits) {
             this.__updateOrAddCredits(jsonConfiguration.credits);
           }
@@ -399,13 +399,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
-        __invertForBarSeries(series) {
-          this._configuration.chart = this._configuration.chart || {};
-          this._configuration.chart.inverted = (series !== undefined) && Array.isArray(series)
-            && series.some(e => e.type === 'bar');
-          this._configuration.chart.type = this._configuration.chart.inverted ? 'column' : this._configuration.chart.type;
-        }
-
         __updateOrAddCredits(credits) {
           if (this._configuration.credits) {
             this._configuration.credits.update(credits);
@@ -433,7 +426,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (!Array.isArray(series)) {
             throw new Error('The type of jsonConfiguration.series should be Object[]');
           }
-          this.__invertForBarSeries(series);
           for (var i = 0; i < series.length; i++) {
             var currentSeries = series[i];
             if (currentSeries.type === 'bar') {
