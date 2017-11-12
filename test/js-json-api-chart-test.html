@@ -119,7 +119,7 @@
       });
 
       it('should inflate function body strings', function(done) {
-        const config ={'tooltip': {'_fn_formatter': 'return "awesome chart"'}};
+        const config = {'tooltip': {'_fn_formatter': 'return "awesome chart"'}};
         chart.__inflateFunctions(config);
         setTimeout(() => {
           expect(config.tooltip.formatter).to.be.a('function');
