@@ -250,11 +250,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.__addLicenseChecker();
           this.__addChildObserver();
-          this.__internalUpdate(this.options, true, true);
+          Polymer.RenderStatus.beforeNextRender(this, () => {
+            this._configuration = Highcharts.chart(this.$.chart, this.options);
+          });
         }
 
         get options() {
-          const options = {};
+          const options = Object.assign({}, this._baseConfig);
 
           if (this.title) {
             options.title = {
@@ -360,35 +362,31 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          */
         update(jsonConfiguration, resetConfiguration) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
-            this.__internalUpdate(jsonConfiguration, resetConfiguration);
+            this.__inflateFunctions(jsonConfiguration);
+
+            if (!this._dirty || resetConfiguration) {
+              const initialOptions = Object.assign({}, this.options);
+              Object.assign(initialOptions, jsonConfiguration);
+
+              this._configuration = Highcharts.chart(this.$.chart, initialOptions);
+              this._dirty = true;
+              return;
+            }
+
+            this.configuration.update(jsonConfiguration);
+            if (jsonConfiguration.credits) {
+              this.__updateOrAddCredits(jsonConfiguration.credits);
+            }
+            if (jsonConfiguration.xAxis) {
+              this.__updateOrAddAxes(jsonConfiguration.xAxis, true);
+            }
+            if (jsonConfiguration.yAxis) {
+              this.__updateOrAddAxes(jsonConfiguration.yAxis, false);
+            }
+            if (jsonConfiguration.series) {
+              this.__updateOrAddSeries(jsonConfiguration.series);
+            }
           });
-        }
-
-        __internalUpdate(jsonConfiguration, resetConfiguration, shouldNotDirty) {
-          this.__inflateFunctions(jsonConfiguration);
-
-          if (!this._dirty || resetConfiguration) {
-            const options = Object.assign({}, this._baseConfig);
-            Object.assign(options, jsonConfiguration);
-
-            this._configuration = Highcharts.chart(this.$.chart, options);
-            this._dirty = !shouldNotDirty;
-            return;
-          }
-
-          this.configuration.update(jsonConfiguration);
-          if (jsonConfiguration.credits) {
-            this.__updateOrAddCredits(jsonConfiguration.credits);
-          }
-          if (jsonConfiguration.xAxis) {
-            this.__updateOrAddAxes(jsonConfiguration.xAxis, true);
-          }
-          if (jsonConfiguration.yAxis) {
-            this.__updateOrAddAxes(jsonConfiguration.yAxis, false);
-          }
-          if (jsonConfiguration.series) {
-            this.__updateOrAddSeries(jsonConfiguration.series);
-          }
         }
 
         __inflateFunctions(jsonConfiguration) {
