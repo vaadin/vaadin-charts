@@ -60,13 +60,6 @@
         chartContainer = chart.$.chart;
       });
 
-      it('should be defined', function(done) {
-        setTimeout(function() {
-          expect(chart.constructor.is).to.be.equal(chart.localName);
-          done();
-        });
-      });
-
       it('should have 3 series', function(done) {
         setTimeout(function() {
           expect(chart.configuration.series.length).to.be.equal(3);
@@ -93,8 +86,10 @@
       it('push in seriesData should create new series', function(done) {
         setTimeout(function() {
           element.push('seriesData', {data: [1, 2, 3, 4, 5]});
-          expect(chart.configuration.series.length).to.be.equal(3);
-          done();
+          setTimeout(function() {
+            expect(chart.configuration.series.length).to.be.equal(4);
+            done();
+          });
         });
       });
 
