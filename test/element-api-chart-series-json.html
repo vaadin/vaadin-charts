@@ -12,7 +12,7 @@
   <dom-module id="chart-series-with-json-api">
     <template>
       <vaadin-chart id="mychart">
-          <vaadin-chart-series values="[10,20,30,40,50]" id="series"></vaadin-chart-series>
+          <vaadin-chart-series values="[10, 20, 30, 40, 50]" id="series"></vaadin-chart-series>
         </template>
     </template>
 
@@ -43,13 +43,11 @@
   <script>
     describe('High-level Charts Series API with JSON API', function() {
       let chart;
-      let chartContainer;
       let element;
 
       before(function() {
         element = document.querySelector('chart-series-with-json-api');
         chart = element.$.mychart;
-        chartContainer = chart.$.chart;
       });
 
       it('should have 1 series', function(done) {
@@ -63,9 +61,9 @@
         setTimeout(function() {
           const series = chart.configuration.series[0];
           const values = series.data.map(({y}) => y);
-          
+
           expect(series.name).to.be.equal('series-name');
-          expect(values).to.deep.equal([10,20,30,40,50]);
+          expect(values).to.deep.equal([10, 20, 30, 40, 50]);
           done();
         });
       });
