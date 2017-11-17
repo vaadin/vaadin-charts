@@ -365,9 +365,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * @param {Boolean} resetConfiguration Optional boolean that should be set to true if no other chart configuration was set before or
          *    if existing configuration should be discarded.
          *
-         * @param {String} chartType Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
+         * @param {String} initialization Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
          */
-        update(jsonConfiguration, resetConfiguration, chartType) {
+        update(jsonConfiguration, resetConfiguration, initialization) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this.__inflateFunctions(jsonConfiguration);
 
@@ -375,7 +375,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               const initialOptions = Object.assign({}, this.options);
               Object.assign(initialOptions, jsonConfiguration);
 
-              if (!!chartType && (chartType.toLowerCase() === 'stockchart')) {
+              if (!!initialization && (initialization.toLowerCase() === 'stockchart')) {
                 this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
                 this._chartType = 'stockChart';
               } else {
