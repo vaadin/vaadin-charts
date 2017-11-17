@@ -11,6 +11,7 @@
   <dom-module id="js-json-api-demo">
     <template>
       <vaadin-chart id="mychart"></vaadin-chart>
+      <vaadin-chart id="stockchart"></vaadin-chart>
     </template>
 
     <script>
@@ -49,37 +50,39 @@
     describe('Basic JS API chart', function() {
       var chart;
       var chartContainer;
+      var stockChart;
 
 
-      before(function() {
+      before(function () {
         const el = document.querySelector('js-json-api-demo');
         chart = el.$.mychart;
         chartContainer = chart.$.chart;
+        stockChart = el.$.stockchart;
       });
 
-      it('should be defined', function(done) {
-        setTimeout(function() {
+      it('should be defined', function (done) {
+        setTimeout(function () {
           expect(chart.constructor.is).to.be.equal(chart.localName);
           done();
         });
       });
 
-      it('should have custom title', function(done) {
-        setTimeout(function() {
+      it('should have custom title', function (done) {
+        setTimeout(function () {
           expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
         });
       });
 
-      it('should not have credits by default', function(done) {
-        setTimeout(function() {
+      it('should not have credits by default', function (done) {
+        setTimeout(function () {
           expect(chart.$.chart.querySelector('.highcharts-credits')).to.be.null;
           done();
         });
       });
 
-      it('should have one column series and twelve points', function(done) {
-        setTimeout(function() {
+      it('should have one column series and twelve points', function (done) {
+        setTimeout(function () {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
@@ -90,8 +93,8 @@
         });
       });
 
-      it('should have month names as categories', function(done) {
-        setTimeout(function() {
+      it('should have month names as categories', function (done) {
+        setTimeout(function () {
           const categories = Array.from(chartContainer.querySelectorAll('.highcharts-xaxis-labels > text')).map(text => text.textContent);
           expect(categories).to.have.lengthOf(12);
           expect(categories).to.have.members(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
@@ -99,18 +102,18 @@
         });
       });
 
-      it('should have no title if resetConfiguration is true', function(done) {
+      it('should have no title if resetConfiguration is true', function (done) {
         // initialConfig true should reset the config
         chart.update({}, true);
         Polymer.flush();
-        
-        setTimeout(function() {
+
+        setTimeout(function () {
           expect(chart.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         }, 100);
       });
 
-      it('should inflate whole function strings', function(done) {
+      it('should inflate whole function strings', function (done) {
         const config = {'tooltip': {'_fn_formatter': 'function() {return "awesome chart"}'}};
         chart.__inflateFunctions(config);
         setTimeout(() => {
@@ -120,7 +123,7 @@
         }, 20);
       });
 
-      it('should inflate function body strings', function(done) {
+      it('should inflate function body strings', function (done) {
         const config = {'tooltip': {'_fn_formatter': 'return "awesome chart"'}};
         chart.__inflateFunctions(config);
         setTimeout(() => {
@@ -130,7 +133,7 @@
         });
       });
 
-      it('should inflate empty function strings', function(done) {
+      it('should inflate empty function strings', function (done) {
         const config = {'tooltip': {'_fn_formatter': ''}};
         chart.__inflateFunctions(config);
         setTimeout(() => {
@@ -140,6 +143,41 @@
         });
       });
 
+      it('should be of chart type "chart" by default', function (done) {
+        setTimeout(() => {
+          expect(chart._chartType).to.be.equal('chart');
+          done();
+        });
+      });
+
+      it('should be of chart type "stockChart" when specified on reset', function (done) {
+        const stockData = [
+          [1290124800000, 44.00, 44.06, 43.61, 43.82],
+          [1290384000000, 43.81, 44.77, 43.70, 44.77],
+          [1290470400000, 44.35, 44.54, 43.79, 44.10]];
+
+        stockChart.update({
+          series: [{
+            type: 'candlestick',
+            name: 'AAPL Stock Price',
+            data: stockData,
+            dataGrouping: {
+              units: [
+                [
+                  'week', [1]
+                ], [
+                  'month', [1, 2, 3, 4, 6]
+                ]
+              ]
+            }
+          }]
+        }, true, 'stockChart');
+
+        setTimeout(() => {
+          expect(stockChart._chartType).to.be.equal('stockChart');
+          done();
+        });
+      });
     });
   </script>
 </body>

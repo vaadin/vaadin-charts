@@ -256,6 +256,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this._configuration = Highcharts.chart(this.$.chart, this.options);
+            this._chartType = 'chart';
           });
         }
 
@@ -363,8 +364,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {Boolean} resetConfiguration Optional boolean that should be set to true if no other chart configuration was set before or
          *    if existing configuration should be discarded.
+         *
+         * @param {String} chartType Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
          */
-        update(jsonConfiguration, resetConfiguration) {
+        update(jsonConfiguration, resetConfiguration, chartType) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this.__inflateFunctions(jsonConfiguration);
 
@@ -372,7 +375,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               const initialOptions = Object.assign({}, this.options);
               Object.assign(initialOptions, jsonConfiguration);
 
-              this._configuration = Highcharts.chart(this.$.chart, initialOptions);
+              if (!!chartType && (chartType.toLowerCase() === 'stockchart')) {
+                this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
+                this._chartType = 'stockChart';
+              } else {
+                this._configuration = Highcharts.chart(this.$.chart, initialOptions);
+                this._chartType = 'chart';
+              }
+
               this._dirty = true;
               return;
             }
