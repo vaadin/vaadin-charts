@@ -449,9 +449,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateOrAddSeriesInstance(seriesOptions, position) {
-          if (seriesOptions.type === 'bar') {
-            seriesOptions.type = 'column';
-          }
           if (this._configuration.series[position]) {
             this._configuration.series[position].update(seriesOptions);
           } else {
