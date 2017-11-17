@@ -61,28 +61,28 @@
       });
 
       it('should be defined', function(done) {
-        setTimeout(function () {
+        setTimeout(function() {
           expect(chart.constructor.is).to.be.equal(chart.localName);
           done();
         });
       });
 
       it('should have custom title', function(done) {
-        setTimeout(function () {
+        setTimeout(function() {
           expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
         });
       });
 
       it('should not have credits by default', function(done) {
-        setTimeout(function () {
+        setTimeout(function() {
           expect(chart.$.chart.querySelector('.highcharts-credits')).to.be.null;
           done();
         });
       });
 
       it('should have one column series and twelve points', function(done) {
-        setTimeout(function () {
+        setTimeout(function() {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
@@ -94,7 +94,7 @@
       });
 
       it('should have month names as categories', function(done) {
-        setTimeout(function () {
+        setTimeout(function() {
           const categories = Array.from(chartContainer.querySelectorAll('.highcharts-xaxis-labels > text')).map(text => text.textContent);
           expect(categories).to.have.lengthOf(12);
           expect(categories).to.have.members(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
@@ -107,7 +107,7 @@
         chart.update({}, true);
         Polymer.flush();
 
-        setTimeout(function () {
+        setTimeout(function() {
           expect(chart.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         }, 100);
