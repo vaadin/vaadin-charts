@@ -187,6 +187,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             _configuration: Object,
 
             /**
+             * Specifies whether the chart is a normal chart or a timeline chart.
+             */
+            timeline: {
+              type: Boolean,
+              value: false,
+              observer: '__timelineChanged'
+            },
+
+            /**
              * Represents the title of the chart.
              */
             title: {
@@ -256,7 +265,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this._configuration = Highcharts.chart(this.$.chart, this.options);
-            this._chartType = 'chart';
           });
         }
 
@@ -367,7 +375,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {String} initialization Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
          */
-        update(jsonConfiguration, resetConfiguration, initialization) {
+        update(jsonConfiguration, resetConfiguration) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this.__inflateFunctions(jsonConfiguration);
 
@@ -375,12 +383,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               const initialOptions = Object.assign({}, this.options);
               Object.assign(initialOptions, jsonConfiguration);
 
-              if (!!initialization && (initialization.toLowerCase() === 'stockchart')) {
+              if (this.timeline) {
                 this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
-                this._chartType = 'stockChart';
               } else {
                 this._configuration = Highcharts.chart(this.$.chart, initialOptions);
-                this._chartType = 'chart';
               }
 
               this._dirty = true;
@@ -458,6 +464,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             } else {
               this._configuration.addSeries(currentSeries);
             }
+          }
+        }
+
+        __timelineChanged(newValue, oldValue) {
+          if (this._configuration) {
+            this.update(this._configuration, false);
           }
         }
 

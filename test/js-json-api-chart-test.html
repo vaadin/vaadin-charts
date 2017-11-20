@@ -159,20 +159,6 @@
           done();
         });
       });
-
-      it('should be of chart type "chart" by default', function(done) {
-        setTimeout(() => {
-          expect(chart._chartType).to.be.equal('chart');
-          done();
-        });
-      });
-
-      it('should be of chart type "stockChart" when specified on reset', function(done) {
-        setTimeout(() => {
-          expect(stockChart._chartType).to.be.equal('stockChart');
-          done();
-        }, 100);
-      });
     });
   </script>
 </body>
