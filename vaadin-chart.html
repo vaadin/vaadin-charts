@@ -375,8 +375,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *
          * @param {Boolean} resetConfiguration Optional boolean that should be set to true if no other chart configuration was set before or
          *    if existing configuration should be discarded.
-         *
-         * @param {String} initialization Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
          */
         update(jsonConfiguration, resetConfiguration) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
