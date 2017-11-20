@@ -264,7 +264,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__addLicenseChecker();
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
-            this._configuration = Highcharts.chart(this.$.chart, this.options);
+            if (this.timeline) {
+              this._configuration = Highcharts.stockChart(this.$.chart, this.options);
+            } else {
+              this._configuration = Highcharts.chart(this.$.chart, this.options);
+            }
           });
         }
 
