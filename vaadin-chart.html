@@ -192,7 +192,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             timeline: {
               type: Boolean,
               value: false,
-              observer: '__timelineChanged'
+              reflectToAttribute: true
             },
 
             /**
@@ -390,6 +390,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               Object.assign(initialOptions, jsonConfiguration);
 
               if (this.timeline || timeline) {
+                this.timeline = true;
                 this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
               } else {
                 this._configuration = Highcharts.chart(this.$.chart, initialOptions);
@@ -470,12 +471,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             } else {
               this._configuration.addSeries(currentSeries);
             }
-          }
-        }
-
-        __timelineChanged(newValue, oldValue) {
-          if (this._configuration) {
-            this.update(this._configuration, false);
           }
         }
 
