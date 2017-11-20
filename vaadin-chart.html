@@ -378,8 +378,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *    if existing configuration should be discarded.
          *
          * @param {String} initialization Optional, 'chart' or 'stockChart'. Defaults to 'chart'.
+         *
+         * @param {Boolean} timeline Optional, The chart will be a timeline chart if this parameter or the timeline property is true.
          */
-        update(jsonConfiguration, resetConfiguration) {
+        update(jsonConfiguration, resetConfiguration, timeline) {
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this.__inflateFunctions(jsonConfiguration);
 
@@ -387,7 +389,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               const initialOptions = Object.assign({}, this.options);
               Object.assign(initialOptions, jsonConfiguration);
 
-              if (this.timeline) {
+              if (this.timeline || timeline) {
                 this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
               } else {
                 this._configuration = Highcharts.chart(this.$.chart, initialOptions);
