@@ -11,7 +11,6 @@
   <dom-module id="js-json-api-demo">
     <template>
       <vaadin-chart id="mychart"></vaadin-chart>
-      <vaadin-chart id="stockchart"></vaadin-chart>
     </template>
 
     <script>
@@ -37,23 +36,6 @@
                 data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
               }]
             });
-
-            this.$.stockchart.update({
-              series: [{
-                type: 'candlestick',
-                name: 'AAPL Stock Price',
-                data: [[1290124800000, 44.00, 44.06, 43.61, 43.82]],
-                dataGrouping: {
-                  units: [
-                    [
-                      'week', [1]
-                    ], [
-                      'month', [1, 2, 3, 4, 6]
-                    ]
-                  ]
-                }
-              }]
-            }, true, 'stockChart');
           }
         }
 
@@ -67,14 +49,12 @@
     describe('Basic JS API chart', function() {
       var chart;
       var chartContainer;
-      var stockChart;
 
 
       before(function() {
         const el = document.querySelector('js-json-api-demo');
         chart = el.$.mychart;
         chartContainer = chart.$.chart;
-        stockChart = el.$.stockchart;
       });
 
       it('should be defined', function(done) {
