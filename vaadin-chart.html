@@ -386,7 +386,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          */
         update(jsonConfiguration, resetConfiguration) {
 
-          this._jsonConfigurationBuffer = Object.assign({}, this._jsonConfigurationBuffer, jsonConfiguration);
+          if (resetConfiguration || !this._jsonConfigurationBuffer) {
+            this._jsonConfigurationBuffer = {};
+          }
+          this._jsonConfigurationBuffer = Object.assign(this._jsonConfigurationBuffer, jsonConfiguration);
 
           Polymer.RenderStatus.beforeNextRender(this, () => {
 
