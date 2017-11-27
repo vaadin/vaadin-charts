@@ -277,6 +277,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
+          this.__initEventsListeners(options);
 
           if (this.title) {
             options.title = {
@@ -304,6 +305,22 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         set configuration(value) {
           this._dirty = true;
           this._configuration = value;
+        }
+
+        /**
+         *  Name of the chart events to add to the configuration and its corresponding event for the chart element
+         **/
+        get __chartEventNames() {
+          return {
+            addSeries: "add-series",
+            afterPrint: "after-print",
+            beforePrint: "before-print",
+            click: "chart-click",
+            drilldown: "drilldown",
+            drillup: "drillup",
+            redraw: "redraw",
+            selection: "selection"
+          };
         }
 
         __addLicenseChecker() {
@@ -385,7 +402,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *    if existing configuration should be discarded.
          */
         update(jsonConfiguration, resetConfiguration) {
-
           if (resetConfiguration || !this._jsonConfigurationBuffer) {
             this._jsonConfigurationBuffer = {};
           }
@@ -398,7 +414,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
 
             this.__inflateFunctions(this._jsonConfigurationBuffer);
-
             if (!this._dirty || resetConfiguration) {
               const initialOptions = Object.assign({}, this.options);
               Object.assign(initialOptions, this._jsonConfigurationBuffer);
@@ -444,6 +459,32 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 delete jsonConfiguration[attr];
               } else if (targetProperty instanceof Object) {
                 this.__inflateFunctions(targetProperty);
+              }
+            }
+          }
+        }
+
+        __initEventsListeners(configuration) {
+          this.__initChartEventsListeners(configuration);
+          
+        }
+
+        __initChartEventsListeners(configuration) {
+          configuration.chart = configuration.chart || {};
+          configuration.chart.events = configuration.chart.events || {};
+          const self = this;
+
+          for(const key in this.__chartEventNames) {
+            if (this.__chartEventNames.hasOwnProperty(key) && !configuration.chart.events[key]) {
+              configuration.chart.events[key] = function (event) {
+                self.dispatchEvent(new CustomEvent(self.__chartEventNames[key], { 
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    originalEvent: event,
+                    chart: this
+                  }
+                }));
               }
             }
           }
