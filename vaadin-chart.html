@@ -312,16 +312,50 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          **/
         get __chartEventNames() {
           return {
-            addSeries: "add-series",
-            afterPrint: "after-print",
-            beforePrint: "before-print",
+            addSeries: "chart-add-series",
+            afterPrint: "chart-after-print",
+            beforePrint: "chart-before-print",
             click: "chart-click",
-            drilldown: "drilldown",
-            drillup: "drillup",
-            redraw: "redraw",
-            selection: "selection"
+            drilldown: "chart-drilldown",
+            drillup: "chart-drillup",
+            drillupall: "chart-drillupall",
+            load: "chart-load",
+            redraw: "chart-redraw",
+            selection: "chart-selection"
           };
         }
+
+        /**
+         *  Name of the series events to add to the configuration and its corresponding event for the chart element
+         **/
+        get __seriesEventNames() {
+           return {
+            afterAnimate: "series-after-animate",
+            checkboxClick: "series-checkbox-click",
+            click: "series-click",
+            hide: "series-hide",
+            legendItemClick: "series-legend-item-click",
+            mouseOut: "series-mouse-out",
+            mouseOver: "series-mouse-over",
+            show: "series-show"
+          };
+        }
+
+        /**
+         *  Name of the point events to add to the configuration and its corresponding event for the chart element
+         **/
+         get __pointEventNames(){
+           return {
+            click: "point-click",
+            mouseOut: "point-mouse-out",
+            mouseOver: "point-mouse-over",
+            remove: "point-remove",
+            select: "point-select",
+            unselect: "point-unselect",
+            update: "point-update"
+          };
+        }
+
 
         __addLicenseChecker() {
           var licenseChecker = document.createElement('vaadin-license-checker');
@@ -466,28 +500,53 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __initEventsListeners(configuration) {
           this.__initChartEventsListeners(configuration);
-          
+          this.__initSeriesEventsListeners(configuration);
+          this.__initPointsEventsListeners(configuration);
         }
 
         __initChartEventsListeners(configuration) {
-          configuration.chart = configuration.chart || {};
-          configuration.chart.events = configuration.chart.events || {};
-          const self = this;
+          this.__initEventListeners(this.__chartEventNames, configuration, 'chart.events', 'chart');
+        }
 
-          for(const key in this.__chartEventNames) {
-            if (this.__chartEventNames.hasOwnProperty(key) && !configuration.chart.events[key]) {
-              configuration.chart.events[key] = function (event) {
-                self.dispatchEvent(new CustomEvent(self.__chartEventNames[key], { 
+        __initSeriesEventsListeners(configuration) {
+          this.__initEventListeners(this.__seriesEventNames, configuration, 'plotOptions.series.events', 'series');
+        }
+
+        __initPointsEventsListeners(configuration) {
+          this.__initEventListeners(this.__pointEventNames, configuration, 'plotOptions.series.point.events', 'point');
+        }
+
+        __initEventListeners(eventList, configuration, pathToAdd, eventTarget) {
+          const self = this;
+          const eventObject = this.__ensureObjectPath(configuration, pathToAdd);
+
+          for (let keys = Object.keys(eventList), i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            if(!eventObject[key]) {
+              eventObject[key] = function (event) {
+                self.dispatchEvent(new CustomEvent(eventList[key], {
                   bubbles: true,
                   composed: true,
                   detail: {
                     originalEvent: event,
-                    chart: this
+                    [`${eventTarget}`]: this
                   }
                 }));
               }
             }
           }
+        }
+
+        __ensureObjectPath(object, path) {
+          if (typeof path !== 'string') {
+            return;
+          }
+
+          path = path.split('.');
+          return path.reduce((obj, key) => {
+            obj[key] = obj[key] || {};
+            return obj[key];
+          }, object);
         }
 
         __updateOrAddCredits(credits) {
