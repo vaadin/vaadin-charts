@@ -132,6 +132,44 @@
         <chart-series-dom-repeat></chart-series-dom-repeat>
       </template>
     </demo-snippet>
+
+    <h3>Adding event listeners <small>(Try clicking at chart background and any series point)</small></h3>
+    
+    <demo-snippet>
+      <template>
+        <dom-module id="chart-event-listeners">
+          <template>
+            <vaadin-chart title="Chart with events" id="mychart" on-chart-click="__onChartClick">
+                <vaadin-chart-series values="[10,20,30]"></vaadin-chart-series>
+            </vaadin-chart>
+          </template>
+
+          <script>
+            class ChartEventListeners extends Polymer.Element {
+              static get is() {
+                return 'chart-event-listeners';
+              }
+
+              __onChartClick(event) {
+                alert('[EVENT: CHART-CLICK] You can add events declaratively.');
+              }
+
+              connectedCallback() {
+                super.connectedCallback();
+                this.$.mychart.addEventListener('point-click', (event) => {
+                  alert('[EVENT: POINT-CLICK] You can add events with addEventListener.');                  
+                });
+              }
+            }
+
+            addEventListener('WebComponentsReady', () => {
+              customElements.define(ChartEventListeners.is, ChartEventListeners);
+            });
+          </script>
+        </dom-module>
+        <chart-event-listeners></chart-event-listeners>
+      </template>
+    </demo-snippet>
   </div>
 </body>
 

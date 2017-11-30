@@ -312,16 +312,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          **/
         get __chartEventNames() {
           return {
-            addSeries: "chart-add-series",
-            afterPrint: "chart-after-print",
-            beforePrint: "chart-before-print",
-            click: "chart-click",
-            drilldown: "chart-drilldown",
-            drillup: "chart-drillup",
-            drillupall: "chart-drillupall",
-            load: "chart-load",
-            redraw: "chart-redraw",
-            selection: "chart-selection"
+            addSeries: 'chart-add-series',
+            afterPrint: 'chart-after-print',
+            beforePrint: 'chart-before-print',
+            click: 'chart-click',
+            drilldown: 'chart-drilldown',
+            drillup: 'chart-drillup',
+            drillupall: 'chart-drillupall',
+            load: 'chart-load',
+            redraw: 'chart-redraw',
+            selection: 'chart-selection'
           };
         }
 
@@ -329,30 +329,30 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          *  Name of the series events to add to the configuration and its corresponding event for the chart element
          **/
         get __seriesEventNames() {
-           return {
-            afterAnimate: "series-after-animate",
-            checkboxClick: "series-checkbox-click",
-            click: "series-click",
-            hide: "series-hide",
-            legendItemClick: "series-legend-item-click",
-            mouseOut: "series-mouse-out",
-            mouseOver: "series-mouse-over",
-            show: "series-show"
+          return {
+            afterAnimate: 'series-after-animate',
+            checkboxClick: 'series-checkbox-click',
+            click: 'series-click',
+            hide: 'series-hide',
+            legendItemClick: 'series-legend-item-click',
+            mouseOut: 'series-mouse-out',
+            mouseOver: 'series-mouse-over',
+            show: 'series-show'
           };
         }
 
         /**
          *  Name of the point events to add to the configuration and its corresponding event for the chart element
          **/
-         get __pointEventNames(){
-           return {
-            click: "point-click",
-            mouseOut: "point-mouse-out",
-            mouseOver: "point-mouse-over",
-            remove: "point-remove",
-            select: "point-select",
-            unselect: "point-unselect",
-            update: "point-update"
+        get __pointEventNames() {
+          return {
+            click: 'point-click',
+            mouseOut: 'point-mouse-out',
+            mouseOver: 'point-mouse-over',
+            remove: 'point-remove',
+            select: 'point-select',
+            unselect: 'point-unselect',
+            update: 'point-update'
           };
         }
 
@@ -505,34 +505,34 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __initChartEventsListeners(configuration) {
-          this.__initEventListeners(this.__chartEventNames, configuration, 'chart.events', 'chart');
+          this.__createEventListeners(this.__chartEventNames, configuration, 'chart.events', 'chart');
         }
 
         __initSeriesEventsListeners(configuration) {
-          this.__initEventListeners(this.__seriesEventNames, configuration, 'plotOptions.series.events', 'series');
+          this.__createEventListeners(this.__seriesEventNames, configuration, 'plotOptions.series.events', 'series');
         }
 
         __initPointsEventsListeners(configuration) {
-          this.__initEventListeners(this.__pointEventNames, configuration, 'plotOptions.series.point.events', 'point');
+          this.__createEventListeners(this.__pointEventNames, configuration, 'plotOptions.series.point.events', 'point');
         }
 
-        __initEventListeners(eventList, configuration, pathToAdd, eventTarget) {
+        __createEventListeners(eventList, configuration, pathToAdd, eventType) {
           const self = this;
           const eventObject = this.__ensureObjectPath(configuration, pathToAdd);
 
           for (let keys = Object.keys(eventList), i = 0; i < keys.length; i++) {
             const key = keys[i];
-            if(!eventObject[key]) {
-              eventObject[key] = function (event) {
+            if (!eventObject[key]) {
+              eventObject[key] = function(event) {
                 self.dispatchEvent(new CustomEvent(eventList[key], {
                   bubbles: true,
                   composed: true,
                   detail: {
                     originalEvent: event,
-                    [`${eventTarget}`]: this
+                    [eventType]: this
                   }
                 }));
-              }
+              };
             }
           }
         }
