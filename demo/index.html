@@ -93,6 +93,11 @@
     <h3>Multiple series with dom-repeat</h3>
     <demo-snippet>
       <template>
+        <style>
+          :host(vaadin-chart) .highcharts-label-box {
+            fill: yellow !important;
+          }
+        </style>
         <dom-module id="chart-series-dom-repeat">
           <template>
             <vaadin-chart id="mychart">
@@ -151,14 +156,34 @@
               }
 
               __onChartClick(event) {
-                alert('[EVENT: CHART-CLICK] You can add events declaratively.');
+                // alert('[EVENT: CHART-CLICK] You can add events declaratively.');
+                console.log(event);
+                const {chartX, chartY} = event.detail.originalEvent;
+                this.showLabel(`[CHART-CLICK] (x: ${chartX}, y: ${chartY})`, chartX, chartY);
               }
 
               connectedCallback() {
                 super.connectedCallback();
                 this.$.mychart.addEventListener('point-click', (event) => {
-                  alert('[EVENT: POINT-CLICK] You can add events with addEventListener.');                  
+                  const {chartX, chartY} = event.detail.originalEvent;
+                  this.showLabel(`[POINT-CLICK] (x: ${chartX}, y: ${chartY})`, chartX, chartY);              
                 });
+              }
+
+              showLabel (message, xPixels, yPixels) {
+                const label = this.$.mychart.configuration.renderer.label(message, xPixels, yPixels)
+                  .attr({
+                    padding: 10,
+                    r: 5,
+                    zIndex: 1000
+                  })
+                  .css({
+                    color: '#FF0000'
+                  })
+                  .add();
+                setTimeout(function () {
+                  label.fadeOut();
+                }, 1000);
               }
             }
 
