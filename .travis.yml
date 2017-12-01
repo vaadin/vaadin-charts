@@ -8,8 +8,8 @@ cache:
     - node_modules
 
 addons:
+  chrome: stable
   firefox: latest
-  google-chrome: latest
   ssh_known_hosts: app.fi
 
 install:
