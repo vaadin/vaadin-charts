@@ -12,7 +12,7 @@ module.exports = {
 
     var cronPlatforms = [
       'Android/chrome',
-      'Windows 10/chrome@59',
+      'Windows 10/chrome@62',
       'Windows 10/firefox@54'
     ];
 
