@@ -8,13 +8,9 @@ cache:
     - node_modules
 
 addons:
+  chrome: stable
   firefox: latest
   ssh_known_hosts: app.fi
-  apt:
-    sources:
-     - google-chrome
-    packages:
-     - google-chrome-stable
 
 install:
   - npm install
