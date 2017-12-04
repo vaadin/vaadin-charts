@@ -678,7 +678,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             if (!eventObject[key]) {
               eventObject[key] = function(event) {
                 self.dispatchEvent(new CustomEvent(eventList[key], {
-                  bubbles: true,
+                  bubbles: false,
                   composed: true,
                   detail: {
                     originalEvent: event,
