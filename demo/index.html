@@ -151,8 +151,6 @@
               }
 
               __onChartClick(event) {
-                // alert('[EVENT: CHART-CLICK] You can add events declaratively.');
-                console.log(event);
                 const {chartX, chartY} = event.detail.originalEvent;
                 this.showLabel(`[CHART-CLICK] (x: ${chartX}, y: ${chartY})`, chartX, chartY);
               }
