@@ -163,7 +163,7 @@
                 });
               }
 
-              showLabel (message, xPixels, yPixels) {
+              showLabel(message, xPixels, yPixels) {
                 const label = this.$.mychart.configuration.renderer.label(message, xPixels, yPixels)
                   .attr({
                     padding: 10,
@@ -174,7 +174,7 @@
                     color: '#FF0000'
                   })
                   .add();
-                setTimeout(function () {
+                setTimeout(function() {
                   label.fadeOut();
                 }, 1000);
               }
