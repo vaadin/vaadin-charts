@@ -79,9 +79,11 @@
       });
 
       it('should trigger series events to imperative listeners', done => {
-        chart.addEventListener('series-after-animate', (e) => {
+        function seriesAfterAnimateListener() {
           done();
-        });
+          chart.removeEventListener('series-after-animate', seriesAfterAnimateListener);
+        }
+        chart.addEventListener('series-after-animate', seriesAfterAnimateListener);
       });
 
       it('should trigger series events to declarative listeners', done => {
@@ -93,9 +95,11 @@
       });
 
       it('should trigger point events to imperative listeners', done => {
-        chart.addEventListener('point-click', (e) => {
+        function pointClickListener() {
           done();
-        });
+          chart.removeEventListener('point-click', pointClickListener);
+        }
+        chart.addEventListener('point-click', pointClickListener);
         chart.configuration.series[0].points[0].firePointEvent('click');
       });
 
@@ -104,6 +108,20 @@
           chart.configuration.series[0].points[0].update({y: 20});
           expect(element.pointUpdate).to.be.equal(1);
           done();
+        });
+      });
+      it('should keep events after calling update', done => {
+        function chartRedrawListener() {
+          done();
+          chart.removeEventListener('chart-redraw', chartRedrawListener);
+        }
+        chart.addEventListener('chart-redraw', chartRedrawListener);
+        setTimeout(() => {
+          chart.update({
+            chart: {
+              type: 'column'
+            }
+          });
         });
       });
     });
