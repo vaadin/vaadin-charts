@@ -267,17 +267,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__addLicenseChecker();
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
+            const options = Object.assign({}, this.options);
+            this.__initEventsListeners(options);
             if (this.timeline) {
-              this._configuration = Highcharts.stockChart(this.$.chart, this.options);
+              this._configuration = Highcharts.stockChart(this.$.chart, options);
             } else {
-              this._configuration = Highcharts.chart(this.$.chart, this.options);
+              this._configuration = Highcharts.chart(this.$.chart, options);
             }
           });
         }
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          this.__initEventsListeners(options);
 
           if (this.title) {
             options.title = {
@@ -602,8 +603,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             this.__inflateFunctions(this._jsonConfigurationBuffer);
             if (!this._dirty || resetConfiguration) {
-              const initialOptions = Object.assign({}, this.options);
-              Object.assign(initialOptions, this._jsonConfigurationBuffer);
+              const initialOptions = Object.assign({}, this.options, this._jsonConfigurationBuffer);
+              this.__initEventsListeners(initialOptions);
 
               if (this.timeline) {
                 this._configuration = Highcharts.stockChart(this.$.chart, initialOptions);
