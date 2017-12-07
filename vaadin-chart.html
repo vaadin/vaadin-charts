@@ -183,7 +183,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         static get version() {
-          return '6.0.0-alpha5';
+          return '6.0.0-alpha6';
         }
 
         static get properties() {
@@ -499,14 +499,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * @event point-unselect  Fired when the point is unselected etheir programmatically or by clicking on the point
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} point Point object where the event was sent from
-             */          
+             */
             unselect: 'point-unselect',
             /**
              *
              * @event point-update  Fired when the point is updated programmatically through `.update()` method
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} point Point object where the event was sent from
-             */  
+             */
             update: 'point-update'
           };
         }
@@ -631,7 +631,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             if (this._jsonConfigurationBuffer.series) {
               this.__updateOrAddSeries(this._jsonConfigurationBuffer.series);
             }
-            this._jsonConfigurationBuffer = null;            
+            this._jsonConfigurationBuffer = null;
           });
         }
 
