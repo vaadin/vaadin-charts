@@ -33,7 +33,8 @@
     "highcharts": "^5.0.0",
     "polymer": "^2.0.0",
     "vaadin-themable-mixin": "^1.0.0",
-    "vaadin-license-checker": "vaadin/license-checker#^1.0.0"
+    "vaadin-license-checker": "vaadin/license-checker#^1.0.0",
+    "vaadin-usage-statistics": "vaadin/vaadin-usage-statistics#^1.0.0"
   },
   "devDependencies": {
     "elements-demo-resources": "^2.0.0",
