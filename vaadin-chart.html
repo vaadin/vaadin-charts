@@ -690,7 +690,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   }
                 };
 
-                if (customEvent.type == 'chart-selection') {
+                if (event.type == 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
                     customEvent.xAxisMin = event.xAxis[0].min;
                     customEvent.xAxisMax = event.xAxis[0].max;
@@ -703,7 +703,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
-                if (this.seriesVisibilityTogglingDisabled) {
+                if (event.type == 'legendItemClick' && this.seriesVisibilityTogglingDisabled) {
                   return false;
                 }
               };
