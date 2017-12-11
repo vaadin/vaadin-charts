@@ -681,14 +681,31 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             const key = keys[i];
             if (!eventObject[key]) {
               eventObject[key] = function(event) {
-                self.dispatchEvent(new CustomEvent(eventList[key], {
+                const customEvent = {
                   bubbles: false,
                   composed: true,
                   detail: {
                     originalEvent: event,
                     [eventType]: this
                   }
-                }));
+                };
+
+                if (customEvent.type == 'chart-selection') {
+                  if (event.xAxis && event.xAxis[0]) {
+                    customEvent.xAxisMin = event.xAxis[0].min;
+                    customEvent.xAxisMax = event.xAxis[0].max;
+                  }
+                  if (event.yAxis && event.yAxis[0]) {
+                    customEvent.yAxisMin = event.yAxis[0].min;
+                    customEvent.yAxisMax = event.yAxis[0].max;
+                  }
+                }
+
+                self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
+
+                if (this.seriesVisibilityTogglingDisabled) {
+                  return false;
+                }
               };
             }
           }
