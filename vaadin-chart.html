@@ -680,6 +680,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           for (let keys = Object.keys(eventList), i = 0; i < keys.length; i++) {
             const key = keys[i];
             if (!eventObject[key]) {
+              var chart = this;
               eventObject[key] = function(event) {
                 const customEvent = {
                   bubbles: false,
@@ -692,18 +693,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 if (event.type == 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
-                    customEvent.xAxisMin = event.xAxis[0].min;
-                    customEvent.xAxisMax = event.xAxis[0].max;
+                    customEvent.detail.xAxisMin = event.xAxis[0].min;
+                    customEvent.detail.xAxisMax = event.xAxis[0].max;
                   }
                   if (event.yAxis && event.yAxis[0]) {
-                    customEvent.yAxisMin = event.yAxis[0].min;
-                    customEvent.yAxisMax = event.yAxis[0].max;
+                    customEvent.detail.yAxisMin = event.yAxis[0].min;
+                    customEvent.detail.yAxisMax = event.yAxis[0].max;
                   }
                 }
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
-                if (event.type == 'legendItemClick' && this.seriesVisibilityTogglingDisabled) {
+                if (event.type == 'legendItemClick' && chart.seriesVisibilityTogglingDisabled) {
                   return false;
                 }
               };
