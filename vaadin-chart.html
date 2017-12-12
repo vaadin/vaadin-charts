@@ -20,7 +20,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../highcharts/js/highcharts-more.js"></script>
 <script src="../highcharts/js/highcharts-3d.js"></script>
 <script src="../highcharts/js/modules/data.js"></script>
-<script src="../highcharts/js/modules/drilldown.js"></script>
+<script src="../highcharts/modules/drilldown.js"></script>
 <script src="../highcharts/js/modules/exporting.js"></script>
 <script src="../highcharts/js/modules/funnel.js"></script>
 <script src="../highcharts/js/modules/heatmap.js"></script>
@@ -700,6 +700,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   if (event.yAxis && event.yAxis[0]) {
                     customEvent.detail.yAxisMin = event.yAxis[0].min;
                     customEvent.detail.yAxisMax = event.yAxis[0].max;
+                  }
+                }
+                if (event.type == 'click') {
+                  if (event.xAxis && event.xAxis[0]) {
+                    customEvent.detail.xValue = event.xAxis[0].value;
+                  }
+                  if (event.yAxis && event.yAxis[0]) {
+                    customEvent.detail.yValue = event.yAxis[0].value;
                   }
                 }
 
