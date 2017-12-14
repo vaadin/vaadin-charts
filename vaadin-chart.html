@@ -691,7 +691,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 };
 
                 // Workaround for vaadin-charts-flow because of https://github.com/vaadin/flow/issues/3102
-                if (event.type == 'selection') {
+                if (event.type === 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
                     customEvent.detail.xAxisMin = event.xAxis[0].min;
                     customEvent.detail.xAxisMax = event.xAxis[0].max;
@@ -701,7 +701,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     customEvent.detail.yAxisMax = event.yAxis[0].max;
                   }
                 }
-                if (event.type == 'click') {
+                if (event.type === 'click') {
                   if (event.xAxis && event.xAxis[0]) {
                     customEvent.detail.xValue = event.xAxis[0].value;
                   }
@@ -712,7 +712,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
-                if (event.type == 'legendItemClick' && chart['_seriesVisibilityTogglingDisabled']) {
+                if (event.type === 'legendItemClick' && chart['_seriesVisibilityTogglingDisabled']) {
                   return false;
                 }
               };
