@@ -20,7 +20,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../highcharts/js/highcharts-more.js"></script>
 <script src="../highcharts/js/highcharts-3d.js"></script>
 <script src="../highcharts/js/modules/data.js"></script>
-<script src="../highcharts/modules/drilldown.js"></script>
+<script src="../highcharts/js/modules/drilldown.js"></script>
 <script src="../highcharts/js/modules/exporting.js"></script>
 <script src="../highcharts/js/modules/funnel.js"></script>
 <script src="../highcharts/js/modules/heatmap.js"></script>
@@ -550,6 +550,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __initChart(options) {
           this.__initEventsListeners(options);
+          this.__ensureObjectPath(options, 'drilldown.activeDataLabelStyle');
           if (this.timeline) {
             this._configuration = Highcharts.stockChart(this.$.chart, options);
           } else {
