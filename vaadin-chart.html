@@ -720,7 +720,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
-                if (event.type === 'legendItemClick' && chart['_seriesVisibilityTogglingDisabled']) {
+                if (event.type === 'legendItemClick' && chart['_visibilityTogglingDisabled']) {
                   return false;
                 }
               };
