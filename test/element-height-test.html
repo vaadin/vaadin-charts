@@ -38,18 +38,18 @@
           expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
           expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
           done();
-        }, 10);
+        }, 20);
       });
 
       it('chart height container should react to container change', done => {
         element.classList.add('expand-height');
-        const boundingClientRectElement = element.getBoundingClientRect();
-        const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
         setTimeout(() => {
+          const boundingClientRectElement = element.getBoundingClientRect();
+          const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
           expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
           expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
           done();
-        }, 10);
+        }, 20);
       });
 
     });
