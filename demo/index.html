@@ -20,6 +20,15 @@
     <h3>Using the high-level Element API</h3>
     <demo-snippet>
       <template>
+        <style>
+          vaadin-chart {
+            height: 400px;
+          }
+
+          vaadin-chart.expand-height {
+            height: 300px;
+          }
+        </style>
         <vaadin-chart title="Custom Title" subtitle="Custom Subtitle">
           <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
           <vaadin-chart-series values="[9,2,29,4,35]"></vaadin-chart-series>
@@ -33,9 +42,19 @@
         <wc-api-demo></wc-api-demo>
         <dom-module id="wc-api-demo">
           <template>
+            <style>
+              vaadin-chart {
+                height: 400px;
+              }
+
+              vaadin-chart.expand-height {
+                height: 300px;
+              }
+            </style>
             <vaadin-chart id="mychart" title="Custom Title" subtitle="Custom Subtitle">
               <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
             </vaadin-chart>
+            <button on-click="_toggleHeight">Toggle height</button>
             <button on-click="_addSeries">Add series</button>
             <button on-click="_addMultipleSeries">Add multiple series</button>
             <button on-click="_removeSeries">Remove series</button>
@@ -46,6 +65,10 @@
             class WCApiDemoElement extends Polymer.Element {
               static get is() {
                 return 'wc-api-demo';
+              }
+
+              _toggleHeight() {
+                this.$.mychart.classList.toggle('expand-height');
               }
 
               _removeSeries() {

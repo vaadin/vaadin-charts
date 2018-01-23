@@ -36,6 +36,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         display: block;
         width: 100%;
       }
+
+      #chart {
+        height: 100%;
+      }
     </style>
     <div id="chart"></div>
     <slot id="slot"></slot>
@@ -259,6 +263,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
            * @type {Object}
            */
           this.configuration;
+
+          this.__mutationCallback = this.__mutationCallback.bind(this);
         }
 
         /** @private */
@@ -268,6 +274,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.beforeNextRender(this, () => {
             const options = Object.assign({}, this.options);
             this.__initChart(options);
+            const config = {attributes: true, characterData: true};
+            this.__mutationObserver = new MutationObserver(this.__mutationCallback);
+            this.__mutationObserver.observe(this, config);
           });
         }
 
@@ -511,6 +520,27 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           };
         }
 
+        __reflow() {
+          if (!this.configuration) {
+            return;
+          }
+          Polymer.RenderStatus.beforeNextRender(this, () => {
+            if (!this.__isReflowed) {
+              this.configuration.reflow();
+            }
+          });
+        }
+
+        __mutationCallback(mutationsList) {
+          const attributeList = ['class', 'style'];
+          const shouldReflow = mutationsList.some(({attributeName}) => {
+            return attributeList.indexOf(attributeName) !== -1;
+          });
+
+          if (shouldReflow) {
+            this.__reflow();
+          }
+        }
 
         __addChildObserver() {
           Polymer.RenderStatus.beforeNextRender(this, () => {
@@ -558,6 +588,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         disconnectedCalllback() {
           super.disconnectedCalllback();
+          this.__mutationObserver.disconnect();
           this._childObserver.disconnect();
         }
 
