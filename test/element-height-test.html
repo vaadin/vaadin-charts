@@ -32,13 +32,13 @@
       });
 
       it('should have the same height as defined', function(done) {
+        const boundingClientRectElement = element.getBoundingClientRect();
+        const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
         setTimeout(() => {
-          const boundingClientRectElement = element.getBoundingClientRect();
-          const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
           expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
           expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
           done();
-        }, 10);
+        }, 20);
       });
 
       it('chart height container should react to container change', done => {
@@ -49,7 +49,7 @@
           expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
           expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
           done();
-        }, 10);
+        }, 20);
       });
 
     });
