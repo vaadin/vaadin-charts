@@ -584,12 +584,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           });
         }
 
-        __mutationCallback(mutationsList) {
+        __mutationCallback() {
           const {height: componentHeight} = this.getBoundingClientRect();
           const {chartHeight} = this.configuration;
-          const shouldReflow = componentHeight !== chartHeight;
 
-          if (shouldReflow) {
+          if (componentHeight !== chartHeight) {
             this.__reflow();
           }
         }

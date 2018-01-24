@@ -32,25 +32,28 @@
       });
 
       it('should have the same height as defined', function(done) {
-        Polymer.flush();
         setTimeout(() => {
-          const boundingClientRectElement = element.getBoundingClientRect();
           const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
-          expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
-          expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
+          expect(200).to.be.equal(boundingClientRectContainer.height);
+          expect(200).to.be.equal(element.configuration.chartHeight);
           done();
         }, 50);
       });
 
       it('chart height container should react to container change', done => {
-        element.classList.add('expand-height');
         setTimeout(() => {
-          const boundingClientRectElement = element.getBoundingClientRect();
-          const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
-          expect(boundingClientRectElement.height).to.be.equal(boundingClientRectContainer.height);
-          expect(boundingClientRectElement.height).to.be.equal(element.configuration.chartHeight);
-          done();
-        }, 20);
+          //The class needs to be added after charts is first drawn
+          element.classList.add('expand-height');
+
+          //Then the test needs to wait for the component to react to new height
+          setTimeout(() => {
+            const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
+
+            expect(300).to.be.equal(boundingClientRectContainer.height);
+            expect(300).to.be.equal(element.configuration.chartHeight);
+            done();
+          }, 10);
+        }, 10);
       });
 
     });
