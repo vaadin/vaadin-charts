@@ -525,17 +525,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return;
           }
           Polymer.RenderStatus.beforeNextRender(this, () => {
-            if (!this.__isReflowed) {
               this.configuration.reflow();
-            }
           });
         }
 
         __mutationCallback(mutationsList) {
-          const attributeList = ['class', 'style'];
-          const shouldReflow = mutationsList.some(({attributeName}) => {
-            return attributeList.indexOf(attributeName) !== -1;
-          });
+          const {height: componentHeight} = this.getBoundingClientRect();
+          const {chartHeight} = this.configuration;
+          const shouldReflow = componentHeight !== chartHeight;
 
           if (shouldReflow) {
             this.__reflow();
