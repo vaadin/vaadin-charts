@@ -42,10 +42,10 @@
 
       it('chart height container should react to container change', done => {
         setTimeout(() => {
-          //The class needs to be added after charts is first drawn
+          // The class needs to be added after charts is first drawn
           element.classList.add('expand-height');
 
-          //Then the test needs to wait for the component to react to new height
+          // Then the test needs to wait for the component to react to new height
           setTimeout(() => {
             const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
 
