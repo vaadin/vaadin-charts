@@ -53,7 +53,7 @@
           expect(40).to.be.equal(element.configuration.series[0].options.innerSize);
           expect('name of the series').to.be.equal(element.configuration.series[0].name);
           done();
-        }, 20);
+        }, 70);
       });
 
       it('should handle merging multiple series', function(done) {
@@ -75,7 +75,7 @@
           expect(100).to.be.equal(secondSeries.options.innerSize);
           expect('series 2').to.be.equal(secondSeries.name);
           done();
-        }, 20);
+        }, 70);
       });
 
       // it('chart height container should react to container change', done => {
