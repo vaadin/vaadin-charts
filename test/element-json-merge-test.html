@@ -70,7 +70,9 @@
           ]
         });
         setTimeout(() => {
-          const [firstSeries, secondSeries] = element.configuration.series;
+          const firstSeries = element.configuration.series[0];
+          const secondSeries = element.configuration.series[1];
+
           expect('series 1').to.be.equal(firstSeries.name);
           expect(100).to.be.equal(secondSeries.options.innerSize);
           expect('series 2').to.be.equal(secondSeries.name);
