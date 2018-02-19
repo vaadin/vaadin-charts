@@ -58,12 +58,18 @@
 
       it('should handle merging multiple series', function(done) {
         element.update({
+          xAxis: {
+            categories: ['Africa', 'Asia']
+          },
           series: [
             {name: 'series 1'},
             {name: 'series 2'}
           ]
         });
         element.update({
+          xAxis: {
+            categories: ['Australia', 'Europe']
+          },
           series: [
             null,
             {innerSize: 100}
@@ -76,6 +82,8 @@
           expect('series 1').to.be.equal(firstSeries.name);
           expect(100).to.be.equal(secondSeries.options.innerSize);
           expect('series 2').to.be.equal(secondSeries.name);
+
+          expect(['Africa', 'Asia', 'Australia', 'Europe']).to.be.equal(element.configuration.xAxis[0].categories);
           done();
         }, 70);
       });
