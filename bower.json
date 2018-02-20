@@ -30,7 +30,7 @@
     "wct.conf.js"
   ],
   "dependencies": {
-    "highcharts": "^5.0.0",
+    "highcharts": "5.0.12",
     "polymer": "^2.0.0",
     "vaadin-themable-mixin": "^1.0.0",
     "vaadin-license-checker": "vaadin/license-checker#^2.0.0",
@@ -42,6 +42,7 @@
     "iron-demo-helpers": "^2.0.0",
     "webcomponentsjs": "^1.0.0",
     "web-component-tester": "^6.1.5",
-    "vaadin-board": "^2.0.0"
+    "vaadin-board": "^2.0.0",
+    "vaadin-grid": "4.0.0-beta1"
   }
 }
