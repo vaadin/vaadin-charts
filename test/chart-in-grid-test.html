@@ -1,0 +1,69 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-chart tests</title>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../../vaadin-grid/vaadin-grid.html">
+  <link rel="import" href="../vaadin-chart.html">
+</head>
+
+<body>
+  <dom-module id="chart-in-grid">
+    <template>
+      <vaadin-grid items="[[items]]" id="mygrid">
+        <vaadin-grid-column>
+          <template>
+            <vaadin-chart id="mychart">
+              <vaadin-chart-series values="[1,7,3,1,5,6]"></vaadin-chart-series>
+            </vaadin-chart>
+          </template>
+        </vaadin-grid-column>
+      </vaadin-grid>
+    </template>
+
+    <script>
+      HTMLImports.whenReady(() => {
+        class ChartInGridTestElement extends Polymer.Element {
+          static get is() {
+            return 'chart-in-grid';
+          }
+
+          static get properties() {
+            return {
+              items: {
+                type: Array,
+                value: [1]
+              }
+            };
+          }
+        }
+
+        customElements.define(ChartInGridTestElement.is, ChartInGridTestElement);
+      });
+    </script>
+  </dom-module>
+  <chart-in-grid></chart-in-grid>
+
+  <script>
+    describe('Chart In Grid Test', function() {
+      var chartContainer;
+
+      before(function(done) {
+        HTMLImports.whenReady(() => {
+          const gridChildNodes = document.querySelector('chart-in-grid').$.mygrid.childNodes;
+          const chart = gridChildNodes[gridChildNodes.length - 1].children[0];
+          chartContainer = chart.$.chart;
+          done();
+        });
+      });
+
+      it('chart container should be in the shadow root', function(done) {
+        setTimeout(function() {
+          expect(chartContainer.parentNode).to.not.be.null;
+          done();
+        });
+      });
+    });
+  </script>
+</body>
