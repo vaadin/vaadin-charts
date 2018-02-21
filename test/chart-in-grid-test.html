@@ -14,7 +14,14 @@
       <vaadin-grid items="[[items]]" id="mygrid">
         <vaadin-grid-column>
           <template>
-            <vaadin-chart id="mychart">
+            <vaadin-chart id="chart">
+              <vaadin-chart-series values="[1,7,3,1,5,6]"></vaadin-chart-series>
+            </vaadin-chart>
+          </template>
+        </vaadin-grid-column>
+        <vaadin-grid-column>
+          <template>
+            <vaadin-chart id="timeline_chart" timeline>
               <vaadin-chart-series values="[1,7,3,1,5,6]"></vaadin-chart-series>
             </vaadin-chart>
           </template>
@@ -48,12 +55,18 @@
   <script>
     describe('Chart In Grid Test', function() {
       var chartContainer;
+      var timelineChartContainer;
 
       before(function(done) {
         HTMLImports.whenReady(() => {
-          const gridChildNodes = document.querySelector('chart-in-grid').$.mygrid.childNodes;
-          const chart = gridChildNodes[gridChildNodes.length - 1].children[0];
+          const mygrid = document.querySelector('chart-in-grid').$.mygrid;
+
+          const chart = mygrid.querySelector('#chart');
           chartContainer = chart.$.chart;
+
+          const timelineChart = mygrid.querySelector('#timeline_chart');
+          timelineChartContainer = timelineChart.$.chart;
+
           done();
         });
       });
@@ -61,6 +74,7 @@
       it('chart container should be in the shadow root', function(done) {
         setTimeout(function() {
           expect(chartContainer.parentNode).to.not.be.null;
+          expect(timelineChartContainer.parentNode).to.not.be.null;
           done();
         });
       });
