@@ -1,5 +1,10 @@
 (function() {
   if (Highcharts) {
+    // One regression was introduced after 5.0.12 that was causing the
+    // chart to get removed and never put back to the original location
+    // More info at https://github.com/highcharts/highcharts/issues/7024
+    // The fix for this issue was released for HC 6.0.0, so we need to
+    // add this workaround to get it fixed.
     Highcharts.Chart.prototype.temporaryDisplay = function(revert) {
       var node = this.renderTo,
         tempStyle;
