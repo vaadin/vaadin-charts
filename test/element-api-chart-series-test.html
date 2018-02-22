@@ -11,7 +11,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series values="{{values}}"></vaadin-chart-series>
+        <vaadin-chart-series values="{{values}}" type="{{type}}"></vaadin-chart-series>
       </vaadin-chart>
     </template>
 
@@ -27,6 +27,10 @@
               values: {
                 type: Array,
                 value: [10, 20, 10, 30, 50]
+              },
+              type: {
+                type: String,
+                value: 'line'
               }
             };
           }
@@ -41,20 +45,26 @@
       });
     </script>
   </dom-module>
-  <chart-series-api-demo></chart-series-api-demo>
- 
+  <test-fixture id="default">
+    <template>
+      <chart-series-api-demo></chart-series-api-demo>
+    </template>
+  </test-fixture>
+
   <script>
     describe('High-level Charts Series API', function() {
       let chart;
       let chartContainer;
       let element;
 
-      before(function(done) {
+      beforeEach(function(done) {
         HTMLImports.whenReady(() => {
-          element = document.querySelector('chart-series-api-demo');
+          element = fixture('default');
           chart = element.$.mychart;
           chartContainer = chart.$.chart;
-          done();
+          setTimeout(function() {
+            done();
+          }, 25);
         });
       });
 
@@ -69,7 +79,7 @@
         setTimeout(function() {
           expect(chart.configuration.series.length).to.be.equal(1);
           done();
-        });
+        }, 20);
       });
 
       it('should have one line series with 5 points', function(done) {
@@ -78,12 +88,12 @@
           expect(series).to.have.lengthOf(1);
 
           const firstSeries = series[0];
-          // IE11 doesn't support SVGElement.classList 
+          // IE11 doesn't support SVGElement.classList
           expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
           expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
 
           done();
-        });
+        }, 20);
       });
 
       it('should have same values as passed', function(done) {
@@ -93,7 +103,7 @@
           expect(values).to.have.members(element.values);
 
           done();
-        });
+        }, 20);
       });
 
       it('should update values on change', function(done) {
@@ -149,6 +159,27 @@
 
             done();
           });
+        });
+      });
+
+      it('should have a custom type', function(done) {
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          expect(firstSeries.type).to.be.equal('line');
+          done();
+        }, 20);
+      });
+
+      it('should update type on property change', function(done) {
+        setTimeout(function() {
+          const type = 'area';
+          element.setAttribute('type', type);
+
+          setTimeout(function() {
+            const firstSeries = chart.configuration.series[0];
+            expect(firstSeries.type).to.be.equal(type);
+            done();
+          }, 20);
         });
       });
     });
