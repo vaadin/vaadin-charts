@@ -64,123 +64,91 @@
           chartContainer = chart.$.chart;
           setTimeout(function() {
             done();
-          }, 25);
+          }, 55);
         });
       });
 
-      it('should be defined', function(done) {
-        setTimeout(function() {
-          expect(chart.constructor.is).to.be.equal(chart.localName);
-          done();
+      it('should be defined', function() {
+        expect(chart.constructor.is).to.be.equal(chart.localName);
+      });
+
+      it('should have one series', function() {
+        expect(chart.configuration.series.length).to.be.equal(1);
+      });
+
+      it('should have one line series with 5 points', function() {
+        const series = chartContainer.querySelectorAll('.highcharts-series');
+        expect(series).to.have.lengthOf(1);
+
+        const firstSeries = series[0];
+        // IE11 doesn't support SVGElement.classList
+        expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
+        expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
+      });
+
+      it('should have same values as passed', function() {
+        const values = chart.configuration.series[0].data.map(data => data.y);
+        expect(values).to.have.lengthOf(element.values.length);
+        expect(values).to.have.members(element.values);
+      });
+
+      it('should update values on change', function() {
+        element.changeValues();
+        const changedValues = chart.configuration.series[0].data.map(data => data.y);
+        expect(changedValues).to.have.members(element.values);
+      });
+
+      it('should disable series visibility toggling only when set', function() {
+        const legend = chartContainer.querySelector('.highcharts-legend-item');
+
+        // Series visibility toggling is enabled by default
+        legend.dispatchEvent(new MouseEvent('click'));
+        // IE11 doesn't support SVGElement.classList
+        expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
+
+        legend.dispatchEvent(new MouseEvent('click'));
+        expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
+
+        // Series doesn't hide when toggle is disabled
+        chart['_visibilityTogglingDisabled'] = true;
+        legend.dispatchEvent(new MouseEvent('click'));
+        expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
+
+        chart['_visibilityTogglingDisabled'] = false;
+        legend.dispatchEvent(new MouseEvent('click'));
+
+        // Hidden series doesn't show when toggle is disabled
+        chart['_visibilityTogglingDisabled'] = true;
+        legend.dispatchEvent(new MouseEvent('click'));
+        expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
+      });
+
+      it('should remove series if element is removed from the tree', function() {
+        const series = chartContainer.querySelectorAll('.highcharts-series');
+        expect(series).to.have.lengthOf(1);
+
+        const seriesElement = chart.querySelector('vaadin-chart-series');
+        chart.removeChild(seriesElement);
+
+        Polymer.RenderStatus.beforeNextRender(this, () => {
+          const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
+          expect(seriesEmpty).to.have.lengthOf(0);
         });
       });
 
-      it('should have one series', function(done) {
-        setTimeout(function() {
-          expect(chart.configuration.series.length).to.be.equal(1);
-          done();
-        }, 20);
+      it('should have a custom type', function() {
+        const firstSeries = chart.configuration.series[0];
+        expect(firstSeries.type).to.be.equal('line');
       });
 
-      it('should have one line series with 5 points', function(done) {
-        setTimeout(function() {
-          const series = chartContainer.querySelectorAll('.highcharts-series');
-          expect(series).to.have.lengthOf(1);
+      it('should update type on property change', function() {
+        const type = 'area';
+        element.setAttribute('type', type);
 
-          const firstSeries = series[0];
-          // IE11 doesn't support SVGElement.classList
-          expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
-          expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
-
-          done();
-        }, 20);
-      });
-
-      it('should have same values as passed', function(done) {
-        setTimeout(function() {
-          const values = chart.configuration.series[0].data.map(data => data.y);
-          expect(values).to.have.lengthOf(element.values.length);
-          expect(values).to.have.members(element.values);
-
-          done();
-        }, 20);
-      });
-
-      it('should update values on change', function(done) {
-        setTimeout(function() {
-          element.changeValues();
-          const changedValues = chart.configuration.series[0].data.map(data => data.y);
-          expect(changedValues).to.have.members(element.values);
-
-          done();
-        });
-      });
-
-      it('should disable series visibility toggling only when set', function(done) {
-        setTimeout(function() {
-          const legend = chartContainer.querySelector('.highcharts-legend-item');
-
-          // Series visibility toggling is enabled by default
-          legend.dispatchEvent(new MouseEvent('click'));
-          // IE11 doesn't support SVGElement.classList
-          expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
-
-          legend.dispatchEvent(new MouseEvent('click'));
-          expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
-
-          // Series doesn't hide when toggle is disabled
-          chart['_visibilityTogglingDisabled'] = true;
-          legend.dispatchEvent(new MouseEvent('click'));
-          expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
-
-          chart['_visibilityTogglingDisabled'] = false;
-          legend.dispatchEvent(new MouseEvent('click'));
-
-          // Hidden series doesn't show when toggle is disabled
-          chart['_visibilityTogglingDisabled'] = true;
-          legend.dispatchEvent(new MouseEvent('click'));
-          expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
-
-          done();
-        });
-      });
-
-      it('should remove series if element is removed from the tree', function(done) {
-        setTimeout(function() {
-          const series = chartContainer.querySelectorAll('.highcharts-series');
-          expect(series).to.have.lengthOf(1);
-
-          const seriesElement = chart.querySelector('vaadin-chart-series');
-          chart.removeChild(seriesElement);
-
-          Polymer.RenderStatus.beforeNextRender(this, () => {
-            const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
-            expect(seriesEmpty).to.have.lengthOf(0);
-
-            done();
-          });
-        });
-      });
-
-      it('should have a custom type', function(done) {
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          expect(firstSeries.type).to.be.equal('line');
-          done();
+          expect(firstSeries.type).to.be.equal(type);
         }, 20);
-      });
-
-      it('should update type on property change', function(done) {
-        setTimeout(function() {
-          const type = 'area';
-          element.setAttribute('type', type);
-
-          setTimeout(function() {
-            const firstSeries = chart.configuration.series[0];
-            expect(firstSeries.type).to.be.equal(type);
-            done();
-          }, 20);
-        });
       });
     });
   </script>
