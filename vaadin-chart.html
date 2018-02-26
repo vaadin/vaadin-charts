@@ -362,6 +362,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
+          this.__deepMerge(options, this['additional-options']);
 
           if (this.title) {
             options.title = {
@@ -936,8 +937,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         __updateAdditionalOptions() {
           if (this._configuration) {
             this.update(this['additional-options']);
-          } else {
-            this.__deepMerge(this._baseConfig, this['additional-options']);
           }
         }
 
