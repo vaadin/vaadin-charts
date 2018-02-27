@@ -155,7 +155,7 @@
         }, 30);
       });
 
-      it('should have a custom title', function () {
+      it('should have a custom title', function() {
         const firstSeries = chart.configuration.series[0];
         expect(firstSeries.name).to.be.equal(element.title);
       });
@@ -166,7 +166,7 @@
           element.setAttribute('title', title);
 
           const firstSeries = chart.configuration.series[0];
-          expect(firstSeries.name).to.be.equal(type);
+          expect(firstSeries.name).to.be.equal(title);
         }, 30);
       });
     });
