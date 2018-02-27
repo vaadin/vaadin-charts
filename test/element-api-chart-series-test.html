@@ -11,7 +11,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series values="{{values}}" type="{{type}}"></vaadin-chart-series>
+        <vaadin-chart-series values="{{values}}" title="{{title}}" type="{{type}}"></vaadin-chart-series>
       </vaadin-chart>
     </template>
 
@@ -31,6 +31,10 @@
               type: {
                 type: String,
                 value: 'line'
+              },
+              title: {
+                type: String,
+                value: 'series name'
               }
             };
           }
@@ -142,13 +146,28 @@
       });
 
       it('should update type on property change', function() {
-        const type = 'area';
-        element.setAttribute('type', type);
-
         setTimeout(function() {
+          const type = 'area';
+          element.setAttribute('type', type);
+
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal(type);
-        }, 20);
+        }, 30);
+      });
+
+      it('should have a custom title', function () {
+        const firstSeries = chart.configuration.series[0];
+        expect(firstSeries.name).to.be.equal(element.title);
+      });
+
+      it('should update title on property change', function() {
+        setTimeout(function() {
+          const title = 'new-series-title';
+          element.setAttribute('title', title);
+
+          const firstSeries = chart.configuration.series[0];
+          expect(firstSeries.name).to.be.equal(type);
+        }, 30);
       });
     });
   </script>
