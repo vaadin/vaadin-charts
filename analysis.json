@@ -53,7 +53,7 @@
                   "column": 12
                 },
                 "end": {
-                  "line": 121,
+                  "line": 120,
                   "column": 13
                 }
               },
@@ -70,11 +70,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 126,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 130,
+                  "line": 129,
                   "column": 13
                 }
               },
@@ -91,11 +91,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 137,
+                  "line": 136,
                   "column": 12
                 },
                 "end": {
-                  "line": 139,
+                  "line": 138,
                   "column": 13
                 }
               },
@@ -111,11 +111,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 150,
+                  "line": 149,
                   "column": 8
                 },
                 "end": {
-                  "line": 155,
+                  "line": 154,
                   "column": 9
                 }
               },
@@ -128,11 +128,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 161,
+                  "line": 160,
                   "column": 8
                 },
                 "end": {
-                  "line": 166,
+                  "line": 165,
                   "column": 9
                 }
               },
@@ -150,11 +150,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 168,
+                  "line": 167,
                   "column": 8
                 },
                 "end": {
-                  "line": 172,
+                  "line": 171,
                   "column": 9
                 }
               },
@@ -167,11 +167,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 174,
+                  "line": 173,
                   "column": 8
                 },
                 "end": {
-                  "line": 180,
+                  "line": 179,
                   "column": 9
                 }
               },
@@ -184,11 +184,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 182,
+                  "line": 181,
                   "column": 8
                 },
                 "end": {
-                  "line": 188,
+                  "line": 187,
                   "column": 9
                 }
               },
@@ -201,11 +201,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 190,
+                  "line": 189,
                   "column": 8
                 },
                 "end": {
-                  "line": 192,
+                  "line": 191,
                   "column": 9
                 }
               },
@@ -227,7 +227,7 @@
               "column": 6
             },
             "end": {
-              "line": 194,
+              "line": 193,
               "column": 7
             }
           },
@@ -260,7 +260,7 @@
                   "column": 12
                 },
                 "end": {
-                  "line": 121,
+                  "line": 120,
                   "column": 13
                 }
               },
@@ -272,11 +272,11 @@
               "description": "The name of the series as shown in the legend, tooltip etc.",
               "sourceRange": {
                 "start": {
-                  "line": 126,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 130,
+                  "line": 129,
                   "column": 13
                 }
               },
@@ -288,11 +288,11 @@
               "description": "Object with the configured options defined and used to create a series.",
               "sourceRange": {
                 "start": {
-                  "line": 137,
+                  "line": 136,
                   "column": 12
                 },
                 "end": {
-                  "line": 139,
+                  "line": 138,
                   "column": 13
                 }
               },
