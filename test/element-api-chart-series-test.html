@@ -68,7 +68,7 @@
           chartContainer = chart.$.chart;
           setTimeout(function() {
             done();
-          }, 85);
+          }, 100);
         });
       });
 
@@ -90,10 +90,13 @@
         expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
       });
 
-      it('should have same values as passed', function() {
-        const values = chart.configuration.series[0].data.map(data => data.y);
-        expect(values).to.have.lengthOf(element.values.length);
-        expect(values).to.have.members(element.values);
+      it('should have same values as passed', function(done) {
+        setTimeout(function() {
+          const values = chart.configuration.series[0].data.map(data => data.y);
+          expect(values).to.have.lengthOf(element.values.length);
+          expect(values).to.have.members(element.values);
+          done();
+        });
       });
 
       it('should update values on change', function() {
@@ -145,13 +148,13 @@
         expect(firstSeries.type).to.be.equal('line');
       });
 
-      it('should update type on property change', function() {
+      it('should update type on property change', function(done) {
+        const type = 'area';
+        element.setAttribute('type', type);
         setTimeout(function() {
-          const type = 'area';
-          element.setAttribute('type', type);
-
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal(type);
+          done();
         }, 30);
       });
 
@@ -160,14 +163,14 @@
         expect(firstSeries.name).to.be.equal(element.title);
       });
 
-      it('should update title on property change', function() {
+      it('should update title on property change', function(done) {
+        const title = 'new-series-title';
+        element.setAttribute('title', title);
         setTimeout(function() {
-          const title = 'new-series-title';
-          element.setAttribute('title', title);
-
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.name).to.be.equal(title);
-        }, 30);
+          done();
+        }, 70);
       });
     });
   </script>
