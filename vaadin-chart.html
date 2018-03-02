@@ -352,6 +352,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
+            if (this._configuration) {
+              return;
+            }
             const options = Object.assign({}, this.options);
             this.__initChart(options);
             const config = {attributes: true, characterData: true};
