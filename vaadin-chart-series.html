@@ -8,6 +8,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 -->
 
 <link rel="import" href="../polymer/polymer-element.html">
+<script src="chart-property-mapper.js"></script>
 
 <dom-module id="vaadin-chart-series">
   <script>
@@ -75,9 +76,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         get options() {
-          const options = {
-            data: this.values,
-          };
+          const options = {};
 
           if (this.type) {
             options.type = this.type;
@@ -87,6 +86,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.name = this.title;
           }
 
+          if (this.values) {
+            options.data = this.__computeData(this.values, this.labels);
+          }
+
           return options;
         }
 
@@ -94,7 +97,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return {
             /**
              * An array of data used by the series.
-             * Formats dependends on the chart type and can be:
+             * Format depends on the chart type and can be:
              *   - An array of numerical values `[y0, y1, y2, y3,...]`
              *   - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`
              *   - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`
@@ -103,11 +106,24 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              *
              * Note that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)
              * to mutate the values array in order to make the component aware of the
-             * change and be able to syncronize it.
+             * change and be able to synchronize it.
              */
             values: {
               type: Array,
               value: () => []
+            },
+
+            /**
+             * Labels for the series values.
+             * - An array e.g '["Mon", "Tue", "Wed", "Thur", "Fri"]'. This maps to corresponding values by position.
+             * - A mapping object e.g '{10: "Mon", 20: "Tue", 30: "Wed"}'. This maps to specific values.
+             * - A function e.g 'e => e + "km"'. This is evaluated against every value to generate its label.
+             *
+             * Any data point not covered (e.g value not present in the mapping object
+             * or mapping array shorter than the list of values), results in the actual value being used as the label.
+             */
+            labels: {
+              type: ChartPropertyMapper
             },
 
             /**
@@ -142,7 +158,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         static get observers() {
           return [
-            '__valuesObserver(values.splices)'
+            '__valuesObserver(values.splices)',
+            '__labelsObserver(labels.*, values)'
           ];
         }
 
@@ -167,8 +184,30 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __valuesObserver() {
           if (this.__hasSeriesConfig()) {
-            this._series.setData(this.values);
+            this._series.setData(this.__computeData(this.values, this.labels));
           }
+        }
+
+        _deserializeValue(value, type) {
+          if (type == ChartPropertyMapper) {
+            return new ChartPropertyMapper(value);
+          } else {
+            return super._deserializeValue(value, type);
+          }
+        }
+
+        __labelsObserver(changeRecord, values) {
+          if (this.__hasSeriesConfig()) {
+            this._series.setData(this.__computeData(values, this.labels));
+          }
+        }
+
+        __computeData(values, labels) {
+          let currentLabels = labels || [];
+          if (currentLabels.constructor.name !== 'ChartPropertyMapper') {
+            currentLabels = new ChartPropertyMapper(currentLabels);
+          }
+          return currentLabels.map(values);
         }
 
         __typeObserver() {

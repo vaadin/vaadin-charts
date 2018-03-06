@@ -25,15 +25,15 @@
             {
               "name": "values",
               "type": "Array",
-              "description": "An array of data used by the series.\nFormats dependends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to syncronize it.",
+              "description": "An array of data used by the series.\nFormat depends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to synchronize it.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 107,
+                  "line": 110,
                   "column": 12
                 },
                 "end": {
-                  "line": 110,
+                  "line": 113,
                   "column": 13
                 }
               },
@@ -43,17 +43,36 @@
               "defaultValue": "[]"
             },
             {
+              "name": "labels",
+              "type": "ChartPropertyMapper",
+              "description": "Labels for the series values.\n- An array e.g '[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'. This maps to corresponding values by position.\n- A mapping object e.g '{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'. This maps to specific values.\n- A function e.g 'e => e + \"km\"'. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 124,
+                  "column": 12
+                },
+                "end": {
+                  "line": 126,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              }
+            },
+            {
               "name": "type",
               "type": "string",
               "description": "A string with the type of the series.\n Defaults to `'line'`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 116,
+                  "line": 132,
                   "column": 12
                 },
                 "end": {
-                  "line": 120,
+                  "line": 136,
                   "column": 13
                 }
               },
@@ -70,11 +89,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 125,
+                  "line": 141,
                   "column": 12
                 },
                 "end": {
-                  "line": 129,
+                  "line": 145,
                   "column": 13
                 }
               },
@@ -91,11 +110,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 136,
+                  "line": 152,
                   "column": 12
                 },
                 "end": {
-                  "line": 138,
+                  "line": 154,
                   "column": 13
                 }
               },
@@ -111,11 +130,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 149,
+                  "line": 166,
                   "column": 8
                 },
                 "end": {
-                  "line": 154,
+                  "line": 171,
                   "column": 9
                 }
               },
@@ -128,11 +147,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 160,
+                  "line": 177,
                   "column": 8
                 },
                 "end": {
-                  "line": 165,
+                  "line": 182,
                   "column": 9
                 }
               },
@@ -150,11 +169,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 167,
+                  "line": 184,
                   "column": 8
                 },
                 "end": {
-                  "line": 171,
+                  "line": 188,
                   "column": 9
                 }
               },
@@ -162,16 +181,88 @@
               "params": []
             },
             {
+              "name": "_deserializeValue",
+              "description": "",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 190,
+                  "column": 8
+                },
+                "end": {
+                  "line": 196,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "value"
+                },
+                {
+                  "name": "type"
+                }
+              ]
+            },
+            {
+              "name": "__labelsObserver",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 198,
+                  "column": 8
+                },
+                "end": {
+                  "line": 202,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "changeRecord"
+                },
+                {
+                  "name": "values"
+                }
+              ]
+            },
+            {
+              "name": "__computeData",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 204,
+                  "column": 8
+                },
+                "end": {
+                  "line": 210,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "values"
+                },
+                {
+                  "name": "labels"
+                }
+              ]
+            },
+            {
               "name": "__typeObserver",
               "description": "",
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 173,
+                  "line": 212,
                   "column": 8
                 },
                 "end": {
-                  "line": 179,
+                  "line": 218,
                   "column": 9
                 }
               },
@@ -184,11 +275,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 181,
+                  "line": 220,
                   "column": 8
                 },
                 "end": {
-                  "line": 187,
+                  "line": 226,
                   "column": 9
                 }
               },
@@ -201,11 +292,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 189,
+                  "line": 228,
                   "column": 8
                 },
                 "end": {
-                  "line": 191,
+                  "line": 230,
                   "column": 9
                 }
               },
@@ -223,11 +314,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 71,
+              "line": 72,
               "column": 6
             },
             "end": {
-              "line": 193,
+              "line": 232,
               "column": 7
             }
           },
@@ -237,14 +328,14 @@
           "attributes": [
             {
               "name": "values",
-              "description": "An array of data used by the series.\nFormats dependends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to syncronize it.",
+              "description": "An array of data used by the series.\nFormat depends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to synchronize it.",
               "sourceRange": {
                 "start": {
-                  "line": 107,
+                  "line": 110,
                   "column": 12
                 },
                 "end": {
-                  "line": 110,
+                  "line": 113,
                   "column": 13
                 }
               },
@@ -252,15 +343,31 @@
               "type": "Array"
             },
             {
+              "name": "labels",
+              "description": "Labels for the series values.\n- An array e.g '[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'. This maps to corresponding values by position.\n- A mapping object e.g '{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'. This maps to specific values.\n- A function e.g 'e => e + \"km\"'. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
+              "sourceRange": {
+                "start": {
+                  "line": 124,
+                  "column": 12
+                },
+                "end": {
+                  "line": 126,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "ChartPropertyMapper"
+            },
+            {
               "name": "type",
               "description": "A string with the type of the series.\n Defaults to `'line'`.",
               "sourceRange": {
                 "start": {
-                  "line": 116,
+                  "line": 132,
                   "column": 12
                 },
                 "end": {
-                  "line": 120,
+                  "line": 136,
                   "column": 13
                 }
               },
@@ -272,11 +379,11 @@
               "description": "The name of the series as shown in the legend, tooltip etc.",
               "sourceRange": {
                 "start": {
-                  "line": 125,
+                  "line": 141,
                   "column": 12
                 },
                 "end": {
-                  "line": 129,
+                  "line": 145,
                   "column": 13
                 }
               },
@@ -288,11 +395,11 @@
               "description": "Object with the configured options defined and used to create a series.",
               "sourceRange": {
                 "start": {
-                  "line": 136,
+                  "line": 152,
                   "column": 12
                 },
                 "end": {
-                  "line": 138,
+                  "line": 154,
                   "column": 13
                 }
               },
@@ -1405,6 +1512,139 @@
           "tagname": "vaadin-chart"
         }
       ]
+    }
+  ],
+  "classes": [
+    {
+      "description": "",
+      "summary": "",
+      "path": "chart-property-mapper.js",
+      "properties": [],
+      "methods": [
+        {
+          "name": "__isFunction",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 22,
+              "column": 2
+            },
+            "end": {
+              "line": 24,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "__tryPassFunction",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 26,
+              "column": 2
+            },
+            "end": {
+              "line": 33,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "__tryPassArrayOrObjct",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 35,
+              "column": 2
+            },
+            "end": {
+              "line": 43,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "__assignMapper",
+          "description": "",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 45,
+              "column": 2
+            },
+            "end": {
+              "line": 48,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "type"
+            }
+          ]
+        },
+        {
+          "name": "map",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 50,
+              "column": 2
+            },
+            "end": {
+              "line": 59,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "values"
+            }
+          ]
+        }
+      ],
+      "staticMethods": [],
+      "demos": [],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 0,
+          "column": 0
+        },
+        "end": {
+          "line": 60,
+          "column": 1
+        }
+      },
+      "privacy": "public",
+      "name": "ChartPropertyMapper"
     }
   ]
 }
