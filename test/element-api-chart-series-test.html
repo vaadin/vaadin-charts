@@ -11,7 +11,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" labels="{{labels}}"></vaadin-chart-series>
+        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
       </vaadin-chart>
     </template>
 
@@ -201,7 +201,7 @@
       it('should accept labels as mapping object string', function(done) {
         const labelsAsObject = {10: 'Mon', 20: 'Tue', 30: 'Wed', 50: 'Thur'};
         const labelsAsObjectString = JSON.stringify(labelsAsObject);
-        series.setAttribute('labels', labelsAsObjectString);
+        series.setAttribute('value-labels', labelsAsObjectString);
 
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
@@ -222,7 +222,7 @@
 
       it('should accept labels as function string', function(done) {
         const labelsAsFunctionString = 'e => e + "BBB"';
-        series.setAttribute('labels', labelsAsFunctionString);
+        series.setAttribute('value-labels', labelsAsFunctionString);
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach(e => expect(e.name).to.equal(e.y + 'BBB'));
@@ -243,7 +243,7 @@
       it('should accept labels as array string', function(done) {
         const labelsAsArray = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri'];
         const labelsAsArrayString = JSON.stringify(labelsAsArray);
-        series.setAttribute('labels', labelsAsArrayString);
+        series.setAttribute('value-labels', labelsAsArrayString);
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach((e, index) => expect(e.name).to.equal(labelsAsArray[index]));

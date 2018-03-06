@@ -87,7 +87,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (this.values) {
-            options.data = this.__computeData(this.values, this.labels);
+            options.data = this.__computeData(this.values, this['value-labels']);
           }
 
           return options;
@@ -108,7 +108,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * to mutate the values array in order to make the component aware of the
              * change and be able to synchronize it.
              */
-            values: {
+            'values': {
               type: Array,
               value: () => []
             },
@@ -122,7 +122,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * Any data point not covered (e.g value not present in the mapping object
              * or mapping array shorter than the list of values), results in the actual value being used as the label.
              */
-            labels: {
+            'value-labels': {
               type: ChartLabelsMapper
             },
 
@@ -130,7 +130,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              *  A string with the type of the series.
              *  Defaults to `'line'`.
              */
-            type: {
+            'type': {
               type: String,
               observer: '__typeObserver',
               reflectToAttribute: true
@@ -139,7 +139,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             /**
              * The name of the series as shown in the legend, tooltip etc.
              */
-            title: {
+            'title': {
               type: String,
               observer: '__titleObserver',
               reflectToAttribute: true
@@ -150,7 +150,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              *
              * @readonly
              */
-            options: {
+            'options': {
               type: Object
             }
           };
@@ -159,7 +159,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         static get observers() {
           return [
             '__valuesObserver(values.splices)',
-            '__labelsObserver(labels.*, values)'
+            '__labelsObserver(value-labels.*, values)'
           ];
         }
 
@@ -184,7 +184,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __valuesObserver() {
           if (this.__hasSeriesConfig()) {
-            this._series.setData(this.__computeData(this.values, this.labels));
+            this._series.setData(this.__computeData(this.values, this['value-labels']));
           }
         }
 
@@ -198,7 +198,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __labelsObserver(changeRecord, values) {
           if (this.__hasSeriesConfig()) {
-            this._series.setData(this.__computeData(values, this.labels));
+            this._series.setData(this.__computeData(values, this['value-labels']));
           }
         }
 

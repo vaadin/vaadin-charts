@@ -43,7 +43,7 @@
               "defaultValue": "[]"
             },
             {
-              "name": "labels",
+              "name": "value-labels",
               "type": "ChartLabelsMapper",
               "description": "Labels for the series values. Acceptable input are:\n- An array e.g `'[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'`. This maps to corresponding values by position.\n- A mapping object e.g `'{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'`. This maps to specific values.\n- A function e.g `'e => e + \"km\"'`. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
               "privacy": "public",
@@ -343,7 +343,7 @@
               "type": "Array"
             },
             {
-              "name": "labels",
+              "name": "value-labels",
               "description": "Labels for the series values. Acceptable input are:\n- An array e.g `'[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'`. This maps to corresponding values by position.\n- A mapping object e.g `'{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'`. This maps to specific values.\n- A function e.g `'e => e + \"km\"'`. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
               "sourceRange": {
                 "start": {
@@ -1564,7 +1564,7 @@
           ]
         },
         {
-          "name": "__tryPassArrayOrObjct",
+          "name": "__tryPassArrayOrObject",
           "description": "",
           "privacy": "private",
           "sourceRange": {
