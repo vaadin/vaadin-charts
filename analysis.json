@@ -29,11 +29,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 110,
+                  "line": 111,
                   "column": 12
                 },
                 "end": {
-                  "line": 113,
+                  "line": 114,
                   "column": 13
                 }
               },
@@ -45,15 +45,15 @@
             {
               "name": "labels",
               "type": "ChartPropertyMapper",
-              "description": "Labels for the series values.\n- An array e.g '[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'. This maps to corresponding values by position.\n- A mapping object e.g '{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'. This maps to specific values.\n- A function e.g 'e => e + \"km\"'. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
+              "description": "Labels for the series values. Acceptable input are:\n- An array e.g `'[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'`. This maps to corresponding values by position.\n- A mapping object e.g `'{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'`. This maps to specific values.\n- A function e.g `'e => e + \"km\"'`. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 124,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 126,
+                  "line": 127,
                   "column": 13
                 }
               },
@@ -68,11 +68,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 132,
+                  "line": 133,
                   "column": 12
                 },
                 "end": {
-                  "line": 136,
+                  "line": 137,
                   "column": 13
                 }
               },
@@ -89,11 +89,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 141,
+                  "line": 142,
                   "column": 12
                 },
                 "end": {
-                  "line": 145,
+                  "line": 146,
                   "column": 13
                 }
               },
@@ -110,11 +110,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 152,
+                  "line": 153,
                   "column": 12
                 },
                 "end": {
-                  "line": 154,
+                  "line": 155,
                   "column": 13
                 }
               },
@@ -130,11 +130,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 166,
+                  "line": 167,
                   "column": 8
                 },
                 "end": {
-                  "line": 171,
+                  "line": 172,
                   "column": 9
                 }
               },
@@ -147,11 +147,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 177,
+                  "line": 178,
                   "column": 8
                 },
                 "end": {
-                  "line": 182,
+                  "line": 183,
                   "column": 9
                 }
               },
@@ -169,11 +169,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 184,
+                  "line": 185,
                   "column": 8
                 },
                 "end": {
-                  "line": 188,
+                  "line": 189,
                   "column": 9
                 }
               },
@@ -186,11 +186,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 190,
+                  "line": 191,
                   "column": 8
                 },
                 "end": {
-                  "line": 196,
+                  "line": 197,
                   "column": 9
                 }
               },
@@ -210,11 +210,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 198,
+                  "line": 199,
                   "column": 8
                 },
                 "end": {
-                  "line": 202,
+                  "line": 203,
                   "column": 9
                 }
               },
@@ -234,11 +234,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 204,
+                  "line": 205,
                   "column": 8
                 },
                 "end": {
-                  "line": 210,
+                  "line": 211,
                   "column": 9
                 }
               },
@@ -258,11 +258,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 212,
+                  "line": 213,
                   "column": 8
                 },
                 "end": {
-                  "line": 218,
+                  "line": 219,
                   "column": 9
                 }
               },
@@ -275,11 +275,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 220,
+                  "line": 221,
                   "column": 8
                 },
                 "end": {
-                  "line": 226,
+                  "line": 227,
                   "column": 9
                 }
               },
@@ -292,11 +292,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 228,
+                  "line": 229,
                   "column": 8
                 },
                 "end": {
-                  "line": 230,
+                  "line": 231,
                   "column": 9
                 }
               },
@@ -314,11 +314,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 72,
+              "line": 73,
               "column": 6
             },
             "end": {
-              "line": 232,
+              "line": 233,
               "column": 7
             }
           },
@@ -331,11 +331,11 @@
               "description": "An array of data used by the series.\nFormat depends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to synchronize it.",
               "sourceRange": {
                 "start": {
-                  "line": 110,
+                  "line": 111,
                   "column": 12
                 },
                 "end": {
-                  "line": 113,
+                  "line": 114,
                   "column": 13
                 }
               },
@@ -344,14 +344,14 @@
             },
             {
               "name": "labels",
-              "description": "Labels for the series values.\n- An array e.g '[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'. This maps to corresponding values by position.\n- A mapping object e.g '{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'. This maps to specific values.\n- A function e.g 'e => e + \"km\"'. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
+              "description": "Labels for the series values. Acceptable input are:\n- An array e.g `'[\"Mon\", \"Tue\", \"Wed\", \"Thur\", \"Fri\"]'`. This maps to corresponding values by position.\n- A mapping object e.g `'{10: \"Mon\", 20: \"Tue\", 30: \"Wed\"}'`. This maps to specific values.\n- A function e.g `'e => e + \"km\"'`. This is evaluated against every value to generate its label.\n\nAny data point not covered (e.g value not present in the mapping object\nor mapping array shorter than the list of values), results in the actual value being used as the label.",
               "sourceRange": {
                 "start": {
-                  "line": 124,
+                  "line": 125,
                   "column": 12
                 },
                 "end": {
-                  "line": 126,
+                  "line": 127,
                   "column": 13
                 }
               },
@@ -363,11 +363,11 @@
               "description": "A string with the type of the series.\n Defaults to `'line'`.",
               "sourceRange": {
                 "start": {
-                  "line": 132,
+                  "line": 133,
                   "column": 12
                 },
                 "end": {
-                  "line": 136,
+                  "line": 137,
                   "column": 13
                 }
               },
@@ -379,11 +379,11 @@
               "description": "The name of the series as shown in the legend, tooltip etc.",
               "sourceRange": {
                 "start": {
-                  "line": 141,
+                  "line": 142,
                   "column": 12
                 },
                 "end": {
-                  "line": 145,
+                  "line": 146,
                   "column": 13
                 }
               },
@@ -395,11 +395,11 @@
               "description": "Object with the configured options defined and used to create a series.",
               "sourceRange": {
                 "start": {
-                  "line": 152,
+                  "line": 153,
                   "column": 12
                 },
                 "end": {
-                  "line": 154,
+                  "line": 155,
                   "column": 13
                 }
               },
