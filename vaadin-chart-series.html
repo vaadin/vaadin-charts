@@ -8,7 +8,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 -->
 
 <link rel="import" href="../polymer/polymer-element.html">
-<script src="chart-property-mapper.js"></script>
+<script src="chart-labels-mapper.js"></script>
 
 <dom-module id="vaadin-chart-series">
   <script>
@@ -123,7 +123,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * or mapping array shorter than the list of values), results in the actual value being used as the label.
              */
             labels: {
-              type: ChartPropertyMapper
+              type: ChartLabelsMapper
             },
 
             /**
@@ -189,8 +189,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         _deserializeValue(value, type) {
-          if (type == ChartPropertyMapper) {
-            return new ChartPropertyMapper(value);
+          if (type == ChartLabelsMapper) {
+            return new ChartLabelsMapper(value);
           } else {
             return super._deserializeValue(value, type);
           }
@@ -204,8 +204,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __computeData(values, labels) {
           let currentLabels = labels || [];
-          if (currentLabels.constructor.name !== 'ChartPropertyMapper') {
-            currentLabels = new ChartPropertyMapper(currentLabels);
+          if (currentLabels.constructor.name !== 'ChartLabelsMapper') {
+            currentLabels = new ChartLabelsMapper(currentLabels);
           }
           return currentLabels.map(values);
         }

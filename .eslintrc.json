@@ -12,6 +12,6 @@
     "Polymer": false,
     "Vaadin": false,
     "Highcharts": false,
-    "ChartPropertyMapper": false
+    "ChartLabelsMapper": false
   }
 }

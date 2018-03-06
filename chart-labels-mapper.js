@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-class ChartPropertyMapper {
+class ChartLabelsMapper {
 
   constructor(mapper) {
     const value = mapper || [];
@@ -7,7 +7,7 @@ class ChartPropertyMapper {
       try {
         this.__tryPassFunction(value);
       } catch (ex) {
-        this.__tryPassArrayOrObjct(JSON.parse(value));
+        this.__tryPassArrayOrObject(JSON.parse(value));
       }
     } else if (Array.isArray(value)) {
       this.__assignMapper(value, 'array');
@@ -34,7 +34,7 @@ class ChartPropertyMapper {
     this.type = 'function';
   }
 
-  __tryPassArrayOrObjct(value) {
+  __tryPassArrayOrObject(value) {
     if (Array.isArray(value)) {
       this.__assignMapper(value, 'array');
     } else if (typeof value === 'object') {
