@@ -207,7 +207,7 @@
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach(e => expect(e.name).to.equal(labelsAsObject[e.y] || e.y));
           done();
-        }, 70);
+        }, 100);
       });
 
       it('should accept labels as function', function(done) {
@@ -227,7 +227,7 @@
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach(e => expect(e.name).to.equal(e.y + 'BBB'));
           done();
-        }, 70);
+        }, 100);
       });
 
       it('should accept labels as array', function(done) {
@@ -248,7 +248,7 @@
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach((e, index) => expect(e.name).to.equal(labelsAsArray[index]));
           done();
-        }, 70);
+        }, 100);
       });
     });
   </script>
