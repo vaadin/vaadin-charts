@@ -8,7 +8,7 @@ cache:
     - node_modules
 
 addons:
-  chrome: stable
+  google-chrome: latest
   firefox: latest
   ssh_known_hosts: app.fi
 
