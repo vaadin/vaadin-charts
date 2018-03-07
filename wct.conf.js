@@ -16,11 +16,16 @@ module.exports = {
       'Windows 10/firefox@54'
     ];
 
+    var quickPlatforms = [
+      'Windows 10/chrome@64'
+    ];
+
     if (argv.env === 'saucelabs') {
       context.options.plugins.sauce.browsers = saucelabsPlatforms;
-
     } else if (argv.env === 'saucelabs-cron') {
       context.options.plugins.sauce.browsers = cronPlatforms;
+    } else {
+      context.options.plugins.sauce.browsers = quickPlatforms;
     }
   }
 };
