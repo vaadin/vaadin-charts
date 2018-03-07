@@ -1,7 +1,7 @@
 sudo: true
 dist: trusty
 language: node_js
-node_js: 8.1
+node_js: 8.9
 
 cache:
   directories:
@@ -26,17 +26,17 @@ deploy:
 before_script:
   - gulp lint version:check
   - polymer lint --rules polymer-2 --input *.html
-  - xvfb-run -s '-screen 0 1024x768x24' polymer test
+  - xvfb-run -s '-screen 0 1024x768x24' wct
 
 script:
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
       npm i gemini@^4.0.0 gemini-sauce gemini-polyserve;
       gemini test test/visual;
       gemini test test/visual -c .gemini-ie.yml;
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs;
+      xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs;
     fi
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs-cron;
+      xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs-cron;
     fi
 
 before_deploy:
