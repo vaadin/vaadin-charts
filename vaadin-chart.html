@@ -260,6 +260,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             /** @private */
             '_configuration': Object,
 
+            /**
+             * If categories are present names are used instead of numbers for the category axis.
+             * The format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`
+             * or a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.
+             */
             'categories': {
               type: Object,
               reflectToAttribute: true,
