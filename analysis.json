@@ -1522,16 +1522,33 @@
       "properties": [],
       "methods": [
         {
+          "name": "getClassName",
+          "description": "Because transpiled JS for IE11 doesn't handle instance.constructor.name properly",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 24,
+              "column": 2
+            },
+            "end": {
+              "line": 26,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
           "name": "__isFunction",
           "description": "",
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 23,
+              "line": 28,
               "column": 2
             },
             "end": {
-              "line": 25,
+              "line": 30,
               "column": 3
             }
           },
@@ -1548,11 +1565,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 27,
+              "line": 32,
               "column": 2
             },
             "end": {
-              "line": 34,
+              "line": 39,
               "column": 3
             }
           },
@@ -1569,11 +1586,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 36,
+              "line": 41,
               "column": 2
             },
             "end": {
-              "line": 44,
+              "line": 49,
               "column": 3
             }
           },
@@ -1590,11 +1607,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 46,
+              "line": 51,
               "column": 2
             },
             "end": {
-              "line": 49,
+              "line": 54,
               "column": 3
             }
           },
@@ -1614,11 +1631,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 51,
+              "line": 56,
               "column": 2
             },
             "end": {
-              "line": 60,
+              "line": 65,
               "column": 3
             }
           },
@@ -1639,7 +1656,7 @@
           "column": 0
         },
         "end": {
-          "line": 61,
+          "line": 66,
           "column": 1
         }
       },

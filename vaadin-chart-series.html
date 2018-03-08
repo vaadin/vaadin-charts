@@ -204,7 +204,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __computeData(values, labels) {
           let currentLabels = labels || [];
-          if (!currentLabels.getClassName || currentLabels.getClassName() !== 'ChartLabelsMapper') {
+          if (!currentLabels.__getClassName || currentLabels.__getClassName() !== 'ChartLabelsMapper') {
             currentLabels = new ChartLabelsMapper(currentLabels);
           }
           return currentLabels.map(values);

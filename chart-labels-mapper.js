@@ -22,7 +22,7 @@ class ChartLabelsMapper {
   }
 
   // Because transpiled JS for IE11 doesn't handle instance.constructor.name properly
-  getClassName() {
+  __getClassName() {
     return 'ChartLabelsMapper';
   }
 
