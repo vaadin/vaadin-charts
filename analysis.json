@@ -1522,9 +1522,9 @@
       "properties": [],
       "methods": [
         {
-          "name": "getClassName",
+          "name": "__getClassName",
           "description": "Because transpiled JS for IE11 doesn't handle instance.constructor.name properly",
-          "privacy": "public",
+          "privacy": "private",
           "sourceRange": {
             "start": {
               "line": 24,
@@ -1590,7 +1590,7 @@
               "column": 2
             },
             "end": {
-              "line": 49,
+              "line": 51,
               "column": 3
             }
           },
@@ -1607,11 +1607,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 51,
+              "line": 53,
               "column": 2
             },
             "end": {
-              "line": 54,
+              "line": 56,
               "column": 3
             }
           },
@@ -1631,11 +1631,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 56,
+              "line": 58,
               "column": 2
             },
             "end": {
-              "line": 65,
+              "line": 67,
               "column": 3
             }
           },
@@ -1656,7 +1656,7 @@
           "column": 0
         },
         "end": {
-          "line": 66,
+          "line": 68,
           "column": 1
         }
       },
