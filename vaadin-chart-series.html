@@ -87,7 +87,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (this.values) {
-            options.data = this.__computeData(this.values, this['value-labels']);
+            options.data = this.__computeData(this.values, this.__labelsMapper);
           }
 
           return options;
@@ -124,6 +124,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              */
             'value-labels': {
               type: ChartLabelsMapper
+            },
+
+            /*
+             * Internal value-labels representation so that the original property/attribute set
+             * on value-labels can be preserved.
+             */
+            '__labelsMapper': {
+              type: ChartLabelsMapper,
+              value: new ChartLabelsMapper([])
             },
 
             /**
@@ -184,30 +193,33 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __valuesObserver() {
           if (this.__hasSeriesConfig()) {
-            this._series.setData(this.__computeData(this.values, this['value-labels']));
+            this._series.setData(this.__computeData(this.values, this.__labelsMapper));
           }
         }
 
         _deserializeValue(value, type) {
           if (type == ChartLabelsMapper) {
-            return new ChartLabelsMapper(value);
-          } else {
-            return super._deserializeValue(value, type);
+            return value;
           }
+
+          return super._deserializeValue(value, type);
         }
 
         __labelsObserver(changeRecord, values) {
+          const currentLabels = this['value-labels'] || [];
+          if (!currentLabels.__getClassName || currentLabels.__getClassName() !== 'ChartLabelsMapper') {
+            this.__labelsMapper = new ChartLabelsMapper(currentLabels);
+          } else {
+            this.__labelsMapper = currentLabels;
+          }
+
           if (this.__hasSeriesConfig()) {
-            this._series.setData(this.__computeData(values, this['value-labels']));
+            this._series.setData(this.__computeData(values));
           }
         }
 
-        __computeData(values, labels) {
-          let currentLabels = labels || [];
-          if (!currentLabels.__getClassName || currentLabels.__getClassName() !== 'ChartLabelsMapper') {
-            currentLabels = new ChartLabelsMapper(currentLabels);
-          }
-          return currentLabels.map(values);
+        __computeData(values) {
+          return this.__labelsMapper.map(values);
         }
 
         __typeObserver() {
