@@ -21,6 +21,11 @@ class ChartLabelsMapper {
     }
   }
 
+  // Because transpiled JS for IE11 doesn't handle instance.constructor.name properly
+  getClassName() {
+    return 'ChartLabelsMapper';
+  }
+
   __isFunction(value) {
     return value && {}.toString.call(value) === '[object Function]';
   }
