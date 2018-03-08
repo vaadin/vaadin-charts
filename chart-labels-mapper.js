@@ -7,17 +7,17 @@ class ChartLabelsMapper {
       try {
         this.__tryPassFunction(value);
       } catch (ex) {
-        this.__tryPassArrayOrObject(JSON.parse(value));
+        try {
+          this.__tryPassArrayOrObject(JSON.parse(value));
+        } catch (parseEx) {
+          console.warn(`VaadinChartSeries::ChartLabelsMapper: couldn't decode JSON attribute: ${value}`);
+          this.__assignMapper([], 'array'); // Pass-through.
+        }
       }
-    } else if (Array.isArray(value)) {
-      this.__assignMapper(value, 'array');
     } else if (this.__isFunction(value)) {
       this.__assignMapper(value, 'function');
-    } else if (typeof value === 'object') {
-      this.__assignMapper(value, 'object');
     } else {
-      throw new SyntaxError(`Unrecognized mapper type: ${typeof value}. 
-      Supported types are Array, Object, Function or a string representation of the aforementioned.`);
+      this.__tryPassArrayOrObject(value);
     }
   }
 
@@ -45,7 +45,9 @@ class ChartLabelsMapper {
     } else if (typeof value === 'object') {
       this.__assignMapper(value, 'object');
     } else {
-      throw new SyntaxError('Error parsing mapping property');
+      console.warn(`VaadinChartSeries::ChartLabelsMapper: unsupported type for mapping property: 
+      ${typeof value} - ${value}. Will use the pass-through mapper instead`);
+      this.__assignMapper([], 'array'); // Pass-through.
     }
   }
 

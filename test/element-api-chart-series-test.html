@@ -192,7 +192,8 @@
 
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach(e => expect(e.name).to.equal(labelsAsObject[e.y] || e.y));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(
+            firstSeries.data.map(e => labelsAsObject[e.y] || e.y));
           done();
         }, 50);
       });
@@ -204,7 +205,8 @@
 
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach(e => expect(e.name).to.equal(labelsAsObject[e.y] || e.y));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(
+            firstSeries.data.map(e => labelsAsObject[e.y] || e.y));
           done();
         }, 70);
       });
@@ -214,7 +216,8 @@
         element.labels = labelsAsFunction;
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach(e => expect(e.name).to.equal(e.y + 'AAA'));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(
+            firstSeries.data.map(e => e.y + 'AAA'));
           done();
         }, 50);
       });
@@ -224,7 +227,8 @@
         series.setAttribute('value-labels', labelsAsFunctionString);
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach(e => expect(e.name).to.equal(e.y + 'BBB'));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(
+            firstSeries.data.map(e => e.y + 'BBB'));
           done();
         }, 70);
       });
@@ -234,7 +238,7 @@
         element.labels = labelsAsArray;
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach((e, index) => expect(e.name).to.equal(labelsAsArray[index]));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(labelsAsArray);
           done();
         }, 50);
       });
@@ -245,7 +249,7 @@
         series.setAttribute('value-labels', labelsAsArrayString);
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          firstSeries.data.forEach((e, index) => expect(e.name).to.equal(labelsAsArray[index]));
+          expect(firstSeries.data.map(e => e.name)).to.deep.equal(labelsAsArray);
           done();
         }, 70);
       });
