@@ -123,7 +123,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * or mapping array shorter than the list of values), results in the actual value being used as the label.
              */
             'value-labels': {
-              type: ChartLabelsMapper
+              type: ChartLabelsMapper,
+              reflectToAttribute: true
             },
 
             /*
@@ -132,7 +133,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              */
             '__labelsMapper': {
               type: ChartLabelsMapper,
-              value: new ChartLabelsMapper([])
+              value: () => new ChartLabelsMapper([])
             },
 
             /**
@@ -199,18 +200,25 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         _deserializeValue(value, type) {
           if (type == ChartLabelsMapper) {
-            return value;
+            return new ChartLabelsMapper(value).mapper;
           }
 
           return super._deserializeValue(value, type);
         }
 
+        _serializeValue(value) {
+          if (value instanceof ChartLabelsMapper) {
+            return value.type === 'function' ? value.mapper.toString() : super._serializeValue(value.mapper);
+          }
+          return super._serializeValue(value);
+        }
+
         __labelsObserver(changeRecord, values) {
           const currentLabels = this['value-labels'] || [];
-          if (!currentLabels.__getClassName || currentLabels.__getClassName() !== 'ChartLabelsMapper') {
-            this.__labelsMapper = new ChartLabelsMapper(currentLabels);
-          } else {
+          if (currentLabels instanceof ChartLabelsMapper) {
             this.__labelsMapper = currentLabels;
+          } else {
+            this.__labelsMapper = new ChartLabelsMapper(currentLabels);
           }
 
           if (this.__hasSeriesConfig()) {
