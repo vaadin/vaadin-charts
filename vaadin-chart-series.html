@@ -198,6 +198,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
+        /** @private */
         _deserializeValue(value, type) {
           if (type == ChartLabelsMapper) {
             return new ChartLabelsMapper(value).mapper;
@@ -206,6 +207,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return super._deserializeValue(value, type);
         }
 
+        /** @private */
         _serializeValue(value) {
           if (value instanceof ChartLabelsMapper) {
             return value.type === 'function' ? value.mapper.toString() : super._serializeValue(value.mapper);
