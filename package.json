@@ -42,8 +42,5 @@
     "stylelint-config-vaadin": "latest",
     "web-component-tester": "^6.1.5",
     "yargs": "latest"
-  },
-  "dependencies": {
-    "npm": "^5.7.1"
   }
 }
