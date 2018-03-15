@@ -1,6 +1,6 @@
 {
   "name": "vaadin-charts",
-  "version": "6.1.0-alpha1",
+  "version": "6.1.0-alpha2",
   "description": "vaadin-charts",
   "main": "vaadin-chart.html",
   "repository": "vaadin/vaadin-charts",
@@ -42,5 +42,8 @@
     "stylelint-config-vaadin": "latest",
     "web-component-tester": "^6.1.5",
     "yargs": "latest"
+  },
+  "dependencies": {
+    "npm": "^5.7.1"
   }
 }
