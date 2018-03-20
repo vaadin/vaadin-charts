@@ -32,7 +32,8 @@
       it('data label connectors should have no fill', function(done) {
         setTimeout(function() {
           const connectors = Array.from(chart.querySelectorAll('.highcharts-data-label-connector'));
-          connectors.forEach(connector => expect(connector.fill).to.be.undefined);
+          expect(connectors).to.have.lengthOf(5);
+          connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));
           done();
         }, 20);
       });
