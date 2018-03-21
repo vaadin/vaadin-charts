@@ -29,19 +29,22 @@
 
 
       it('data label connectors should have no fill', function(done) {
-        chart.update({
-          series: [{
-            type: 'pie',
-            data: [29.9, 71.5, 50]
-          }]
-        });
-        setTimeout(function() {
+        const check = () => {
           const chartContainer = chart.$.chart;
           const connectors = Array.from(chartContainer.querySelectorAll('.highcharts-data-label-connector'));
           expect(connectors).to.have.lengthOf(3);
           connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));
           done();
-        }, 20);
+        };
+        chart.update({
+          series: [{
+            type: 'pie',
+            data: [29.9, 71.5, 50],
+            events: {
+              afterAnimate: check
+            }
+          }]
+        });
       });
 
 
