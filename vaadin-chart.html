@@ -741,6 +741,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             this.__inflateFunctions(this._jsonConfigurationBuffer);
             if (!this._dirty || resetConfiguration) {
+              if (!this.$) {
+                this.connectedCallback();
+              }
+
               const initialOptions = Object.assign({}, this.options, this._jsonConfigurationBuffer);
 
               this.__initChart(initialOptions);
