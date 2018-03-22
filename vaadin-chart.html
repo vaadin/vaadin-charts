@@ -721,16 +721,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             this._jsonConfigurationBuffer = {};
           }
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, jsonConfiguration);
+          if (this._jsonConfigurationBuffer) {
+            this.__inflateFunctions(this._jsonConfigurationBuffer);
+          }
 
           Polymer.RenderStatus.beforeNextRender(this, () => {
-
-            if (!this._jsonConfigurationBuffer) {
-              return;
-            }
-
-            this.__inflateFunctions(this._jsonConfigurationBuffer);
-
-            if (!this.configuration) {
+            if (!this.configuration || !this._jsonConfigurationBuffer) {
               return;
             }
 
