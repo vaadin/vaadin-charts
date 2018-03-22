@@ -118,7 +118,7 @@
         const unattachedChart = document.createElement('vaadin-chart');
         unattachedChart.update({title: {text: 'Awesome chart'}});
         setTimeout(() => {
-          testContainer.append(unattachedChart);
+          testContainer.appendChild(unattachedChart);
 
           setTimeout(() => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
@@ -142,25 +142,25 @@
       it('should not reset configuration when attached to new parent', function(done) {
         const div1 = document.createElement('div1');
         div1['id'] = 'div1';
-        testContainer.append(div1);
+        testContainer.appendChild(div1);
 
         const div2 = document.createElement('div2');
         div2['id'] = 'div2';
-        testContainer.append(div2);
+        testContainer.appendChild(div2);
 
 
         const floatingChart = document.createElement('vaadin-chart');
         floatingChart.update({title: {text: 'Awesome title'}});
 
         setTimeout(() => {
-          div1.append(floatingChart);
+          div1.appendChild(floatingChart);
 
           setTimeout(() => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
 
             div1.removeChild(floatingChart);
             floatingChart.update({subtitle: {text: 'Awesome subtitle'}});
-            div2.append(floatingChart);
+            div2.appendChild(floatingChart);
 
             setTimeout(() => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
@@ -180,7 +180,7 @@
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        }, 20);
+        }, 50);
       });
 
       it('should inflate function body strings', function(done) {
@@ -190,7 +190,7 @@
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        });
+        }, 50);
       });
 
       it('should inflate empty function strings', function(done) {
@@ -200,7 +200,7 @@
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        });
+        }, 50);
       });
     });
   </script>
