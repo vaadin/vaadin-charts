@@ -33,8 +33,8 @@
         <wc-api-demo></wc-api-demo>
         <dom-module id="wc-api-demo">
           <template>
-            <vaadin-chart timeline id="mychart" title="Custom Title" subtitle="Custom Subtitle">
-              <vaadin-chart-series type="candlestick" values="{{data}}"></vaadin-chart-series>
+            <vaadin-chart timeline id="mychart" title="Custom Title - TIMELINE" subtitle="Custom Subtitle">
+              <!-- <vaadin-chart-series type="candlestick" values="{{data}}"></vaadin-chart-series> -->
             </vaadin-chart>
             <button on-click="_addSeries">Add series</button>
             <button on-click="_addMultipleSeries">Add multiple series</button>
@@ -534,7 +534,7 @@
                         ]
                     }
                 }]
-                }, true)
+                })
               }
 
               _removeSeries() {
