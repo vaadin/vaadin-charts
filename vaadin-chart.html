@@ -363,7 +363,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
+            // Detect if the chart had already been initialized. This might happen in
+            // environments where the chart is lazily attached (e.g Grid).
+            if (this._configuration) {
+              this.__reflow();
+              return;
+            }
+
             let options = Object.assign({}, this.options);
+            // Merge buffer if there are pending changes
             if (this._jsonConfigurationBuffer) {
               options = Object.assign(options, this._jsonConfigurationBuffer);
             }
