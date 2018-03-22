@@ -363,14 +363,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.connectedCallback();
           this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
-            // Detect if the chart had already been initialized. This might happen in
-            // environments where the chart is lazily attached (e.g Grid).
-            // if (this._configuration) {
-            //   this.__reflow();
-            //   return;
-            // }
-            // const options = Object.assign({}, this.options);
-            const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
+            let options = Object.assign({}, this.options);
+            if (this._jsonConfigurationBuffer) {
+              options = Object.assign(options, this._jsonConfigurationBuffer);
+            }
             this.__initChart(options);
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
@@ -742,7 +738,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             this.__inflateFunctions(this._jsonConfigurationBuffer);
 
-            if (!this.$) {
+            if (!this._configuration) {
               return;
             }
 
