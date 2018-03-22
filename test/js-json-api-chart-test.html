@@ -38,6 +38,14 @@
               }]
             });
           }
+
+          appendChildElement(parent, child) {
+            if (parent.append) {
+              parent.append(child);
+            } else {
+              parent.appendChild(child);
+            }
+          }
         }
 
         customElements.define(JSJSONApiDemoElement.is, JSJSONApiDemoElement);
@@ -118,14 +126,14 @@
         const unattachedChart = document.createElement('vaadin-chart');
         unattachedChart.update({title: {text: 'Awesome chart'}});
         setTimeout(() => {
-          testContainer.appendChild(unattachedChart);
+
+          testContainer.appendChildElement(testContainer, unattachedChart);
 
           setTimeout(() => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
             testContainer.removeChild(unattachedChart);
+            done();
           }, 80);
-
-          done();
         }, 20);
       });
 
@@ -142,34 +150,32 @@
       it('should not reset configuration when attached to new parent', function(done) {
         const div1 = document.createElement('div1');
         div1['id'] = 'div1';
-        testContainer.appendChild(div1);
+        testContainer.appendChildElement(testContainer, div1);
 
         const div2 = document.createElement('div2');
         div2['id'] = 'div2';
-        testContainer.appendChild(div2);
-
+        testContainer.appendChildElement(testContainer, div2);
 
         const floatingChart = document.createElement('vaadin-chart');
         floatingChart.update({title: {text: 'Awesome title'}});
 
         setTimeout(() => {
-          div1.appendChild(floatingChart);
+          testContainer.appendChildElement(div1, floatingChart);
 
           setTimeout(() => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
 
             div1.removeChild(floatingChart);
             floatingChart.update({subtitle: {text: 'Awesome subtitle'}});
-            div2.appendChild(floatingChart);
+            testContainer.appendChildElement(div2, floatingChart);
 
             setTimeout(() => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
               expect(floatingChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('Awesome subtitle');
               div2.removeChild(floatingChart);
-            }, 50);
-          }, 50);
-
-          done();
+              done();
+            }, 100);
+          }, 100);
         }, 20);
       });
 
