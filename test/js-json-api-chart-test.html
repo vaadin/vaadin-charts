@@ -11,6 +11,7 @@
   <dom-module id="js-json-api-demo">
     <template>
       <vaadin-chart id="mychart"></vaadin-chart>
+      <vaadin-chart id="htmlChart" subtitle="My subtitle"></vaadin-chart>
     </template>
 
     <script>
@@ -47,13 +48,14 @@
 
   <script>
     describe('Basic JS API chart', function() {
+      var testContainer;
       var chart;
       var chartContainer;
 
       before(function(done) {
         HTMLImports.whenReady(() => {
-          const el = document.querySelector('js-json-api-demo');
-          chart = el.$.mychart;
+          testContainer = document.querySelector('js-json-api-demo');
+          chart = testContainer.$.mychart;
           chartContainer = chart.$.chart;
           done();
         });
@@ -68,14 +70,14 @@
 
       it('should have custom title', function(done) {
         setTimeout(function() {
-          expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
+          expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
         });
       });
 
       it('should not have credits by default', function(done) {
         setTimeout(function() {
-          expect(chart.$.chart.querySelector('.highcharts-credits')).to.be.null;
+          expect(chartContainer.querySelector('.highcharts-credits')).to.be.null;
           done();
         });
       });
@@ -107,9 +109,68 @@
         Polymer.flush();
 
         setTimeout(function() {
-          expect(chart.$.chart.querySelector('.highcharts-title')).to.be.null;
+          expect(chartContainer.querySelector('.highcharts-title')).to.be.null;
           done();
         }, 150);
+      });
+
+      it('should work if configured before connect', function(done) {
+        const unattachedChart = document.createElement('vaadin-chart');
+        unattachedChart.update({title: {text: 'Awesome chart'}});
+        setTimeout(() => {
+          testContainer.append(unattachedChart);
+
+          setTimeout(() => {
+            expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
+            testContainer.removeChild(unattachedChart);
+          }, 80);
+
+          done();
+        }, 20);
+      });
+
+      it('should not reset chart configured with html', function(done) {
+        const htmlChart = testContainer.$.htmlChart;
+        htmlChart.update({title: {text: 'Awesome chart'}});
+        setTimeout(() => {
+          expect(htmlChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
+          expect(htmlChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('My subtitle');
+          done();
+        }, 70);
+      });
+
+      it('should not reset configuration when attached to new parent', function(done) {
+        const div1 = document.createElement('div1');
+        div1['id'] = 'div1';
+        testContainer.append(div1);
+
+        const div2 = document.createElement('div2');
+        div2['id'] = 'div2';
+        testContainer.append(div2);
+
+
+        const floatingChart = document.createElement('vaadin-chart');
+        floatingChart.update({title: {text: 'Awesome title'}});
+
+        setTimeout(() => {
+          div1.append(floatingChart);
+
+          setTimeout(() => {
+            expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
+
+            div1.removeChild(floatingChart);
+            floatingChart.update({subtitle: {text: 'Awesome subtitle'}});
+            div2.append(floatingChart);
+
+            setTimeout(() => {
+              expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
+              expect(floatingChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('Awesome subtitle');
+              div2.removeChild(floatingChart);
+            }, 50);
+          }, 50);
+
+          done();
+        }, 20);
       });
 
       it('should inflate whole function strings', function(done) {
