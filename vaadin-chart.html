@@ -365,11 +365,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.beforeNextRender(this, () => {
             // Detect if the chart had already been initialized. This might happen in
             // environments where the chart is lazily attached (e.g Grid).
-            if (this._configuration) {
-              this.__reflow();
-              return;
-            }
-            const options = Object.assign({}, this.options);
+            // if (this._configuration) {
+            //   this.__reflow();
+            //   return;
+            // }
+            // const options = Object.assign({}, this.options);
+            const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
             this.__initChart(options);
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
@@ -740,11 +741,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
 
             this.__inflateFunctions(this._jsonConfigurationBuffer);
-            if (!this._dirty || resetConfiguration) {
-              if (!this.$) {
-                this.connectedCallback();
-              }
 
+            if (!this.$) {
+              return;
+            }
+
+            if (!this._dirty || resetConfiguration) {
               const initialOptions = Object.assign({}, this.options, this._jsonConfigurationBuffer);
 
               this.__initChart(initialOptions);
