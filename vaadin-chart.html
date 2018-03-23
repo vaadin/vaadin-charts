@@ -754,11 +754,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               return;
             }
 
-            // Make sure to have at least one xAxis defined
-            if (!this._jsonConfigurationBuffer.xAxis || this._jsonConfigurationBuffer.xAxis.length === 0) {
-              this._jsonConfigurationBuffer.xAxis = {};
-            }
-
             this.__inflateFunctions(this._jsonConfigurationBuffer);
             if (!this._dirty || resetConfiguration) {
               const initialOptions = Object.assign({}, this.options, this._jsonConfigurationBuffer);
