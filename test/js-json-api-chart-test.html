@@ -147,35 +147,35 @@
         }, 70);
       });
 
-      it('should not reset configuration when attached to new parent', function(done) {
-        const div1 = document.createElement('div1');
-        div1['id'] = 'div1';
+      it('should not reset configuration when attached to a new parent', function(done) {
+        const div1 = document.createElement('div');
         testContainer.appendChildElement(testContainer, div1);
 
-        const div2 = document.createElement('div2');
-        div2['id'] = 'div2';
+        const div2 = document.createElement('div');
         testContainer.appendChildElement(testContainer, div2);
 
         const floatingChart = document.createElement('vaadin-chart');
-        floatingChart.update({title: {text: 'Awesome title'}});
+        floatingChart.update({title: {text: 'Awesome title'}, credits: {enabled: false}});
 
         setTimeout(() => {
           testContainer.appendChildElement(div1, floatingChart);
 
           setTimeout(() => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
+            expect(floatingChart.$.chart.querySelector('.highcharts-credits')).to.be.null;
 
             div1.removeChild(floatingChart);
-            floatingChart.update({subtitle: {text: 'Awesome subtitle'}});
+            floatingChart.update({subtitle: {text: 'Awesome subtitle'}, credits: {enabled: true, text: 'Vaadin'}});
             testContainer.appendChildElement(div2, floatingChart);
 
             setTimeout(() => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
               expect(floatingChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('Awesome subtitle');
+              expect(floatingChart.$.chart.querySelector('.highcharts-credits').textContent).to.equal('Vaadin');
               div2.removeChild(floatingChart);
               done();
-            }, 100);
-          }, 100);
+            }, 70);
+          }, 70);
         }, 20);
       });
 
