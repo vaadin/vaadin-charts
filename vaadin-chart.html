@@ -367,11 +367,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               return;
             }
 
-            let options = Object.assign({}, this.options);
-            // Merge buffer if there are pending changes
-            if (this._jsonConfigurationBuffer) {
-              options = Object.assign(options, this._jsonConfigurationBuffer);
-            }
+            const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
             this.__initChart(options);
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
