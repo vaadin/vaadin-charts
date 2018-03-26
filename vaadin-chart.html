@@ -720,9 +720,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           const configCopy = this.__deepMerge({}, jsonConfiguration);
           this.__inflateFunctions(configCopy);
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
-          if (this._jsonConfigurationBuffer) {
-            this.__inflateFunctions(this._jsonConfigurationBuffer);
-          }
 
           Polymer.RenderStatus.beforeNextRender(this, () => {
             if (!this.configuration || !this._jsonConfigurationBuffer) {
