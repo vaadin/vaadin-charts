@@ -368,6 +368,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
 
             const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
+            this._jsonConfigurationBuffer = null;
             this.__initChart(options);
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
@@ -716,7 +717,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (resetConfiguration || !this._jsonConfigurationBuffer) {
             this._jsonConfigurationBuffer = {};
           }
-          this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, jsonConfiguration);
+          const configCopy = this.__deepMerge({}, jsonConfiguration);
+          this.__inflateFunctions(configCopy);
+          this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
           if (this._jsonConfigurationBuffer) {
             this.__inflateFunctions(this._jsonConfigurationBuffer);
           }
