@@ -1440,12 +1440,6 @@
           "events": [
             {
               "type": "CustomEvent",
-              "name": "axis-extremes",
-              "description": "axis-extremes  Fired when when the minimum and maximum is set for the axis",
-              "metadata": {}
-            },
-            {
-              "type": "CustomEvent",
               "name": "chart-add-series",
               "description": "chart-add-series  Fired when a new series is added",
               "metadata": {}
@@ -1598,6 +1592,12 @@
               "type": "CustomEvent",
               "name": "series-show",
               "description": "series-show  Fired when the series is show after chart generation time",
+              "metadata": {}
+            },
+            {
+              "type": "CustomEvent",
+              "name": "xaxis-extremes",
+              "description": "xaxis-extremes  Fired when when the minimum and maximum is set for the axis",
               "metadata": {}
             }
           ],
