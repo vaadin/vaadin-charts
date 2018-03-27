@@ -1599,14 +1599,14 @@
             },
             {
               "type": "CustomEvent",
-              "name": "xaxis-extremes",
-              "description": "xaxis-extremes  Fired when when the minimum and maximum is set for the x axis",
+              "name": "xaxis-set-extremes",
+              "description": "xaxis-set-extremes  Fired when when the minimum and maximum is set for the x axis",
               "metadata": {}
             },
             {
               "type": "CustomEvent",
-              "name": "yaxis-extremes",
-              "description": "yaxis-extremes  Fired when when the minimum and maximum is set for the y axis",
+              "name": "yaxis-set-extremes",
+              "description": "yaxis-set-extremes  Fired when when the minimum and maximum is set for the y axis",
               "metadata": {}
             }
           ],
