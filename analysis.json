@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "vaadin-chart.html",
         "start": {
-          "line": 1044,
+          "line": 1068,
           "column": 6
         },
         "end": {
-          "line": 1044,
+          "line": 1068,
           "column": 48
         }
       },
@@ -212,37 +212,37 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 336,
-                  "column": 10
-                },
-                "end": {
-                  "line": 336,
-                  "column": 29
-                }
-              },
-              "metadata": {
-                "polymer": {
-                  "readOnly": false
-                }
-              }
-            },
-            {
-              "name": "_configuration",
-              "type": "Object",
-              "description": "",
-              "privacy": "private",
-              "sourceRange": {
-                "start": {
-                  "line": 260,
+                  "line": 281,
                   "column": 12
                 },
                 "end": {
-                  "line": 260,
-                  "column": 34
+                  "line": 281,
+                  "column": 35
                 }
               },
               "metadata": {
                 "polymer": {}
+              }
+            },
+            {
+              "name": "categories",
+              "type": "Object",
+              "description": "If categories are present names are used instead of numbers for the category axis.\nThe format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`\nor a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 288,
+                  "column": 12
+                },
+                "end": {
+                  "line": 292,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"__updateCategories\""
+                }
               }
             },
             {
@@ -252,11 +252,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 265,
+                  "line": 297,
                   "column": 12
                 },
                 "end": {
-                  "line": 268,
+                  "line": 300,
                   "column": 13
                 }
               },
@@ -271,11 +271,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 273,
+                  "line": 305,
                   "column": 12
                 },
                 "end": {
-                  "line": 277,
+                  "line": 309,
                   "column": 13
                 }
               },
@@ -292,11 +292,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 282,
+                  "line": 314,
                   "column": 12
                 },
                 "end": {
-                  "line": 286,
+                  "line": 318,
                   "column": 13
                 }
               },
@@ -314,11 +314,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 342,
+                  "line": 350,
                   "column": 8
                 },
                 "end": {
-                  "line": 352,
+                  "line": 368,
                   "column": 9
                 }
               },
@@ -331,11 +331,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 618,
+                  "line": 621,
                   "column": 8
                 },
                 "end": {
-                  "line": 625,
+                  "line": 628,
                   "column": 9
                 }
               },
@@ -348,11 +348,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 627,
+                  "line": 630,
                   "column": 8
                 },
                 "end": {
-                  "line": 634,
+                  "line": 637,
                   "column": 9
                 }
               },
@@ -365,11 +365,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 636,
+                  "line": 639,
                   "column": 8
                 },
                 "end": {
-                  "line": 642,
+                  "line": 645,
                   "column": 9
                 }
               },
@@ -382,11 +382,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 644,
+                  "line": 647,
                   "column": 8
                 },
                 "end": {
-                  "line": 646,
+                  "line": 649,
                   "column": 9
                 }
               },
@@ -403,11 +403,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 648,
+                  "line": 651,
                   "column": 8
                 },
                 "end": {
-                  "line": 662,
+                  "line": 665,
                   "column": 9
                 }
               },
@@ -424,11 +424,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 664,
+                  "line": 667,
                   "column": 8
                 },
                 "end": {
-                  "line": 666,
+                  "line": 669,
                   "column": 9
                 }
               },
@@ -445,11 +445,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 668,
+                  "line": 671,
                   "column": 8
                 },
                 "end": {
-                  "line": 677,
+                  "line": 680,
                   "column": 9
                 }
               },
@@ -466,11 +466,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 680,
+                  "line": 683,
                   "column": 8
                 },
                 "end": {
-                  "line": 684,
+                  "line": 687,
                   "column": 9
                 }
               },
@@ -483,11 +483,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 721,
+                  "line": 724,
                   "column": 8
                 },
                 "end": {
-                  "line": 759,
+                  "line": 761,
                   "column": 9
                 }
               },
@@ -511,11 +511,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 761,
+                  "line": 763,
                   "column": 8
                 },
                 "end": {
-                  "line": 770,
+                  "line": 772,
                   "column": 9
                 }
               },
@@ -535,11 +535,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 772,
+                  "line": 774,
                   "column": 8
                 },
                 "end": {
-                  "line": 787,
+                  "line": 789,
                   "column": 9
                 }
               },
@@ -562,11 +562,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 789,
+                  "line": 791,
                   "column": 8
                 },
                 "end": {
-                  "line": 805,
+                  "line": 807,
                   "column": 9
                 }
               },
@@ -583,11 +583,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 807,
+                  "line": 809,
                   "column": 8
                 },
                 "end": {
-                  "line": 813,
+                  "line": 815,
                   "column": 9
                 }
               },
@@ -604,11 +604,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 815,
+                  "line": 817,
                   "column": 8
                 },
                 "end": {
-                  "line": 817,
+                  "line": 819,
                   "column": 9
                 }
               },
@@ -625,11 +625,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 819,
+                  "line": 821,
                   "column": 8
                 },
                 "end": {
-                  "line": 821,
+                  "line": 823,
                   "column": 9
                 }
               },
@@ -646,11 +646,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 823,
+                  "line": 825,
                   "column": 8
                 },
                 "end": {
-                  "line": 825,
+                  "line": 827,
                   "column": 9
                 }
               },
@@ -667,11 +667,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 827,
+                  "line": 829,
                   "column": 8
                 },
                 "end": {
-                  "line": 843,
+                  "line": 845,
                   "column": 9
                 }
               },
@@ -691,11 +691,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 845,
+                  "line": 847,
                   "column": 8
                 },
                 "end": {
-                  "line": 891,
+                  "line": 893,
                   "column": 9
                 }
               },
@@ -721,11 +721,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 893,
+                  "line": 895,
                   "column": 8
                 },
                 "end": {
-                  "line": 903,
+                  "line": 905,
                   "column": 9
                 }
               },
@@ -745,11 +745,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 905,
+                  "line": 907,
                   "column": 8
                 },
                 "end": {
-                  "line": 911,
+                  "line": 913,
                   "column": 9
                 }
               },
@@ -766,11 +766,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 913,
+                  "line": 915,
                   "column": 8
                 },
                 "end": {
-                  "line": 926,
+                  "line": 928,
                   "column": 9
                 }
               },
@@ -790,11 +790,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 928,
+                  "line": 930,
                   "column": 8
                 },
                 "end": {
-                  "line": 936,
+                  "line": 938,
                   "column": 9
                 }
               },
@@ -811,11 +811,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 938,
+                  "line": 940,
                   "column": 8
                 },
                 "end": {
-                  "line": 945,
+                  "line": 947,
                   "column": 9
                 }
               },
@@ -835,11 +835,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 947,
+                  "line": 949,
                   "column": 8
                 },
                 "end": {
-                  "line": 955,
+                  "line": 957,
                   "column": 9
                 }
               },
@@ -856,11 +856,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 957,
+                  "line": 959,
                   "column": 8
                 },
                 "end": {
-                  "line": 969,
+                  "line": 971,
                   "column": 9
                 }
               },
@@ -872,16 +872,61 @@
               ]
             },
             {
+              "name": "__isObject",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 973,
+                  "column": 8
+                },
+                "end": {
+                  "line": 975,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "item"
+                }
+              ]
+            },
+            {
+              "name": "__deepMerge",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 977,
+                  "column": 8
+                },
+                "end": {
+                  "line": 993,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "target"
+                },
+                {
+                  "name": "source"
+                }
+              ]
+            },
+            {
               "name": "__callChartFunction",
               "description": "",
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 971,
+                  "line": 995,
                   "column": 8
                 },
                 "end": {
-                  "line": 979,
+                  "line": 1003,
                   "column": 9
                 }
               },
@@ -898,11 +943,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 981,
+                  "line": 1005,
                   "column": 8
                 },
                 "end": {
-                  "line": 990,
+                  "line": 1014,
                   "column": 9
                 }
               },
@@ -922,11 +967,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 992,
+                  "line": 1016,
                   "column": 8
                 },
                 "end": {
-                  "line": 1025,
+                  "line": 1049,
                   "column": 9
                 }
               },
@@ -949,11 +994,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1027,
+                  "line": 1051,
                   "column": 8
                 },
                 "end": {
-                  "line": 1036,
+                  "line": 1060,
                   "column": 9
                 }
               },
@@ -985,7 +1030,7 @@
               "column": 6
             },
             "end": {
-              "line": 1037,
+              "line": 1061,
               "column": 7
             }
           },
@@ -994,15 +1039,47 @@
           "name": "Vaadin.ChartElement",
           "attributes": [
             {
+              "name": "configuration",
+              "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
+              "sourceRange": {
+                "start": {
+                  "line": 281,
+                  "column": 12
+                },
+                "end": {
+                  "line": 281,
+                  "column": 35
+                }
+              },
+              "metadata": {},
+              "type": "Object"
+            },
+            {
+              "name": "categories",
+              "description": "If categories are present names are used instead of numbers for the category axis.\nThe format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`\nor a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.",
+              "sourceRange": {
+                "start": {
+                  "line": 288,
+                  "column": 12
+                },
+                "end": {
+                  "line": 292,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "type": "Object"
+            },
+            {
               "name": "timeline",
               "description": "Specifies whether the chart is a normal chart or a timeline chart.",
               "sourceRange": {
                 "start": {
-                  "line": 265,
+                  "line": 297,
                   "column": 12
                 },
                 "end": {
-                  "line": 268,
+                  "line": 300,
                   "column": 13
                 }
               },
@@ -1014,11 +1091,11 @@
               "description": "Represents the title of the chart.",
               "sourceRange": {
                 "start": {
-                  "line": 273,
+                  "line": 305,
                   "column": 12
                 },
                 "end": {
-                  "line": 277,
+                  "line": 309,
                   "column": 13
                 }
               },
@@ -1030,11 +1107,11 @@
               "description": "Represents the subtitle of the chart.",
               "sourceRange": {
                 "start": {
-                  "line": 282,
+                  "line": 314,
                   "column": 12
                 },
                 "end": {
-                  "line": 286,
+                  "line": 318,
                   "column": 13
                 }
               },
