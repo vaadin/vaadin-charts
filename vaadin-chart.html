@@ -613,15 +613,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           };
         }
 
-        get __axisEventNames() {
+        get __xAxisEventNames() {
           return {
             /**
              *
-             * @event axis-extremes  Fired when when the minimum and maximum is set for the axis
+             * @event xaxis-extremes  Fired when when the minimum and maximum is set for the axis
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} axis Point object where the event was sent from
              */
-            setExtremes: 'axis-extremes',
+            afterSetExtremes: 'xaxis-extremes',
           };
         }
 
@@ -834,9 +834,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __initXAxisEventsListeners(configuration) {
           if (Array.isArray(configuration.xAxis)) {
-            configuration.xAxis.forEach(axis => this.__createEventListeners(this.__axisEventNames, axis, 'events', 'axis'));
+            configuration.xAxis.forEach(axis => this.__createEventListeners(this.__xAxisEventNames, axis, 'events', 'axis'));
           } else {
-            this.__createEventListeners(this.__axisEventNames, configuration.xAxis, 'events', 'axis');
+            this.__createEventListeners(this.__xAxisEventNames, configuration.xAxis, 'events', 'axis');
           }
         }
 
