@@ -303,6 +303,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
             title: {
               text: null
+            },
+            xAxis: {
+
+            },
+            yAxis: {
+
             }
           };
 
@@ -586,6 +592,30 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           };
         }
 
+        get __xAxesEventNames() {
+          return {
+            /**
+             *
+             * @event xaxes-extremes-set  Fired when when the minimum and maximum is set for the x axis
+             * @param {Object} detail.originalEvent object with details about the event sent
+             * @param {Object} axis Point object where the event was sent from
+             */
+            afterSetExtremes: 'xaxes-extremes-set',
+          };
+        }
+
+        get __yAxesEventNames() {
+          return {
+            /**
+             *
+             * @event yaxes-extremes-set  Fired when when the minimum and maximum is set for the y axis
+             * @param {Object} detail.originalEvent object with details about the event sent
+             * @param {Object} axis Point object where the event was sent from
+             */
+            afterSetExtremes: 'yaxes-extremes-set',
+          };
+        }
+
         __reflow() {
           if (!this.configuration) {
             return;
@@ -779,6 +809,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__initChartEventsListeners(configuration);
           this.__initSeriesEventsListeners(configuration);
           this.__initPointsEventsListeners(configuration);
+          this.__initAxisEventsListeners(configuration, true);
+          this.__initAxisEventsListeners(configuration, false);
         }
 
         __initChartEventsListeners(configuration) {
@@ -791,6 +823,24 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __initPointsEventsListeners(configuration) {
           this.__createEventListeners(this.__pointEventNames, configuration, 'plotOptions.series.point.events', 'point');
+        }
+
+        __initAxisEventsListeners(configuration, isXAxis) {
+          let eventNames, axes;
+
+          if (isXAxis) {
+            eventNames = this.__xAxesEventNames;
+            axes = configuration.xAxis;
+          } else {
+            eventNames = this.__yAxesEventNames;
+            axes = configuration.yAxis;
+          }
+
+          if (Array.isArray(axes)) {
+            axes.forEach(axis => this.__createEventListeners(eventNames, axis, 'events', 'axis'));
+          } else {
+            this.__createEventListeners(eventNames, axes, 'events', 'axis');
+          }
         }
 
         __createEventListeners(eventList, configuration, pathToAdd, eventType) {
