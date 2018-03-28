@@ -616,27 +616,27 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           };
         }
 
-        get __xAxisEventNames() {
+        get __xAxesEventNames() {
           return {
             /**
              *
-             * @event xaxis-set-extremes  Fired when when the minimum and maximum is set for the x axis
+             * @event xaxes-extremes-set  Fired when when the minimum and maximum is set for the x axis
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} axis Point object where the event was sent from
              */
-            afterSetExtremes: 'xaxis-set-extremes',
+            afterSetExtremes: 'xaxes-extremes-set',
           };
         }
 
-        get __yAxisEventNames() {
+        get __yAxesEventNames() {
           return {
             /**
              *
-             * @event yaxis-set-extremes  Fired when when the minimum and maximum is set for the y axis
+             * @event yaxes-extremes-set  Fired when when the minimum and maximum is set for the y axis
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} axis Point object where the event was sent from
              */
-            afterSetExtremes: 'yaxis-set-extremes',
+            afterSetExtremes: 'yaxes-extremes-set',
           };
         }
 
@@ -852,10 +852,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           let eventNames, axes;
 
           if (isXAxis) {
-            eventNames = this.__xAxisEventNames;
+            eventNames = this.__xAxesEventNames;
             axes = configuration.xAxis;
           } else {
-            eventNames = this.__yAxisEventNames;
+            eventNames = this.__yAxesEventNames;
             axes = configuration.yAxis;
           }
 

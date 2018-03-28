@@ -144,7 +144,7 @@
           done();
         }
 
-        timelineChart.addEventListener('xaxis-set-extremes', setExtremesListener);
+        timelineChart.addEventListener('xaxes-extremes-set', setExtremesListener);
         timelineChart.configuration.xAxis[0].setExtremes(minExtreme, maxExtreme);
       });
 
@@ -158,7 +158,7 @@
           done();
         }
 
-        timelineChart.addEventListener('yaxis-set-extremes', setExtremesListener);
+        timelineChart.addEventListener('yaxes-extremes-set', setExtremesListener);
         timelineChart.configuration.yAxis[0].setExtremes(minExtreme, maxExtreme);
       });
     });
