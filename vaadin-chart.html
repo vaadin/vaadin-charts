@@ -293,6 +293,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Specifies whether to show legend or not.
+             * Legend configuration can be set up via additional-options property
+             */
+            'legend': {
+              type: Boolean,
+              observer: '__showLegend',
+              reflectToAttribute: true
+            },
+
+            /**
              * Specifies whether the chart is a normal chart or a timeline chart.
              */
             'timeline': {
@@ -403,6 +413,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               categories: this.categories
             }];
           }
+
+          if (!options.legend) {
+            options.legend = {
+              enabled: this.legend
+            };
+          } else {
+            options.legend.enabled = this.legend;
+          }
+
 
           return options;
         }
@@ -976,6 +995,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__updateOrAddAxes([{
             categories: this.categories
           }], true);
+        }
+
+        __showLegend(newValue) {
+          if (!this.configuration) {
+            return;
+          }
+
+          if (this.configuration.legend) {
+            this.configuration.legend.update({enabled: newValue});
+          } else {
+            this.configuration.legend = {enabled: newValue};
+          }
         }
 
         __updateTitle(newValue) {
