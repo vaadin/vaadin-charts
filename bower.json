@@ -37,11 +37,11 @@
     "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^1.0.1"
   },
   "devDependencies": {
-    "elements-demo-resources": "^2.0.0",
     "iron-component-page": "^3.0.0",
     "iron-demo-helpers": "^2.0.0",
     "webcomponentsjs": "^1.0.0",
     "web-component-tester": "^6.1.5",
+    "vaadin-demo-helpers": "vaadin/vaadin-demo-helpers",
     "vaadin-board": "^2.0.0",
     "vaadin-grid": "4.1.7"
   }
