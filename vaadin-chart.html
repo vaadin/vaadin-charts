@@ -414,14 +414,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }];
           }
 
-          if (!options.legend) {
+          if (this['no-legend']) {
             options.legend = {
-              enabled: !this['no-legend']
+              enabled: false
             };
-          } else {
-            options.legend.enabled = !this['no-legend'];
           }
-
 
           return options;
         }
