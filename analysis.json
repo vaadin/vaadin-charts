@@ -498,9 +498,9 @@
               }
             },
             {
-              "name": "legend",
+              "name": "no-legend",
               "type": "boolean",
-              "description": "Specifies whether to show legend or not.\nLegend configuration can be set up via additional-options property",
+              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additional-options property",
               "privacy": "public",
               "sourceRange": {
                 "start": {
@@ -514,7 +514,7 @@
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__showLegend\""
+                  "observer": "\"__hideLegend\""
                 }
               }
             },
@@ -1139,7 +1139,7 @@
               "params": []
             },
             {
-              "name": "__showLegend",
+              "name": "__hideLegend",
               "description": "",
               "privacy": "private",
               "sourceRange": {
@@ -1418,8 +1418,8 @@
               "type": "Object"
             },
             {
-              "name": "legend",
-              "description": "Specifies whether to show legend or not.\nLegend configuration can be set up via additional-options property",
+              "name": "no-legend",
+              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additional-options property",
               "sourceRange": {
                 "start": {
                   "line": 298,
