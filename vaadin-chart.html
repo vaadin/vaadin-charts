@@ -293,12 +293,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
-             * Specifies whether to show legend or not.
+             * Specifies whether to hide legend or show.
              * Legend configuration can be set up via additional-options property
              */
-            'legend': {
+            'no-legend': {
               type: Boolean,
-              observer: '__showLegend',
+              observer: '__hideLegend',
               reflectToAttribute: true
             },
 
@@ -416,10 +416,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           if (!options.legend) {
             options.legend = {
-              enabled: this.legend
+              enabled: !this['no-legend']
             };
           } else {
-            options.legend.enabled = this.legend;
+            options.legend.enabled = !this['no-legend'];
           }
 
 
@@ -997,15 +997,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }], true);
         }
 
-        __showLegend(newValue) {
+        __hideLegend(newValue) {
           if (!this.configuration) {
             return;
           }
 
           if (this.configuration.legend) {
-            this.configuration.legend.update({enabled: newValue});
+            this.configuration.legend.update({enabled: !newValue});
           } else {
-            this.configuration.legend = {enabled: newValue};
+            this.configuration.legend = {enabled: !newValue};
           }
         }
 
