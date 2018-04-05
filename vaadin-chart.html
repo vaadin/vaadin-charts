@@ -678,6 +678,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this._childObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
               this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+              this.__cleanupAfterSeriesRemoved(info.removedNodes.filter(this.__filterSeriesNodes));
             });
           });
         }
@@ -692,18 +693,37 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
           const seriesNodes = Array.from(this.childNodes).filter(this.__filterSeriesNodes);
 
+          const yAxes = this.configuration.yAxis.reduce((acc, axis, index) => {
+            acc[axis.options.id || index] = axis;
+            return acc;
+          }, {});
+
           for (let i = 0, len = series.length; i < len; i++) {
             const seriesElement = series[i];
+            const {yAxis: unit} = seriesElement.options;
 
             const idxOnChildList = seriesNodes.indexOf(seriesElement);
+            if (unit && !yAxes[unit]) {
+              yAxes[unit] = this.addAxis({id: unit, title: {text: unit}});
+            }
+
             const seriesConfiguration = this.__updateOrAddSeriesInstance(seriesElement.options, idxOnChildList);
 
             seriesElement.setSeries(seriesConfiguration);
           }
+          this.removeAxisIfEmpty();
         }
 
         __isSeriesEmpty(series) {
           return series === null || series.length === 0;
+        }
+
+        __cleanupAfterSeriesRemoved(series) {
+          if (this.__isSeriesEmpty(series)) {
+            return;
+          }
+
+          this.removeAxisIfEmpty();
         }
 
         __initChart(options) {
@@ -722,6 +742,53 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           super.disconnectedCalllback();
           this.__mutationObserver.disconnect();
           this._childObserver.disconnect();
+        }
+
+        /**
+         * @private
+         * Search for axis with given `id`.
+         *
+         * @param {String} id contains the id that will be searched
+         * @param {Boolean} isXAxis indicates if it will remove x or y axes. Defaults to `false`.
+         */
+        getAxis(id, isXAxis) {
+          id = Number.parseInt(id) || id;
+          if (this.configuration) {
+            return (isXAxis
+              ? this.configuration.xAxis
+              : this.configuration.yAxis).find((axis) => axis.options.id === id);
+          }
+        }
+
+        /**
+         * @private
+         * Add an axis with given options
+         *
+         * @param {Object} options axis options
+         */
+        addAxis(options) {
+          if (this.configuration) {
+            this.__createEventListeners(this.__xAxesEventNames, options, 'events', 'axis');
+            return this.configuration.addAxis(options);
+          }
+        }
+
+        /**
+         * @private
+         * Iterates over axes (y or x) and removes whenever it doesn't contain any series
+         *
+         * @param {Boolean}  isXAxis indicates if it will remove x or y axes. Defaults to `false`.
+         */
+        removeAxisIfEmpty(isXAxis) {
+          if (this.configuration) {
+            (isXAxis
+              ? this.configuration.xAxis
+              : this.configuration.yAxis).forEach(axis => {
+              if (axis.series.length === 0) {
+                axis.remove();
+              }
+            });
+          }
         }
 
         /**

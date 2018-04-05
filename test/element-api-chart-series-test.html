@@ -11,7 +11,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
+        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" unit="{{firstUnit}}" value-labels="{{labels}}"></vaadin-chart-series>
       </vaadin-chart>
       <vaadin-chart id="additionalchart" additional-options='{"plotOptions": {"series": {"marker": {"enabled": false}}}}'>
         <vaadin-chart-series id="additional-series" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
@@ -41,6 +41,14 @@
               title: {
                 type: String,
                 value: 'series name'
+              },
+              firstUnit: {
+                type: String,
+                value: 'series-unit-1'
+              },
+              secondUnit: {
+                type: String,
+                value: 'series-unit-2'
               }
             };
           }
@@ -306,6 +314,46 @@
           expect(markersVisible(chartContainer)).to.be.false;
           done();
         }, 100);
+      });
+
+      it('should accept unit as string', function(done) {
+        const unit = element.firstUnit;
+        const yAxis = chart.configuration.yAxis[0];
+        setTimeout(function() {
+          expect(yAxis.options.id).to.be.equal(unit);
+          done();
+        }, 50);
+      });
+
+      it('should accept more than one unit', function(done) {
+        const unit = element.secondUnit;
+
+        const secondSeries = document.createElement('vaadin-chart-series');
+        secondSeries.setAttribute('values', '[20,30,40,50]');
+        secondSeries.setAttribute('unit', unit);
+        chart.appendChild(secondSeries);
+
+        setTimeout(function() {
+          expect(chart.configuration.yAxis).to.have.length(2);
+          const secondAxis = chart.configuration.yAxis[1];
+          expect(secondAxis.options.id).to.be.equal(unit);
+          done();
+        }, 20);
+      });
+
+      it('should make series goes to first y axis if no unit is defined', function(done) {
+        const unit = element.firstUnit;
+
+        const secondSeries = document.createElement('vaadin-chart-series');
+        secondSeries.setAttribute('values', '[20,30,40,50]');
+        chart.appendChild(secondSeries);
+
+        setTimeout(function() {
+          expect(chart.configuration.yAxis).to.have.length(1);
+          const secondAxis = chart.configuration.yAxis[0];
+          expect(secondAxis.options.id).to.be.equal(unit);
+          done();
+        }, 20);
       });
     });
   </script>
