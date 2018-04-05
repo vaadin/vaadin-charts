@@ -93,17 +93,17 @@
         }, 50);
       });
 
-      it('should enable legend', done => {
-        expect(element.$.chart.querySelector('.highcharts-legend')).to.be.null;
-        element.setAttribute('legend', true);
+      it('should hide legend', done => {
+        expect(element.$.chart.querySelector('.highcharts-legend')).to.not.be.null;
+        element.setAttribute('no-legend', true);
         setTimeout(() => {
-          expect(element.$.chart.querySelector('.highcharts-legend')).to.not.be.null;
+          expect(element.$.chart.querySelector('.highcharts-legend')).to.be.null;
           done();
         }, 50);
       });
 
       it('should apply legend config via additional-options', done => {
-        element.setAttribute('legend', true);
+        element.removeAttribute('no-legend');
         setTimeout(() => {
           const legendTitle = element.$.chart.querySelector('.highcharts-legend-title > text').textContent;
           expect(legendTitle).to.be.equal('Legend title');
