@@ -252,6 +252,27 @@
           done();
         }, 70);
       });
+
+      it('should not have markers by default', function(done) {
+        setTimeout(function() {
+          const allHidden = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
+            .map(e => !e.firstChild || e.firstChild.attributes.visibility.value === 'hidden')
+            .reduce((e1, e2) => e1 && e2);
+          expect(allHidden).to.be.true;
+          done();
+        }, 100);
+      });
+
+      it('should not have markers when enabled', function(done) {
+        series.markers = true;
+        setTimeout(function() {
+          const markersVisible = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
+            .map(e => !e.firstChild.attributes.hasOwnProperty('visibility'))
+            .reduce((e1, e2) => e1 && e2);
+          expect(markersVisible).to.be.true;
+          done();
+        }, 100);
+      });
     });
   </script>
 </body>

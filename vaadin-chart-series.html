@@ -90,6 +90,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.data = this.__computeData(this.values, this.__labelsMapper);
           }
 
+          if (!this.markers) {
+            options.marker = {enabled: false};
+          }
+
           return options;
         }
 
@@ -152,6 +156,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             'title': {
               type: String,
               observer: '__titleObserver',
+              reflectToAttribute: true
+            },
+
+            'markers': {
+              type: Boolean,
+              observer: '__markersObserver',
               reflectToAttribute: true
             },
 
@@ -252,6 +262,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return this._series instanceof Highcharts.Series;
         }
 
+        __markersObserver() {
+          if (this.__hasSeriesConfig()) {
+            this._series.update({
+              marker: {enabled: this.markers}
+            });
+          }
+        }
       }
 
       customElements.define(ChartSeriesElement.is, ChartSeriesElement);
