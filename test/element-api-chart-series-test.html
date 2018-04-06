@@ -263,7 +263,7 @@
         }, 100);
       });
 
-      it('should not have markers when enabled', function(done) {
+      it('should have markers when enabled', function(done) {
         series.markers = true;
         setTimeout(function() {
           const markersVisible = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
