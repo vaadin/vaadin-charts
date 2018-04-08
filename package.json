@@ -1,5 +1,5 @@
 {
-  "name": "vaadin-charts",
+  "name": "@vaadin/vaadin-charts",
   "version": "6.1.0-alpha3",
   "description": "vaadin-charts",
   "main": "vaadin-chart.html",
@@ -23,10 +23,9 @@
     "preversion": "gulp version:update"
   },
   "devDependencies": {
-    "bower": "latest",
-    "eslint": "^4.0.0",
+    "eslint": "^4.13.0",
     "eslint-config-vaadin": "latest",
-    "eslint-plugin-html": "^3.0.0",
+    "eslint-plugin-html": "^4.0.0",
     "gulp": "latest",
     "gulp-clip-empty-files": "^0.1.2",
     "gulp-eslint": "^4.0.0",
@@ -36,11 +35,9 @@
     "gulp-grep-contents": "0.0.1",
     "gulp-html-extract": "^0.3.0",
     "gulp-replace": "^0.6.1",
-    "gulp-stylelint": "^5.0.0",
-    "polymer-cli": "^1.2.0",
-    "stylelint": "^8.0.0",
+    "gulp-stylelint": "^7.0.0",
+    "stylelint": "^9.0.0",
     "stylelint-config-vaadin": "latest",
-    "web-component-tester": "^6.1.5",
-    "yargs": "latest"
+    "web-component-tester": "^6.1.5"
   }
 }
