@@ -59,15 +59,17 @@
 
       before(function(done) {
         HTMLImports.whenReady(() => {
-          const mygrid = document.querySelector('chart-in-grid').$.mygrid;
+          setTimeout(() => {
+            const mygrid = document.querySelector('chart-in-grid').$.mygrid;
 
-          const chart = mygrid.querySelector('#chart');
-          chartContainer = chart.$.chart;
+            const chart = mygrid.querySelector('#chart');
+            chartContainer = chart.$.chart;
 
-          const timelineChart = mygrid.querySelector('#timeline_chart');
-          timelineChartContainer = timelineChart.$.chart;
+            const timelineChart = mygrid.querySelector('#timeline_chart');
+            timelineChartContainer = timelineChart.$.chart;
 
-          done();
+            done();
+          });
         });
       });
 
