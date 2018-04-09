@@ -30,6 +30,10 @@
     </template>
 
     <script>
+      if (!window.HTMLImports) {
+        window.HTMLImports = {};
+        window.HTMLImports.whenReady = callback => callback();
+      }
       HTMLImports.whenReady(() => {
         class ChartInGridTestElement extends Polymer.Element {
           static get is() {
