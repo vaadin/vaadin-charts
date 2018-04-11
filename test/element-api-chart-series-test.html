@@ -45,6 +45,10 @@
           changeValues() {
             this.values = [10, 30, 50, 10, 20];
           }
+
+          changeValuesDense() {
+            this.values = Array.apply(null, Array(200)).map(Number.prototype.valueOf, 10);
+          }
         }
 
         customElements.define(ChartSeriesApiDemoElement.is, ChartSeriesApiDemoElement);
@@ -253,23 +257,48 @@
         }, 70);
       });
 
-      it('should not have markers by default', function(done) {
+      function testIfMarkersAreShown() {
+        const markersVisible = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
+          .map(e => !e.firstChild.attributes.hasOwnProperty('visibility'))
+          .reduce((e1, e2) => e1 && e2);
+        expect(markersVisible).to.be.true;
+      }
+
+      function testIfMarkersAreHidden() {
+        const allHidden = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
+          .map(e => !e.firstChild || e.firstChild.attributes.visibility.value === 'hidden')
+          .reduce((e1, e2) => e1 && e2);
+        expect(allHidden).to.be.true;
+      }
+
+      it('should have markers by dafeult for widespread data', function(done) {
         setTimeout(function() {
-          const allHidden = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
-            .map(e => !e.firstChild || e.firstChild.attributes.visibility.value === 'hidden')
-            .reduce((e1, e2) => e1 && e2);
-          expect(allHidden).to.be.true;
+          testIfMarkersAreShown();
+          done();
+        }, 100);
+      });
+
+      it('should not have markers by default for dense data', function(done) {
+        element.changeValuesDense();
+
+        setTimeout(function() {
+          testIfMarkersAreHidden();
           done();
         }, 100);
       });
 
       it('should have markers when enabled', function(done) {
-        series.markers = true;
+        series.markers = 'shown';
         setTimeout(function() {
-          const markersVisible = Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
-            .map(e => !e.firstChild.attributes.hasOwnProperty('visibility'))
-            .reduce((e1, e2) => e1 && e2);
-          expect(markersVisible).to.be.true;
+          testIfMarkersAreShown();
+          done();
+        }, 100);
+      });
+
+      it('should not have markers when disabled', function(done) {
+        series.markers = 'hidden';
+        setTimeout(function() {
+          testIfMarkersAreHidden();
           done();
         }, 100);
       });
