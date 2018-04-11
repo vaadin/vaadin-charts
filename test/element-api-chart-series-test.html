@@ -355,6 +355,26 @@
           done();
         }, 20);
       });
+
+      it('should make series goes to first y axis if unit is removed', function(done) {
+        const unit = element.secondUnit;
+
+        const secondSeries = document.createElement('vaadin-chart-series');
+        secondSeries.setAttribute('values', '[20,30,40,50]');
+        secondSeries.setAttribute('unit', unit);
+        chart.appendChild(secondSeries);
+
+        setTimeout(function() {
+          expect(chart.configuration.yAxis).to.have.length(2);
+          secondSeries.removeAttribute('unit');
+          setTimeout(function() {
+            expect(chart.configuration.yAxis).to.have.length(1);
+            const secondAxis = chart.configuration.yAxis[0];
+            expect(secondAxis.options.id).to.be.equal(element.firstUnit);
+          }, 20);
+          done();
+        }, 20);
+      });
     });
   </script>
 </body>
