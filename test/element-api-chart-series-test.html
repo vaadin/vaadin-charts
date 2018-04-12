@@ -124,7 +124,7 @@
           expect(values).to.have.lengthOf(element.values.length);
           expect(values).to.have.members(element.values);
           done();
-        });
+        }, 20);
       });
 
       it('should update values on change', function(done) {
@@ -377,7 +377,7 @@
           const secondAxis = chart.configuration.yAxis[0];
           expect(secondAxis.options.id).to.be.equal(unit);
           done();
-        }, 20);
+        }, 100);
       });
 
       it('should make series goes to first y axis if unit is removed', function(done) {
@@ -395,8 +395,8 @@
             expect(chart.configuration.yAxis).to.have.length(1);
             const secondAxis = chart.configuration.yAxis[0];
             expect(secondAxis.options.id).to.be.equal(element.firstUnit);
-          }, 20);
-          done();
+            done();
+          }, 40);
         }, 40);
       });
 
