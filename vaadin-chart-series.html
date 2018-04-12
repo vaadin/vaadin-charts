@@ -90,11 +90,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.data = this.__computeData(this.values, this.__labelsMapper);
           }
 
-          if (!this.__isMarkersValid()) {
-            this.markers = 'auto';
+          if (this.markers) {
+            if (!this.__isMarkersValid()) {
+              this.markers = 'auto';
+            }
+            options.marker = this.__markersConfiguration;
           }
-          options.marker = this.__markersConfiguration;
-
 
           return options;
         }
@@ -170,7 +171,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              */
             'markers': {
               type: String,
-              value: 'auto',
               observer: '__markersObserver',
               reflectToAttribute: true
             },
