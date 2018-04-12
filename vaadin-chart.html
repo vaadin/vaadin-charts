@@ -763,11 +763,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
          * Add an axis with given options
          *
          * @param {Object} options axis options
+         * @param {Boolean} isXAxis indicates if axis is X (`true`) or Y (`false`). Defaults to `false`.
          */
-        __addAxis(options) {
+        __addAxis(options, isXAxis) {
           if (this.configuration) {
-            this.__createEventListeners(this.__xAxesEventNames, options, 'events', 'axis');
-            return this.configuration.addAxis(options);
+            this.__createEventListeners(isXAxis ? this.__xAxesEventNames : this.__yAxesEventNames, options, 'events', 'axis');
+            return this.configuration.addAxis(options, isXAxis);
           }
         }
 
