@@ -382,14 +382,14 @@
       });
 
 
-      it('should not remove user generated axis', function (done) {
-        setTimeout(function () {
+      it('should not remove user generated axis', function(done) {
+        setTimeout(function() {
           expect(multipleAxesChart.configuration.yAxis).to.have.length(2);
           const [firstAxis, secondAxis] = multipleAxesChart.configuration.yAxis;
           expect(firstAxis.series).to.have.length(1);
           expect(secondAxis.series).to.have.length(0);
           done();
-        }, 20);
+        }, 40);
       });
     });
   </script>
