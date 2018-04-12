@@ -78,7 +78,6 @@
   <script>
     describe('High-level Charts Series API', function() {
       let chart;
-      let multipleAxesChart;
       let chartContainer;
       let series;
       let element;
@@ -87,7 +86,6 @@
         HTMLImports.whenReady(() => {
           element = fixture('default');
           chart = element.$.mychart;
-          multipleAxesChart = element.$.multipleAxesChart;
           chartContainer = chart.$.chart;
           series = element.$.myseries;
           setTimeout(function() {
@@ -100,18 +98,24 @@
         expect(chart.constructor.is).to.be.equal(chart.localName);
       });
 
-      it('should have one series', function() {
-        expect(chart.configuration.series.length).to.be.equal(1);
+      it('should have one series', function(done) {
+        setTimeout(function() {
+          expect(chart.configuration.series.length).to.be.equal(1);
+          done();
+        }, 20);
       });
 
-      it('should have one line series with 5 points', function() {
-        const series = chartContainer.querySelectorAll('.highcharts-series');
-        expect(series).to.have.lengthOf(1);
+      it('should have one line series with 5 points', function(done) {
+        setTimeout(function() {
+          const series = chartContainer.querySelectorAll('.highcharts-series');
+          expect(series).to.have.lengthOf(1);
 
-        const firstSeries = series[0];
-        // IE11 doesn't support SVGElement.classList
-        expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
-        expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
+          const firstSeries = series[0];
+          // IE11 doesn't support SVGElement.classList
+          expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
+          expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
+          done();
+        }, 20);
       });
 
       it('should have same values as passed', function(done) {
@@ -123,53 +127,65 @@
         });
       });
 
-      it('should update values on change', function() {
-        element.changeValues();
-        const changedValues = chart.configuration.series[0].data.map(data => data.y);
-        expect(changedValues).to.have.members(element.values);
+      it('should update values on change', function(done) {
+        setTimeout(function() {
+          element.changeValues();
+          const changedValues = chart.configuration.series[0].data.map(data => data.y);
+          expect(changedValues).to.have.members(element.values);
+          done();
+        }, 10);
       });
 
-      it('should disable series visibility toggling only when set', function() {
-        const legend = chartContainer.querySelector('.highcharts-legend-item');
+      it('should disable series visibility toggling only when set', function(done) {
+        setTimeout(function() {
+          const legend = chartContainer.querySelector('.highcharts-legend-item');
 
-        // Series visibility toggling is enabled by default
-        legend.dispatchEvent(new MouseEvent('click'));
-        // IE11 doesn't support SVGElement.classList
-        expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
+          // Series visibility toggling is enabled by default
+          legend.dispatchEvent(new MouseEvent('click'));
+          // IE11 doesn't support SVGElement.classList
+          expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
 
-        legend.dispatchEvent(new MouseEvent('click'));
-        expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
+          legend.dispatchEvent(new MouseEvent('click'));
+          expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
 
-        // Series doesn't hide when toggle is disabled
-        chart['_visibilityTogglingDisabled'] = true;
-        legend.dispatchEvent(new MouseEvent('click'));
-        expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
+          // Series doesn't hide when toggle is disabled
+          chart['_visibilityTogglingDisabled'] = true;
+          legend.dispatchEvent(new MouseEvent('click'));
+          expect(legend.getAttribute('class')).to.not.include('highcharts-legend-item-hidden');
 
-        chart['_visibilityTogglingDisabled'] = false;
-        legend.dispatchEvent(new MouseEvent('click'));
+          chart['_visibilityTogglingDisabled'] = false;
+          legend.dispatchEvent(new MouseEvent('click'));
 
-        // Hidden series doesn't show when toggle is disabled
-        chart['_visibilityTogglingDisabled'] = true;
-        legend.dispatchEvent(new MouseEvent('click'));
-        expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
+          // Hidden series doesn't show when toggle is disabled
+          chart['_visibilityTogglingDisabled'] = true;
+          legend.dispatchEvent(new MouseEvent('click'));
+          expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
+          done();
+        }, 20);
       });
 
-      it('should remove series if element is removed from the tree', function() {
-        const series = chartContainer.querySelectorAll('.highcharts-series');
-        expect(series).to.have.lengthOf(1);
+      it('should remove series if element is removed from the tree', function(done) {
+        setTimeout(function() {
+          const series = chartContainer.querySelectorAll('.highcharts-series');
+          expect(series).to.have.lengthOf(1);
 
-        const seriesElement = chart.querySelector('vaadin-chart-series');
-        chart.removeChild(seriesElement);
+          const seriesElement = chart.querySelector('vaadin-chart-series');
+          chart.removeChild(seriesElement);
 
-        Polymer.RenderStatus.beforeNextRender(this, () => {
-          const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
-          expect(seriesEmpty).to.have.lengthOf(0);
+          Polymer.RenderStatus.beforeNextRender(this, () => {
+            const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
+            expect(seriesEmpty).to.have.lengthOf(0);
+            done();
+          });
         });
       });
 
-      it('should have a custom type', function() {
-        const firstSeries = chart.configuration.series[0];
-        expect(firstSeries.type).to.be.equal('line');
+      it('should have a custom type', function(done) {
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          expect(firstSeries.type).to.be.equal('line');
+          done();
+        }, 10);
       });
 
       it('should update type on property change', function(done) {
@@ -182,9 +198,12 @@
         }, 30);
       });
 
-      it('should have a custom title', function() {
-        const firstSeries = chart.configuration.series[0];
-        expect(firstSeries.name).to.be.equal(element.title);
+      it('should have a custom title', function(done) {
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          expect(firstSeries.name).to.be.equal(element.title);
+          done();
+        }, 20);
       });
 
       it('should update title on property change', function(done) {
@@ -198,8 +217,8 @@
       });
 
       it('should have values as labels by default', function(done) {
-        const firstSeries = chart.configuration.series[0];
         setTimeout(() => {
+          const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach(e => expect(e.name).to.be.equal(e.y));
           done();
         }, 50);
@@ -323,11 +342,11 @@
 
       it('should accept unit as string', function(done) {
         const unit = element.firstUnit;
-        const yAxis = chart.configuration.yAxis[0];
         setTimeout(function() {
+          const yAxis = chart.configuration.yAxis[0];
           expect(yAxis.options.id).to.be.equal(unit);
           done();
-        }, 50);
+        }, 70);
       });
 
       it('should accept more than one unit', function(done) {
@@ -378,11 +397,12 @@
             expect(secondAxis.options.id).to.be.equal(element.firstUnit);
           }, 20);
           done();
-        }, 20);
+        }, 40);
       });
 
 
       it('should not remove user generated axis', function(done) {
+        const multipleAxesChart = element.$.multipleAxesChart;
         setTimeout(function() {
           expect(multipleAxesChart.configuration.yAxis).to.have.length(2);
           const [firstAxis, secondAxis] = multipleAxesChart.configuration.yAxis;
