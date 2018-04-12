@@ -364,7 +364,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             },
             yAxis: {
-
+              axisGenerated: true
             }
           };
 
@@ -704,14 +704,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             const idxOnChildList = seriesNodes.indexOf(seriesElement);
             if (unit && !yAxes[unit]) {
-              yAxes[unit] = this.addAxis({id: unit, title: {text: unit}});
+              yAxes[unit] = this.__addAxis({id: unit, title: {text: unit}, axisGenerated: true});
             }
 
             const seriesConfiguration = this.__updateOrAddSeriesInstance(seriesElement.options, idxOnChildList);
 
             seriesElement.setSeries(seriesConfiguration);
           }
-          this.removeAxisIfEmpty();
+          this.__removeAxisIfEmpty();
         }
 
         __isSeriesEmpty(series) {
@@ -723,7 +723,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return;
           }
 
-          this.removeAxisIfEmpty();
+          this.__removeAxisIfEmpty();
         }
 
         __initChart(options) {
@@ -745,13 +745,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         /**
-         * @private
          * Search for axis with given `id`.
          *
          * @param {String} id contains the id that will be searched
          * @param {Boolean} isXAxis indicates if it will remove x or y axes. Defaults to `false`.
          */
-        getAxis(id, isXAxis) {
+        __getAxis(id, isXAxis) {
           id = Number.parseInt(id) || id;
           if (this.configuration) {
             return (isXAxis
@@ -761,12 +760,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         /**
-         * @private
          * Add an axis with given options
          *
          * @param {Object} options axis options
          */
-        addAxis(options) {
+        __addAxis(options) {
           if (this.configuration) {
             this.__createEventListeners(this.__xAxesEventNames, options, 'events', 'axis');
             return this.configuration.addAxis(options);
@@ -774,17 +772,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         /**
-         * @private
-         * Iterates over axes (y or x) and removes whenever it doesn't contain any series
+         * Iterates over axes (y or x) and removes whenever it doesn't contain any series and was created for unit
          *
          * @param {Boolean}  isXAxis indicates if it will remove x or y axes. Defaults to `false`.
          */
-        removeAxisIfEmpty(isXAxis) {
+        __removeAxisIfEmpty(isXAxis) {
           if (this.configuration) {
             (isXAxis
               ? this.configuration.xAxis
               : this.configuration.yAxis).forEach(axis => {
-              if (axis.series.length === 0) {
+              if (axis.userOptions.axisGenerated && axis.series.length === 0) {
                 axis.remove();
               }
             });

@@ -16,6 +16,9 @@
       <vaadin-chart id="additionalchart" additional-options='{"plotOptions": {"series": {"marker": {"enabled": false}}}}'>
         <vaadin-chart-series id="additional-series" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
       </vaadin-chart>
+      <vaadin-chart id="multipleAxesChart" additional-options='{"yAxis": [{"id": "additional-unit-1"},{"id": "additional-unit-2"}]}'>
+        <vaadin-chart-series values="{{values}}" title="{{title}}" type="{{type}}" unit="additional-unit-1" value-labels="{{labels}}"></vaadin-chart-series>
+      </vaadin-chart>
     </template>
 
     <script>
@@ -75,6 +78,7 @@
   <script>
     describe('High-level Charts Series API', function() {
       let chart;
+      let multipleAxesChart;
       let chartContainer;
       let series;
       let element;
@@ -83,6 +87,7 @@
         HTMLImports.whenReady(() => {
           element = fixture('default');
           chart = element.$.mychart;
+          multipleAxesChart = element.$.multipleAxesChart;
           chartContainer = chart.$.chart;
           series = element.$.myseries;
           setTimeout(function() {
@@ -372,6 +377,17 @@
             const secondAxis = chart.configuration.yAxis[0];
             expect(secondAxis.options.id).to.be.equal(element.firstUnit);
           }, 20);
+          done();
+        }, 20);
+      });
+
+
+      it('should not remove user generated axis', function (done) {
+        setTimeout(function () {
+          expect(multipleAxesChart.configuration.yAxis).to.have.length(2);
+          const [firstAxis, secondAxis] = multipleAxesChart.configuration.yAxis;
+          expect(firstAxis.series).to.have.length(1);
+          expect(secondAxis.series).to.have.length(0);
           done();
         }, 20);
       });

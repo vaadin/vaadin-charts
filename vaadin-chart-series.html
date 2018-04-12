@@ -287,12 +287,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             const parent = this.parentNode instanceof Vaadin.ChartElement && this.parentNode;
             if (parent && parent instanceof Vaadin.ChartElement) {
 
-              if (this.unit && !parent.getAxis(this.unit)) {
+              if (this.unit && !parent.__getAxis(this.unit)) {
                 const title = {title: {text: this.unit}};
-                parent.addAxis(Object.assign({id: this.unit}, title));
+                parent.__addAxis(Object.assign({id: this.unit, axisGenerated: true}, title));
               }
               this._series.update({yAxis: this.unit || 0});
-              parent.removeAxisIfEmpty();
+              parent.__removeAxisIfEmpty();
             }
           }
         }
