@@ -13,6 +13,9 @@
       <vaadin-chart id="mychart">
         <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
       </vaadin-chart>
+      <vaadin-chart id="additionalchart" additional-options='{"plotOptions": {"series": {"marker": {"enabled": false}}}}'>
+        <vaadin-chart-series id="additional-series" values="{{values}}" title="{{title}}" type="{{type}}" value-labels="{{labels}}"></vaadin-chart-series>
+      </vaadin-chart>
     </template>
 
     <script>
@@ -257,9 +260,9 @@
         }, 70);
       });
 
-      function markersVisible() {
+      function markersVisible(container) {
         // Markers are visible only if there's a child in highcharts-markers with visibility other than 'hidden'
-        return Array.from(chartContainer.querySelectorAll('.highcharts-markers'))
+        return Array.from(container.querySelectorAll('.highcharts-markers'))
           .map(e => !!e.firstChild && (!e.firstChild.attributes.hasOwnProperty('visibility')
               || e.firstChild.attributes.visibility.value !== 'hidden'))
           .reduce((e1, e2) => e1 && e2);
@@ -267,7 +270,15 @@
 
       it('should have markers by default for widespread data', function(done) {
         setTimeout(function() {
-          expect(markersVisible()).to.be.true;
+          expect(markersVisible(chartContainer)).to.be.true;
+          done();
+        }, 100);
+      });
+
+      it('should not override additional-options by default', function(done) {
+        const additionalChartContainer = element.$.additionalchart.$.chart;
+        setTimeout(function() {
+          expect(markersVisible(additionalChartContainer)).to.be.false;
           done();
         }, 100);
       });
@@ -276,7 +287,7 @@
         element.changeValuesDense();
 
         setTimeout(function() {
-          expect(markersVisible()).to.be.false;
+          expect(markersVisible(chartContainer)).to.be.false;
           done();
         }, 100);
       });
@@ -284,7 +295,7 @@
       it('should have markers when enabled', function(done) {
         series.markers = 'shown';
         setTimeout(function() {
-          expect(markersVisible()).to.be.true;
+          expect(markersVisible(chartContainer)).to.be.true;
           done();
         }, 100);
       });
@@ -292,7 +303,7 @@
       it('should not have markers when disabled', function(done) {
         series.markers = 'hidden';
         setTimeout(function() {
-          expect(markersVisible()).to.be.false;
+          expect(markersVisible(chartContainer)).to.be.false;
           done();
         }, 100);
       });
