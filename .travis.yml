@@ -31,27 +31,27 @@ env:
   - POLYMER=3
 
 script:
-  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-      if [[ "$POLYMER" = "2" ]]; then
-        npm install;
-        npm install gemini@^4.0.0 gemini-sauce gemini-polyserve;
-        gulp lint version:check;
-        polymer test --env saucelabs-quick;
-        gemini test test/visual;
-        gemini test test/visual -c .gemini-ie.yml;
-        polymer test --env saucelabs;
-      fi;
-      if [[ "$POLYMER" = "3" ]]; then
-        npm install -g yarn magi-cli;
-        (cd .. && git clone --depth 1 -b vaadin-components git://github.com/web-padawan/polymer-modulizer.git && cd polymer-modulizer && npm link);
-        rm -rf node_modules;
-        magi p3-convert --out .;
-        yarn install --flat;
-        polymer test --module-resolution=node --npm --env saucelabs-p3;
-      fi;
+  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "2" ]]; then
+      npm install &&
+      npm install gemini@^4.0.0 gemini-sauce gemini-polyserve &&
+      gulp lint version:check &&
+      polymer test --env saucelabs-quick &&
+      gemini test test/visual &&
+      gemini test test/visual -c .gemini-ie.yml &&
+      polymer test --env saucelabs;
     fi
+
+  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "3" ]]; then
+      npm install -g yarn magi-cli &&
+      (cd .. && git clone --depth 1 -b vaadin-components git://github.com/web-padawan/polymer-modulizer.git && cd polymer-modulizer && npm link) &&
+      rm -rf node_modules &&
+      magi p3-convert --out . &&
+      yarn install --flat &&
+      polymer test --module-resolution=node --npm --env saucelabs-p3;
+    fi
+
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      npm install;
+      npm install &&
       polymer test --env saucelabs-cron;
     fi
 
