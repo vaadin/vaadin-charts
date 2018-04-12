@@ -275,7 +275,7 @@
         }, 100);
       });
 
-      it('should not override additional-options by default', function(done) {
+      it('should not override chart plot options by default', function(done) {
         const additionalChartContainer = element.$.additionalchart.$.chart;
         setTimeout(function() {
           expect(markersVisible(additionalChartContainer)).to.be.false;

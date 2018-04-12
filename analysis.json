@@ -133,7 +133,7 @@
                   "column": 12
                 },
                 "end": {
-                  "line": 176,
+                  "line": 175,
                   "column": 13
                 }
               },
@@ -141,8 +141,7 @@
                 "polymer": {
                   "observer": "\"__markersObserver\""
                 }
-              },
-              "defaultValue": "\"auto\""
+              }
             },
             {
               "name": "options",
@@ -151,11 +150,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 183,
+                  "line": 182,
                   "column": 12
                 },
                 "end": {
-                  "line": 185,
+                  "line": 184,
                   "column": 13
                 }
               },
@@ -171,11 +170,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 197,
+                  "line": 196,
                   "column": 8
                 },
                 "end": {
-                  "line": 202,
+                  "line": 201,
                   "column": 9
                 }
               },
@@ -188,11 +187,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 208,
+                  "line": 207,
                   "column": 8
                 },
                 "end": {
-                  "line": 213,
+                  "line": 212,
                   "column": 9
                 }
               },
@@ -210,11 +209,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 215,
+                  "line": 214,
                   "column": 8
                 },
                 "end": {
-                  "line": 219,
+                  "line": 218,
                   "column": 9
                 }
               },
@@ -227,11 +226,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 222,
+                  "line": 221,
                   "column": 8
                 },
                 "end": {
-                  "line": 228,
+                  "line": 227,
                   "column": 9
                 }
               },
@@ -251,11 +250,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 231,
+                  "line": 230,
                   "column": 8
                 },
                 "end": {
-                  "line": 236,
+                  "line": 235,
                   "column": 9
                 }
               },
@@ -272,11 +271,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 238,
+                  "line": 237,
                   "column": 8
                 },
                 "end": {
-                  "line": 249,
+                  "line": 248,
                   "column": 9
                 }
               },
@@ -296,11 +295,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 251,
+                  "line": 250,
                   "column": 8
                 },
                 "end": {
-                  "line": 253,
+                  "line": 252,
                   "column": 9
                 }
               },
@@ -317,11 +316,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 255,
+                  "line": 254,
                   "column": 8
                 },
                 "end": {
-                  "line": 261,
+                  "line": 260,
                   "column": 9
                 }
               },
@@ -334,11 +333,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 263,
+                  "line": 262,
                   "column": 8
                 },
                 "end": {
-                  "line": 269,
+                  "line": 268,
                   "column": 9
                 }
               },
@@ -351,11 +350,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 271,
+                  "line": 270,
                   "column": 8
                 },
                 "end": {
-                  "line": 273,
+                  "line": 272,
                   "column": 9
                 }
               },
@@ -368,11 +367,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 275,
+                  "line": 274,
                   "column": 8
                 },
                 "end": {
-                  "line": 281,
+                  "line": 280,
                   "column": 9
                 }
               },
@@ -385,11 +384,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 283,
+                  "line": 282,
                   "column": 8
                 },
                 "end": {
-                  "line": 293,
+                  "line": 292,
                   "column": 9
                 }
               },
@@ -411,7 +410,7 @@
               "column": 6
             },
             "end": {
-              "line": 312,
+              "line": 311,
               "column": 7
             }
           },
@@ -492,7 +491,7 @@
                   "column": 12
                 },
                 "end": {
-                  "line": 176,
+                  "line": 175,
                   "column": 13
                 }
               },
@@ -504,11 +503,11 @@
               "description": "Object with the configured options defined and used to create a series.",
               "sourceRange": {
                 "start": {
-                  "line": 183,
+                  "line": 182,
                   "column": 12
                 },
                 "end": {
-                  "line": 185,
+                  "line": 184,
                   "column": 13
                 }
               },
