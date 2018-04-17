@@ -319,6 +319,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               reflectToAttribute: true
             },
 
+            /**
+             * Sets the default series type of the chart.
+             */
             'type': {
               type: String,
               observer: '__updateType',
@@ -430,7 +433,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               enabled: false
             };
           }
-          console.log('options', options)
           return options;
         }
 
@@ -1102,7 +1104,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               chart: {
                 type: newValue
               }
-            })
+            });
           }
         }
 
