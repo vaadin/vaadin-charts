@@ -319,6 +319,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               reflectToAttribute: true
             },
 
+            'type': {
+              type: String,
+              observer: '__updateType',
+              reflectToAttribute: true
+            },
+
             /**
              * Represents the subtitle of the chart.
              */
@@ -396,6 +402,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           const options = Object.assign({}, this._baseConfig);
           this.__deepMerge(options, this['additional-options']);
 
+          if (this.type) {
+            options.chart = options.chart || {};
+            options.chart.type = this.type;
+          }
+
           if (this.title) {
             options.title = {
               text: this.title
@@ -419,7 +430,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               enabled: false
             };
           }
-
+          console.log('options', options)
           return options;
         }
 
@@ -1078,6 +1089,20 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           if (newValue && newValue.length > 0) {
             this.configuration.title.update({text: newValue});
+          }
+        }
+
+        __updateType(newValue) {
+          if (!this.configuration) {
+            return;
+          }
+
+          if (newValue && newValue.length > 0) {
+            this.configuration.update({
+              chart: {
+                type: newValue
+              }
+            })
           }
         }
 
