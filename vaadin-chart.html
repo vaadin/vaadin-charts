@@ -312,9 +312,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             /**
              * Specifies whether to hide legend or show.
-             * Legend configuration can be set up via additional-options property
+             * Legend configuration can be set up via additionalOptions property
              */
-            'no-legend': {
+            'noLegend': {
               type: Boolean,
               observer: '__hideLegend',
               reflectToAttribute: true
@@ -359,7 +359,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             /**
              * Represents additional JSON configuration.
              */
-            'additional-options': {
+            'additionalOptions': {
               type: Object,
               reflectToAttribute: true
             }
@@ -368,7 +368,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         static get observers() {
           return [
-            '__updateAdditionalOptions(additional-options.*)'
+            '__updateAdditionalOptions(additionalOptions.*)'
           ];
         }
 
@@ -422,7 +422,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          this.__deepMerge(options, this['additional-options']);
+          this.__deepMerge(options, this.additionalOptions);
 
           if (this.type) {
             options.chart = options.chart || {};
@@ -447,7 +447,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }];
           }
 
-          if (this['no-legend']) {
+          if (this.noLegend) {
             options.legend = {
               enabled: false
             };
@@ -1143,7 +1143,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __updateAdditionalOptions() {
           if (this.configuration) {
-            this.update(this['additional-options']);
+            this.update(this.additionalOptions);
           }
         }
 

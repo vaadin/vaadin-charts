@@ -623,9 +623,9 @@
               }
             },
             {
-              "name": "no-legend",
+              "name": "noLegend",
               "type": "boolean",
-              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additional-options property",
+              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additionalOptions property",
               "privacy": "public",
               "sourceRange": {
                 "start": {
@@ -726,7 +726,7 @@
               }
             },
             {
-              "name": "additional-options",
+              "name": "additionalOptions",
               "type": "Object",
               "description": "Represents additional JSON configuration.",
               "privacy": "public",
@@ -1686,7 +1686,7 @@
             },
             {
               "name": "no-legend",
-              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additional-options property",
+              "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additionalOptions property",
               "sourceRange": {
                 "start": {
                   "line": 316,
