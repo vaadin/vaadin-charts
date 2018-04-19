@@ -133,14 +133,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * Any data point not covered (e.g value not present in the mapping object
              * or mapping array shorter than the list of values), results in the actual value being used as the label.
              */
-            'value-labels': {
+            'valueLabels': {
               type: ChartLabelsMapper,
               reflectToAttribute: true
             },
 
             /*
-             * Internal value-labels representation so that the original property/attribute set
-             * on value-labels can be preserved.
+             * Internal valueLabels representation so that the original property/attribute set
+             * on valueLabels can be preserved.
              */
             '__labelsMapper': {
               type: ChartLabelsMapper,
@@ -204,7 +204,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         static get observers() {
           return [
             '__valuesObserver(values.splices)',
-            '__labelsObserver(value-labels.*, values)'
+            '__labelsObserver(valueLabels.*, values)'
           ];
         }
 
@@ -251,7 +251,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __labelsObserver(changeRecord, values) {
-          const currentLabels = this['value-labels'] || [];
+          const currentLabels = this.valueLabels || [];
           if (currentLabels instanceof ChartLabelsMapper) {
             this.__labelsMapper = currentLabels;
           } else {
