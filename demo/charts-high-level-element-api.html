@@ -144,14 +144,14 @@
 
                 __onChartClick(event) {
                   const {chartX, chartY} = event.detail.originalEvent;
-                  this.showLabel(`[CHART-CLICK] (x: ${chartX}, y: ${chartY})`, chartX, chartY);
+                  this.showLabel('[CHART-CLICK] (x: ' + chartX + ', y: ' + chartY + ')', chartX, chartY);
                 }
 
                 connectedCallback() {
                   super.connectedCallback();
                   this.$.mychart.addEventListener('point-click', (event) => {
                     const {chartX, chartY} = event.detail.originalEvent;
-                    this.showLabel(`[POINT-CLICK] (x: ${chartX}, y: ${chartY})`, chartX, chartY);
+                    this.showLabel('[POINT-CLICK] (x: ' + chartX + ', y: ' + chartY + ')', chartX, chartY);
                   });
                 }
 
