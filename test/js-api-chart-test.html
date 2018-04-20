@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../vaadin-chart.html">
 </head>
 
@@ -14,8 +15,8 @@
     </template>
 
     <script>
-      HTMLImports.whenReady(() => {
-        class JSApiDemoElement extends Polymer.Element {
+      addEventListener('WebComponentsReady', () => {
+        customElements.define('js-api-demo', class extends Polymer.Element {
           static get is() {
             return 'js-api-demo';
           }
@@ -34,9 +35,7 @@
               });
             });
           }
-        }
-
-        customElements.define(JSApiDemoElement.is, JSApiDemoElement);
+        });
       });
     </script>
   </dom-module>
@@ -49,12 +48,10 @@
 
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
-          const el = document.querySelector('js-api-demo');
-          chart = el.$.mychart;
-          chartContainer = chart.$.chart;
-          done();
-        });
+        const el = document.querySelector('js-api-demo');
+        chart = el.$.mychart;
+        chartContainer = chart.$.chart;
+        done();
       });
 
       it('should be defined', function(done) {
@@ -76,7 +73,7 @@
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
-          // IE11 doesn't support SVGElement.classList 
+          // IE11 doesn't support SVGElement.classList
           expect(firstSeries.getAttribute('class')).to.include('highcharts-column-series');
           expect(firstSeries.querySelectorAll('.highcharts-point')).to.have.lengthOf(12);
           done();

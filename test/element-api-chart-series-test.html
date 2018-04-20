@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../vaadin-chart.html">
 </head>
 
@@ -16,8 +17,8 @@
     </template>
 
     <script>
-      HTMLImports.whenReady(() => {
-        class ChartSeriesApiDemoElement extends Polymer.Element {
+      addEventListener('WebComponentsReady', () => {
+        customElements.define('chart-series-api-demo', class extends Polymer.Element {
           static get is() {
             return 'chart-series-api-demo';
           }
@@ -45,9 +46,7 @@
           changeValues() {
             this.values = [10, 30, 50, 10, 20];
           }
-        }
-
-        customElements.define(ChartSeriesApiDemoElement.is, ChartSeriesApiDemoElement);
+        });
       });
     </script>
   </dom-module>
@@ -65,15 +64,13 @@
       let element;
 
       beforeEach(function(done) {
-        HTMLImports.whenReady(() => {
-          element = fixture('default');
-          chart = element.$.mychart;
-          chartContainer = chart.$.chart;
-          series = element.$.myseries;
-          setTimeout(function() {
-            done();
-          }, 100);
-        });
+        element = fixture('default');
+        chart = element.$.mychart;
+        chartContainer = chart.$.chart;
+        series = element.$.myseries;
+        setTimeout(function() {
+          done();
+        }, 100);
       });
 
       it('should be defined', function() {

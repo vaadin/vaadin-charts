@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../vaadin-chart.html">
 </head>
 
@@ -17,12 +18,12 @@
     </template>
 
     <script>
-      HTMLImports.whenReady(() => {
-        class ChartSeriesWithJsonApiElement extends Polymer.Element {
+      addEventListener('WebComponentsReady', () => {
+        customElements.define('chart-series-with-json-api', class extends Polymer.Element {
           static get is() {
             return 'chart-series-with-json-api';
           }
-  
+
           connectedCallback() {
             super.connectedCallback();
             this.$.mychart.update({
@@ -31,26 +32,21 @@
               }]
             });
           }
-        }
-
-        customElements.define(ChartSeriesWithJsonApiElement.is, ChartSeriesWithJsonApiElement);
+        });
       });
-
     </script>
   </dom-module>
   <chart-series-with-json-api></chart-series-with-json-api>
- 
+
   <script>
     describe('High-level Charts Series API with JSON API', function() {
       let chart;
       let element;
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
-          element = document.querySelector('chart-series-with-json-api');
-          chart = element.$.mychart;
-          done();
-        });
+        element = document.querySelector('chart-series-with-json-api');
+        chart = element.$.mychart;
+        done();
       });
 
       it('should have 1 series', function(done) {
@@ -59,7 +55,7 @@
           done();
         }, 20);
       });
-      
+
       it('should have 1 series with merged options', function(done) {
         setTimeout(function() {
           const series = chart.configuration.series[0];
