@@ -150,14 +150,14 @@
       });
 
       it('should have category minimun set to first category by default', () => {
-        const [xAxis] = element.configuration.xAxis;
+        const [xAxis] = chart.configuration.xAxis;
         expect(xAxis.min).to.be.equal(0);
       });
 
       it('should be able to set category minimun', (done) => {
-        element = fixture('category');
+        chart = fixture('category');
         setTimeout(() => {
-          const [xAxis] = element.configuration.xAxis;
+          const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(1);
           done();
         }, 50);
@@ -167,11 +167,11 @@
         const newCategoryMin = 2;
         function extremesListener(event) {
           expect(event.detail.originalEvent.min).to.be.equal(newCategoryMin);
-          element.removeEventListener('xaxes-extremes-set', extremesListener);
+          chart.removeEventListener('xaxes-extremes-set', extremesListener);
           done();
         }
-        element.addEventListener('xaxes-extremes-set', extremesListener);
-        element.setAttribute('category-min', newCategoryMin);
+        chart.addEventListener('xaxes-extremes-set', extremesListener);
+        chart.setAttribute('category-min', newCategoryMin);
       });
     });
   </script>
