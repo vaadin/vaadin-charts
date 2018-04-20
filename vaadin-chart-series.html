@@ -101,6 +101,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.yAxis = this.unit;
           }
 
+          if (this.valueMin) {
+            options.yAxisValueMin = this.__getNumberOrUndefined(this.valueMin);
+          }
+
           return options;
         }
 
@@ -148,6 +152,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             *  Value-axis minimum-value.
+             *  Sets the value to a series bound by 'unit' property.
+             *  Otherwise sets the value to the first series.
+             *  Undefined by default (determined from data).
+             */
+             valueMin: {
+              type: String,
+              observer: '__valueMinObserver',
+              reflectToAttribute: true
+            },
+
+            /**
              *  A string with the type of the series.
              *  Defaults to `'line'` in case no type is set for the chart.
              * Note that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type on `<vaadin-chart>`.
@@ -185,7 +201,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * If no unit is defined, then series will be connected to the first axis.
              */
             unit: {
-              type: 'String',
+              type: String,
               observer: '__unitObserver',
               reflectToAttribute: true
             },
@@ -267,11 +283,31 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return this.__labelsMapper.map(values);
         }
 
+        __valueMinObserver() {
+          if (!this.__hasSeriesConfig()) {
+            return;
+          }
+
+          if (this._series.yAxis) {
+            this._series.yAxis.update({
+              min: this.__getNumberOrUndefined(this.valueMin)
+            });
+          } 
+        }
+
+        __getNumberOrUndefined(num) {
+          var parsed = Number.parseFloat(num);
+          if (parsed || parsed == 0) {
+            return parsed;
+          }
+          return undefined;
+        }
+
         __typeObserver() {
           if (this.__hasSeriesConfig()) {
             this._series.update({
               type: this.type
-            });
+            });            
           }
         }
 
@@ -293,6 +329,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 parent.__addAxis(Object.assign({id: this.unit, axisGenerated: true}, title));
               }
               this._series.update({yAxis: this.unit || 0});
+              this.__valueMinObserver();
               parent.__removeAxisIfEmpty();
             }
           }
