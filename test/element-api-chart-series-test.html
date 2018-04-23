@@ -437,7 +437,7 @@
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.equal(0);
           done();
-        }, 100);
+        }, 150);
       });
 
       it('should be available to change value-min', function(done) {
@@ -450,7 +450,7 @@
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
           done();
-        }, 100);
+        }, 150);
       });
 
     });
