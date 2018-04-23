@@ -224,12 +224,38 @@
         }, 70);
       });
 
-      it('should have values as labels by default', function(done) {
+      it('should have values (array of numbers) as labels by default', function(done) {
         setTimeout(() => {
           const firstSeries = chart.configuration.series[0];
           firstSeries.data.forEach(e => expect(e.name).to.be.equal(e.y));
           done();
         }, 50);
+      });
+
+      it('should have values (array of arrays) as labels by default', function(done) {
+        const valuesArrayArray = [[10,20], [40,50],[70,80]];
+        series.values = valuesArrayArray;
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          const expected = firstSeries.data.map(e => e.name);
+          const actual = valuesArrayArray.map(e => e[1]);
+
+          expect(expected).to.deep.equal(actual);
+          done();
+        }, 70);
+      });
+
+      it('should have values (array of objects) as labels by default', function(done) {
+        const valuesObjectArray = [{name: '10' , y: 20}, {name: '40', y: 50}, {name: '70', y: 80}];
+        series.values = valuesObjectArray;
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          const expected = firstSeries.data.map(e => e.name);
+          const actual = valuesObjectArray.map(e => e.name);
+
+          expect(expected).to.deep.equal(actual);
+          done();
+        }, 70);
       });
 
       it('should accept labels as mapping object', function(done) {
