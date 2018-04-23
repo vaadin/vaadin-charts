@@ -27,7 +27,7 @@
   </test-fixture>
   <test-fixture id="category">
     <template>
-      <vaadin-chart categries="[10,20,30]" category-min="1">
+      <vaadin-chart categories="[10,20,30]" category-min="1">
         <vaadin-chart-series values="[1,2,3]"></vaadin-chart-series>
       </vaadin-chart>
     </template>
@@ -149,7 +149,7 @@
         }, 150);
       });
 
-      it('should have category minimun set to first category by default', (done) => {
+      it('should have category minimum set to first category by default', (done) => {
         setTimeout(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(0);
@@ -157,7 +157,7 @@
         }, 30);
       });
 
-      it('should be able to set category minimun', (done) => {
+      it('should be able to set category minimum', (done) => {
         chart = fixture('category');
         setTimeout(() => {
           const [xAxis] = chart.configuration.xAxis;
@@ -166,7 +166,7 @@
         }, 110);
       });
 
-      it('should change category minimun value', done => {
+      it('should change category minimum value', done => {
         const newCategoryMin = 2;
         function extremesListener(event) {
           expect(event.detail.originalEvent.min).to.be.equal(newCategoryMin);

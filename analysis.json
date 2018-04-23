@@ -625,7 +625,7 @@
             {
               "name": "categoryMin",
               "type": "number",
-              "description": "Category-axis minimun value. Defaults to `undefined`.",
+              "description": "Category-axis minimum value. Defaults to `undefined`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
@@ -1766,7 +1766,7 @@
             },
             {
               "name": "category-min",
-              "description": "Category-axis minimun value. Defaults to `undefined`.",
+              "description": "Category-axis minimum value. Defaults to `undefined`.",
               "sourceRange": {
                 "start": {
                   "line": 315,
