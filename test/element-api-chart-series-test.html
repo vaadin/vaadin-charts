@@ -434,7 +434,7 @@
         const yAxisValuesChart = fixture('y-axis-values');
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const [firstAxis, secondAxis] = yAxisValuesChart.configuration.yAxis;
+          const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.equal(0);
           done();
         }, 100);
@@ -447,7 +447,7 @@
         seriesWithValue.valueMin = '-20';
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const [firstAxis, secondAxis] = yAxisValuesChart.configuration.yAxis;
+          const firstAxis= yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
           done();
         }, 100);
