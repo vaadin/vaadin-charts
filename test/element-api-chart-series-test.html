@@ -233,7 +233,7 @@
       });
 
       it('should have values (array of arrays) as labels by default', function(done) {
-        const valuesArrayArray = [[10,20], [40,50],[70,80]];
+        const valuesArrayArray = [[10, 20], [40, 50], [70, 80]];
         series.values = valuesArrayArray;
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
@@ -246,7 +246,7 @@
       });
 
       it('should have values (array of objects) as labels by default', function(done) {
-        const valuesObjectArray = [{name: '10' , y: 20}, {name: '40', y: 50}, {name: '70', y: 80}];
+        const valuesObjectArray = [{name: '10', y: 20}, {name: '40', y: 50}, {name: '70', y: 80}];
         series.values = valuesObjectArray;
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
