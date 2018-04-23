@@ -473,7 +473,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
           }
 
-          if (this.categoryMin) {
+          if (Number.isFinite(this.categoryMin)) {
             options.xAxis = options.xAxis || {};
             if (Array.isArray(options.xAxis)) {
               // Set category-min on first x axis
@@ -1128,7 +1128,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateCategoryMin() {
-          if (!this.configuration) {
+          if (!this.configuration || !Number.isFinite(this.categoryMin)) {
             return;
           }
 
