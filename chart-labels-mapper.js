@@ -68,14 +68,14 @@ class ChartLabelsMapper {
 
         if (this.type === 'function') {
           result.name = this.mapper(result.y);
-        } else if (this.type === 'object') {
+        } else if (this.type === 'object' && !!this.mapper[result.y]) {
           result.name = this.mapper[result.y];
-        } else if (this.type === 'array') {
+        } else if (this.type === 'array' && this.mapper.length > index) {
           result.name = this.mapper[index];
         }
 
         if (!result.name) {
-          result.name = item;
+          result.name = result.y;
         }
 
         return result;
