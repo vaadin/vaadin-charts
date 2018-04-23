@@ -149,9 +149,12 @@
         }, 150);
       });
 
-      it('should have category minimun set to first category by default', () => {
-        const [xAxis] = chart.configuration.xAxis;
-        expect(xAxis.min).to.be.equal(0);
+      it('should have category minimun set to first category by default', (done) => {
+        setTimeout(() => {
+          const [xAxis] = chart.configuration.xAxis;
+          expect(xAxis.min).to.be.equal(0);
+          done();
+        }, 30);
       });
 
       it('should be able to set category minimun', (done) => {
@@ -160,7 +163,7 @@
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(1);
           done();
-        }, 100);
+        }, 110);
       });
 
       it('should change category minimun value', done => {
