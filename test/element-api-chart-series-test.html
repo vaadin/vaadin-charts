@@ -447,7 +447,7 @@
         seriesWithValue.valueMin = '-20';
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const firstAxis= yAxisValuesChart.configuration.yAxis[0];
+          const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
           done();
         }, 100);
