@@ -465,12 +465,22 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           if (this.categories) {
             options.xAxis = options.xAxis || {};
-            options.xAxis.categories = this.categories;
+            if (Array.isArray(options.xAxis)) {
+              // Set categories on first x axis
+              options.xAxis[0].categories = this.categories;
+            } else {
+              options.xAxis.categories = this.categories;
+            }
           }
 
           if (this.categoryMin) {
             options.xAxis = options.xAxis || {};
-            options.xAxis.min = this.categoryMin;
+            if (Array.isArray(options.xAxis)) {
+              // Set category-min on first x axis
+              options.xAxis[0].min = this.categoryMin;
+            } else {
+              options.xAxis.min = this.categoryMin;
+            }
           }
 
           if (this.noLegend) {
