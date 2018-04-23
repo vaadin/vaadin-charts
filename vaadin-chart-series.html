@@ -158,7 +158,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              *  Undefined by default (determined from data).
              */
             valueMin: {
-              type: String,
+              type: Number,
               observer: '__valueMinObserver',
               reflectToAttribute: true
             },
@@ -296,11 +296,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __getNumberOrUndefined(num) {
-          var parsed = parseFloat(num);
-          if (parsed || parsed == 0) {
-            return parsed;
-          }
-          return undefined;
+          return (Number.isNaN(num)) ? undefined : num;
         }
 
         __typeObserver() {
