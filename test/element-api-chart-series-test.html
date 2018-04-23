@@ -435,7 +435,7 @@
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
-          expect(firstAxis.paddedTicks[0]).to.be.equal(0);
+          expect(firstAxis.paddedTicks[0]).to.be.closeTo(0, 5);
           done();
         }, 150);
       });
@@ -443,8 +443,8 @@
       it('should be available to change value-min', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
         const seriesWithValue = yAxisValuesChart.children[2];
-        expect(seriesWithValue.valueMin).to.be.equal('0');
-        seriesWithValue.valueMin = '-20';
+        expect(seriesWithValue.valueMin).to.be.closeTo(0, 5);
+        seriesWithValue.setAttribute('value-min', -20);
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];

@@ -101,8 +101,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.yAxis = this.unit;
           }
 
-          if (this.valueMin) {
-            options.yAxisValueMin = this.__getNumberOrUndefined(this.valueMin);
+          if (!isNaN(this.valueMin)) {
+            options.yAxisValueMin = this.valueMin;
           }
 
           return options;
@@ -290,13 +290,9 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           if (this._series.yAxis) {
             this._series.yAxis.update({
-              min: this.__getNumberOrUndefined(this.valueMin)
+              min: (!isNaN(this.valueMin)) ? this.valueMin : undefined
             });
           } 
-        }
-
-        __getNumberOrUndefined(num) {
-          return (Number.isNaN(num)) ? undefined : num;
         }
 
         __typeObserver() {
