@@ -53,10 +53,17 @@ class ChartLabelsMapper {
 
   map(values) {
     if (values) {
-      return values.map((e, index) => {
+      return values.map((item, index) => {
         const result = {};
-        result.y = e;
-        result.name = this.type === 'function' ? this.mapper(e) : this.mapper[this.type === 'array' ? index : e] || e;
+
+        result.y = typeof item === 'object' ? item.y
+          : Array.isArray(item) ? item[1]
+            : item;
+
+        result.name = this.type === 'function' ? this.mapper(item)
+          : this.mapper[Array.isArray(this.type) ? index : item]
+            || item;
+
         return result;
       });
     }
