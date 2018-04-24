@@ -168,7 +168,7 @@
 
       it('should change category minimum value', done => {
         const newCategoryMin = 2;
-        function extremesListener (event) {
+        function extremesListener(event) {
           expect(event.detail.originalEvent.min).to.be.equal(newCategoryMin);
           chart.removeEventListener('xaxes-extremes-set', extremesListener);
           done();
@@ -177,7 +177,7 @@
         chart.setAttribute('category-min', newCategoryMin);
       });
 
-    it('should be able to set category maximum', (done) => {
+      it('should be able to set category maximum', (done) => {
         chart = fixture('category');
         setTimeout(() => {
           const [xAxis] = chart.configuration.xAxis;
@@ -188,7 +188,7 @@
 
       it('should change category maximum value', done => {
         const newCategoryMax = 5;
-        function extremesListener (event) {
+        function extremesListener(event) {
           expect(event.detail.originalEvent.max).to.be.equal(newCategoryMax);
           chart.removeEventListener('xaxes-extremes-set', extremesListener);
           done();
