@@ -82,7 +82,7 @@
             },
             {
               "name": "valueMin",
-              "type": "string",
+              "type": "number",
               "description": "Value-axis minimum-value.\n Sets the value to a series bound by 'unit' property.\n Otherwise sets the value to the first series.\n Undefined by default (determined from data).",
               "privacy": "public",
               "sourceRange": {
@@ -370,7 +370,7 @@
               "params": []
             },
             {
-              "name": "__getNumberOrUndefined",
+              "name": "__typeObserver",
               "description": "",
               "privacy": "private",
               "sourceRange": {
@@ -384,14 +384,10 @@
                 }
               },
               "metadata": {},
-              "params": [
-                {
-                  "name": "num"
-                }
-              ]
+              "params": []
             },
             {
-              "name": "__typeObserver",
+              "name": "__titleObserver",
               "description": "",
               "privacy": "private",
               "sourceRange": {
@@ -408,7 +404,7 @@
               "params": []
             },
             {
-              "name": "__titleObserver",
+              "name": "__unitObserver",
               "description": "",
               "privacy": "private",
               "sourceRange": {
@@ -417,24 +413,7 @@
                   "column": 8
                 },
                 "end": {
-                  "line": 319,
-                  "column": 9
-                }
-              },
-              "metadata": {},
-              "params": []
-            },
-            {
-              "name": "__unitObserver",
-              "description": "",
-              "privacy": "private",
-              "sourceRange": {
-                "start": {
-                  "line": 321,
-                  "column": 8
-                },
-                "end": {
-                  "line": 335,
+                  "line": 327,
                   "column": 9
                 }
               },
@@ -447,11 +426,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 337,
+                  "line": 329,
                   "column": 8
                 },
                 "end": {
-                  "line": 339,
+                  "line": 331,
                   "column": 9
                 }
               },
@@ -464,11 +443,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 341,
+                  "line": 333,
                   "column": 8
                 },
                 "end": {
-                  "line": 347,
+                  "line": 339,
                   "column": 9
                 }
               },
@@ -481,11 +460,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 349,
+                  "line": 341,
                   "column": 8
                 },
                 "end": {
-                  "line": 359,
+                  "line": 351,
                   "column": 9
                 }
               },
@@ -507,7 +486,7 @@
               "column": 6
             },
             "end": {
-              "line": 378,
+              "line": 370,
               "column": 7
             }
           },
@@ -561,7 +540,7 @@
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "number"
             },
             {
               "name": "type",
