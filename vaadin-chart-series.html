@@ -288,9 +288,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             return;
           }
 
+          if (!isFinite(this.valueMin)) {
+            console.warn('<vaadin-chart-series> Acceptable values for "value-min" are Numbers or null');
+            return;
+          }
+
           if (this._series.yAxis) {
             this._series.yAxis.update({
-              min: (isFinite(this.valueMin)) ? this.valueMin : undefined
+              min: this.valueMin
             });
           } 
         }
