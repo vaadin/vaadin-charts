@@ -311,6 +311,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Category-axis maximum value. Defaults to `undefined`.
+             */
+             categoryMax: {
+              type: Number,
+              observer: '__updateCategoryMax',
+              reflectToAttribute: true,
+            },
+
+            /**
              * Category-axis minimum value. Defaults to `undefined`.
              */
             categoryMin: {
@@ -1124,6 +1133,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           this.__updateOrAddAxes([{
             categories: this.categories
+          }], true);
+        }
+
+        __updateCategoryMax() {
+          if (!this.configuration || !isFinite(this.categoryMax)) {
+            return;
+          }
+
+          this.__updateOrAddAxes([{
+            max: this.categoryMax
           }], true);
         }
 
