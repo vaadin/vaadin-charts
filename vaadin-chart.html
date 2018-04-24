@@ -316,7 +316,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              categoryMax: {
               type: Number,
               observer: '__updateCategoryMax',
-              reflectToAttribute: true,
+              reflectToAttribute: true
             },
 
             /**
@@ -489,6 +489,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               options.xAxis[0].min = this.categoryMin;
             } else {
               options.xAxis.min = this.categoryMin;
+            }
+          }
+
+          if (isFinite(this.categoryMax)) {
+            options.xAxis = options.xAxis || {};
+            if (Array.isArray(options.xAxis)) {
+              // Set category-max on first x axis
+              options.xAxis[0].max = this.categoryMax;
+            } else {
+              options.xAxis.max = this.categoryMax;
             }
           }
 
