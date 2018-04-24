@@ -61,7 +61,7 @@ class ChartLabelsMapper {
         const result = this.__isObject(item) ? Object.assign({}, item) : {};
 
         if (Array.isArray(item)) {
-          result.y = item[1];
+          [result.x, result.y] = item;
         } else if (!this.__isObject(item)) {
           result.y = item;
         }
