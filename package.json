@@ -40,7 +40,7 @@
     "polymer-cli": "^1.2.0",
     "stylelint": "^8.0.0",
     "stylelint-config-vaadin": "latest",
-    "web-component-tester": "^6.1.5",
+    "web-component-tester": "^6.5.0",
     "yargs": "latest"
   }
 }
