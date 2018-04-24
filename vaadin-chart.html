@@ -1147,7 +1147,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateCategoryMax() {
-          if (!this.configuration || !isFinite(this.categoryMax)) {
+          if (!this.configuration) {
+            return;
+          }
+
+          if (!isFinite(this.categoryMax)) {
+            console.warn('<vaadin-chart> Acceptable value for "category-max" are Numbers or null');
             return;
           }
 
@@ -1157,7 +1162,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __updateCategoryMin() {
-          if (!this.configuration || !isFinite(this.categoryMin)) {
+          if (!this.configuration) {
+            return;
+          }
+
+          if (!isFinite(this.categoryMin)) {
+            console.warn('<vaadin-chart> Acceptable value for "category-min" are Numbers or null');
             return;
           }
 
