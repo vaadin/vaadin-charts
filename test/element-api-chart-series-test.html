@@ -375,7 +375,6 @@
 
       it('should be available initially to set value-max', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        const seriesWithValue = yAxisValuesChart.children[1];
         setTimeout(function() {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const secondAxis = yAxisValuesChart.configuration.yAxis[1];
