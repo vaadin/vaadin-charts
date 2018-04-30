@@ -852,6 +852,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   }
                 };
 
+                if (event.type === 'afterSetExtremes') {
+                  if (!event.min || !event.max) {
+                    return;
+                  }
+                }
                 // Workaround for vaadin-charts-flow because of https://github.com/vaadin/flow/issues/3102
                 if (event.type === 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
@@ -871,7 +876,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     customEvent.detail.yValue = event.yAxis[0].value;
                   }
                 }
-
+                
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
                 if (event.type === 'legendItemClick' && chart['_visibilityTogglingDisabled']) {
