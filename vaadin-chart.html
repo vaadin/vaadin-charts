@@ -876,7 +876,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     customEvent.detail.yValue = event.yAxis[0].value;
                   }
                 }
-                
+
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
                 if (event.type === 'legendItemClick' && chart['_visibilityTogglingDisabled']) {
