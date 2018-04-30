@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
-  <link rel="import" href="../../vaadin-grid/vaadin-grid.html">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="external-imports.html">
   <link rel="import" href="../vaadin-chart.html">
 </head>
 
@@ -30,8 +31,8 @@
     </template>
 
     <script>
-      HTMLImports.whenReady(() => {
-        class ChartInGridTestElement extends Polymer.Element {
+      addEventListener('WebComponentsReady', () => {
+        customElements.define('chart-in-grid', class extends Polymer.Element {
           static get is() {
             return 'chart-in-grid';
           }
@@ -44,9 +45,7 @@
               }
             };
           }
-        }
-
-        customElements.define(ChartInGridTestElement.is, ChartInGridTestElement);
+        });
       });
     </script>
   </dom-module>
@@ -58,7 +57,7 @@
       var timelineChartContainer;
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
+        setTimeout(() => {
           const mygrid = document.querySelector('chart-in-grid').$.mygrid;
 
           const chart = mygrid.querySelector('#chart');
