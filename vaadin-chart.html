@@ -853,7 +853,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 };
 
                 if (event.type === 'afterSetExtremes') {
-                  if (!event.min || !event.max) {
+                  if (event.min == null || event.max == null) {
                     return;
                   }
                 }
