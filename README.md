@@ -39,7 +39,7 @@ After one day using Vaadin Charts in a development environment you will see a po
 You can get your trial key from [https://vaadin.com/pro/licenses](https://vaadin.com/pro/licenses).
 If the license is valid, it will be saved to the local storage of the browser and you will not see the pop-up again.
 
-[<img src="https://raw.githubusercontent.com/vaadin/vaadin-charts/6.0-preview/screenshot.png" width="400" alt="Screenshot of vaadin-chart">](https://vaadin.com/elements/-/element/vaadin-chart)
+[<img src="https://raw.githubusercontent.com/vaadin/vaadin-charts/6.0/screenshot.png" width="400" alt="Screenshot of vaadin-chart">](https://vaadin.com/elements/-/element/vaadin-chart)
 
 
 ## Running demos and tests in browser
