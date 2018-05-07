@@ -60,7 +60,7 @@
       let element;
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
+        customElements.whenDefined('chart-events').then(() => {
           element = document.querySelector('chart-events');
           chart = element.$.mychart;
           timelineChart = element.$.timeline;

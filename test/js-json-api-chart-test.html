@@ -61,7 +61,7 @@
       var chartContainer;
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
+        customElements.whenDefined('js-json-api-demo').then(() => {
           testContainer = document.querySelector('js-json-api-demo');
           chart = testContainer.$.mychart;
           chartContainer = chart.$.chart;

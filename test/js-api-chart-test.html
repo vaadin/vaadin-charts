@@ -49,7 +49,7 @@
 
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
+        customElements.whenDefined('js-api-demo').then(() => {
           const el = document.querySelector('js-api-demo');
           chart = el.$.mychart;
           chartContainer = chart.$.chart;

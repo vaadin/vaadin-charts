@@ -59,7 +59,7 @@
 
 
       before(function(done) {
-        HTMLImports.whenReady(() => {
+        customElements.whenDefined('chart-style-demo').then(() => {
           const el = document.querySelector('chart-style-demo');
           chart = el.$.mychart;
           chartContainer = chart.$.chart;
