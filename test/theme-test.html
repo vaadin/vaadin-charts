@@ -31,12 +31,12 @@
 
 
       it('data label connectors should have no fill', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chart, () => {
           const connectors = Array.from(chart.querySelectorAll('.highcharts-data-label-connector'));
           expect(connectors).to.have.lengthOf(5);
           connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));
           done();
-        }, 50);
+        });
       });
 
 

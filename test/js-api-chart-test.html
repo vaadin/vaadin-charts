@@ -48,10 +48,12 @@
 
 
       before(function(done) {
-        const el = document.querySelector('js-api-demo');
-        chart = el.$.mychart;
-        chartContainer = chart.$.chart;
-        done();
+        customElements.whenDefined('js-api-demo').then(() => {
+          const el = document.querySelector('js-api-demo');
+          chart = el.$.mychart;
+          chartContainer = chart.$.chart;
+          done();
+        });
       });
 
       it('should be defined', function(done) {

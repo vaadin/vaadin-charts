@@ -60,10 +60,12 @@
       var chartContainer;
 
       before(function(done) {
-        testContainer = document.querySelector('js-json-api-demo');
-        chart = testContainer.$.mychart;
-        chartContainer = chart.$.chart;
-        done();
+        customElements.whenDefined('js-json-api-demo').then(() => {
+          testContainer = document.querySelector('js-json-api-demo');
+          chart = testContainer.$.mychart;
+          chartContainer = chart.$.chart;
+          done();
+        });
       });
 
       it('should be defined', function(done) {

@@ -58,10 +58,12 @@
 
 
       before(function(done) {
-        const el = document.querySelector('chart-style-demo');
-        chart = el.$.mychart;
-        chartContainer = chart.$.chart;
-        done();
+        customElements.whenDefined('chart-style-demo').then(() => {
+          const el = document.querySelector('chart-style-demo');
+          chart = el.$.mychart;
+          chartContainer = chart.$.chart;
+          done();
+        });
       });
 
       it('should have column series svg rect stroke red', function(done) {

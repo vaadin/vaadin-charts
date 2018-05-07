@@ -54,21 +54,23 @@
       let element;
 
       before(function(done) {
-        element = document.querySelector('chart-series-dom-repeat');
-        chart = element.$.mychart;
-        chartContainer = chart.$.chart;
-        done();
+        customElements.whenDefined('chart-series-dom-repeat').then(() => {
+          element = document.querySelector('chart-series-dom-repeat');
+          chart = element.$.mychart;
+          chartContainer = chart.$.chart;
+          done();
+        });
       });
 
       it('should have 3 series', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chartContainer, () => {
           expect(chart.configuration.series.length).to.be.equal(3);
           done();
         });
       });
 
       it('should have one line series with 5 points', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chartContainer, () => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(3);
           for (let index = 0; index < series.length; index++) {
@@ -82,7 +84,7 @@
       });
 
       it('push in seriesData should create new series', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chartContainer, () => {
           element.push('seriesData', {data: [1, 2, 3, 4, 5]});
           setTimeout(function() {
             expect(chart.configuration.series.length).to.be.equal(4);
@@ -92,7 +94,7 @@
       });
 
       it('set in seriesData should update values', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chartContainer, () => {
           const newData = [6, 7, 8, 9, 10, 11, 12];
           element.set('seriesData.1', {data: newData});
           const values = chart.configuration.series[1].data.map(data => data.y);

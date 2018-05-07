@@ -58,10 +58,12 @@
       let element;
 
       before(function(done) {
-        element = document.querySelector('chart-events');
-        chart = element.$.mychart;
-        timelineChart = element.$.timeline;
-        done();
+        customElements.whenDefined('chart-events').then(() => {
+          element = document.querySelector('chart-events');
+          chart = element.$.mychart;
+          timelineChart = element.$.timeline;
+          done();
+        });
       });
 
       it('should trigger chart events to imperative listeners', done => {

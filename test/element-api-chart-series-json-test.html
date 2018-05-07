@@ -44,20 +44,22 @@
       let element;
 
       before(function(done) {
-        element = document.querySelector('chart-series-with-json-api');
-        chart = element.$.mychart;
-        done();
+        customElements.whenDefined('chart-series-with-json-api').then(() => {
+          element = document.querySelector('chart-series-with-json-api');
+          chart = element.$.mychart;
+          done();
+        });
       });
 
       it('should have 1 series', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chart.$.chart, () => {
           expect(chart.configuration.series.length).to.be.equal(1);
           done();
-        }, 20);
+        });
       });
 
       it('should have 1 series with merged options', function(done) {
-        setTimeout(function() {
+        Polymer.RenderStatus.afterNextRender(chart.$.chart, () => {
           const series = chart.configuration.series[0];
           const values = series.data.map(({y}) => y);
 
