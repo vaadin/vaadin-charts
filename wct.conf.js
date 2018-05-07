@@ -7,16 +7,10 @@ module.exports = {
       'macOS 10.12/ipad@11.0',
       'macOS 10.12/iphone@10.3',
       'macOS 10.12/safari@11.0',
+      'Windows 10/chrome@65',
       'Windows 10/firefox@59',
       'Windows 10/internet explorer@11',
       'Windows 10/microsoftedge@16'
-    ];
-
-    var saucelabsPlatformsP3 = [
-      'macOS 10.12/iphone@11.2',
-      'macOS 10.12/ipad@11.2',
-      'Windows 10/chrome@65',
-      'macOS 10.12/safari@11.0'
     ];
 
     var cronPlatforms = [
@@ -31,8 +25,6 @@ module.exports = {
 
     if (env === 'saucelabs') {
       context.options.plugins.sauce.browsers = saucelabsPlatforms;
-    } else if (env === 'saucelabs-p3') {
-      context.options.plugins.sauce.browsers = saucelabsPlatformsP3;
     } else if (env === 'saucelabs-cron') {
       context.options.plugins.sauce.browsers = cronPlatforms;
     } else if (env === 'saucelabs-quick') {
