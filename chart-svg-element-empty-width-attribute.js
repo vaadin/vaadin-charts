@@ -1,7 +1,7 @@
 (function() {
   if (Highcharts) {
     // Workaround for https://github.com/vaadin/vaadin-charts/issues/294
-    Highcharts.SVGElement.prototype.strokeWidth = function () {
+    Highcharts.SVGElement.prototype.strokeWidth = function() {
       var val = this.getStyle('stroke-width'),
         ret,
         dummy;
