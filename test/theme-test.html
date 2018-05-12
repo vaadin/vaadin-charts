@@ -22,22 +22,17 @@
 
       beforeEach(done => {
         chart = fixture('pie-with-labels').$.chart;
-        Polymer.flush();
-        setTimeout(() => {
-          done();
-        }, 100);
+        window.defer(() => done());
       });
 
-
       it('data label connectors should have no fill', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           const connectors = Array.from(chart.querySelectorAll('.highcharts-data-label-connector'));
           expect(connectors).to.have.lengthOf(5);
           connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));
           done();
-        }, 50);
+        });
       });
-      
 
     });
   </script>

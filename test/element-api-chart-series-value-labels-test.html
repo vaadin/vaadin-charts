@@ -56,59 +56,57 @@
           element = fixture('default');
           chart = element.$.mychart;
           series = element.$.myseries;
-          setTimeout(function() {
-            done();
-          }, 100);
+          window.defer(() => done());
         });
       });
 
       it('should have values (array of numbers) as labels by default', function(done) {
-        setTimeout(() => {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const actual = firstSeries.data.map(e => e.name);
 
           expect(element.values).to.deep.equal(actual);
           done();
-        }, 50);
+        });
       });
 
       it('should have values (array of arrays) as labels by default', function(done) {
         const valuesArrayArray = [[10, 20], [40, 50], [70, 80]];
         element.values = valuesArrayArray;
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const actual = firstSeries.data.map(e => [e.x, e.name]);
 
           expect(valuesArrayArray).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should have values (array of objects) as labels by default', function(done) {
         const valuesObjectArray = [{name: '10', y: 20}, {name: '40', y: 50}, {name: '70', y: 80}];
         element.values = valuesObjectArray;
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = valuesObjectArray.map(e => [e.name, e.y]);
           const actual = firstSeries.data.map(e => [e.name, e.y]);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as mapping object for values (array of numbers)', function(done) {
         const labelsAsObject = {10: 'Mon', 20: 'Tue', 30: 'Wed', 50: 'Thur'};
         element.labels = labelsAsObject;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = element.values.map(e => labelsAsObject[e] || e);
           const actual = firstSeries.data.map(e => e.name);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as mapping object for values (array of arrays)', function(done) {
@@ -118,14 +116,14 @@
         const labelsAsObject = {10: 'Mon', 20: 'Tue', 30: 'Wed', 50: 'Thur'};
         element.labels = labelsAsObject;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = element.values.map(e => [e[0], labelsAsObject[e[1]] || e[1]]);
           const actual = firstSeries.data.map(e => [e.x, e.name]);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as mapping object for values (array of objects)', function(done) {
@@ -135,7 +133,7 @@
         const labelsAsObject = {10: 'Mon', 20: 'Tue', 30: 'Wed', 50: 'Thur'};
         element.labels = labelsAsObject;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
 
           // We pick the mapping, if absent the name, if absent the value.
@@ -146,7 +144,7 @@
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as mapping object string', function(done) {
@@ -154,26 +152,26 @@
         const labelsAsObjectString = JSON.stringify(labelsAsObject);
         series.setAttribute('value-labels', labelsAsObjectString);
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.data.map(e => e.name)).to.deep.equal(
             firstSeries.data.map(e => labelsAsObject[e.y] || e.y));
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as function for values (array of numbers)', function(done) {
         const labelsAsFunction = e => e + 'AAA';
         element.labels = labelsAsFunction;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = element.values.map(e => e + 'AAA');
           const actual = firstSeries.data.map(e => e.name);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as function for values (array of arrays)', function(done) {
@@ -183,14 +181,14 @@
         const labelsAsFunction = e => e + 'AAA';
         element.labels = labelsAsFunction;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = element.values.map(e => [e[0], e[1] + 'AAA']);
           const actual = firstSeries.data.map(e => [e.x, e.name]);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as function for values (array of objects)', function(done) {
@@ -200,39 +198,39 @@
         const labelsAsFunction = e => e + 'AAA';
         element.labels = labelsAsFunction;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = element.values.map(e => [e.x, e.y + 'AAA']);
           const actual = firstSeries.data.map(e => [e.x, e.name]);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as function string', function(done) {
         const labelsAsFunctionString = 'function(e) { return e + "BBB"; }';
         series.setAttribute('value-labels', labelsAsFunctionString);
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.data.map(e => e.name)).to.deep.equal(
             firstSeries.data.map(e => e.y + 'BBB'));
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as array for values (array of numbers)', function(done) {
         const labelsAsArray = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri'];
         element.labels = labelsAsArray;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           const expected = labelsAsArray;
           const actual = firstSeries.data.map(e => e.name);
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as array for values (array of arrays)', function(done) {
@@ -242,7 +240,7 @@
         const labelsAsArray = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri'];
         element.labels = labelsAsArray;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           // We pick the mapping, if absent the value
           const expected = element.values.map((e, index) => [e[0], labelsAsArray[index] || e[1]]);
@@ -250,7 +248,7 @@
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as array for values (array of objects)', function(done) {
@@ -260,7 +258,7 @@
         const labelsAsArray = ['Mon', 'Tue'];
         element.labels = labelsAsArray;
 
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           // We pick the mapping, if absent the name, if absent the value
           const expected = element.values.map((e, index) => [e.x, labelsAsArray[index] || e.name || e.y]);
@@ -268,18 +266,18 @@
 
           expect(expected).to.deep.equal(actual);
           done();
-        }, 70);
+        });
       });
 
       it('should accept labels as array string', function(done) {
         const labelsAsArray = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri'];
         const labelsAsArrayString = JSON.stringify(labelsAsArray);
         series.setAttribute('value-labels', labelsAsArrayString);
-        setTimeout(function() {
+        window.defer(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.data.map(e => e.name)).to.deep.equal(labelsAsArray);
           done();
-        }, 70);
+        });
       });
     });
   </script>

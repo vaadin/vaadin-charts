@@ -22,7 +22,7 @@
           connectedCallback() {
             super.connectedCallback();
             Polymer.RenderStatus.beforeNextRender(this, () => {
-              var configuration = this.$.mychart.configuration;
+              const configuration = this.$.mychart.configuration;
               configuration.setTitle({
                 text: 'The chart title'
               });
@@ -58,21 +58,21 @@
       });
 
       it('should be defined', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           expect(chart.constructor.is).to.be.equal(chart.localName);
           done();
         });
       });
 
       it('should have custom title', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
         });
       });
 
       it('should have one column series and twelve points', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
@@ -84,7 +84,7 @@
       });
 
       it('should have month names as categories', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           const categories = Array.from(chartContainer.querySelectorAll('.highcharts-xaxis-labels > text')).map(text => text.textContent);
           expect(categories).to.have.lengthOf(12);
           expect(categories).to.have.members(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
