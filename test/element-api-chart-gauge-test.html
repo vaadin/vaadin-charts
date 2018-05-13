@@ -24,12 +24,12 @@
       beforeEach(done => {
         HTMLImports.whenReady(() => {
           element = fixture('default');
-          defer(() => done());
+          window.evaluateLater(() => done());
         });
       });
 
       it('should have one gauge series', done => {
-        defer(() => {
+        window.evaluateLater(() => {
           const series = element.$.chart.querySelectorAll('.highcharts-data-labels.highcharts-gauge-series');
           expect(series).to.have.length(1);
           const text = Array.from(series).map(node => node.textContent);

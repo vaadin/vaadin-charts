@@ -54,14 +54,14 @@
       });
 
       it('should have 1 series', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.configuration.series.length).to.be.equal(1);
           done();
         });
       });
       
       it('should have 1 series with merged options', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const series = chart.configuration.series[0];
           const values = series.data.map(({y}) => y);
 

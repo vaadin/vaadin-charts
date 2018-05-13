@@ -102,26 +102,26 @@
           chart = element.$.mychart;
           chartContainer = chart.$.chart;
           series = element.$.myseries;
-          defer(() => done(), 100);
+          window.evaluateLater(() => done(), 100);
         });
       });
 
       it('should be defined', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.constructor.is).to.be.equal(chart.localName);
           done();
         });
       });
 
       it('should have one series', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.configuration.series.length).to.be.equal(1);
           done();
         });
       });
 
       it('should have one line series with 5 points', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
 
@@ -134,7 +134,7 @@
       });
 
       it('should have same values as passed', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const values = chart.configuration.series[0].data.map(data => data.y);
           expect(values).to.have.lengthOf(element.values.length);
           expect(values).to.have.members(element.values);
@@ -143,7 +143,7 @@
       });
 
       it('should update values on change', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           element.changeValues();
           const changedValues = chart.configuration.series[0].data.map(data => data.y);
           expect(changedValues).to.have.members(element.values);
@@ -152,7 +152,7 @@
       });
 
       it('should disable series visibility toggling only when set', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const legend = chartContainer.querySelector('.highcharts-legend-item');
 
           // Series visibility toggling is enabled by default
@@ -180,14 +180,14 @@
       });
 
       it('should remove series if element is removed from the tree', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
 
           const seriesElement = chart.querySelector('vaadin-chart-series');
           chart.removeChild(seriesElement);
 
-          defer(() => {
+          window.evaluateLater(() => {
             const seriesEmpty = chartContainer.querySelectorAll('.highcharts-series');
             expect(seriesEmpty).to.have.lengthOf(0);
             done();
@@ -196,7 +196,7 @@
       });
 
       it('should have a custom type', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal('line');
           done();
@@ -206,7 +206,7 @@
       it('should update type on property change', function(done) {
         const type = 'area';
         element.setAttribute('type', type);
-        defer(() => {
+        window.evaluateLater(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal(type);
           done();
@@ -214,7 +214,7 @@
       });
 
       it('should have a custom title', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.name).to.be.equal(element.title);
           done();
@@ -224,7 +224,7 @@
       it('should update title on property change', function(done) {
         const title = 'new-series-title';
         element.setAttribute('title', title);
-        defer(() => {
+        window.evaluateLater(() => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.name).to.be.equal(title);
           done();
@@ -240,7 +240,7 @@
       }
 
       it('should have markers by default for widespread data', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(markersVisible(chartContainer)).to.be.true;
           done();
         });
@@ -248,7 +248,7 @@
 
       it('should not override chart plot options by default', function(done) {
         const additionalchart = fixture('additionalchart');
-        defer(() => {
+        window.evaluateLater(() => {
           const additionalChartContainer = additionalchart.$.chart;
           expect(markersVisible(additionalChartContainer)).to.be.false;
           done();
@@ -258,7 +258,7 @@
       it('should not have markers by default for dense data', function(done) {
         element.changeValuesDense();
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(markersVisible(chartContainer)).to.be.false;
           done();
         });
@@ -266,7 +266,7 @@
 
       it('should have markers when enabled', function(done) {
         series.markers = 'shown';
-        defer(() => {
+        window.evaluateLater(() => {
           expect(markersVisible(chartContainer)).to.be.true;
           done();
         });
@@ -274,7 +274,7 @@
 
       it('should not have markers when disabled', function(done) {
         series.markers = 'hidden';
-        defer(() => {
+        window.evaluateLater(() => {
           expect(markersVisible(chartContainer)).to.be.false;
           done();
         });
@@ -282,7 +282,7 @@
 
       it('should accept unit as string', function(done) {
         const unit = element.firstUnit;
-        defer(() => {
+        window.evaluateLater(() => {
           const yAxis = chart.configuration.yAxis[0];
           expect(yAxis.options.id).to.be.equal(unit);
           done();
@@ -297,7 +297,7 @@
         secondSeries.setAttribute('unit', unit);
         chart.appendChild(secondSeries);
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.configuration.yAxis).to.have.length(2);
           const secondAxis = chart.configuration.yAxis[1];
           expect(secondAxis.options.id).to.be.equal(unit);
@@ -312,7 +312,7 @@
         secondSeries.setAttribute('values', '[20,30,40,50]');
         chart.appendChild(secondSeries);
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.configuration.yAxis).to.have.length(1);
           const secondAxis = chart.configuration.yAxis[0];
           expect(secondAxis.options.id).to.be.equal(unit);
@@ -328,10 +328,10 @@
         secondSeries.setAttribute('unit', unit);
         chart.appendChild(secondSeries);
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.configuration.yAxis).to.have.length(2);
           secondSeries.removeAttribute('unit');
-          defer(() => {
+          window.evaluateLater(() => {
             expect(chart.configuration.yAxis).to.have.length(1);
             const secondAxis = chart.configuration.yAxis[0];
             expect(secondAxis.options.id).to.be.equal(element.firstUnit);
@@ -343,7 +343,7 @@
 
       it('should not remove user generated axis', function(done) {
         const multipleAxesChart = fixture('multipleaxes');
-        defer(() => {
+        window.evaluateLater(() => {
           expect(multipleAxesChart.configuration.yAxis).to.have.length(2);
           const [firstAxis, secondAxis] = multipleAxesChart.configuration.yAxis;
           expect(firstAxis.series).to.have.length(1);
@@ -354,7 +354,7 @@
 
       it('should work value-min initially', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        defer(() => {
+        window.evaluateLater(() => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(0, 5);
@@ -366,7 +366,7 @@
         const yAxisValuesChart = fixture('y-axis-values');
         const seriesWithValue = yAxisValuesChart.children[2];
         seriesWithValue.valueMin = -20;
-        defer(() => {
+        window.evaluateLater(() => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
@@ -376,7 +376,7 @@
 
       it('should be available initially to set value-max', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        defer(() => {
+        window.evaluateLater(() => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const secondAxis = yAxisValuesChart.configuration.yAxis[1];
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(40, 5);
@@ -388,7 +388,7 @@
         const yAxisValuesChart = fixture('y-axis-values');
         const seriesWithValue = yAxisValuesChart.children[1];
         seriesWithValue.valueMax = 10;
-        defer(() => {
+        window.evaluateLater(() => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const secondAxis = yAxisValuesChart.configuration.yAxis[1];
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(10, 5);

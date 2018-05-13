@@ -32,7 +32,7 @@
       beforeEach(done => {
         HTMLImports.whenReady(() => {
           element = fixture('default');
-          defer(() => done());
+          window.evaluateLater(() => done());
         });
       });
 
@@ -54,7 +54,7 @@
           ]
         });
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(40).to.be.equal(element.configuration.series[0].options.innerSize);
           expect('name of the series').to.be.equal(element.configuration.series[0].name);
           expect('area').to.be.equal(element.configuration.series[0].type);
@@ -76,7 +76,7 @@
           ]
         });
 
-        defer(() => {
+        window.evaluateLater(() => {
           const firstSeries = element.configuration.series[0];
           const secondSeries = element.configuration.series[1];
 

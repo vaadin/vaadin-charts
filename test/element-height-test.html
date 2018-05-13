@@ -30,12 +30,12 @@
       beforeEach(done => {
         HTMLImports.whenReady(() => {
           element = fixture('default');
-          defer(() => done());
+          window.evaluateLater(() => done());
         });
       });
 
       it('should have the same height as defined', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
           expect(200).to.be.equal(boundingClientRectContainer.height);
           expect(200).to.be.equal(element.configuration.chartHeight);
@@ -44,13 +44,13 @@
       });
 
       it('chart height container should react to container change', done => {
-        defer(() => {
+        window.evaluateLater(() => {
           // The class needs to be added after charts is first drawn
           element.classList.add('expand-height');
 
           // Then the test needs to wait for the component to react to new height
-          defer(() => {
-            defer(() => {
+          window.evaluateLater(() => {
+            window.evaluateLater(() => {
               const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
 
               expect(300).to.be.equal(boundingClientRectContainer.height);

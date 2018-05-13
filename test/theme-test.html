@@ -23,12 +23,12 @@
       beforeEach(done => {
         HTMLImports.whenReady(() => {
           chart = fixture('pie-with-labels').$.chart;
-          defer(() => done());
+          window.evaluateLater(() => done());
         });
       });
 
       it('data label connectors should have no fill', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const connectors = Array.from(chart.querySelectorAll('.highcharts-data-label-connector'));
           expect(connectors).to.have.lengthOf(5);
           connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));

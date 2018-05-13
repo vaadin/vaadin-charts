@@ -70,28 +70,28 @@
       });
 
       it('should be defined', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chart.constructor.is).to.be.equal(chart.localName);
           done();
         });
       });
 
       it('should have custom title', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
         });
       });
 
       it('should not have credits by default', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chartContainer.querySelector('.highcharts-credits')).to.be.null;
           done();
         });
       });
 
       it('should have one column series and twelve points', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
@@ -103,7 +103,7 @@
       });
 
       it('should have month names as categories', function(done) {
-        defer(() => {
+        window.evaluateLater(() => {
           const categories = Array.from(chartContainer.querySelectorAll('.highcharts-xaxis-labels > text')).map(text => text.textContent);
           expect(categories).to.have.lengthOf(12);
           expect(categories).to.have.members(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
@@ -116,7 +116,7 @@
         chart.update({}, true);
         Polymer.flush();
 
-        defer(() => {
+        window.evaluateLater(() => {
           expect(chartContainer.querySelector('.highcharts-title')).to.be.null;
           done();
         });
@@ -125,11 +125,11 @@
       it('should work if configured before connect', function(done) {
         const unattachedChart = document.createElement('vaadin-chart');
         unattachedChart.update({title: {text: 'Awesome chart'}});
-        defer(() => {
+        window.evaluateLater(() => {
 
           testContainer.appendChildElement(testContainer, unattachedChart);
 
-          defer(() => {
+          window.evaluateLater(() => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
             testContainer.removeChild(unattachedChart);
             done();
@@ -140,7 +140,7 @@
       it('should not reset chart configured with html', function(done) {
         const htmlChart = testContainer.$.htmlChart;
         htmlChart.update({title: {text: 'Awesome chart'}});
-        defer(() => {
+        window.evaluateLater(() => {
           expect(htmlChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
           expect(htmlChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('My subtitle');
           done();
@@ -157,10 +157,10 @@
         const floatingChart = document.createElement('vaadin-chart');
         floatingChart.update({title: {text: 'Awesome title'}, credits: {enabled: false}});
 
-        defer(() => {
+        window.evaluateLater(() => {
           testContainer.appendChildElement(div1, floatingChart);
 
-          defer(() => {
+          window.evaluateLater(() => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
             expect(floatingChart.$.chart.querySelector('.highcharts-credits')).to.be.null;
 
@@ -168,7 +168,7 @@
             floatingChart.update({subtitle: {text: 'Awesome subtitle'}, credits: {enabled: true, text: 'Vaadin'}});
             testContainer.appendChildElement(div2, floatingChart);
 
-            defer(() => {
+            window.evaluateLater(() => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
               expect(floatingChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('Awesome subtitle');
               expect(floatingChart.$.chart.querySelector('.highcharts-credits').textContent).to.equal('Vaadin');
@@ -182,7 +182,7 @@
       it('should inflate whole function strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': 'function() {return "awesome chart"}'}};
         chart.__inflateFunctions(config);
-        defer(() => {
+        window.evaluateLater(() => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
@@ -192,7 +192,7 @@
       it('should inflate function body strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': 'return "awesome chart"'}};
         chart.__inflateFunctions(config);
-        defer(() => {
+        window.evaluateLater(() => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
@@ -202,7 +202,7 @@
       it('should inflate empty function strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': ''}};
         chart.__inflateFunctions(config);
-        defer(() => {
+        window.evaluateLater(() => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();

@@ -5,8 +5,7 @@
       window.oRequestAnimationFrame ||
       window.msRequestAnimationFrame;
 
-  // IE has a problem with direct properties on window object.
-  var defer = (callback, delay) => {
+  var evaluateLater = (callback, delay) => {
     const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
     const isSafari = navigator.vendor.indexOf('Apple') >= 0;
 
@@ -20,5 +19,5 @@
     }
   };
 
-  window.defer = defer;
+  window.evaluateLater = evaluateLater;
 })();
