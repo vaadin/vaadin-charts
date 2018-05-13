@@ -1,10 +1,16 @@
 (() => {
+  const rAF = window.requestAnimationFrame ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame ||
+              window.oRequestAnimationFrame ||
+              window.msRequestAnimationFrame;
+
   window.defer = (callback, delay) => {
     const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-    if (isIE11) {
-      requestAnimationFrame(() => setTimeout(callback, delay));
+    if (isIE11 || delay) {
+      rAF(() => setTimeout(callback, delay));
     } else {
-      requestAnimationFrame(() => callback());
+      rAF(() => callback());
     }
   };
 })();
