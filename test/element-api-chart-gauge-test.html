@@ -22,8 +22,10 @@
       var element;
 
       beforeEach(done => {
-        element = fixture('default');
-        window.defer(() => done());
+        HTMLImports.whenReady(() => {
+          element = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should have one gauge series', done => {

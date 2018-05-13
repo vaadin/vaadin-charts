@@ -57,7 +57,7 @@
       var chartContainer;
       var timelineChartContainer;
 
-      before(function(done) {
+      beforeEach(done => {
         HTMLImports.whenReady(() => {
           const mygrid = document.querySelector('chart-in-grid').$.mygrid;
 
