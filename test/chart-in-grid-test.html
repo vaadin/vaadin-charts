@@ -72,7 +72,7 @@
       });
 
       it('chart container should be in the shadow root', function(done) {
-        window.evaluateLater(() => {
+        window.defer(() => {
           expect(chartContainer.parentNode).to.not.be.null;
           expect(timelineChartContainer.parentNode).to.not.be.null;
           done();

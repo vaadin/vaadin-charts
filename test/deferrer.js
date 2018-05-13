@@ -5,7 +5,7 @@
       window.oRequestAnimationFrame ||
       window.msRequestAnimationFrame;
 
-  var evaluateLater = (callback, delay) => {
+  var defer = (callback, delay) => {
     const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
     const isSafari = navigator.vendor.indexOf('Apple') >= 0;
 
@@ -19,5 +19,5 @@
     }
   };
 
-  window.evaluateLater = evaluateLater;
+  window.defer = defer;
 })();
