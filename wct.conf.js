@@ -7,8 +7,13 @@ module.exports = {
       'macOS 10.12/iphone@10.3',
       'macOS 10.12/safari@11.0',
       'Windows 10/firefox@58',
-      'Windows 10/internet explorer@11',
-      'Windows 10/microsoftedge@16'
+      'Windows 10/microsoftedge@16',
+      {
+        'browserName': 'internet explorer',
+        'platform': 'Windows 10',
+        'version': '11',
+        'screenResolution': '1600x1200'
+      }
     ];
 
     var cronPlatforms = [
