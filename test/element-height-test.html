@@ -27,7 +27,12 @@
     describe('Element with height defined', function() {
       var element;
 
-      beforeEach(() => element = fixture('default'));
+      beforeEach(done => {
+        HTMLImports.whenReady(() => {
+          element = fixture('default');
+          window.defer(() => done());
+        });
+      });
 
       it('should have the same height as defined', function(done) {
         window.defer(() => {

@@ -21,8 +21,10 @@
       var chart;
 
       beforeEach(done => {
-        chart = fixture('pie-with-labels').$.chart;
-        window.defer(() => done());
+        HTMLImports.whenReady(() => {
+          chart = fixture('pie-with-labels').$.chart;
+          window.defer(() => done());
+        });
       });
 
       it('data label connectors should have no fill', function(done) {

@@ -38,9 +38,11 @@
       var chart, chartContainer;
 
       beforeEach(done => {
-        chart = fixture('default');
-        chartContainer = chart.$.chart;
-        window.defer(() => done());
+        HTMLImports.whenReady(() => {
+          chart = fixture('default');
+          chartContainer = chart.$.chart;
+          window.defer(() => done());
+        });
       });
 
       it('should be defined', () => {

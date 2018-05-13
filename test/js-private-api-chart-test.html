@@ -21,8 +21,10 @@
       var chart;
 
       beforeEach(done => {
-        chart = fixture('default');
-        window.defer(() => done());
+        HTMLImports.whenReady(() => {
+          chart = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should be possible to modify a chart', function(done) {

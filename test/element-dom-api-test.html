@@ -19,8 +19,10 @@
       var container;
 
       beforeEach(done => {
-        container = fixture('default');
-        window.defer(() => done());
+        HTMLImports.whenReady(() => {
+          container = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should be able to create a chart through DOM API', done => {
