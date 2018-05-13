@@ -41,7 +41,7 @@
         HTMLImports.whenReady(() => {
           chart = fixture('default');
           chartContainer = chart.$.chart;
-          window.defer(() => done());
+          defer(() => done());
         });
       });
 
@@ -73,7 +73,7 @@
       it('should react to additionalOptions object change', done => {
         chart.additionalOptions = {title: {text: 'Updated title'}};
 
-        window.defer(() => {
+        defer(() => {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Updated title');
           done();
         });
@@ -82,14 +82,14 @@
       it('should react to additionalOptions subproperty change', done => {
         chart.set('additionalOptions.title.text', 'Reindeer statistics');
 
-        window.defer(() => {
+        defer(() => {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Reindeer statistics');
           done();
         });
       });
 
       it('should have categories set', done => {
-        window.defer(() => {
+        defer(() => {
           const textNodes = chartContainer.querySelectorAll('.highcharts-xaxis-labels > text');
           const text = Array.from(textNodes).map(node => node.textContent);
           expect(text).to.be.deep.equal(['2010', '2011', '2012', '2013']);
@@ -99,7 +99,7 @@
 
       it('should react to categories change', done => {
         chart.setAttribute('categories', '["Jan", "Fev", "Mar", "Abr"]');
-        window.defer(() => {
+        defer(() => {
           const textNodes = chartContainer.querySelectorAll('.highcharts-xaxis-labels > text');
           const text = Array.from(textNodes).map(node => node.textContent);
           expect(text).to.be.deep.equal(['Jan', 'Fev', 'Mar', 'Abr']);
@@ -110,7 +110,7 @@
       it('should hide legend', done => {
         expect(chartContainer.querySelector('.highcharts-legend')).to.not.be.null;
         chart.setAttribute('no-legend', true);
-        window.defer(() => {
+        defer(() => {
           expect(chartContainer.querySelector('.highcharts-legend')).to.be.null;
           done();
         });
@@ -118,7 +118,7 @@
 
       it('should apply legend config via additional-options', done => {
         chart.removeAttribute('no-legend');
-        window.defer(() => {
+        defer(() => {
           const legendTitle = chartContainer.querySelector('.highcharts-legend-title > text').textContent;
           expect(legendTitle).to.be.equal('Legend title');
           done();
@@ -126,7 +126,7 @@
       });
 
       it('should not have tooltips by default', function(done) {
-        window.defer(() => {
+        defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.false;
           done();
         });
@@ -134,7 +134,7 @@
 
       it('should have tooltips when enabled', function(done) {
         chart.tooltip = true;
-        window.defer(() => {
+        defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.true;
           done();
         });
@@ -142,14 +142,14 @@
 
       it('should have tooltips when tooltip is configured in additional options', function(done) {
         chart = fixture('tooltip');
-        window.defer(() => {
+        defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.true;
           done();
         });
       });
 
       it('should have category minimum set to first category by default', (done) => {
-        window.defer(() => {
+        defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(0);
           done();
@@ -158,7 +158,7 @@
 
       it('should be able to set category minimum', (done) => {
         chart = fixture('category');
-        window.defer(() => {
+        defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(1);
           done();
@@ -178,7 +178,7 @@
 
       it('should be able to set category maximum', (done) => {
         chart = fixture('category');
-        window.defer(() => {
+        defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.max).to.be.equal(2);
           done();

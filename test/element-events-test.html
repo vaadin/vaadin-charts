@@ -74,11 +74,11 @@
           chart.removeEventListener('chart-redraw', chartRedrawListener);
         }
         chart.addEventListener('chart-redraw', chartRedrawListener);
-        window.defer(() => chart.configuration.redraw());
+        defer(() => chart.configuration.redraw());
       });
 
       it('should trigger chart events to declarative listeners', done => {
-        window.defer(() => {
+        defer(() => {
           expect(element.loaded).to.be.equal(1);
           done();
         });
@@ -94,7 +94,7 @@
 
       it('should trigger series events to declarative listeners', done => {
         chart.configuration.series[0].show();
-        window.defer(() => {
+        defer(() => {
           expect(element.seriesShow).to.be.equal(1);
           done();
         });
@@ -110,7 +110,7 @@
       });
 
       it('should trigger point events to declarative listeners', done => {
-        window.defer(() => {
+        defer(() => {
           chart.configuration.series[0].points[0].update({y: 20});
           expect(element.pointUpdate).to.be.equal(1);
           done();
@@ -123,7 +123,7 @@
           chart.removeEventListener('chart-redraw', chartRedrawListener);
         }
         chart.addEventListener('chart-redraw', chartRedrawListener);
-        window.defer(() => {
+        defer(() => {
           chart.update({
             chart: {
               type: 'column'
@@ -164,7 +164,7 @@
         const axisResizeSpy = sinon.spy(); 
         chart.addEventListener('yaxes-extremes-set', axisResizeSpy);
         chart.configuration.series[0].setVisible(false);
-        window.defer(() => {
+        defer(() => {
           expect(axisResizeSpy.called).to.be.false;
           chart.removeEventListener('chart-redraw', axisResizeSpy);
           chart.configuration.series[0].setVisible(true);

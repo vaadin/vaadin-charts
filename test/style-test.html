@@ -68,7 +68,7 @@
       });
 
       it('should have column series svg rect stroke red', function(done) {
-        window.defer(() => {
+        defer(() => {
           const rects = chartContainer.querySelectorAll('.highcharts-series > rect');
           expect(rects).to.have.lengthOf(12);
           // Safari for iOS is returning the color in hexa format, so we need to test for both values

@@ -75,7 +75,7 @@
       });
 
       it('first series should have a green fill', function(done) {
-        window.defer(() => {
+        defer(() => {
           const rects = chartContainer.querySelectorAll('.highcharts-legend-item > rect');
           expect(rects).to.have.lengthOf(2);
           // Safari for iOS is returning the color in hexa format, so we need to test for both values
@@ -85,7 +85,7 @@
       });
 
       it('second series should have the highcharts-color-1 default fill', function(done) {
-        window.defer(() => {
+        defer(() => {
           const rects = chartContainer.querySelectorAll('.highcharts-legend-item > rect');
           expect(rects).to.have.lengthOf(2);
           // Safari for iOS is returning the color in hexa format, so we need to test for both values

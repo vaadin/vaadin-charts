@@ -21,19 +21,19 @@
       beforeEach(done => {
         HTMLImports.whenReady(() => {
           element = fixture('default');
-          window.defer(() => done());
+          defer(() => done());
         });
       });
 
       it('should be defined', done => {
-        window.defer(() => {
+        defer(() => {
           expect(element.constructor.is).to.be.equal(element.localName);
           done();
         });
       });
 
       it('should have no title', done => {
-        window.defer(() => {
+        defer(() => {
           expect(element.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         });
