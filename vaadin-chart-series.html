@@ -101,6 +101,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.yAxis = this.unit;
           }
 
+          if (this.stack) {
+            options.stack = this.stack;
+          }
+
+          if (this.stacking) {
+            options.stacking = this.stacking;
+          }
+
           if (isFinite(this.valueMin)) {
             options.yAxisValueMin = this.valueMin;
           }
@@ -108,7 +116,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (isFinite(this.valueMax)) {
             options.yAxisValueMax = this.valueMax;
           }
-
 
           return options;
         }
@@ -218,6 +225,26 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             unit: {
               type: String,
               observer: '__unitObserver',
+              reflectToAttribute: true
+            },
+
+            /** Used to group series in a different stacks.
+             * "stacking" property should be specified either for each series or in plotOptions.
+             */
+            stack: {
+              type: String,
+              observer: '__stackObserver',
+              reflectToAttribute: true
+            },
+
+            /** Used to group series in a stacked chart.
+             * Can be specified for each series separately or at chart's plotOptions for the entire chart.
+             * Possible values are null, "normal" or "percent".
+             * If "stack" property is not defined, then series will be put into default stack.
+             */
+             stacking: {
+              type: String,
+              observer: '__stackingObserver',
               reflectToAttribute: true
             },
 
@@ -346,6 +373,26 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               name: this.title
             });
           }
+        }
+
+        __stackObserver() {
+          if (!this.__hasSeriesConfig()) {
+            return;
+          }
+
+          this._series.update({
+            stack: this.stack
+          });
+        }
+
+        __stackingObserver() {
+          if (!this.__hasSeriesConfig()) {
+            return;
+          }
+
+          this._series.update({
+            stacking: this.stacking
+          });
         }
 
         __unitObserver() {
