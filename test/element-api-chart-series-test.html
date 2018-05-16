@@ -417,8 +417,8 @@
 
       it('should be available to change stack with default stacking in plotOptions', function(done) {
         const stackChart = fixture('stack');
-        stackChart.children[2].stack = "0";
-        stackChart.children[3].stack = "0";
+        stackChart.children[2].stack = '0';
+        stackChart.children[3].stack = '0';
         setTimeout(function() {  
           expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
           expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
@@ -430,7 +430,7 @@
 
       it('should be available to change stacking with default stacking in plotOptions', function(done) {
         const stackChart = fixture('stack');
-        stackChart.children[0].stacking = "percent";
+        stackChart.children[0].stacking = 'percent';
         setTimeout(function() {
           expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(100);
           expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(50);
