@@ -386,6 +386,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __stackingObserver() {
+          if (!this.__isStackingValid()) {
+            this.stacking = null;
+            return;
+          }
+
           if (!this.__hasSeriesConfig()) {
             return;
           }
@@ -393,6 +398,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this._series.update({
             stacking: this.stacking
           });
+        }
+
+        __isStackingValid() {
+          if (['normal', 'percent', null].indexOf(this.stacking) === -1) {
+            this.__showWarn('stacking', '"normal", "percent" or null');
+            return false;
+          }
+          return true;          
         }
 
         __unitObserver() {
@@ -418,7 +431,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __isMarkersValid() {
           if (['shown', 'hidden', 'auto'].indexOf(this.markers) === -1) {
-            console.warn('<vaadin-chart-series> Acceptable values for "markers" are "shown", "hidden" or "auto"');
+            this.__showWarn('markers', '"shown", "hidden" or "auto"');
             return false;
           }
           return true;
@@ -452,6 +465,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           return config;
+        }
+
+        __showWarn(propertyName, acceptedValues) {
+          console.warn('<vaadin-chart-series> Acceptable values for "' + propertyName + '" are ' + acceptedValues);
         }
       }
 
