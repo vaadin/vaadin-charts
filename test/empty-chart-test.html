@@ -18,16 +18,22 @@
     describe('Empty chart', function() {
       var element;
 
-      beforeEach(function() {
-        element = fixture('default');
+      beforeEach(done => {
+        HTMLImports.whenReady(() => {
+          element = fixture('default');
+          window.defer(() => done());
+        });
       });
 
-      it('should be defined', function() {
-        expect(element.constructor.is).to.be.equal(element.localName);
+      it('should be defined', done => {
+        window.defer(() => {
+          expect(element.constructor.is).to.be.equal(element.localName);
+          done();
+        });
       });
 
       it('should have no title', done => {
-        setTimeout(() => {
+        window.defer(() => {
           expect(element.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         });
