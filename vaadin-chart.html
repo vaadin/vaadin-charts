@@ -29,7 +29,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../highcharts/js/modules/solid-gauge.js"></script>
 <script src="../highcharts/js/modules/treemap.js"></script>
 <script src="chart-temporary-display.js"></script>
-<script src="deep-merger.js"></script>
+<script src="chart-deep-merger.js"></script>
 
 <link rel="import" href="vaadin-chart-series.html">
 
@@ -446,8 +446,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          // eslint-disable-next-line no-undef
-          DeepMerger.__deepMerge(options, this.additionalOptions);
+          ChartDeepMerger.__deepMerge(options, this.additionalOptions);
 
           if (this.type) {
             options.chart = options.chart || {};
@@ -931,8 +930,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (resetConfiguration || !this._jsonConfigurationBuffer) {
             this._jsonConfigurationBuffer = {};
           }
-          // eslint-disable-next-line no-undef
-          const configCopy = DeepMerger.__deepMerge({}, jsonConfiguration);
+
+          const configCopy = ChartDeepMerger.__deepMerge({}, jsonConfiguration);
           this.__inflateFunctions(configCopy);
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
 

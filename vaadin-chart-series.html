@@ -9,7 +9,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
 <link rel="import" href="../polymer/polymer-element.html">
 <script src="chart-labels-mapper.js"></script>
-<script src="deep-merger.js"></script>
+<script src="chart-deep-merger.js"></script>
 
 <dom-module id="vaadin-chart-series">
   <script>
@@ -77,8 +77,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         get options() {
-          // eslint-disable-next-line no-undef
-          const options = DeepMerger.__deepMerge({}, this.additionalOptions);
+          const options = ChartDeepMerger.__deepMerge({}, this.additionalOptions);
 
           if (this.type) {
             options.type = this.type;
