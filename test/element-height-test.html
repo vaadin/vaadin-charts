@@ -27,33 +27,38 @@
     describe('Element with height defined', function() {
       var element;
 
-      beforeEach(function() {
-        element = fixture('default');
+      beforeEach(done => {
+        HTMLImports.whenReady(() => {
+          element = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should have the same height as defined', function(done) {
-        setTimeout(() => {
+        window.defer(() => {
           const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
           expect(200).to.be.equal(boundingClientRectContainer.height);
           expect(200).to.be.equal(element.configuration.chartHeight);
           done();
-        }, 150);
+        });
       });
 
       it('chart height container should react to container change', done => {
-        setTimeout(() => {
+        window.defer(() => {
           // The class needs to be added after charts is first drawn
           element.classList.add('expand-height');
 
           // Then the test needs to wait for the component to react to new height
-          setTimeout(() => {
-            const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
+          window.defer(() => {
+            window.defer(() => {
+              const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
 
-            expect(300).to.be.equal(boundingClientRectContainer.height);
-            expect(300).to.be.equal(element.configuration.chartHeight);
-            done();
-          }, 150);
-        }, 100);
+              expect(300).to.be.equal(boundingClientRectContainer.height);
+              expect(300).to.be.equal(element.configuration.chartHeight);
+              done();
+            }, 100);
+          });
+        });
       });
 
     });

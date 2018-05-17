@@ -57,7 +57,7 @@
       var chartContainer;
       var timelineChartContainer;
 
-      before(function(done) {
+      beforeEach(done => {
         HTMLImports.whenReady(() => {
           const mygrid = document.querySelector('chart-in-grid').$.mygrid;
 
@@ -72,7 +72,7 @@
       });
 
       it('chart container should be in the shadow root', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           expect(chartContainer.parentNode).to.not.be.null;
           expect(timelineChartContainer.parentNode).to.not.be.null;
           done();
