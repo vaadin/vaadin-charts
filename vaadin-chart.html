@@ -386,6 +386,19 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Specifies whether to show chart in 3 or in 2 dimensions.
+             * Some display angles are added by default to the "chart.options3d".
+             * 3D display options can be modified via additionalOptions.
+             * 3D is supported by Column, Pie and Scatter3D charts.
+             * More info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts)
+             */
+            chart3d: {
+              type: Boolean,
+              observer: '__chart3dObserver',
+              reflectToAttribute: true
+            },
+
+            /**
              * Represents additional JSON configuration.
              */
             additionalOptions: {
@@ -508,6 +521,17 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.legend = {
               enabled: false
             };
+          }
+
+          if (this.chart3d) {
+            options.chart = options.chart || {};
+            if (options.chart.options3d) {
+              options.chart.options3d.enabled = true;
+            } else {
+              options.chart.options3d = {
+                enabled: true
+              }
+            }
           }
           return options;
         }
@@ -1260,6 +1284,20 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (this.configuration) {
             this.update(this.additionalOptions);
           }
+        }
+
+        __chart3dObserver() {
+          if (!this.configuration) {
+            return;
+          }
+
+          this.configuration.update({
+            chart: {
+              options3d: {
+                enabled: this.chart3d
+              }
+            }
+          });
         }
 
         __callChartFunction(functionName) {
