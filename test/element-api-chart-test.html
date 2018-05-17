@@ -38,12 +38,11 @@
       var chart, chartContainer;
 
       beforeEach(done => {
-        chart = fixture('default');
-        chartContainer = chart.$.chart;
-        Polymer.flush();
-        setTimeout(() => {
-          done();
-        }, 100);
+        HTMLImports.whenReady(() => {
+          chart = fixture('default');
+          chartContainer = chart.$.chart;
+          window.defer(() => done());
+        });
       });
 
       it('should be defined', () => {
@@ -74,96 +73,96 @@
       it('should react to additionalOptions object change', done => {
         chart.additionalOptions = {title: {text: 'Updated title'}};
 
-        setTimeout(() => {
+        window.defer(() => {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Updated title');
           done();
-        }, 100);
+        });
       });
 
       it('should react to additionalOptions subproperty change', done => {
         chart.set('additionalOptions.title.text', 'Reindeer statistics');
 
-        setTimeout(() => {
+        window.defer(() => {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Reindeer statistics');
           done();
-        }, 150);
+        });
       });
 
       it('should have categories set', done => {
-        setTimeout(() => {
+        window.defer(() => {
           const textNodes = chartContainer.querySelectorAll('.highcharts-xaxis-labels > text');
           const text = Array.from(textNodes).map(node => node.textContent);
           expect(text).to.be.deep.equal(['2010', '2011', '2012', '2013']);
           done();
-        }, 50);
+        });
       });
 
       it('should react to categories change', done => {
         chart.setAttribute('categories', '["Jan", "Fev", "Mar", "Abr"]');
-        setTimeout(() => {
+        window.defer(() => {
           const textNodes = chartContainer.querySelectorAll('.highcharts-xaxis-labels > text');
           const text = Array.from(textNodes).map(node => node.textContent);
           expect(text).to.be.deep.equal(['Jan', 'Fev', 'Mar', 'Abr']);
           done();
-        }, 50);
+        });
       });
 
       it('should hide legend', done => {
         expect(chartContainer.querySelector('.highcharts-legend')).to.not.be.null;
         chart.setAttribute('no-legend', true);
-        setTimeout(() => {
+        window.defer(() => {
           expect(chartContainer.querySelector('.highcharts-legend')).to.be.null;
           done();
-        }, 50);
+        });
       });
 
       it('should apply legend config via additional-options', done => {
         chart.removeAttribute('no-legend');
-        setTimeout(() => {
+        window.defer(() => {
           const legendTitle = chartContainer.querySelector('.highcharts-legend-title > text').textContent;
           expect(legendTitle).to.be.equal('Legend title');
           done();
-        }, 50);
+        });
       });
 
       it('should not have tooltips by default', function(done) {
-        setTimeout(function() {
+        window.defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.false;
           done();
-        }, 100);
+        });
       });
 
       it('should have tooltips when enabled', function(done) {
         chart.tooltip = true;
-        setTimeout(function() {
+        window.defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.true;
           done();
-        }, 100);
+        });
       });
 
       it('should have tooltips when tooltip is configured in additional options', function(done) {
         chart = fixture('tooltip');
-        setTimeout(function() {
+        window.defer(() => {
           expect(chart.configuration.tooltip.options.enabled).to.be.true;
           done();
-        }, 150);
+        });
       });
 
       it('should have category minimum set to first category by default', (done) => {
-        setTimeout(() => {
+        window.defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(0);
           done();
-        }, 30);
+        });
       });
 
       it('should be able to set category minimum', (done) => {
         chart = fixture('category');
-        setTimeout(() => {
+        window.defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.min).to.be.equal(1);
           done();
-        }, 120);
+        }, 100);
       });
 
       it('should change category minimum value', done => {
@@ -179,11 +178,11 @@
 
       it('should be able to set category maximum', (done) => {
         chart = fixture('category');
-        setTimeout(() => {
+        window.defer(() => {
           const [xAxis] = chart.configuration.xAxis;
           expect(xAxis.max).to.be.equal(2);
           done();
-        }, 120);
+        }, 100);
       });
 
       it('should change category maximum value', done => {

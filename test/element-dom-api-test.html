@@ -18,8 +18,11 @@
     describe('High-level using DOM API', function() {
       var container;
 
-      beforeEach(function() {
-        container = fixture('default');
+      beforeEach(done => {
+        HTMLImports.whenReady(() => {
+          container = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should be able to create a chart through DOM API', done => {
@@ -27,7 +30,7 @@
         expect(vaadinChart.$).to.be.undefined;
 
         container.appendChild(vaadinChart);
-        setTimeout(() => {
+        window.defer(() => {
           expect(vaadinChart.$.chart.querySelector('.highcharts-title')).to.be.null;
           done();
         });
@@ -37,10 +40,10 @@
         const vaadinChart = document.createElement('vaadin-chart');
         vaadinChart.setAttribute('title', 'Custom title');
         container.appendChild(vaadinChart);
-        setTimeout(() => {
+        window.defer(() => {
           expect(vaadinChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('Custom title');
           done();
-        }, 50);
+        });
       });
 
       it('should be able to add series', done => {
@@ -53,7 +56,7 @@
 
         container.appendChild(vaadinChart);
 
-        setTimeout(function() {
+        window.defer(() => {
           expect(Array.from(vaadinChart.$.chart.querySelectorAll('.highcharts-series'))).to.have.lengthOf(1);
           done();
         }, 100);

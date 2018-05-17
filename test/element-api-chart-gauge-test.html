@@ -22,21 +22,20 @@
       var element;
 
       beforeEach(done => {
-        element = fixture('default');
-        Polymer.flush();
-        setTimeout(() => {
-          done();
-        }, 100);
+        HTMLImports.whenReady(() => {
+          element = fixture('default');
+          window.defer(() => done());
+        });
       });
 
       it('should have one gauge series', done => {
-        setTimeout(() => {
+        window.defer(() => {
           const series = element.$.chart.querySelectorAll('.highcharts-data-labels.highcharts-gauge-series');
           expect(series).to.have.length(1);
           const text = Array.from(series).map(node => node.textContent);
           expect(text).to.be.deep.equal(['80']);
           done();
-        }, 50);
+        });
       });
     });
   </script>
