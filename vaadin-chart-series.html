@@ -331,7 +331,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (!isFinite(this.valueMin)) {
-            console.warn('<vaadin-chart-series> Acceptable values for "value-min" are Numbers or null');
+            this.__showWarn('value-min', 'Numbers or null');
             return;
           }
 
@@ -348,7 +348,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (!isFinite(this.valueMax)) {
-            console.warn('<vaadin-chart-series> Acceptable values for "value-max" are Numbers or null');
+            this.__showWarn('value-max', 'Numbers or null');  
             return;
           }
 
