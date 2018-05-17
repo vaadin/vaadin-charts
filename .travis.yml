@@ -35,10 +35,10 @@ before_script:
 
 script:
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-      polymer test --env saucelabs-ie && travis_retry polymer test --env saucelabs-others;
+      polymer test --env saucelabs-ie && polymer test --env saucelabs-others;
     fi
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      polymer test --env saucelabs-cron;
+      travis_retry polymer test --env saucelabs-cron;
     fi
 
 before_deploy:

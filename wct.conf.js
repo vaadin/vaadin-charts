@@ -18,14 +18,14 @@ module.exports = {
       ],
 
       'saucelabs-others': [
-        'macOS 10.12/ipad@11.0',
-        'macOS 10.12/iphone@10.3',
         'macOS 10.12/safari@11.0',
         'Windows 10/firefox@58',
         'Windows 10/microsoftedge@16'
       ],
 
       'saucelabs-cron': [
+        'macOS 10.12/ipad@11.0',
+        'macOS 10.12/iphone@10.3',
         'Android/chrome',
         'Windows 10/chrome@64',
         'Windows 10/firefox@58'
