@@ -235,6 +235,28 @@
         <chart-event-listeners></chart-event-listeners>
       </template>
     </demo-snippet>
+
+    <h3>3D column chart with stacks</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-chart type="column" chart3d 
+          additional-options='{"chart": {"options3d": {"alpha": 15, "beta": 15}},"plotOptions": {"series": {"stacking": "normal"}}}'>
+          <vaadin-chart-series values="[1,2,8,18]" stack="0"></vaadin-chart-series>
+          <vaadin-chart-series values="[1,2,5,17]" stack="0"></vaadin-chart-series>
+          <vaadin-chart-series values="[1,2,4,16]" stack="1"></vaadin-chart-series>
+          <vaadin-chart-series values="[1,4,9,15]" stack="1"></vaadin-chart-series>
+        </vaadin-chart>
+      </template>
+    </demo-snippet>
+
+    <h3>3D pie chart</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-chart type="pie" chart3d additional-options='{"chart": {"options3d": {"alpha": 30}},"plotOptions": {"pie": {"depth": 50}}}'>
+          <vaadin-chart-series values="[2, 4, 6, 1, 3]"></vaadin-chart-series>
+        </vaadin-chart>
+      </template>
+    </demo-snippet>
   </div>
 </body>
 
