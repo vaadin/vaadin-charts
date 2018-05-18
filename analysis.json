@@ -2448,12 +2448,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 3,
-              "column": 4
+              "line": 4,
+              "column": 2
             },
             "end": {
-              "line": 5,
-              "column": 5
+              "line": 6,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2469,12 +2469,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 7,
-              "column": 4
+              "line": 8,
+              "column": 2
             },
             "end": {
-              "line": 23,
-              "column": 5
+              "line": 24,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2492,16 +2492,15 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 1,
-          "column": 2
+          "line": 2,
+          "column": 29
         },
         "end": {
-          "line": 24,
-          "column": 3
+          "line": 25,
+          "column": 1
         }
       },
-      "privacy": "public",
-      "name": "ChartDeepMerger"
+      "privacy": "public"
     },
     {
       "description": "",
@@ -2515,12 +2514,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 23,
-              "column": 4
+              "line": 24,
+              "column": 2
             },
             "end": {
-              "line": 25,
-              "column": 5
+              "line": 26,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2536,12 +2535,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 27,
-              "column": 4
+              "line": 28,
+              "column": 2
             },
             "end": {
-              "line": 29,
-              "column": 5
+              "line": 30,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2557,12 +2556,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 31,
-              "column": 4
+              "line": 32,
+              "column": 2
             },
             "end": {
-              "line": 38,
-              "column": 5
+              "line": 39,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2578,12 +2577,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 40,
-              "column": 4
+              "line": 41,
+              "column": 2
             },
             "end": {
-              "line": 50,
-              "column": 5
+              "line": 51,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2599,12 +2598,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 52,
-              "column": 4
+              "line": 53,
+              "column": 2
             },
             "end": {
-              "line": 55,
-              "column": 5
+              "line": 56,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2623,12 +2622,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 57,
-              "column": 4
+              "line": 58,
+              "column": 2
             },
             "end": {
-              "line": 83,
-              "column": 5
+              "line": 84,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2644,16 +2643,15 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 1,
-          "column": 2
+          "line": 2,
+          "column": 31
         },
         "end": {
-          "line": 84,
-          "column": 3
+          "line": 85,
+          "column": 1
         }
       },
-      "privacy": "public",
-      "name": "ChartLabelsMapper"
+      "privacy": "public"
     },
     {
       "description": "",
@@ -2668,12 +2666,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 3,
-              "column": 4
+              "line": 4,
+              "column": 2
             },
             "end": {
-              "line": 5,
-              "column": 5
+              "line": 6,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2689,12 +2687,12 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 7,
-              "column": 4
+              "line": 8,
+              "column": 2
             },
             "end": {
-              "line": 23,
-              "column": 5
+              "line": 24,
+              "column": 3
             }
           },
           "metadata": {},
@@ -2712,16 +2710,15 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 1,
-          "column": 2
+          "line": 2,
+          "column": 29
         },
         "end": {
-          "line": 24,
-          "column": 3
+          "line": 25,
+          "column": 1
         }
       },
-      "privacy": "public",
-      "name": "ChartDeepMerger"
+      "privacy": "public"
     }
   ]
 }
