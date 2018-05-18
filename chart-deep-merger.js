@@ -1,6 +1,8 @@
+window.Vaadin = window.Vaadin || {};
+Vaadin.Charts = Vaadin.Charts || {};
 /** @private */
 // eslint-disable-next-line no-unused-vars
-var ChartDeepMerger = (() => class {
+Vaadin.Charts.ChartDeepMerger = (() => class {
 
   static __isObject(item) {
     return (item && typeof item === 'object' && !Array.isArray(item));
