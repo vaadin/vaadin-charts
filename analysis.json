@@ -1048,7 +1048,7 @@
             {
               "name": "chart3d",
               "type": "boolean",
-              "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via additionalOptions.\n3D is supported by Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
+              "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via additionalOptions.\n3D is supported by Bar, Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
               "privacy": "public",
               "sourceRange": {
                 "start": {
@@ -2254,7 +2254,7 @@
             },
             {
               "name": "chart3d",
-              "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via additionalOptions.\n3D is supported by Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
+              "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via additionalOptions.\n3D is supported by Bar, Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
               "sourceRange": {
                 "start": {
                   "line": 392,
