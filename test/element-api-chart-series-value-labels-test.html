@@ -84,6 +84,20 @@
         }, 70);
       });
 
+      it('should have values (array of arrays where the first element is a string) as labels by default', function(done) {
+        const valuesArrayArray = [['Lagos', 20], ['Rio', 50], ['Helsinki', 80]];
+        element.values = valuesArrayArray;
+        setTimeout(function() {
+          const firstSeries = chart.configuration.series[0];
+          const actual = firstSeries.data.map(e => [e.name, e.y, e.x]);
+
+          const expected = valuesArrayArray.slice();
+          expected.map((e, index) => e.push(index));
+          expect(expected).to.deep.equal(actual);
+          done();
+        }, 70);
+      });
+
       it('should have values (array of objects) as labels by default', function(done) {
         const valuesObjectArray = [{name: '10', y: 20}, {name: '40', y: 50}, {name: '70', y: 80}];
         element.values = valuesObjectArray;

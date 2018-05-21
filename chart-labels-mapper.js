@@ -61,7 +61,14 @@ class ChartLabelsMapper {
         const result = this.__isObject(item) ? Object.assign({}, item) : {};
 
         if (Array.isArray(item)) {
-          [result.x, result.y] = item;
+          // Set default name like Highcharts as specified here https://api.highcharts.com/highcharts/series.area.data
+          // just in case the user-supplied mapper is unable to find a befitting name
+          if (typeof item[0] === 'string') {
+            result.name = item[0];
+            result.y = item[1];
+          } else {
+            [result.x, result.y] = item;
+          }
         } else if (!this.__isObject(item)) {
           result.y = item;
         }
