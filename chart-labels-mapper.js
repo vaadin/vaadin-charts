@@ -64,8 +64,7 @@ class ChartLabelsMapper {
           // Set default name like Highcharts as specified here https://api.highcharts.com/highcharts/series.area.data
           // just in case the user-supplied mapper is unable to find a befitting name
           if (typeof item[0] === 'string') {
-            result.name = item[0];
-            result.y = item[1];
+            [result.name, result.y] = item;
           } else {
             [result.x, result.y] = item;
           }

@@ -129,7 +129,7 @@
       });
 
       it('should accept labels as mapping object for values (array of arrays)', function(done) {
-        const valuesArrayArray = [[10, 20], [40, 50], [70, 80], ['Vaadin', 90]];
+        const valuesArrayArray = [['Vaadin', 90], ['Flow', 30], [10, 20], [40, 50], [70, 80]];
         element.values = valuesArrayArray;
 
         const labelsAsObject = {10: 'Mon', 20: 'Tue', 30: 'Wed', 50: 'Thur'};
@@ -137,7 +137,7 @@
 
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          const expected = [[10, 'Tue'], [40, 'Thur'], [70, 80], [0, 'Vaadin']];
+          const expected = [[0, 'Vaadin'], [1, 'Wed'], [10, 'Tue'], [40, 'Thur'], [70, 80]];
           const actual = firstSeries.data.map(e => [e.x, e.name]);
 
           expect(expected).to.deep.equal(actual);
