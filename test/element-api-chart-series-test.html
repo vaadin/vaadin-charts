@@ -72,6 +72,17 @@
         </vaadin-chart>
     </template>
   </test-fixture>
+  <test-fixture id="additionalseries">
+    <template>
+      <vaadin-chart>
+        <vaadin-chart-series id="additional-series"
+                             values="[10,20,30]"
+                             title="series-title"
+                             additional-options='{"name": "Awe", "type": "column"}'>
+        </vaadin-chart-series>
+      </vaadin-chart>
+    </template>
+  </test-fixture>
   <test-fixture id="multipleaxes">
     <template>
       <vaadin-chart additional-options='{"yAxis": [{"id": "additional-unit-1"},{"id": "additional-unit-2"}]}'>
@@ -85,6 +96,16 @@
         <vaadin-chart-series title="First" values="[1,2,8,4]" unit="first"></vaadin-chart-series>
         <vaadin-chart-series title="Second" values="[-4,0,2,16]" unit="second" value-max="40"></vaadin-chart-series>
         <vaadin-chart-series title="Third" values="[0,-1,2,-16]" unit="first" value-min="0"></vaadin-chart-series>
+      </vaadin-chart>
+    </template>
+  </test-fixture>
+  <test-fixture id="stack">
+    <template>
+      <vaadin-chart additional-options='{"plotOptions": {"series": {"stacking": "normal"}}}' >
+        <vaadin-chart-series title="First" values="[1,2,8,10]" stack="0"></vaadin-chart-series>
+        <vaadin-chart-series title="Second" values="[0,0,2,10]" stack="0"></vaadin-chart-series>
+        <vaadin-chart-series title="Third" values="[0,1,2,10]" stack="1" ></vaadin-chart-series>
+        <vaadin-chart-series title="4th" values="[1,0,1,10]" stack="1" ></vaadin-chart-series>
       </vaadin-chart>
     </template>
   </test-fixture>
@@ -337,7 +358,6 @@
         });
       });
 
-
       it('should not remove user generated axis', function(done) {
         const multipleAxesChart = fixture('multipleaxes');
         Polymer.RenderStatus.afterNextRender(chartContainer, () => {
@@ -391,6 +411,86 @@
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(10, 5);
           done();
         });
+      });
+
+      it('should be available initially to set stack with default stacking in plotOptions', function(done) {
+        const stackChart = fixture('stack');
+        setTimeout(function() {
+          expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(20);
+          expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(10);
+          expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
+          expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
+          done();
+        }, 120);
+      });
+
+      it('should be available to change stack with default stacking in plotOptions', function(done) {
+        const stackChart = fixture('stack');
+        stackChart.children[2].stack = '0';
+        stackChart.children[3].stack = '0';
+        setTimeout(function() {
+          expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
+          expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
+          expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
+          expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
+          done();
+        }, 120);
+      });
+
+      it('should be available to change stacking with default stacking in plotOptions', function(done) {
+        const stackChart = fixture('stack');
+        stackChart.children[0].stacking = 'percent';
+        setTimeout(function() {
+          expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(100);
+          expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(50);
+          expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(100);
+          expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(50);
+          done();
+        }, 120);
+      });
+
+      it('should have additional-options', done => {
+        const chart = fixture('additionalseries');
+
+        setTimeout(() => {
+          const hcSeries = chart.configuration.series[0];
+          expect(hcSeries.type).to.be.equal('column');
+          done();
+        }, 200);
+      });
+
+      it('additional-options should not overwrite top-level element properties', done => {
+        const chart = fixture('additionalseries');
+
+        setTimeout(() => {
+          const hcSeries = chart.configuration.series[0];
+          expect(hcSeries.name).to.be.equal('series-title');
+          done();
+        }, 200);
+      });
+
+      it('should react to additionalOptions object change', done => {
+        const chart = fixture('additionalseries');
+        const series = chart.querySelector('vaadin-chart-series');
+        series.additionalOptions = {type: 'line'};
+
+        setTimeout(() => {
+          const hcSeries = chart.configuration.series[0];
+          expect(hcSeries.type).to.be.equal('line');
+          done();
+        }, 200);
+      });
+
+      it('should react to additionalOptions subproperty change', done => {
+        const chart = fixture('additionalseries');
+        const series = chart.querySelector('vaadin-chart-series');
+        series.additionalOptions.type = 'line';
+
+        setTimeout(() => {
+          const hcSeries = chart.configuration.series[0];
+          expect(hcSeries.type).to.be.equal('line');
+          done();
+        }, 200);
       });
 
     });

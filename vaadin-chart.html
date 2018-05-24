@@ -27,7 +27,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../highcharts/js/modules/heatmap.js"></script>
 <script src="../highcharts/js/modules/solid-gauge.js"></script>
 <script src="../highcharts/js/modules/treemap.js"></script>
-<script src="./chart-temporary-display.js"></script>
+<script src="chart-temporary-display.js"></script>
+<script src="chart-deep-merger.js"></script>
 
 <link rel="import" href="vaadin-chart-series.html">
 
@@ -53,6 +54,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
     }
 
     {
+      const {ChartDeepMerger} = Vaadin.Charts;
 
       /**
        * `<vaadin-chart>` is a Polymer 2 element for creating high quality charts.
@@ -383,6 +385,20 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Specifies whether to show chart in 3 or in 2 dimensions.
+             * Some display angles are added by default to the "chart.options3d" (`{alpha: 15, beta: 15, depth: 50}`).
+             * 3D display options can be modified via `additionalOptions`.
+             * The thickness of a Pie chart can be set on `additionalOptions` through `plotOptions.pie.depth`.
+             * 3D is supported by Bar, Column, Pie and Scatter3D charts.
+             * More info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).
+             */
+            chart3d: {
+              type: Boolean,
+              observer: '__chart3dObserver',
+              reflectToAttribute: true
+            },
+
+            /**
              * Represents additional JSON configuration.
              */
             additionalOptions: {
@@ -418,6 +434,13 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             }
           };
 
+          this._baseChart3d = {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50
+          };
+
           this.__mutationCallback = this.__mutationCallback.bind(this);
         }
 
@@ -444,7 +467,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          this.__deepMerge(options, this.additionalOptions);
+          ChartDeepMerger.__deepMerge(options, this.additionalOptions);
 
           if (this.type) {
             options.chart = options.chart || {};
@@ -505,6 +528,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.legend = {
               enabled: false
             };
+          }
+
+          if (this.chart3d) {
+            options.chart = options.chart || {};
+
+            options.chart.options3d = Object.assign({}, this._baseChart3d, options.chart.options3d);
           }
           return options;
         }
@@ -928,7 +957,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (resetConfiguration || !this._jsonConfigurationBuffer) {
             this._jsonConfigurationBuffer = {};
           }
-          const configCopy = this.__deepMerge({}, jsonConfiguration);
+
+          const configCopy = ChartDeepMerger.__deepMerge({}, jsonConfiguration);
           this.__inflateFunctions(configCopy);
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
 
@@ -1065,6 +1095,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   }
                 };
 
+                if (event.type === 'afterSetExtremes') {
+                  if (event.min == null || event.max == null) {
+                    return;
+                  }
+                }
                 // Workaround for vaadin-charts-flow because of https://github.com/vaadin/flow/issues/3102
                 if (event.type === 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
@@ -1253,26 +1288,35 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
-        __isObject(item) {
-          return (item && typeof item === 'object' && !Array.isArray(item));
-        }
-
-        __deepMerge(target, source) {
-          if (this.__isObject(source) && this.__isObject(target)) {
-            for (const key in source) {
-              if (this.__isObject(source[key])) {
-                if (!target[key]) {
-                  Object.assign(target, {[key]: {}});
-                }
-
-                this.__deepMerge(target[key], source[key]);
-              } else {
-                Object.assign(target, {[key]: source[key]});
-              }
-            }
+        __chart3dObserver() {
+          if (!this.configuration) {
+            return;
           }
 
-          return target;
+          if (this.chart3d) {
+            this.configuration.update({
+              chart: {
+                options3d: Object.assign(
+                  {},
+                  this._baseChart3d,
+                  (
+                    this.additionalOptions
+                    && this.additionalOptions.chart
+                    && this.additionalOptions.chart.options3d
+                  ),
+                  {enabled: true}
+                )
+              }
+            });
+          } else {
+            this.configuration.update({
+              chart: {
+                options3d: {
+                  enabled: false
+                }
+              }
+            });
+          }
         }
 
         __callChartFunction(functionName) {

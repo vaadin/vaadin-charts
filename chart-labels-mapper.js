@@ -1,5 +1,8 @@
+window.Vaadin = window.Vaadin || {};
+Vaadin.Charts = Vaadin.Charts || {};
+/** @private */
 // eslint-disable-next-line no-unused-vars
-class ChartLabelsMapper {
+Vaadin.Charts.ChartLabelsMapper = (() => class {
 
   constructor(mapper) {
     const value = mapper || [];
@@ -61,7 +64,13 @@ class ChartLabelsMapper {
         const result = this.__isObject(item) ? Object.assign({}, item) : {};
 
         if (Array.isArray(item)) {
-          [result.x, result.y] = item;
+          // Set default name like Highcharts as specified here https://api.highcharts.com/highcharts/series.area.data
+          // just in case the user-supplied mapper is unable to find a befitting name
+          if (typeof item[0] === 'string') {
+            [result.name, result.y] = item;
+          } else {
+            [result.x, result.y] = item;
+          }
         } else if (!this.__isObject(item)) {
           result.y = item;
         }
@@ -82,4 +91,4 @@ class ChartLabelsMapper {
       });
     }
   }
-}
+})();
