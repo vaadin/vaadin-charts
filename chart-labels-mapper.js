@@ -1,4 +1,10 @@
+/**
+ * @namespace Vaadin
+ */
 window.Vaadin = window.Vaadin || {};
+/**
+ * @namespace Vaadin.Charts
+ */
 Vaadin.Charts = Vaadin.Charts || {};
 /** @private */
 // eslint-disable-next-line no-unused-vars
@@ -47,7 +53,7 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
     } else if (typeof value === 'object') {
       this.__assignMapper(value, 'object');
     } else {
-      console.warn(`VaadinChartSeries::ChartLabelsMapper: unsupported type for mapping property: 
+      console.warn(`VaadinChartSeries::ChartLabelsMapper: unsupported type for mapping property:
       ${typeof value} - ${value}. Will use the pass-through mapper instead`);
       this.__assignMapper([], 'array'); // Pass-through.
     }

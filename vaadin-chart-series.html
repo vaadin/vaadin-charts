@@ -18,8 +18,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
     }
 
     {
-      const {ChartLabelsMapper, ChartDeepMerger} = Vaadin.Charts;
-
       /**
        * `<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.
        *
@@ -78,7 +76,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         get options() {
-          const options = ChartDeepMerger.__deepMerge({}, this.additionalOptions);
+          const options = Vaadin.Charts.ChartDeepMerger.__deepMerge({}, this.additionalOptions);
 
           if (this.type) {
             options.type = this.type;
@@ -152,7 +150,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * or mapping array shorter than the list of values), results in the actual value being used as the label.
              */
             valueLabels: {
-              type: ChartLabelsMapper,
+              type: Vaadin.Charts.ChartLabelsMapper,
               reflectToAttribute: true
             },
 
@@ -161,8 +159,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * on valueLabels can be preserved.
              */
             __labelsMapper: {
-              type: ChartLabelsMapper,
-              value: () => new ChartLabelsMapper([])
+              type: Vaadin.Charts.ChartLabelsMapper,
+              value: () => new Vaadin.Charts.ChartLabelsMapper([])
             },
 
             /**
@@ -305,8 +303,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /** @private */
         _deserializeValue(value, type) {
-          if (type == ChartLabelsMapper) {
-            return new ChartLabelsMapper(value).mapper;
+          if (type == Vaadin.Charts.ChartLabelsMapper) {
+            return new Vaadin.Charts.ChartLabelsMapper(value).mapper;
           }
 
           return super._deserializeValue(value, type);
@@ -314,7 +312,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         /** @private */
         _serializeValue(value) {
-          if (value instanceof ChartLabelsMapper) {
+          if (value instanceof Vaadin.Charts.ChartLabelsMapper) {
             return value.type === 'function' ? value.mapper.toString() : super._serializeValue(value.mapper);
           }
           return super._serializeValue(value);
@@ -328,10 +326,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
         __labelsObserver(changeRecord, values) {
           const currentLabels = this.valueLabels || [];
-          if (currentLabels instanceof ChartLabelsMapper) {
+          if (currentLabels instanceof Vaadin.Charts.ChartLabelsMapper) {
             this.__labelsMapper = currentLabels;
           } else {
-            this.__labelsMapper = new ChartLabelsMapper(currentLabels);
+            this.__labelsMapper = new Vaadin.Charts.ChartLabelsMapper(currentLabels);
           }
 
           if (this.__hasSeriesConfig()) {
@@ -357,7 +355,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             this._series.yAxis.update({
               min: this.valueMin
             });
-          } 
+          }
         }
 
         __valueMaxObserver() {
@@ -366,7 +364,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (!isFinite(this.valueMax)) {
-            this.__showWarn('value-max', 'Numbers or null');  
+            this.__showWarn('value-max', 'Numbers or null');
             return;
           }
 
@@ -374,7 +372,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             this._series.yAxis.update({
               max: this.valueMax
             });
-          } 
+          }
         }
 
         __typeObserver() {
@@ -495,8 +493,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * @namespace Vaadin
        */
-      window.Vaadin = window.Vaadin || {};
-      Vaadin.ChartSeriesElement = ChartSeriesElement;
+      window.Vaadin.ChartSeriesElement = ChartSeriesElement;
     }
   </script>
 </dom-module>
