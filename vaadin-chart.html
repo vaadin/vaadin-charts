@@ -876,7 +876,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           // This is needed because Highcharts currently doesn't react. A condition not catered for is
           // when all points are removed from all series without removing any series.
           const isEmpty = this.configuration.series.length === 0 ||
-              this.configuration.series.map(e => e.values.length === 0).reduce((e1, e2) => e1 && e2, true);
+              this.configuration.series.map(e => e.data.length === 0).reduce((e1, e2) => e1 && e2, true);
           if (isEmpty) {
             this.configuration.hideNoData();
             this.configuration.showNoData(this.emptyText);
