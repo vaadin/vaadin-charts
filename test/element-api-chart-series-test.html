@@ -499,9 +499,20 @@
         }, 200);
       });
 
-      it('should be able to set neck-position', () => {
+      it('should be able to set neck-width', () => {
         const { neckWidth } = series.options;
         expect(neckWidth).to.be.equal(element.neckWidth);
+      });
+
+      it('should be able to change neck-width', () => {
+        let { neckWidth } = series.options;
+        expect(neckWidth).to.be.equal(element.neckWidth);
+
+        const newNeckWidth = 100;
+        element.neckWidth = newNeckWidth;
+        neckWidth = series.options.neckWidth;
+
+        expect(neckWidth).to.be.equal(newNeckWidth);
       });
 
     });
