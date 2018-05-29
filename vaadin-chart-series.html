@@ -119,6 +119,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.yAxisValueMax = this.valueMax;
           }
 
+          if (this.neckWidth) {
+            options.neckWidth = this.neckWidth;
+          }
+
           return options;
         }
 
@@ -251,6 +255,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               reflectToAttribute: true
             },
 
+            neckWidth: {
+              type: String,
+              reflectToAttribute: true
+            },
+
             /**
              * Object with the configured options defined and used to create a series.
              *
@@ -357,7 +366,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             this._series.yAxis.update({
               min: this.valueMin
             });
-          } 
+          }
         }
 
         __valueMaxObserver() {
@@ -366,7 +375,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           if (!isFinite(this.valueMax)) {
-            this.__showWarn('value-max', 'Numbers or null');  
+            this.__showWarn('value-max', 'Numbers or null');
             return;
           }
 
@@ -374,7 +383,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             this._series.yAxis.update({
               max: this.valueMax
             });
-          } 
+          }
         }
 
         __typeObserver() {
