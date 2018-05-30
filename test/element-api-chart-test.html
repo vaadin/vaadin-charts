@@ -265,46 +265,36 @@
 
       it('should display empty-text when all series are removed form existing charts', done => {
         chart = fixture('nodata')[2];
+        const newEmptyText = 'A real chart';
+        chart.emptyText = newEmptyText;
+
+        [...chart.childNodes]
+          .filter(e => e.tagName === 'VAADIN-CHART-SERIES')
+          .forEach(e => chart.removeChild(e));
+
         setTimeout(() => {
-          const emptyText = chart.$.chart.querySelector('.highcharts-no-data > text > tspan');
-          expect(emptyText).to.be.null;
+          const actual = chart.$.chart.querySelector('.highcharts-no-data > text > tspan').textContent;
+          expect(newEmptyText).to.be.equal(actual);
 
-          const newEmptyText = 'A real chart';
-          chart.emptyText = newEmptyText;
-
-          [...chart.childNodes]
-            .filter(e => e.tagName === 'VAADIN-CHART-SERIES')
-            .forEach(e => chart.removeChild(e));
-
-          setTimeout(() => {
-            const actual = chart.$.chart.querySelector('.highcharts-no-data > text > tspan').textContent;
-            expect(newEmptyText).to.be.equal(actual);
-
-            done();
-          }, 100);
+          done();
         }, 100);
       });
 
       it('should display empty-text when all data-containing series are removed from existing charts', done => {
         chart = fixture('nodata')[2];
+        const newEmptyText = 'A real chart';
+        chart.emptyText = newEmptyText;
+
+        [...chart.childNodes]
+          .filter(e => e.tagName === 'VAADIN-CHART-SERIES')
+          .splice(0, 2)
+          .forEach(e => chart.removeChild(e));
+
         setTimeout(() => {
-          const emptyText = chart.$.chart.querySelector('.highcharts-no-data > text > tspan');
-          expect(emptyText).to.be.null;
+          const actual = chart.$.chart.querySelector('.highcharts-no-data > text > tspan').textContent;
+          expect(newEmptyText).to.be.equal(actual);
 
-          const newEmptyText = 'A real chart';
-          chart.emptyText = newEmptyText;
-
-          [...chart.childNodes]
-            .filter(e => e.tagName === 'VAADIN-CHART-SERIES')
-            .splice(0, 2)
-            .forEach(e => chart.removeChild(e));
-
-          setTimeout(() => {
-            const actual = chart.$.chart.querySelector('.highcharts-no-data > text > tspan').textContent;
-            expect(newEmptyText).to.be.equal(actual);
-
-            done();
-          }, 100);
+          done();
         }, 100);
       });
     });
