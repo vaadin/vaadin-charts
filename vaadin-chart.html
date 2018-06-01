@@ -459,7 +459,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         connectedCallback() {
           super.connectedCallback();
-          this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
             // Detect if the chart had already been initialized. This might happen in
             // environments where the chart is lazily attached (e.g Grid).
@@ -471,6 +470,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
             this._jsonConfigurationBuffer = null;
             this.__initChart(options);
+            this.__addChildObserver();
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
             this.__mutationObserver.observe(this, config);
@@ -540,12 +540,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             options.legend = {
               enabled: false
             };
-          }
-
-          if (this.chart3d) {
-            options.chart = options.chart || {};
-
-            options.chart.options3d = Object.assign({}, this._baseChart3d, options.chart.options3d);
           }
 
           if (this.emptyText) {
@@ -1317,34 +1311,36 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __chart3dObserver() {
-          if (!this.configuration) {
-            return;
-          }
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            if (!this.configuration) {
+              return;
+            }
 
-          if (this.chart3d) {
-            this.configuration.update({
-              chart: {
-                options3d: Object.assign(
-                  {},
-                  this._baseChart3d,
-                  (
-                    this.additionalOptions
-                    && this.additionalOptions.chart
-                    && this.additionalOptions.chart.options3d
-                  ),
-                  {enabled: true}
-                )
-              }
-            });
-          } else {
-            this.configuration.update({
-              chart: {
-                options3d: {
-                  enabled: false
+            if (this.chart3d) {
+              this.configuration.update({
+                chart: {
+                  options3d: Object.assign(
+                    {},
+                    this._baseChart3d,
+                    (
+                      this.additionalOptions
+                      && this.additionalOptions.chart
+                      && this.additionalOptions.chart.options3d
+                    ),
+                    {enabled: true}
+                  )
                 }
-              }
-            });
-          }
+              });
+            } else {
+              this.configuration.update({
+                chart: {
+                  options3d: {
+                    enabled: false
+                  }
+                }
+              });
+            }
+          });
         }
 
         __emptyTextObserver() {
