@@ -11,7 +11,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" unit="{{firstUnit}}" neck-width="{{neckWidth}}"></vaadin-chart-series>
+        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" unit="{{firstUnit}}" neck-width="{{neckWidth}}" neck-position="{{neckPosition}}"></vaadin-chart-series>
       </vaadin-chart>
     </template>
 
@@ -45,6 +45,10 @@
                 value: 'series-unit-2'
               },
               neckWidth: {
+                type: String,
+                value: '20%'
+              },
+              neckPosition: {
                 type: String,
                 value: '20%'
               }
@@ -513,6 +517,11 @@
         neckWidth = series.options.neckWidth;
 
         expect(neckWidth).to.be.equal(newNeckWidth);
+      });
+
+      it('should be able to set neck-position', () => {
+        const {neckHeight} = series.options;
+        expect(neckHeight).to.be.equal(element.neckPosition);
       });
 
     });
