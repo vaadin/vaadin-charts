@@ -265,6 +265,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              */
             neckPosition: {
               type: String,
+              observer: '__neckPositionOberserver',
               reflectToAttribute: true
             },
 
@@ -442,6 +443,15 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
           this._series.update({
             stacking: this.stacking
+          });
+        }
+
+        __neckPositionOberserver() {
+          if (!this.__hasSeriesConfig()) {
+            return;
+          }
+          this._series.update({
+            neckHeight: this.neckPosition
           });
         }
 
