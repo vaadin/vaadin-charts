@@ -1,5 +1,5 @@
 (function() {
-  if (Highcharts) {
+  if (window.Highcharts) {
     // One regression was introduced after 5.0.12 that was causing the
     // chart to get removed and never put back to the original location
     // More info at https://github.com/highcharts/highcharts/issues/7024
