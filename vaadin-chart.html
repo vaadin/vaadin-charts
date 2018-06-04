@@ -14,12 +14,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <link rel="import" href="../vaadin-element-mixin/vaadin-element-mixin.html">
 
 <link rel="import" href="vaadin-chart-default-theme.html">
-<script src="../highcharts/js/highstock.js"></script>
-<link rel="import" href="highcharts-imports.html">
-
 <script src="chart-temporary-display.js"></script>
 <script src="chart-deep-merger.js"></script>
 
+<link rel="import" href="highcharts-imports.html">
 <link rel="import" href="vaadin-chart-series.html">
 
 <dom-module id="vaadin-chart">
@@ -58,7 +56,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
        * ```
        * 1. Install Vaadin Charts
        * ```
-       * bower install --save vaadin-charts#6.1.0-alpha5
+       * bower install --save vaadin-charts#6.1.0-alpha6
        * ```
        * 1. Import `<vaadin-chart>` to your app
        * Edit the file `src/my-app/my-app.html` and add the following snipped before the `<dom-module>` tag
@@ -387,6 +385,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Specifies the message displayed on a chart without displayable data.
+             */
+            emptyText: {
+              type: String,
+              value: ' ',
+              observer: '__emptyTextObserver',
+              reflectToAttribute: true
+            },
+
+            /**
              * Represents additional JSON configuration.
              */
             additionalOptions: {
@@ -435,7 +443,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         connectedCallback() {
           super.connectedCallback();
-          this.__addChildObserver();
           Polymer.RenderStatus.beforeNextRender(this, () => {
             // Detect if the chart had already been initialized. This might happen in
             // environments where the chart is lazily attached (e.g Grid).
@@ -447,6 +454,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             const options = Object.assign({}, this.options, this._jsonConfigurationBuffer);
             this._jsonConfigurationBuffer = null;
             this.__initChart(options);
+            this.__addChildObserver();
             const config = {attributes: true, characterData: true};
             this.__mutationObserver = new MutationObserver(this.__mutationCallback);
             this.__mutationObserver.observe(this, config);
@@ -518,11 +526,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             };
           }
 
-          if (this.chart3d) {
-            options.chart = options.chart || {};
-
-            options.chart.options3d = Object.assign({}, this._baseChart3d, options.chart.options3d);
+          if (this.emptyText) {
+            options.lang = options.lang || {};
+            options.lang.noData = this.emptyText;
           }
+
           return options;
         }
 
@@ -841,6 +849,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
 
           this.__removeAxisIfEmpty();
+
+          // Best effort to make chart display custom empty-text messages when series are removed.
+          // This is needed because Highcharts currently doesn't react. A condition not catered for is
+          // when all points are removed from all series without removing any series.
+          const isEmpty = this.configuration.series.length === 0 ||
+              this.configuration.series.map(e => e.data.length === 0).reduce((e1, e2) => e1 && e2, true);
+          if (isEmpty) {
+            this.configuration.hideNoData();
+            this.configuration.showNoData(this.emptyText);
+          }
         }
 
         __initChart(options) {
@@ -1277,34 +1295,50 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         __chart3dObserver() {
+          Polymer.RenderStatus.afterNextRender(this, () => {
+            if (!this.configuration) {
+              return;
+            }
+
+            if (this.chart3d) {
+              this.configuration.update({
+                chart: {
+                  options3d: Object.assign(
+                    {},
+                    this._baseChart3d,
+                    (
+                      this.additionalOptions
+                      && this.additionalOptions.chart
+                      && this.additionalOptions.chart.options3d
+                    ),
+                    {enabled: true}
+                  )
+                }
+              });
+            } else {
+              this.configuration.update({
+                chart: {
+                  options3d: {
+                    enabled: false
+                  }
+                }
+              });
+            }
+          });
+        }
+
+        __emptyTextObserver() {
           if (!this.configuration) {
             return;
           }
 
-          if (this.chart3d) {
-            this.configuration.update({
-              chart: {
-                options3d: Object.assign(
-                  {},
-                  this._baseChart3d,
-                  (
-                    this.additionalOptions
-                    && this.additionalOptions.chart
-                    && this.additionalOptions.chart.options3d
-                  ),
-                  {enabled: true}
-                )
-              }
-            });
-          } else {
-            this.configuration.update({
-              chart: {
-                options3d: {
-                  enabled: false
-                }
-              }
-            });
-          }
+          this.configuration.update({
+            lang: {
+              noData: this.emptyText
+            }
+          });
+          this.configuration.hideNoData();
+          this.configuration.showNoData(this.emptyText);
         }
 
         __callChartFunction(functionName) {

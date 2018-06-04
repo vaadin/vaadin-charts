@@ -13,7 +13,7 @@
   <dom-module id="chart-series-api-demo">
     <template>
       <vaadin-chart id="mychart">
-        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" unit="{{firstUnit}}"></vaadin-chart-series>
+        <vaadin-chart-series id="myseries" values="{{values}}" title="{{title}}" type="{{type}}" unit="{{firstUnit}}" neck-width="{{neckWidth}}"></vaadin-chart-series>
       </vaadin-chart>
     </template>
 
@@ -45,6 +45,10 @@
               secondUnit: {
                 type: String,
                 value: 'series-unit-2'
+              },
+              neckWidth: {
+                type: String,
+                value: '20%'
               }
             };
           }
@@ -421,7 +425,7 @@
           expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
           done();
-        }, 120);
+        }, 150);
       });
 
       it('should be available to change stack with default stacking in plotOptions', function(done) {
@@ -434,7 +438,7 @@
           expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
           done();
-        }, 120);
+        }, 150);
       });
 
       it('should be available to change stacking with default stacking in plotOptions', function(done) {
@@ -446,7 +450,7 @@
           expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(100);
           expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(50);
           done();
-        }, 120);
+        }, 150);
       });
 
       it('should have additional-options', done => {
@@ -491,6 +495,22 @@
           expect(hcSeries.type).to.be.equal('line');
           done();
         }, 200);
+      });
+
+      it('should be able to set neck-width', () => {
+        const {neckWidth} = series.options;
+        expect(neckWidth).to.be.equal(element.neckWidth);
+      });
+
+      it('should be able to change neck-width', () => {
+        let {neckWidth} = series.options;
+        expect(neckWidth).to.be.equal(element.neckWidth);
+
+        const newNeckWidth = 100;
+        element.neckWidth = newNeckWidth;
+        neckWidth = series.options.neckWidth;
+
+        expect(neckWidth).to.be.equal(newNeckWidth);
       });
 
     });
