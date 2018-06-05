@@ -115,7 +115,10 @@
         chart.update({}, true);
 
         setTimeout(function() {
-          expect(chartContainer.querySelector('.highcharts-title').textContent).to.be.empty;
+          const title = chartContainer.querySelector('.highcharts-title');
+          if (title) {
+            expect(title.textContent).to.be.empty;
+          }
           done();
         }, 150);
       });
