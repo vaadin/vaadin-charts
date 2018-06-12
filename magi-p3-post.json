@@ -1,0 +1,17 @@
+{
+  "files": ["vaadin-chart*.js"],
+  "from": [
+    "import 'highcharts/es-modules/masters/highstock.src.js'",
+    "window.Highcharts",
+    "_documentContainer = document.createElement('template')",
+    "_documentContainer.content"],
+  "to": [
+    "import Highcharts from 'highcharts/es-modules/masters/highstock.src.js'",
+    "Highcharts",
+    "_documentContainer = document.createElement('div')",
+    "_documentContainer"],
+  "remove": [
+    "highcharts-imports.html",
+    "magi-p3-post.json"
+   ]
+}
