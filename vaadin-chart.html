@@ -18,7 +18,19 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="chart-deep-merger.js"></script>
 
 <!-- MAGI REMOVE START -->
-<link rel="import" href="highcharts-imports.html">
+<script src="../highcharts/js/highstock.js"></script>
+<!-- For some chart types, an error is raised if accessibility is added after highcharts-3d module -->
+<script src="../highcharts/js/modules/accessibility.js"></script>
+<script src="../highcharts/js/highcharts-more.js"></script>
+<script src="../highcharts/js/highcharts-3d.js"></script>
+<script src="../highcharts/js/modules/data.js"></script>
+<script src="../highcharts/js/modules/drilldown.js"></script>
+<script src="../highcharts/js/modules/exporting.js"></script>
+<script src="../highcharts/js/modules/funnel.js"></script>
+<script src="../highcharts/js/modules/heatmap.js"></script>
+<script src="../highcharts/js/modules/solid-gauge.js"></script>
+<script src="../highcharts/js/modules/treemap.js"></script>
+<script src="../highcharts/js/modules/no-data-to-display.js"></script>
 <!-- MAGI REMOVE END -->
 <!-- MAGI ADD START
 <script src="../highcharts/es-modules/masters/highstock.src.js"></script>
