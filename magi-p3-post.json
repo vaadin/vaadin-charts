@@ -5,8 +5,5 @@
     "window.Highcharts"],
   "to": [
     "import Highcharts from 'highcharts/es-modules/masters/highstock.src.js'",
-    "Highcharts"],
-  "remove": [
-    "magi-p3-post.json"
-   ]
+    "Highcharts"]
 }
