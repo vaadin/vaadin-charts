@@ -357,6 +357,18 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             },
 
             /**
+             * Specifies how series are stacked on top of each other.
+             * Possible values are null, "normal" or "percent".
+             * If "stack" property is not defined on the vaadin-chart-series elements, then series will be put into
+             * the default stack.
+             */
+            stacking: {
+              type: String,
+              observer: '__stackingObserver',
+              reflectToAttribute: true
+            },
+
+            /**
              * Specifies whether the chart is a normal chart or a timeline chart.
              */
             timeline: {
@@ -594,6 +606,12 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             } else if (options.xAxis) {
               options.xAxis.opposite = this.__shouldFlipOpposite();
             }
+          }
+
+          if (this.stacking) {
+            options.plotOptions = options.plotOptions || {};
+            options.plotOptions.series = options.plotOptions.series || {};
+            options.plotOptions.series.stacking = this.stacking;
           }
 
           return options;
@@ -1399,6 +1417,33 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           if (this.configuration) {
             this.update(this.additionalOptions);
           }
+        }
+
+        __isStackingValid() {
+          if (['normal', 'percent', null].indexOf(this.stacking) === -1) {
+            this.__showWarn('stacking', '"normal", "percent" or null');
+            return false;
+          }
+          return true;
+        }
+
+        __stackingObserver() {
+          if (!this.configuration) {
+            return;
+          }
+
+          if (!this.__isStackingValid()) {
+            this.stacking = null;
+            return;
+          }
+
+          this.configuration.update({
+            plotOptions: {
+              series: {
+                stacking: this.stacking
+              }
+            }
+          });
         }
 
         __chart3dObserver() {
