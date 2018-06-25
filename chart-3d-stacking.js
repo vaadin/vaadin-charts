@@ -1,3 +1,4 @@
+// Workaround for https://github.com/highcharts/highcharts/issues/8417
 (function() {
   if (Highcharts) {
     Highcharts.wrap(
