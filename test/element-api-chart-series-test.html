@@ -311,7 +311,7 @@
       it('should accept unit as string', function(done) {
         const unit = element.firstUnit;
         setTimeout(function() {
-          const yAxis = chart.configuration.yAxis[0];
+          const yAxis = chart.configuration.yAxis[1];
           expect(yAxis.options.id).to.be.equal(unit);
           done();
         }, 70);
@@ -326,23 +326,38 @@
         chart.appendChild(secondSeries);
 
         setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(2);
-          const secondAxis = chart.configuration.yAxis[1];
-          expect(secondAxis.options.id).to.be.equal(unit);
+          expect(chart.configuration.yAxis).to.have.length(3);
+          const secondUserAxis = chart.configuration.yAxis[2];
+          expect(secondUserAxis.options.id).to.be.equal(unit);
           done();
         }, 20);
       });
 
+      function isSeriesWithTitleInAxis(title, axis) {
+        return axis.series
+          .map(e => e.userOptions.name)
+          .some(e => e === title);
+      }
+
       it('should make series goes to first y axis if no unit is defined', function(done) {
         const unit = element.firstUnit;
+        const title = 'random title';
 
         const secondSeries = document.createElement('vaadin-chart-series');
         secondSeries.setAttribute('values', '[20,30,40,50]');
+        secondSeries.setAttribute('title', title);
         chart.appendChild(secondSeries);
 
         setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(1);
-          const secondAxis = chart.configuration.yAxis[0];
+          expect(chart.configuration.yAxis).to.have.length(2);
+
+          const defaultYAxis = chart.configuration.yAxis[0];
+          expect(defaultYAxis.userOptions.vaadinChartsDefault).to.not.be.undefined;
+
+          const isInFirstAxis = isSeriesWithTitleInAxis(title, defaultYAxis);
+          expect(isInFirstAxis).to.be.true;
+
+          const secondAxis = chart.configuration.yAxis[1];
           expect(secondAxis.options.id).to.be.equal(unit);
           done();
         }, 200);
@@ -350,19 +365,32 @@
 
       it('should make series goes to first y axis if unit is removed', function(done) {
         const unit = element.secondUnit;
+        const title = 'random title';
 
         const secondSeries = document.createElement('vaadin-chart-series');
         secondSeries.setAttribute('values', '[20,30,40,50]');
         secondSeries.setAttribute('unit', unit);
+        secondSeries.setAttribute('title', title);
         chart.appendChild(secondSeries);
 
         setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(2);
+          expect(chart.configuration.yAxis).to.have.length(3);
+
+          const thirdYAxis = chart.configuration.yAxis[2];
+          expect(thirdYAxis.userOptions.vaadinChartsDefault).to.be.undefined;
+
+          const isInThirdAxis = isSeriesWithTitleInAxis(title, thirdYAxis);
+          expect(isInThirdAxis).to.be.true;
+
           secondSeries.removeAttribute('unit');
           setTimeout(function() {
-            expect(chart.configuration.yAxis).to.have.length(1);
-            const secondAxis = chart.configuration.yAxis[0];
-            expect(secondAxis.options.id).to.be.equal(element.firstUnit);
+            expect(chart.configuration.yAxis).to.have.length(2);
+
+            const defaultYAxis = chart.configuration.yAxis[0];
+            expect(defaultYAxis.userOptions.vaadinChartsDefault).to.not.be.undefined;
+
+            const isInFirstAxis = isSeriesWithTitleInAxis(title, defaultYAxis);
+            expect(isInFirstAxis).to.be.true;
             done();
           }, 40);
         }, 40);
@@ -382,8 +410,7 @@
       it('should work value-min initially', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
         setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const firstAxis = yAxisValuesChart.configuration.yAxis[0];
+          const firstAxis = yAxisValuesChart.configuration.yAxis[1];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(0, 5);
           done();
         }, 150);
@@ -394,8 +421,7 @@
         const seriesWithValue = yAxisValuesChart.children[2];
         seriesWithValue.valueMin = -20;
         setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const firstAxis = yAxisValuesChart.configuration.yAxis[0];
+          const firstAxis = yAxisValuesChart.configuration.yAxis[1];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
           done();
         }, 150);
@@ -404,8 +430,7 @@
       it('should be available initially to set value-max', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
         setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const secondAxis = yAxisValuesChart.configuration.yAxis[1];
+          const secondAxis = yAxisValuesChart.configuration.yAxis[2];
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(40, 5);
           done();
         }, 150);
@@ -416,8 +441,7 @@
         const seriesWithValue = yAxisValuesChart.children[1];
         seriesWithValue.valueMax = 10;
         setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const secondAxis = yAxisValuesChart.configuration.yAxis[1];
+          const secondAxis = yAxisValuesChart.configuration.yAxis[2];
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(10, 5);
           done();
         }, 150);
