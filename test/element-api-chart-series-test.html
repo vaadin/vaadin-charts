@@ -352,7 +352,7 @@
           expect(chart.configuration.yAxis).to.have.length(2);
 
           const defaultYAxis = chart.configuration.yAxis[0];
-          expect(defaultYAxis.userOptions.vaadinChartsDefault).to.not.be.undefined;
+          expect(defaultYAxis.userOptions.axisGenerated).to.be.undefined;
 
           const isInFirstAxis = isSeriesWithTitleInAxis(title, defaultYAxis);
           expect(isInFirstAxis).to.be.true;
@@ -377,7 +377,7 @@
           expect(chart.configuration.yAxis).to.have.length(3);
 
           const thirdYAxis = chart.configuration.yAxis[2];
-          expect(thirdYAxis.userOptions.vaadinChartsDefault).to.be.undefined;
+          expect(thirdYAxis.userOptions.axisGenerated).to.not.be.undefined;
 
           const isInThirdAxis = isSeriesWithTitleInAxis(title, thirdYAxis);
           expect(isInThirdAxis).to.be.true;
@@ -387,7 +387,7 @@
             expect(chart.configuration.yAxis).to.have.length(2);
 
             const defaultYAxis = chart.configuration.yAxis[0];
-            expect(defaultYAxis.userOptions.vaadinChartsDefault).to.not.be.undefined;
+            expect(defaultYAxis.userOptions.axisGenerated).to.be.undefined;
 
             const isInFirstAxis = isSeriesWithTitleInAxis(title, defaultYAxis);
             expect(isInFirstAxis).to.be.true;
