@@ -149,6 +149,7 @@
         if (this.sourceLayout) {
           this.$.layout.removeChild(this.sourceLayout);
           this.sourceLayout = undefined;
+          this.$.example.updateSize();
         }
         this.$.closebutton.style.display = "none";
         this.classList.add('hiddensplitter');
@@ -184,6 +185,7 @@
         var exampleArea = this.$.layout.querySelector("demo-area");
         this.$.layout.insertBefore(this.sourceLayout, exampleArea);
         this.$.layout.updateStyles();
+        this.$.example.updateSize();
       }
 
       connectedCallback() {

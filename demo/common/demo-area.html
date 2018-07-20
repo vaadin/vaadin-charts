@@ -40,8 +40,15 @@
         super.ready();
       }
 
+      updateSize() {
+        var demo = this.querySelector("vaadin-chart");
+        if (demo) {
+          demo.__reflow();
+        }
+      }
+
       _onIronResize() {
-        console.log('Resized');
+        this.debounce('updateSizeDebounce', this.updateSize, 300);
       }
 
       connectedCallback() {
