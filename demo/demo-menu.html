@@ -12,15 +12,12 @@
         --app-menu-color: #616161;
         --water: #00B4F0;
         --charcoal: #33383A;
-
         --app-primary-color: var(--water);
         --app-secondary-color: #e5e8e8;
         --app-menu-selected-bg-color: rgba(0, 0, 0, 0.05);
         --primary-color: #e5e8e8;
-
         --app-menu-background-color: var(--charcoal);
         --app-menu-color: #e5e8e8;
-
         --app-menu-focused-item: {
           background-color: var(--water);
           color: #e5e8e8;
@@ -36,7 +33,8 @@
         background-color: var(--charcoal);
       }
 
-      .app-menu-item:hover, .app-menu-item[aria-selected] {
+      .app-menu-item:hover,
+      .app-menu-item[aria-selected] {
         background-color: var(--water) !important; /* for some reason, the order in Firefox is different, so this is overwritten withou !important */
       }
 
@@ -72,7 +70,9 @@
 
   <script>
     class DemoMenu extends Polymer.Element {
-      static get is() { return 'demo-menu'; }
+      static get is() {
+        return 'demo-menu';
+      }
 
       static get properties() {
         return {

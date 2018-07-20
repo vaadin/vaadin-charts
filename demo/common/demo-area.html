@@ -29,10 +29,10 @@
       static get properties() {
         return {
           header: {
-            value: "",
+            value: '',
             type: String
           }
-        }
+        };
       }
 
       ready() {
@@ -41,7 +41,7 @@
       }
 
       updateSize() {
-        var demo = this.querySelector("vaadin-chart");
+        var demo = this.querySelector('vaadin-chart');
         if (demo) {
           demo.__reflow();
         }

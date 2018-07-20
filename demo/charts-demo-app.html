@@ -20,10 +20,8 @@
        :host {
         --water: #00B4F0;
         --charcoal: #33383A;
-
         --app-primary-color: var(--water);
         --app-secondary-color: #e5e8e8;
-
         display: flex;
         flex-direction: row;
         height: 100%;
@@ -78,7 +76,6 @@
         transform: translateX(-100%);
         position: absolute;
         overflow-x: hidden;
-
         z-index: 2;
         border-right: 1px solid white;
         background-color: var(--charcoal);
@@ -88,7 +85,6 @@
         transition: all 0.3s ease-in-out;
         visibility: hidden;
         box-sizing: border-box;
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -156,9 +152,6 @@
         overflow-y: auto;
       }
 
-      #externalresource {
-      }
-
       #resourcelinks {
         list-style: none;
         display: flex;
@@ -201,9 +194,9 @@
         padding-right: 10px;
       }
 
-      .resourcelinks__item+*:before {
+      .resourcelinks__item + *::before {
         content: '•';
-        color: #FFFFFF;
+        color: #fff;
         vertical-align: middle;
       }
 
@@ -230,6 +223,7 @@
           padding-left: 300px;
           padding-top: 0;
         }
+
         #sideMenu {
           transform: translateX(0);
           visibility: visible;
@@ -305,7 +299,9 @@
 
   <script>
     class MyApp extends Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element) {
-      static get is() { return 'charts-demo-app'; }
+      static get is() {
+        return 'charts-demo-app';
+      }
 
       ready() {
         super.ready();
@@ -329,116 +325,116 @@
             type: Array,
             value: [
               {
-                component: "area",
-                caption: "Area"
+                component: 'area',
+                caption: 'Area'
               },
               {
-                component: "area-range",
-                caption: "Area Range"
+                component: 'area-range',
+                caption: 'Area Range'
               },
               {
-                component: "area-spline",
-                caption: "Area Spline"
+                component: 'area-spline',
+                caption: 'Area Spline'
               },
               {
-                component: "area-spline-range",
-                caption: "Area Spline Range"
+                component: 'area-spline-range',
+                caption: 'Area Spline Range'
               },
               {
-                component: "bar",
-                caption: "Bar Chart"
+                component: 'bar',
+                caption: 'Bar Chart'
               },
               {
-                component: "box-plot",
-                caption: "Box Plot"
+                component: 'box-plot',
+                caption: 'Box Plot'
               },
               {
-                component: "bubble",
-                caption: "Bubble"
+                component: 'bubble',
+                caption: 'Bubble'
               },
               {
-                component: "candlestick",
-                caption: "Candlestick"
+                component: 'candlestick',
+                caption: 'Candlestick'
               },
               {
-                component: "column",
-                caption: "Column"
+                component: 'column',
+                caption: 'Column'
               },
               {
-                component: "column-range",
-                caption: "Column Range"
+                component: 'column-range',
+                caption: 'Column Range'
               },
               {
-                component: "error-bar",
-                caption: "Error Bar"
+                component: 'error-bar',
+                caption: 'Error Bar'
               },
               {
-                component: "flags",
-                caption: "Flags"
+                component: 'flags',
+                caption: 'Flags'
               },
               {
-                component: "funnel",
-                caption: "Funnel"
+                component: 'funnel',
+                caption: 'Funnel'
               },
               {
-                component: "gauge",
-                caption: "Gauge"
+                component: 'gauge',
+                caption: 'Gauge'
               },
               {
-                component: "heat-map",
-                caption: "Heat Map"
+                component: 'heat-map',
+                caption: 'Heat Map'
               },
               {
-                component: "line",
-                caption: "Line"
+                component: 'line',
+                caption: 'Line'
               },
               {
-                component: "ohlc",
-                caption: "OHLC"
+                component: 'ohlc',
+                caption: 'OHLC'
               },
               {
-                component: "pie",
-                caption: "Pie"
+                component: 'pie',
+                caption: 'Pie'
               },
               {
-                component: "polar",
-                caption: "Polar"
+                component: 'polar',
+                caption: 'Polar'
               },
               {
-                component: "polygon",
-                caption: "Polygon"
+                component: 'polygon',
+                caption: 'Polygon'
               },
               {
-                component: "pyramid",
-                caption: "Pyramid"
+                component: 'pyramid',
+                caption: 'Pyramid'
               },
               {
-                component: "scatter",
-                caption: "Scatter"
+                component: 'scatter',
+                caption: 'Scatter'
               },
               {
-                component: "solid-gauge",
-                caption: "Solid Gauge"
+                component: 'solid-gauge',
+                caption: 'Solid Gauge'
               },
               {
-                component: "spiderweb",
-                caption: "Spiderweb"
+                component: 'spiderweb',
+                caption: 'Spiderweb'
               },
               {
-                component: "spline",
-                caption: "Spline"
+                component: 'spline',
+                caption: 'Spline'
               },
               {
-                component: "treemap",
-                caption: "Tree Map"
+                component: 'treemap',
+                caption: 'Tree Map'
               },
               {
-                component: "waterfall",
-                caption: "Waterfall"
+                component: 'waterfall',
+                caption: 'Waterfall'
               },
               {
-                component: "windrose",
-                caption: "Wind Rose"
+                component: 'windrose',
+                caption: 'Wind Rose'
               }
             ]
           }
@@ -463,7 +459,7 @@
       }
 
       _sideMenuTransitionend(el) {
-        //0.3s is set for #sideMenu transition
+        // 0.3s is set for #sideMenu transition
         this.debounce('_notifyResize', this.notifyResize, 300);
       }
 
