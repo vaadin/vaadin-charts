@@ -5,11 +5,10 @@
     <style>
       :host {
         display: block;
-        background-color: white;
         box-shadow: none;
         margin-bottom: 0;
         background-color: #1B2021;
-        border-top: 1px solid #ffffff;
+        border-top: 1px solid #fff;
         color: var(--app-secondary-color);
         font: 400 13px "Open Sans", Verdana, sans-serif;
       }
@@ -35,17 +34,17 @@
   </template>
 
   <script>
-    class DemoSnippet extends Polymer.Element{
+    class DemoSnippet extends Polymer.Element {
       static get is() {
         return 'demo-snippet';
       }
       static get properties() {
         return {
-          source:{
-            value:"No source",
-            type:String
+          source: {
+            value: 'No source',
+            type: String
           }
-        }
+        };
       }
       ready() {
         super.ready();
@@ -62,15 +61,23 @@
 
       // From https://github.com/PolymerElements/marked-element.
       _unindent(text) {
-        if (!text) return text;
-        var lines  = text.replace(/\t/g, '  ').split('\n');
+        if (!text) {
+          return text;
+        }
+        var lines = text.replace(/\t/g, '  ').split('\n');
         var indent = lines.reduce(function(prev, line) {
-          if (/^\s*$/.test(line)) return prev;  // Completely ignore blank lines.
+          if (/^\s*$/.test(line)) {
+            return prev; // Completely ignore blank lines.
+          }
           var lineIndent = line.match(/^(\s*)/)[0].length;
-          if (prev === null) return lineIndent;
+          if (prev === null) {
+            return lineIndent;
+          }
           return lineIndent < prev ? lineIndent : prev;
         }, null);
-        return lines.map(function(l) { return l.substr(indent); }).join('\n');
+        return lines.map(function(l) {
+          return l.substr(indent);
+        }).join('\n');
       }
     }
     customElements.define(DemoSnippet.is, DemoSnippet);

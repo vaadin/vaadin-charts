@@ -27,7 +27,7 @@
       }
 
       #container {
-        display:flex;
+        display: flex;
         flex-direction: column;
         height: 100%;
         width: 100%;
@@ -43,9 +43,9 @@
       .nav-panel__tabs__button {
         border-bottom: 1px solid transparent;
         border-radius: 0;
-        padding:0;
-        padding-bottom:6px;
-        margin:0;
+        padding: 0;
+        padding-bottom: 6px;
+        margin: 0;
         margin-left: 24px;
         min-width: auto;
         color: #00B2EF;
@@ -55,22 +55,22 @@
 
       .nav-panel__tabs__button[active] {
         border-bottom: 1px solid var(--app-primary-color);
-        color: #ffffff;
+        color: #fff;
       }
 
       #header {
         padding-left: 36px;
         padding-top: 20px;
-        padding-bottom:20px;
+        padding-bottom: 20px;
         display: inline-block;
       }
 
       #javabutton {
-        display:none;
+        display: none;
       }
 
       #closebutton {
-        float:right;
+        float: right;
         padding-top: 16px;
         padding-bottom: 16px;
         color: #00B2EF;
@@ -78,7 +78,7 @@
 
       #layout {
           flex-grow: 1;
-          height:100%;
+          height: 100%;
       }
 
     </style>
@@ -115,26 +115,22 @@
             type: Object
           },
           sourceType: {
-            value: "html",
+            value: 'html',
             type: String
           },
           header: {
-            value: "",
+            value: '',
             type: String
           },
           htmlSource: {
-            value: "No HTML source",
+            value: 'No HTML source',
             type: String
           },
           javaSource: {
-            value: "No Java source",
+            value: 'No Java source',
             type: String
           }
-        }
-      }
-
-      constructor() {
-        super();
+        };
       }
 
       ready() {
@@ -151,38 +147,38 @@
           this.sourceLayout = undefined;
           this.$.example.updateSize();
         }
-        this.$.closebutton.style.display = "none";
+        this.$.closebutton.style.display = 'none';
         this.classList.add('hiddensplitter');
         this.updateStyles();
         this._clearButtonsActive();
       }
 
       _createSourceElement() {
-        this.sourceLayout = document.createElement("demo-snippet");
-        this.sourceLayout.style.height = "100%";
+        this.sourceLayout = document.createElement('demo-snippet');
+        this.sourceLayout.style.height = '100%';
       }
 
       _clearButtonsActive() {
-        this.$.htmlbutton.removeAttribute("active");
-        this.$.javabutton.removeAttribute("active");
+        this.$.htmlbutton.removeAttribute('active');
+        this.$.javabutton.removeAttribute('active');
       }
 
       showSource(e) {
-        this.classList.remove("hiddensplitter");
+        this.classList.remove('hiddensplitter');
         this.updateStyles();
         this._clearButtonsActive();
-        this.$.closebutton.style.display = "";
+        this.$.closebutton.style.display = '';
         if (this.sourceLayout) {
           this.$.layout.removeChild(this.sourceLayout);
         }
-        this._createSourceElement()
-        const sourceType = e.target.getAttribute("source-type");
-        if (sourceType === "html") {
-          this.sourceLayout.setAttribute("source", this.htmlSource);
+        this._createSourceElement();
+        const sourceType = e.target.getAttribute('source-type');
+        if (sourceType === 'html') {
+          this.sourceLayout.setAttribute('source', this.htmlSource);
         } else {
-          this.sourceLayout.setAttribute("source", this.javaSource);
+          this.sourceLayout.setAttribute('source', this.javaSource);
         }
-        var exampleArea = this.$.layout.querySelector("demo-area");
+        var exampleArea = this.$.layout.querySelector('demo-area');
         this.$.layout.insertBefore(this.sourceLayout, exampleArea);
         this.$.layout.updateStyles();
         this.$.example.updateSize();
