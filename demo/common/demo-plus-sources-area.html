@@ -83,8 +83,6 @@
 
     </style>
     <div id="container">
-      <!--You can implement this either HTML or Java-->
-
       <div class="nav-panel">
         <span id="header">Source:</span>
         <paper-button id="htmlbutton" class="nav-panel__tabs__button" on-click="showSource" noink toggles
@@ -96,7 +94,7 @@
           <iron-icon icon="vaadin:eye-slash" style="padding-right:8px;"></iron-icon> Hide source
         </paper-button>
       </div>
-      <vaadin-split-layout id="layout" vertical>
+      <vaadin-split-layout id="layout" orientation="vertical">
         <demo-area id="example" header="[[header]]">
         </demo-area>
       </vaadin-split-layout>

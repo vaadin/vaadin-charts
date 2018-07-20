@@ -38,11 +38,11 @@
           var resolvedDemoUrl = this.resolveUrl("../demos/" + (this.category ? this.category + "/" : "") + this.demo + ".html");
           Polymer.importHref(resolvedDemoUrl, (result) => {
             var demoContent = result.target.import.body ? result.target.import.body : result.target.import;
-            var demoArea = document.createElement("demo-plus-sources-area");
+            var demoPlusSourcesArea = document.createElement("demo-plus-sources-area");
             while (demoContent.childNodes.length > 0) {
-              demoArea.appendChild(demoContent.childNodes[0]);
+              demoPlusSourcesArea.appendChild(demoContent.childNodes[0]);
             }
-            this.shadowRoot.appendChild(demoArea);
+            this.shadowRoot.appendChild(demoPlusSourcesArea);
             this.__initialized = true;
           });
         }
