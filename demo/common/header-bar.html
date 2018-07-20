@@ -6,22 +6,22 @@
   <template>
     <style>
       :host {
-          width:100%;
-          height:50px;
+          width: 100%;
+          height: 50px;
           background-color: var(--charcoal);
-          display:flex;
+          display: flex;
           flex-direction: row;
-          color:white;
+          color: white;
           font: 400 14px 'Open Sans', Verdana, sans-serif;
           border-bottom: 1px solid white;
-          position:absolute;
+          position: absolute;
       }
 
       #menu {
         background-color: var(--water);
         padding: 16px;
-        width:50px;
-        height:50px;
+        width: 50px;
+        height: 50px;
       }
 
       #logo {
@@ -31,10 +31,10 @@
       }
 
       #names {
-        display:flex;
+        display: flex;
         flex-direction: column;
-        height:50px;
-        padding:8px 0;
+        height: 50px;
+        padding: 8px 0;
       }
 
       #product-name {
@@ -42,7 +42,7 @@
       }
 
       #separator {
-        display:none;
+        display: none;
         padding: 0 8px;
         color: #808F8F;
       }
@@ -57,7 +57,7 @@
   </template>
 
   <script>
-    class HeaderBar extends Polymer.Element{
+    class HeaderBar extends Polymer.Element {
       static get is() {
         return 'header-bar';
       }
@@ -68,12 +68,12 @@
             type: String,
             computed: '_computeName(demo)'
           }
-        }
+        };
       }
 
       _computeName(demo) {
-        //TODO get caption instead of page name
-        return "";
+        // TODO get caption instead of page name
+        return '';
       }
 
       openMenu() {
