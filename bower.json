@@ -70,9 +70,6 @@
     "polymer": "^2.0.0",
     "iron-icon": "2.0.0",
     "iron-iconset-svg": "^2.1.0",
-    "iron-selector": "2.0.0",
-    "vaadin-control-state-mixin": "^2.0.0",
-    "vaadin-checkbox": "^2.0.0",
-    "vaadin-text-field": "^2.0.0"
+    "iron-selector": "2.0.0"
   }
 }
