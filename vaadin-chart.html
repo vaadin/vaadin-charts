@@ -1248,11 +1248,11 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                         return prev;
                       }
                     }, '')
-                      // Zoom out a bit to avoid clipping the chart's edge on paper.
-                      + 'body {\n' +
-                      '    -moz-transform: scale(0.9, 0.9); /* Moz-browsers */\n' +
-                      '    zoom: 0.9; /* Other non-webkit browsers */\n' +
-                      '    zoom: 90%; /* Webkit browsers */\n' +
+                      // Zoom out a bit to avoid clipping the chart's edge on paper
+                      + 'body {' +
+                      '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
+                      '    zoom: 0.9;' + // Others
+                      '    zoom: 90%;' + // Webkit
                       '}';
 
                   this.tempBodyStyle = document.createElement('style');
@@ -1260,7 +1260,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   document.body.appendChild(this.tempBodyStyle);
                 }
 
-                // Hook into afterPrint and afterExport to revert changes made before export
+                // Hook into afterPrint and afterExport to revert changes made before
                 if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0) {
                   if (this.tempBodyStyle) {
                     document.body.removeChild(this.tempBodyStyle);
