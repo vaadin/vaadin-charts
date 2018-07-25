@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
 (function() {
   if (Highcharts) {
