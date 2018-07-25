@@ -30,6 +30,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../highcharts/js/modules/treemap.js"></script>
 <script src="../highcharts/js/modules/no-data-to-display.js"></script>
 <script src="chart-deep-merger.js"></script>
+<script src="chart-exporting.js"></script>
 <script src="chart-3d-stacking.js"></script>
 
 <link rel="import" href="vaadin-chart-series.html">
@@ -638,11 +639,25 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             addSeries: 'chart-add-series',
             /**
              *
+             * @event chart-after-export  Fired after a chart is exported
+             * @param {Object} detail.originalEvent object with details about the event sent
+             * @param {Object} chart Chart object where the event was sent from
+             */
+            afterExport: 'chart-after-export',
+            /**
+             *
              * @event chart-after-print  Fired after a chart is printed
              * @param {Object} detail.originalEvent object with details about the event sent
              * @param {Object} chart Chart object where the event was sent from
              */
             afterPrint: 'chart-after-print',
+            /**
+             *
+             * @event chart-before-export  Fired before a chart is exported
+             * @param {Object} detail.originalEvent object with details about the event sent
+             * @param {Object} chart Chart object where the event was sent from
+             */
+            beforeExport: 'chart-before-export',
             /**
              *
              * @event chart-before-print  Fired before a chart is printed
@@ -1181,7 +1196,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           for (let keys = Object.keys(eventList), i = 0; i < keys.length; i++) {
             const key = keys[i];
             if (!eventObject[key]) {
-              var chart = this;
+              const chart = this;
               eventObject[key] = function(event) {
                 const customEvent = {
                   bubbles: false,
@@ -1197,6 +1212,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                     return;
                   }
                 }
+
                 // Workaround for vaadin-charts-flow because of https://github.com/vaadin/flow/issues/3102
                 if (event.type === 'selection') {
                   if (event.xAxis && event.xAxis[0]) {
@@ -1214,6 +1230,41 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   }
                   if (event.yAxis && event.yAxis[0]) {
                     customEvent.detail.yValue = event.yAxis[0].value;
+                  }
+                }
+
+                // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
+                // Hook into beforePrint and beforeExport to ensure correct styling
+                if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
+                  const effectiveCss = [].slice.call(self.shadowRoot.styleSheets)
+                    .reduce(function(prev, styleSheet) {
+                      if (styleSheet.cssRules) {
+                        return prev +
+                              [].slice.call(styleSheet.cssRules)
+                                .reduce(function(prev, cssRule) {
+                                  return prev + cssRule.cssText;
+                                }, '');
+                      } else {
+                        return prev;
+                      }
+                    }, '')
+                      // Zoom out a bit to avoid clipping the chart's edge on paper.
+                      + 'body {\n' +
+                      '    -moz-transform: scale(0.9, 0.9); /* Moz-browsers */\n' +
+                      '    zoom: 0.9; /* Other non-webkit browsers */\n' +
+                      '    zoom: 90%; /* Webkit browsers */\n' +
+                      '}';
+
+                  this.tempBodyStyle = document.createElement('style');
+                  this.tempBodyStyle.innerHTML = effectiveCss;
+                  document.body.appendChild(this.tempBodyStyle);
+                }
+
+                // Hook into afterPrint and afterExport to revert changes made before export
+                if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0) {
+                  if (this.tempBodyStyle) {
+                    document.body.removeChild(this.tempBodyStyle);
+                    delete this.tempBodyStyle;
                   }
                 }
 
