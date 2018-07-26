@@ -1236,19 +1236,41 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
                 // Hook into beforePrint and beforeExport to ensure correct styling
                 if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
-                  const effectiveCss = [].slice.call(self.shadowRoot.styleSheets)
-                    .reduce(function(prev, styleSheet) {
-                      if (styleSheet.cssRules) {
-                        return prev +
-                              [].slice.call(styleSheet.cssRules)
-                                .reduce(function(prev, cssRule) {
-                                  return prev + cssRule.cssText;
-                                }, '');
-                      } else {
-                        return prev;
+                  const shadowSheets = self.shadowRoot.styleSheets;
+                  // Shady CSS doesn't polyfill .styleSheets on shadow roots
+                  // So fallback to the global stylesheets
+                  const styleSheets = [].slice.call(shadowSheets || document.styleSheets);
+
+                  let effectiveCss = '';
+                  for (const sheetIndex in styleSheets) {
+                    const styleSheet = styleSheets[sheetIndex];
+                    const cssRules = styleSheet.cssRules;
+
+                    for (const ruleIndex in cssRules) {
+                      if (cssRules[ruleIndex].cssText
+                          && cssRules[ruleIndex].cssText.indexOf('highcharts') >= 0) {
+                        effectiveCss = effectiveCss + cssRules[ruleIndex].cssText;
                       }
-                    }, '')
-                      // Zoom out a bit to avoid clipping the chart's edge on paper
+                    }
+                  }
+
+                  // Remove style scope from global style rules for polyfilled browsers
+                  if (!shadowSheets) {
+                    let instanceScope;
+                    const classList = [].slice.call(self.classList);
+                    for (clazz in classList) {
+                      if (classList[clazz].indexOf('vaadin-chart') === 0) {
+                        instanceScope = classList[clazz];
+                        break;
+                      }
+                    }
+
+                    effectiveCss = effectiveCss.replace(new RegExp('\\.' + instanceScope, 'g'), '');
+                    effectiveCss = effectiveCss.replace(/\.vaadin-chart/g, ''); // Tag scope
+                  }
+
+                  // Zoom out a bit to avoid clipping the chart's edge on paper
+                  effectiveCss = effectiveCss +
                       + 'body {' +
                       '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
                       '    zoom: 0.9;' + // Others
