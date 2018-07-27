@@ -1236,37 +1236,43 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
                 // Hook into beforePrint and beforeExport to ensure correct styling
                 if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
-                  const shadowSheets = self.shadowRoot.styleSheets;
-                  // Shady CSS doesn't polyfill .styleSheets on shadow roots
-                  // So fallback to the global stylesheets
-                  const styleSheets = [].slice.call(shadowSheets || document.styleSheets);
+                  const shadowStyle = self.shadowRoot.querySelector('style');
+
+                  const isNativeShadowDom = shadowStyle.classList && [].slice.call(shadowStyle.classList)
+                    .indexOf('style-scope') < 0;
 
                   let effectiveCss = '';
-                  for (const sheetIndex in styleSheets) {
-                    const styleSheet = styleSheets[sheetIndex];
-                    const cssRules = styleSheet.cssRules;
+                  if (isNativeShadowDom) {
+                    effectiveCss = shadowStyle.innerHTML;
+                  } else {
+                    const styleSheets = document.styleSheets;
 
-                    for (const ruleIndex in cssRules) {
-                      if (cssRules[ruleIndex].cssText
-                          && cssRules[ruleIndex].cssText.indexOf('highcharts') >= 0) {
-                        effectiveCss = effectiveCss + cssRules[ruleIndex].cssText;
+                    let globalMatchingStyles = '';
+                    for (let sheetIndex = 0; sheetIndex < styleSheets.length; sheetIndex++) {
+                      const styleSheet = styleSheets[sheetIndex];
+                      const cssRules = styleSheet.cssRules;
+
+                      for (let ruleIndex = 0; ruleIndex < cssRules.length; ruleIndex++) {
+                        if (cssRules[ruleIndex].cssText
+                            && cssRules[ruleIndex].cssText.indexOf('highcharts') >= 0) {
+                          globalMatchingStyles = globalMatchingStyles + cssRules[ruleIndex].cssText;
+                        }
                       }
                     }
-                  }
 
-                  // Remove style scope from global style rules for polyfilled browsers
-                  if (!shadowSheets) {
+                    // Find the scope prefix for this chart instance
                     let instanceScope;
-                    const classList = [].slice.call(self.classList);
-                    for (clazz in classList) {
-                      if (classList[clazz].indexOf('vaadin-chart') === 0) {
-                        instanceScope = classList[clazz];
+                    const classList = self.classList;
+                    for (let classIndex = 0; classIndex < classList.length; classIndex++) {
+                      if (classList[classIndex].indexOf('vaadin-chart') === 0) {
+                        instanceScope = classList[classIndex];
                         break;
                       }
                     }
 
-                    effectiveCss = effectiveCss.replace(new RegExp('\\.' + instanceScope, 'g'), '');
-                    effectiveCss = effectiveCss.replace(/\.vaadin-chart/g, ''); // Tag scope
+                    // Strip off instance scope and tag scopes
+                    globalMatchingStyles = globalMatchingStyles.replace(new RegExp('\\.' + instanceScope, 'g'), '');
+                    effectiveCss = globalMatchingStyles.replace(/\.vaadin-chart/g, '');
                   }
 
                   // Zoom out a bit to avoid clipping the chart's edge on paper
