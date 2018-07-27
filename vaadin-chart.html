@@ -1236,44 +1236,23 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
                 // Hook into beforePrint and beforeExport to ensure correct styling
                 if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
-                  const shadowStyle = self.shadowRoot.querySelector('style');
-
-                  const isNativeShadowDom = shadowStyle.classList && [].slice.call(shadowStyle.classList)
-                    .indexOf('style-scope') < 0;
-
                   let effectiveCss = '';
-                  if (isNativeShadowDom) {
-                    effectiveCss = shadowStyle.innerHTML;
+                  if (window.ShadyCSS.nativeShadow) {
+                    const shadowStyles = self.shadowRoot.querySelectorAll('style');
+                    for (let i = 0; i < shadowStyles.length; i++) {
+                      effectiveCss = effectiveCss + shadowStyles[i].textContent;
+                    }
                   } else {
-                    const styleSheets = document.styleSheets;
-
-                    let globalMatchingStyles = '';
-                    for (let sheetIndex = 0; sheetIndex < styleSheets.length; sheetIndex++) {
-                      const styleSheet = styleSheets[sheetIndex];
-                      const cssRules = styleSheet.cssRules;
-
-                      for (let ruleIndex = 0; ruleIndex < cssRules.length; ruleIndex++) {
-                        if (cssRules[ruleIndex].cssText
-                            && cssRules[ruleIndex].cssText.indexOf('highcharts') >= 0) {
-                          globalMatchingStyles = globalMatchingStyles + cssRules[ruleIndex].cssText;
-                        }
-                      }
-                    }
-
-                    // Find the scope prefix for this chart instance
-                    let instanceScope;
-                    const classList = self.classList;
-                    for (let classIndex = 0; classIndex < classList.length; classIndex++) {
-                      if (classList[classIndex].indexOf('vaadin-chart') === 0) {
-                        instanceScope = classList[classIndex];
-                        break;
-                      }
-                    }
-
-                    // Strip off instance scope and tag scopes
-                    globalMatchingStyles = globalMatchingStyles.replace(new RegExp('\\.' + instanceScope, 'g'), '');
-                    effectiveCss = globalMatchingStyles.replace(/\.vaadin-chart/g, '');
+                    effectiveCss = window.ShadyCSS.ScopingShim._styleInfoForNode(self)
+                      ._getStyleRules().parsedCssText;
                   }
+
+                  // Strip off host selectors that target individual instances
+                  effectiveCss = effectiveCss.replace(/:host\(.+\)/g, match => {
+                    const selector = match.substr(6, match.length - 7);
+                    const matchesFn = self.matches || self.msMatchesSelector;
+                    return matchesFn.call(self, selector) ? '' : match;
+                  });
 
                   // Zoom out a bit to avoid clipping the chart's edge on paper
                   effectiveCss = effectiveCss +
@@ -1284,7 +1263,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                       '}';
 
                   this.tempBodyStyle = document.createElement('style');
-                  this.tempBodyStyle.innerHTML = effectiveCss;
+                  this.tempBodyStyle.textContent = effectiveCss;
                   document.body.appendChild(this.tempBodyStyle);
                 }
 
