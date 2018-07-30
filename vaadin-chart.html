@@ -1235,50 +1235,63 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
                 // Hook into beforePrint and beforeExport to ensure correct styling
-                if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0
-                    && !window.isCurrentlyExporting) {
-                  window.isCurrentlyExporting = true;
+                if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
 
-                  let effectiveCss = '';
-                  if (window.ShadyCSS.nativeShadow) {
-                    const shadowStyles = self.shadowRoot.querySelectorAll('style');
-                    for (let i = 0; i < shadowStyles.length; i++) {
-                      effectiveCss = effectiveCss + shadowStyles[i].textContent;
+                  // Guard against another print 'before print' event coming before
+                  // the 'after print' event.
+                  if (!this.tempBodyStyle) {
+                    let effectiveCss = '';
+                    if (window.ShadyCSS.nativeShadow) {
+                      const shadowStyles = self.shadowRoot.querySelectorAll('style');
+                      for (let i = 0; i < shadowStyles.length; i++) {
+                        effectiveCss = effectiveCss + shadowStyles[i].textContent;
+                      }
+
+                      // Strip off host selectors that target individual instances
+                      effectiveCss = effectiveCss.replace(/:host\(.+\)/g, match => {
+                        const selector = match.substr(6, match.length - 7);
+                        const matchesFn = self.matches || self.msMatchesSelector;
+                        return matchesFn.call(self, selector) ? '' : match;
+                      });
+                    } else {
+                      const ScopingShim = window.ShadyCSS.ScopingShim;
+                      effectiveCss = ScopingShim.styleAstToString(
+                        ScopingShim._styleInfoForNode(self)._getStyleRules());
+
+                      // Remove the style scopes added by ShadyCSS
+                      // e.g. '.vaadin-chart-1 .highcharts-container.vaadin-chart'
+                      //   -> '.highcharts-container'
+
+                      // 1. Web Component instance scope
+                      const match = self.className.match(/\bvaadin-chart-\d+\b/);
+                      if (match) {
+                        effectiveCss = effectiveCss.replace(new RegExp('\\.' + match[0], 'g'), '');
+                      }
+
+                      // 2. Web Component tag scope
+                      effectiveCss = effectiveCss.replace(/\.vaadin-chart/g, '');
                     }
-                  } else {
-                    effectiveCss = window.ShadyCSS.ScopingShim._styleInfoForNode(self)
-                      ._getStyleRules().parsedCssText;
+
+                    // Zoom out a bit to avoid clipping the chart's edge on paper
+                    effectiveCss = effectiveCss +
+                        + 'body {' +
+                        '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
+                        '    zoom: 0.9;' + // Others
+                        '    zoom: 90%;' + // Webkit
+                        '}';
+
+                    this.tempBodyStyle = document.createElement('style');
+                    this.tempBodyStyle.textContent = effectiveCss;
+                    document.body.appendChild(this.tempBodyStyle);
                   }
-
-                  // Strip off host selectors that target individual instances
-                  effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, match => {
-                    const selector = match.substr(6, match.length - 7);
-                    const matchesFn = self.matches || self.msMatchesSelector;
-                    return matchesFn.call(self, selector) ? '' : match;
-                  });
-
-                  // Zoom out a bit to avoid clipping the chart's edge on paper
-                  effectiveCss = effectiveCss +
-                      + 'body {' +
-                      '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
-                      '    zoom: 0.9;' + // Others
-                      '    zoom: 90%;' + // Webkit
-                      '}';
-
-                  this.tempBodyStyle = document.createElement('style');
-                  this.tempBodyStyle.textContent = effectiveCss;
-                  document.body.appendChild(this.tempBodyStyle);
                 }
 
                 // Hook into afterPrint and afterExport to revert changes made before
-                if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0
-                    && window.isCurrentlyExporting) {
+                if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0) {
                   if (this.tempBodyStyle) {
                     document.body.removeChild(this.tempBodyStyle);
                     delete this.tempBodyStyle;
                   }
-
-                  delete window.isCurrentlyExporting;
                 }
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
