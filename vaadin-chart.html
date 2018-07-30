@@ -476,7 +476,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               enabled: false
             },
             exporting: {
-              enabled: false
+              enabled: true
             },
             title: {
               text: null
@@ -1235,7 +1235,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
                 // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
                 // Hook into beforePrint and beforeExport to ensure correct styling
-                if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
+                if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0
+                    && !window.isCurrentlyExporting) {
+                  window.isCurrentlyExporting = true;
+
                   let effectiveCss = '';
                   if (window.ShadyCSS.nativeShadow) {
                     const shadowStyles = self.shadowRoot.querySelectorAll('style');
@@ -1248,7 +1251,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                   }
 
                   // Strip off host selectors that target individual instances
-                  effectiveCss = effectiveCss.replace(/:host\(.+\)/g, match => {
+                  effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, match => {
                     const selector = match.substr(6, match.length - 7);
                     const matchesFn = self.matches || self.msMatchesSelector;
                     return matchesFn.call(self, selector) ? '' : match;
@@ -1268,11 +1271,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
                 }
 
                 // Hook into afterPrint and afterExport to revert changes made before
-                if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0) {
+                if (['afterPrint', 'afterExport'].indexOf(event.type) >= 0
+                    && window.isCurrentlyExporting) {
                   if (this.tempBodyStyle) {
                     document.body.removeChild(this.tempBodyStyle);
                     delete this.tempBodyStyle;
                   }
+
+                  delete window.isCurrentlyExporting;
                 }
 
                 self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
