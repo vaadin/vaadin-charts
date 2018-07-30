@@ -64,8 +64,6 @@
                 mutations.some(e => [].slice.call(e.addedNodes)
                   .map(e => e.tagName.toLowerCase())
                   .indexOf('style') >= 0);
-
-            expect(styleCopiedToBody).to.be.true;
           });
           observer.observe(document.body, {childList: true});
 
@@ -77,7 +75,10 @@
           pngExportButton.onclick();
           expect(beforeExportCalled).to.be.true;
 
-          setTimeout(() => done(), 200);
+          setTimeout(() => {
+            expect(styleCopiedToBody).to.be.true;
+            done();
+          }, 200);
         });
       });
 
@@ -99,8 +100,6 @@
                 mutations.some(e => [].slice.call(e.removedNodes)
                   .map(e => e.tagName.toLowerCase())
                   .indexOf('style') >= 0);
-
-            expect(styleRemovedFromBody).to.be.true;
           });
           observer.observe(document.body, {childList: true});
 
@@ -109,7 +108,10 @@
           pngExportButton.onclick();
           expect(afterExportCalled).to.be.true;
 
-          setTimeout(() => done(), 200);
+          setTimeout(() => {
+            expect(styleRemovedFromBody).to.be.true;
+            done();
+          }, 200);
         });
       });
     });
