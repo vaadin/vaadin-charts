@@ -60,6 +60,9 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
 
   map(values, seriesType) {
     if (values) {
+      if (this.type === 'array' && this.mapper.length === 0) {
+        return values.slice();
+      }
       const arrayMapper = this.__itemArrayToObjectMapperFactory(seriesType);
       return values.map((item, index) => {
         const result = this.__isObject(item) ? Object.assign({}, item) : {};
@@ -76,10 +79,6 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
           result.name = this.mapper[result.y];
         } else if (this.type === 'array' && this.mapper.length > index) {
           result.name = this.mapper[index];
-        }
-
-        if (!result.name) {
-          result.name = result.y;
         }
 
         return result;
