@@ -62,12 +62,12 @@
         });
       });
 
-      it('should have values (array of numbers) as labels by default', function(done) {
+      it('should have x values (array of numbers) as labels by default', function(done) {
         setTimeout(() => {
           const firstSeries = chart.configuration.series[0];
-          const actual = firstSeries.data.map(e => e.name);
+          const actual = firstSeries.data.map(e => e.x);
 
-          expect(element.values).to.deep.equal(actual);
+          expect(element.values.map((v, i) => i)).to.deep.equal(actual);
           done();
         }, 50);
       });
@@ -77,7 +77,7 @@
         element.values = valuesArrayArray;
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          const actual = firstSeries.data.map(e => [e.x, e.name]);
+          const actual = firstSeries.data.map(e => [e.x, e.y]);
 
           expect(valuesArrayArray).to.deep.equal(actual);
           done();
@@ -135,8 +135,8 @@
         element.values = [[10, 20], [40, 50], [70, 80]];
         setTimeout(function() {
           const firstSeries = chart.configuration.series[0];
-          let expected = [[10, 'Tue'], [40, 'Thur'], [70, 80]];
-          let actual = firstSeries.data.map(e => [e.x, e.name]);
+          let expected = [[10, 'Tue'], [40, 'Thur'], [70, 2]];
+          let actual = firstSeries.data.map((e, i) => [e.x, e.name || i]);
           expect(expected).to.deep.equal(actual);
 
           // Highcharts assigns serial values for missing x starting from 0

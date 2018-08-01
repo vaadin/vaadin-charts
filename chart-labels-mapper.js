@@ -47,7 +47,7 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
     } else if (typeof value === 'object') {
       this.__assignMapper(value, 'object');
     } else {
-      console.warn(`VaadinChartSeries::ChartLabelsMapper: unsupported type for mapping property: 
+      console.warn(`VaadinChartSeries::ChartLabelsMapper: unsupported type for mapping property:
       ${typeof value} - ${value}. Will use the pass-through mapper instead`);
       this.__assignMapper([], 'array'); // Pass-through.
     }
@@ -58,19 +58,17 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
     this.type = type;
   }
 
-  map(values) {
+  map(values, seriesType) {
     if (values) {
+      if (this.type === 'array' && this.mapper.length === 0) {
+        return values.slice();
+      }
+      const arrayMapper = this.__itemArrayToObjectMapperFactory(seriesType);
       return values.map((item, index) => {
         const result = this.__isObject(item) ? Object.assign({}, item) : {};
 
         if (Array.isArray(item)) {
-          // Set default name like Highcharts as specified here https://api.highcharts.com/highcharts/series.area.data
-          // just in case the user-supplied mapper is unable to find a befitting name
-          if (typeof item[0] === 'string') {
-            [result.name, result.y] = item;
-          } else {
-            [result.x, result.y] = item;
-          }
+          Object.assign(result, arrayMapper(item));
         } else if (!this.__isObject(item)) {
           result.y = item;
         }
@@ -83,12 +81,167 @@ Vaadin.Charts.ChartLabelsMapper = (() => class {
           result.name = this.mapper[index];
         }
 
-        if (!result.name) {
-          result.name = result.y;
-        }
-
         return result;
       });
+    }
+  }
+  /**
+   * Creates a mapping function to convert an item of type Array to an Object
+   * based on the type of the series (or the chart default type).
+   *
+   * @param {String} type the series (or chart default) type
+   *
+   * @returns a mapper function that converts `Array` → `Object` based on the type
+   */
+  __itemArrayToObjectMapperFactory(type) {
+    switch (type) {
+      case 'arearange':
+      case 'columnrange':
+      case 'areasplinerange':
+      case 'errorbar':
+        return (item) => {
+          const result = {};
+
+          if (item.length === 3) {
+            [, result.low, result.high] = item;
+
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.low, result.high] = item;
+          }
+          return result;
+        };
+      case 'ohlc':
+      case 'candlestick':
+        return (item) => {
+          const result = {};
+          if (item.length === 5) {
+            [, result.open, result.high, result.low, result.close] = item;
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.open, result.high, result.low, result.close] = item;
+          }
+          return result;
+        };
+      case 'boxplot':
+        return (item) => {
+          const result = {};
+
+          if (item.length === 6) {
+            [, result.low, result.q1, result.median, result.q3, result.high] = item;
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.low, result.q1, result.median, result.q3, result.high] = item;
+          }
+          return result;
+        };
+      case 'bubble':
+      case 'variwide':
+        return (item) => {
+          const result = {};
+
+          if (item.length === 3) {
+            [, result.y, result.z] = item;
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.y, result.z] = item;
+          }
+          return result;
+        };
+      case 'bullet':
+        return (item) => {
+          const result = {};
+
+          if (item.length === 3) {
+            [, result.y, result.target] = item;
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.y, result.target] = item;
+          }
+          return result;
+        };
+      case 'heatmap':
+      case 'tilemap':
+        return (item) => {
+          const result = {};
+
+          if (item.length === 3) {
+            [, result.y, result.value] = item;
+            if (typeof item[0] === 'string') {
+              [result.name] = item;
+            } else {
+              [result.x] = item;
+            }
+          } else {
+            [result.y, result.value] = item;
+          }
+          return result;
+        };
+      case 'scatter3d':
+        return (item) => {
+          const result = {};
+
+          [, result.y, result.z] = item;
+          if (typeof item[0] === 'string') {
+            [result.name] = item;
+          } else {
+            [result.x] = item;
+          }
+          return result;
+        };
+      case 'variablepie':
+        return (item) => {
+          const result = {};
+
+          [result.y, result.z] = item;
+          return result;
+        };
+      case 'vector':
+      case 'windbard':
+        return (item) => {
+          const result = {};
+
+          [result.x, result.y, result.length, result.direction] = item;
+          return result;
+        };
+      case 'wordcloud':
+        return (item) => {
+          const result = {};
+
+          [result.name, result.weight] = item;
+          return result;
+        };
+      default:
+        return (item) => {
+          const result = {};
+
+          if (typeof item[0] === 'string') {
+            [result.name, result.y] = item;
+          } else {
+            [result.x, result.y] = item;
+          }
+          return result;
+        };
     }
   }
 })();

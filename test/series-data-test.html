@@ -1,0 +1,111 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-chart tests</title>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../vaadin-chart.html">
+</head>
+
+<body>
+  <test-fixture id="default">
+    <template>
+      <vaadin-chart type="arearange">
+        <vaadin-chart-series id="arearangeSeries" values="[[1,10,15],[2,20,25]]"></vaadin-chart-series>
+      </vaadin-chart>
+    </template>
+  </test-fixture>
+
+  <script>
+    describe('Series data type', function() {
+      var element;
+
+      beforeEach(function() {
+        element = fixture('default');
+      });
+
+      it('should map *range series types as expected', function(done) {
+        setTimeout(() => {
+          const series = element.querySelector('#arearangeSeries');
+          const {x, low, high} = series._series.points[0];
+          const firstPoint = {x, low, high};
+          expect(firstPoint).to.be.deep.equal({x: 1, low: 10, high: 15});
+          done();
+        }, 50);
+      });
+
+      it('should map ohlc series type as expected', function(done) {
+        element.timeline = true;
+        const series = document.createElement('vaadin-chart-series');
+        series.type = 'ohlc';
+        series.values = [[1, 10, 15, 20, 25]];
+        element.appendChild(series);
+        setTimeout(() => {
+          const {x, open, high, low, close} = series._series.points[0];
+          const firstPoint = {x, open, high, low, close};
+          expect(firstPoint).to.be.deep.equal({x: 1, open: 10, high: 15, low: 20, close: 25});
+          element.removeChild(series);
+          done();
+        }, 50);
+      });
+
+      it('should map boxplot series type as expected', function(done) {
+        const series = document.createElement('vaadin-chart-series');
+        series.type = 'boxplot';
+        series.values = [[1, 10, 15, 20, 25, 30]];
+        element.appendChild(series);
+        setTimeout(() => {
+          const {x, low, q1, median, q3, high} = series._series.points[0];
+          const firstPoint = {x, low, q1, median, q3, high};
+          expect(firstPoint).to.be.deep.equal({x: 1, low: 10, q1: 15, median: 20, q3: 25, high: 30});
+          element.removeChild(series);
+          done();
+        }, 50);
+      });
+
+      it('should map bubble series type as expected', function(done) {
+        const series = document.createElement('vaadin-chart-series');
+        series.type = 'bubble';
+        series.values = [[1, 10, 15]];
+        element.appendChild(series);
+        setTimeout(() => {
+          const {x, y, z} = series._series.points[0];
+          const firstPoint = {x, y, z};
+          expect(firstPoint).to.be.deep.equal({x: 1, y: 10, z: 15});
+          element.removeChild(series);
+          done();
+        }, 50);
+      });
+
+      it('should map bubble series type as expected', function(done) {
+        const series = document.createElement('vaadin-chart-series');
+        series.type = 'bubble';
+        series.values = [[1, 10, 15]];
+        element.appendChild(series);
+        setTimeout(() => {
+          const {x, y, z} = series._series.points[0];
+          const firstPoint = {x, y, z};
+          expect(firstPoint).to.be.deep.equal({x: 1, y: 10, z: 15});
+          element.removeChild(series);
+          done();
+        }, 50);
+      });
+
+      it('should map scatter3d series type as expected', function(done) {
+        element.chart3d = true;
+        const series = document.createElement('vaadin-chart-series');
+        series.type = 'scatter3d';
+        series.values = [[1, 10, 15]];
+        element.appendChild(series);
+        setTimeout(() => {
+          const {x, y, z} = series._series.points[0];
+          const firstPoint = {x, y, z};
+          expect(firstPoint).to.be.deep.equal({x: 1, y: 10, z: 15});
+          element.removeChild(series);
+          done();
+        }, 50);
+      });
+
+    });
+  </script>
+</body>
