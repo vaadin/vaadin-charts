@@ -1,28 +1,3 @@
-<dom-module id="WaterfallChart" theme-for="vaadin-chart">
-    <template>
-      <style include="vaadin-chart-default-theme">
-        :host(.waterfall) .highcharts-data-labels text {
-          fill: black;
-        }
-
-        :host(.waterfall) .highcharts-waterfall-series .highcharts-point {
-          fill: lightgreen;
-        }
-
-        :host(.waterfall) .highcharts-waterfall-series .highcharts-negative {
-          fill: lightcoral;
-        }
-
-        :host(.waterfall) .highcharts-waterfall-series .highcharts-sum {
-          fill: lightblue;
-        }
-
-        :host(.waterfall) .highcharts-waterfall-series .highcharts-intermediate-sum {
-          fill: lightgoldenrodyellow;
-        }
-      </style>
-    </template>
-  </dom-module>
-<vaadin-chart type="waterfall" class="waterfall" title="Waterfall" no-legend tooltip categories='["Start", "Product Revenue", "Service Revenue", "Positive Balance", "Fixed Costs", "Variable Costs", "Balance"]' additional-options='{"yAxis":{"title":{"text":"USD"}}, "tooltip":{"pointFormat":"<b>${point.y:,.2f}</b> USD"}}'>
+<vaadin-chart type="waterfall" class="waterfall" title="Waterfall" no-legend categories='["Start", "Product Revenue", "Service Revenue", "Positive Balance", "Fixed Costs", "Variable Costs", "Balance"]' additional-options='{"yAxis":{"title":{"text":"USD"}}, "tooltip":{"pointFormat":"<b>${point.y:,.2f}</b> USD"}}'>
   <vaadin-chart-series values='[120000,569000,231000,{"isIntermediateSum":true},-342000,-233000,{"isSum":true}]'></vaadin-chart-series>
 </vaadin-chart>
