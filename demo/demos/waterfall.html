@@ -1,3 +1,29 @@
-<vaadin-chart type="waterfall" class="waterfall" title="Waterfall" no-legend categories='["Start", "Product Revenue", "Service Revenue", "Positive Balance", "Fixed Costs", "Variable Costs", "Balance"]' additional-options='{"yAxis":{"title":{"text":"USD"}}, "tooltip":{"pointFormat":"<b>${point.y:,.2f}</b> USD"}}'>
-  <vaadin-chart-series values='[120000,569000,231000,{"isIntermediateSum":true},-342000,-233000,{"isSum":true}]'></vaadin-chart-series>
+<vaadin-chart type="waterfall"
+    title="Waterfall"
+    class="waterfall"
+    categories='["Start", "Product Revenue", "Service Revenue", "Positive Balance", "Fixed Costs", "Variable Costs", "Balance"]'
+    no-legend
+    additional-options='{
+      "yAxis": {
+        "title": {
+          "text": "USD"
+        }
+      },
+      "tooltip": {
+        "pointFormat": "&lt;b&gt;${point.y:,.2f}&lt;/b&gt; USD"
+      }
+    }'>
+  <vaadin-chart-series values='[
+    120000,
+    569000,
+    231000,
+    {
+      "isIntermediateSum": true
+    },
+    -342000,
+    -233000,
+    {
+      "isSum": true
+    }
+  ]'></vaadin-chart-series>
 </vaadin-chart>
