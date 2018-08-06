@@ -1,7 +1,7 @@
 <dom-module id="speedometer-theme" theme-for="vaadin-chart">
   <template>
     <style include="vaadin-chart-default-theme">
-      :host([theme~="speedometer-dual"]) .highcharts-axis-line {
+      :host([theme~="speedometer-dual"]) .highcharts-yaxis .highcharts-axis-line {
         stroke-width: 2;
       }
 
@@ -20,6 +20,11 @@
       :host([theme~="speedometer-dual"]) .highcharts-grid-line,
       :host([theme~="speedometer-dual"]) .highcharts-minor-grid-line {
         stroke: none;
+      }
+
+      :host([theme~="speedometer-dual"]) .highcharts-pivot {
+        fill: #000;
+        stroke: #000;
       }
     </style>
   </template>
