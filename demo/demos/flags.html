@@ -1,7 +1,12 @@
 <vaadin-chart type="areaspline"
     title="Average fruit consumption during one week"
     categories='["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]'
-    additional-options='{"tooltip": { "shared": true, "valueSuffix": " units" }}'>
+    additional-options='{
+      "tooltip": {
+        "shared": true,
+        "valueSuffix": " units"
+      }
+    }'>
   <vaadin-chart-series title="John"
     values="[3, 4, 3, 5, 4, 10, 12]" unit="Fruit units">
   </vaadin-chart-series>
@@ -11,11 +16,23 @@
   </vaadin-chart-series>
   <vaadin-chart-series type="flags"
     title="Flags on series"
-    additional-options='{"onSeries": "jane", "shape": "squarepin"}'
-    values='[{"x": 2, "title": "On series"}, {"x": 5, "title": "On series"}]'>
+    additional-options='{
+      "onSeries": "jane",
+      "shape": "squarepin"
+    }'
+    values='[{
+      "x": 2,
+      "title": "On series"
+    }, {
+      "x": 5,
+      "title": "On series"
+    }]'>
   </vaadin-chart-series>
   <vaadin-chart-series type="flags"
     title="Flags on axis"
-    values='[{"x": 3, "title": "On axis"}]'>
+    values='[{
+      "x": 3,
+      "title": "On axis"
+    }]'>
   </vaadin-chart-series>
 </vaadin-chart>
