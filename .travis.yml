@@ -42,8 +42,7 @@ script:
     fi
 
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "3" ]]; then
-      npm install -g yarn magi-cli &&
-      (cd .. && git clone --depth 1 -b vaadin-components-next git://github.com/web-padawan/polymer-modulizer.git && cd polymer-modulizer && npm link) &&
+      npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer &&
       rm -rf node_modules &&
       magi p3-convert --out . --import-style=name &&
       yarn install --flat &&
