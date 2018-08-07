@@ -1,23 +1,19 @@
 sudo: true
 dist: trusty
 language: node_js
-node_js: 8.1
+node_js: 8.9
 
 cache:
   directories:
     - node_modules
 
 addons:
+  firefox: latest
+  chrome: stable
   ssh_known_hosts: app.fi
-
-addons:
   sauce_connect:
     username: $SAUCE_USERNAME
     access_key: $SAUCE_ACCESS_KEY
-
-install:
-  - npm install
-  - bower install
 
 deploy:
   - provider: script
@@ -27,19 +23,36 @@ deploy:
       branch: master
 
 before_script:
-  - gulp lint version:check
-  - polymer lint --rules polymer-2 --input *.html
-  - xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs-quick
+  - npm install bower polymer-cli@next -g
+  - bower install
+
+env:
+  - POLYMER=2
+  - POLYMER=3
 
 script:
-  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-      npm i gemini@^4.0.0 gemini-sauce gemini-polyserve;
-      gemini test test/visual;
-      gemini test test/visual -c .gemini-ie.yml;
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs;
+  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "2" ]]; then
+      npm install &&
+      npm install gemini@^4.0.0 gemini-sauce gemini-polyserve &&
+      gulp lint version:check &&
+      polymer test --env saucelabs-quick &&
+      gemini test test/visual &&
+      gemini test test/visual -c .gemini-ie.yml &&
+      polymer test --env saucelabs;
     fi
+
+  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "3" ]]; then
+      npm install -g yarn magi-cli &&
+      (cd .. && git clone --depth 1 -b vaadin-components-next git://github.com/web-padawan/polymer-modulizer.git && cd polymer-modulizer && npm link) &&
+      rm -rf node_modules &&
+      magi p3-convert --out . --import-style=name &&
+      yarn install --flat &&
+      polymer test --module-resolution=node --npm --env saucelabs;
+    fi
+
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs-cron;
+      npm install &&
+      polymer test --env saucelabs-cron;
     fi
 
 before_deploy:

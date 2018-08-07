@@ -7,6 +7,10 @@ See the file LICENSE.md distributed with this software for more information abou
 See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete license.
 -->
 
+<!-- MAGI ADD START
+<script src="../highcharts/es-modules/masters/highstock.src.js"></script>
+MAGI ADD END -->
+
 <link rel="import" href="../polymer/polymer-element.html">
 <script src="chart-deep-merger.js"></script>
 
@@ -17,8 +21,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
     }
 
     {
-      const {ChartDeepMerger} = Vaadin.Charts;
-
       /**
        * `<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.
        *
@@ -77,7 +79,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         get options() {
-          const options = ChartDeepMerger.__deepMerge({}, this.additionalOptions);
+          const options = Vaadin.Charts.ChartDeepMerger.__deepMerge({}, this.additionalOptions);
 
           if (this.type) {
             options.type = this.type;
@@ -444,8 +446,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       /**
        * @namespace Vaadin
        */
-      window.Vaadin = window.Vaadin || {};
-      Vaadin.ChartSeriesElement = ChartSeriesElement;
+      window.Vaadin.ChartSeriesElement = ChartSeriesElement;
     }
   </script>
 </dom-module>
