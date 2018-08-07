@@ -32,16 +32,16 @@
   "dependencies": {
     "highcharts": "6.1.0",
     "polymer": "^2.0.0",
-    "vaadin-themable-mixin": "vaadin/vaadin-themable-mixin#p3-preview",
+    "vaadin-themable-mixin": "vaadin/vaadin-themable-mixin#^1.2.1",
     "vaadin-license-checker": "vaadin/license-checker#p3-preview",
-    "vaadin-element-mixin": "vaadin/vaadin-element-mixin#p3-preview"
+    "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^1.1.2"
   },
   "devDependencies": {
     "iron-component-page": "^3.0.0",
     "iron-demo-helpers": "^2.0.0",
     "webcomponentsjs": "^1.0.0",
     "web-component-tester": "^6.1.5",
-    "vaadin-demo-helpers": "vaadin/vaadin-demo-helpers#p3-preview",
-    "vaadin-grid": "vaadin/vaadin-grid#p3-preview"
+    "vaadin-demo-helpers": "vaadin/vaadin-demo-helpers#^2.0.1",
+    "vaadin-grid": "vaadin/vaadin-grid#^5.1.0"
   }
 }
