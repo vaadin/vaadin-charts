@@ -33,7 +33,7 @@
     "highcharts": "6.1.0",
     "polymer": "^2.0.0",
     "vaadin-themable-mixin": "vaadin/vaadin-themable-mixin#^1.2.1",
-    "vaadin-license-checker": "vaadin/license-checker#p3-preview",
+    "vaadin-license-checker": "vaadin/license-checker#2.1.0-alpha1",
     "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^1.1.2"
   },
   "devDependencies": {
@@ -42,6 +42,6 @@
     "webcomponentsjs": "^1.0.0",
     "web-component-tester": "^6.1.5",
     "vaadin-demo-helpers": "vaadin/vaadin-demo-helpers#^2.0.1",
-    "vaadin-grid": "vaadin/vaadin-grid#^5.1.0"
+    "vaadin-grid": "vaadin/vaadin-grid#5.1.0-beta2"
   }
 }
