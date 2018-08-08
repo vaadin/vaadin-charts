@@ -45,6 +45,7 @@ script:
       npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer &&
       rm -rf node_modules &&
       magi p3-convert --out . --import-style=name &&
+      node post-modulize-processor.js &&
       yarn install --flat &&
       polymer test --module-resolution=node --npm --env saucelabs;
     fi
