@@ -60,7 +60,8 @@
     "vaadin-icons": "4.1.4",
     "vaadin-split-layout": "4.0.0",
     "vaadin-dialog": "2.0.2",
-    "iron-image": "2.0.0"
+    "iron-image": "2.0.0",
+    "vaadin-demo-helpers": "vaadin/vaadin-demo-helpers#^1.0.0"
   },
   "resolutions": {
     "webcomponentsjs": "^v1.1.0",

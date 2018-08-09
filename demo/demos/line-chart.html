@@ -1,0 +1,49 @@
+<dom-module id="line-chart">
+  <template>
+    <style include="vaadin-component-demo-shared-styles">
+    </style>
+
+
+    <h3>Line Chart</h3>
+    <vaadin-demo-snippet id="line-chart-demo-snippet">
+      <template preserve-content>
+        <vaadin-chart id="line-chart-sample" title="Monthly Average Temperature" subtitle="Source: WorldClimate.com" noLegend
+            categories='["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'>
+            <vaadin-chart-series type="line" title="Tokyo" values="[7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]" unit="Temperature (°C)">
+            </vaadin-chart-series>
+            <vaadin-chart-series type="line" title="London" values="[3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]" unit="Temperature (°C)">
+            </vaadin-chart-series>
+        </vaadin-chart>
+        <script>
+          window.addDemoReadyListener('#line-chart-demo-snippet', function(document) {
+            var chart = document.querySelector('#line-chart-sample');
+            var options = {
+              tooltip: {
+                enabled: true,
+                shared: true,
+                pointFormat: "{series.name}: <b>{point.y} °C</b><br />"
+              },
+              plotOptions: {
+                series: {
+                  dataLabels: {
+                    enabled: true
+                  }
+                }
+              }
+            };
+            chart.configuration.update(options);
+          });
+        </script>
+      </template>
+    </vaadin-demo-snippet>
+
+  </template>
+  <script>
+    class LineChart extends DemoReadyEventEmitter(ChartDemoMixin(Polymer.Element)) {
+      static get is() {
+        return 'line-chart';
+      }
+    }
+    customElements.define(LineChart.is, LineChart);
+  </script>
+</dom-module>
