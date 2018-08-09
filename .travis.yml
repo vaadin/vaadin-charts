@@ -15,6 +15,11 @@ addons:
     username: $SAUCE_USERNAME
     access_key: $SAUCE_ACCESS_KEY
 
+install:
+  - npm install
+  - npm install bower polymer-cli@next -g
+  - bower install
+
 deploy:
   - provider: script
     script: "./.travis.deploy.sh"
@@ -23,8 +28,9 @@ deploy:
       branch: master
 
 before_script:
-  - npm install bower polymer-cli@next -g
-  - bower install
+  - if [[ "$POLYMER" = "2" ]]; then
+      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs-quick;
+    fi
 
 env:
   - POLYMER=2
@@ -33,11 +39,7 @@ env:
 script:
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "2" ]]; then
       npm install &&
-      npm install gemini@^4.0.0 gemini-sauce gemini-polyserve &&
       gulp lint version:check &&
-      polymer test --env saucelabs-quick &&
-      gemini test test/visual &&
-      gemini test test/visual -c .gemini-ie.yml &&
       polymer test --env saucelabs;
     fi
 
@@ -47,6 +49,7 @@ script:
       magi p3-convert --out . --import-style=name &&
       node post-modulize-processor.js &&
       yarn install --flat &&
+      polymer test --module-resolution=node --npm --env saucelabs-quick &&
       polymer test --module-resolution=node --npm --env saucelabs;
     fi
 
