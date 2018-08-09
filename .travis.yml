@@ -1,7 +1,7 @@
 sudo: true
 dist: trusty
 language: node_js
-node_js: 8.9
+node_js: 8.11
 
 cache:
   directories:
@@ -13,11 +13,6 @@ addons:
     username: $SAUCE_USERNAME
     access_key: $SAUCE_ACCESS_KEY
 
-install:
-  - npm install
-  - npm install bower polymer-cli@next -g
-  - bower install
-
 deploy:
   - provider: script
     script: "./.travis.deploy.sh"
@@ -25,34 +20,35 @@ deploy:
     on:
       branch: master
 
-before_script:
-  - if [[ "$POLYMER" = "2" ]]; then
-      gulp lint version:check &&
-      polymer lint --rules polymer-2 --input *.html &&
-      polymer test --env saucelabs-quick;
-    fi
-
 env:
-  - POLYMER=2
+  - POLYMER=2 TEST_SUITE="unit_tests"
   - POLYMER=3
 
 script:
-  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "2" ]]; then
-      polymer test --env saucelabs;
+  - if [[ "$POLYMER" = "2" ]]; then
+      npm -q i && npm i -q --no-save bower polymer-cli && bower -q i &&
+      gulp lint version:check &&
+      polymer lint --rules polymer-2 --input ./src/*.html ./theme/**/*.html &&
+      if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
+        wct --env saucelabs;
+      else
+        wct;
+      fi &&
+      if [[ "$TRAVIS_EVENT_TYPE" = "cron" && "$TEST_SUITE" = "unit_tests" ]]; then
+        wct --env saucelabs-cron;
+      fi;
     fi
-
-  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "3" ]]; then
+  - if [[ "$POLYMER" = "3" ]]; then
       npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer &&
       rm -rf node_modules &&
       magi p3-convert --out . --import-style=name &&
       node post-modulize-processor.js &&
       yarn install --flat &&
-      polymer test --module-resolution=node --npm --env saucelabs-quick &&
-      polymer test --module-resolution=node --npm --env saucelabs;
-    fi
-
-  - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      polymer test --env saucelabs-cron;
+      if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
+        wct --module-resolution=node --npm --env saucelabs;
+      else
+        wct --module-resolution=node --npm;
+      fi;
     fi
 
 before_deploy:
