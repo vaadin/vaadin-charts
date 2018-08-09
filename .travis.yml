@@ -8,8 +8,6 @@ cache:
     - node_modules
 
 addons:
-  firefox: latest
-  chrome: stable
   ssh_known_hosts: app.fi
   sauce_connect:
     username: $SAUCE_USERNAME
@@ -29,7 +27,9 @@ deploy:
 
 before_script:
   - if [[ "$POLYMER" = "2" ]]; then
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs-quick;
+      gulp lint version:check &&
+      polymer lint --rules polymer-2 --input *.html &&
+      polymer test --env saucelabs-quick;
     fi
 
 env:
@@ -38,8 +38,6 @@ env:
 
 script:
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* && "$POLYMER" = "2" ]]; then
-      npm install &&
-      gulp lint version:check &&
       polymer test --env saucelabs;
     fi
 
@@ -54,7 +52,6 @@ script:
     fi
 
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
-      npm install &&
       polymer test --env saucelabs-cron;
     fi
 

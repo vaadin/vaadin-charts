@@ -11,7 +11,7 @@ module.exports = {
 
     var cronPlatforms = [
       'Android/chrome',
-      'Windows 10/chrome@65',
+      'Windows 10/chrome@68',
       'Windows 10/firefox@59',
       'Windows 10/internet explorer@11',
       'macOS 10.12/ipad@11.0',
@@ -19,7 +19,7 @@ module.exports = {
     ];
 
     var quickPlatforms = [
-      'Windows 10/chrome@65'
+      'Windows 10/chrome@68'
     ];
 
     if (env === 'saucelabs') {
