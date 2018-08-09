@@ -1255,7 +1255,8 @@ MAGI ADD END -->
                   // the 'after print' event.
                   if (!this.tempBodyStyle) {
                     let effectiveCss = '';
-                    if (window.ShadyCSS.nativeShadow) {
+                    const isNativeShadowDom = typeof nativeShadow !== 'undefined' ? nativeShadow : window.ShadyCSS.nativeShadow;
+                    if (isNativeShadowDom) {
                       const shadowStyles = self.shadowRoot.querySelectorAll('style');
                       for (let i = 0; i < shadowStyles.length; i++) {
                         effectiveCss = effectiveCss + shadowStyles[i].textContent;
@@ -1268,9 +1269,9 @@ MAGI ADD END -->
                         return matchesFn.call(self, selector) ? '' : match;
                       });
                     } else {
-                      const ScopingShim = window.ShadyCSS.ScopingShim;
-                      effectiveCss = ScopingShim.styleAstToString(
-                        ScopingShim._styleInfoForNode(self)._getStyleRules());
+                      const Shim = typeof ScopingShim !== 'undefined' ? ScopingShim : window.ShadyCSS.ScopingShim;
+                      effectiveCss = Shim.styleAstToString(
+                        Shim._styleInfoForNode(self)._getStyleRules());
 
                       // Remove the style scopes added by ShadyCSS
                       // e.g. '.vaadin-chart-1 .highcharts-container.vaadin-chart'
