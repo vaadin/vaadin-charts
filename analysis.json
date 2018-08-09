@@ -8,11 +8,11 @@
       "sourceRange": {
         "file": "vaadin-chart.html",
         "start": {
-          "line": 1738,
+          "line": 1739,
           "column": 6
         },
         "end": {
-          "line": 1738,
+          "line": 1739,
           "column": 48
         }
       },
@@ -41,250 +41,286 @@
           "path": "vaadin-chart-series.html",
           "properties": [
             {
+              "name": "options",
+              "type": "Object | null | undefined",
+              "description": "Object with the configured options defined and used to create a series.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 79,
+                  "column": 8
+                },
+                "end": {
+                  "line": 126,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__markersConfiguration",
+              "type": "?",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 416,
+                  "column": 8
+                },
+                "end": {
+                  "line": 432,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
               "name": "values",
-              "type": "Array",
+              "type": "Array | null | undefined",
               "description": "An array of data used by the series.\nFormat depends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to synchronize it.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 144,
+                  "line": 143,
                   "column": 12
                 },
                 "end": {
-                  "line": 147,
+                  "line": 146,
                   "column": 13
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "Array"
+                }
               },
               "defaultValue": "[]"
             },
             {
               "name": "valueMin",
-              "type": "number",
+              "type": "number | null | undefined",
               "description": "Value-axis minimum-value.\n Sets the value to a series bound by 'unit' property.\n Otherwise sets the value to the first series.\n Undefined by default (determined from data).",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 155,
+                  "line": 154,
                   "column": 12
                 },
                 "end": {
-                  "line": 159,
+                  "line": 158,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__valueMinObserver\""
+                  "observer": "\"__valueMinObserver\"",
+                  "attributeType": "Number"
                 }
               }
             },
             {
               "name": "valueMax",
-              "type": "number",
+              "type": "number | null | undefined",
               "description": "Value-axis maximum-value.\n See the 'valueMin'",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 165,
+                  "line": 164,
                   "column": 12
                 },
                 "end": {
-                  "line": 169,
+                  "line": 168,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__valueMaxObserver\""
+                  "observer": "\"__valueMaxObserver\"",
+                  "attributeType": "Number"
                 }
               }
             },
             {
               "name": "type",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "A string with the type of the series.\n Defaults to `'line'` in case no type is set for the chart.\nNote that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type on `<vaadin-chart>`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 176,
+                  "line": 175,
                   "column": 12
                 },
                 "end": {
-                  "line": 180,
+                  "line": 179,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__typeObserver\""
+                  "observer": "\"__typeObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "title",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "The name of the series as shown in the legend, tooltip etc.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 185,
+                  "line": 184,
                   "column": 12
                 },
                 "end": {
-                  "line": 189,
+                  "line": 188,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__titleObserver\""
+                  "observer": "\"__titleObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "markers",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Shows/hides data-point markers for line-like series.\nAcceptable input are:\n - `shown`: markers are always visible\n - `hidden`: markers are always hidden\n - `auto`: markers are visible for widespread data and hidden, when data is dense *(default)*",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 198,
+                  "line": 197,
                   "column": 12
                 },
                 "end": {
-                  "line": 202,
+                  "line": 201,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__markersObserver\""
+                  "observer": "\"__markersObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "unit",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Used to connect the series to an axis; if multiple series have the same “unit”, they will share axis.\nDisplayed as a title for the axis.\nIf no unit is defined, then series will be connected to the first axis.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 208,
+                  "line": 207,
                   "column": 12
                 },
                 "end": {
-                  "line": 212,
+                  "line": 211,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__unitObserver\""
+                  "observer": "\"__unitObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "stack",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Used to group series in a different stacks.\n\"stacking\" property should be specified either for each series or in plotOptions.\nIt is recommended to place series in a single stack, when they belong to the same yAxis.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 218,
+                  "line": 217,
                   "column": 12
                 },
                 "end": {
-                  "line": 222,
+                  "line": 221,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__stackObserver\""
+                  "observer": "\"__stackObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "neckPosition",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "The height of the neck, the lower part of the funnel.\nA number defines pixel width, a percentage string defines a percentage of the plot area height. Defaults to 30%.\nNote that this property only applies for \"funnel\" charts.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 228,
+                  "line": 227,
                   "column": 12
                 },
                 "end": {
-                  "line": 232,
+                  "line": 231,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__neckPositionOberserver\""
+                  "observer": "\"__neckPositionOberserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "neckWidth",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "The width of the neck, the lower part of the funnel.\nA number defines pixel width, a percentage string defines a percentage of the plot area width. Defaults to 30%.\nNote that this property only applies for \"funnel\" charts.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 238,
+                  "line": 237,
                   "column": 12
                 },
                 "end": {
-                  "line": 242,
+                  "line": 241,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__neckWidthOberserver\""
+                  "observer": "\"__neckWidthOberserver\"",
+                  "attributeType": "String"
                 }
-              }
-            },
-            {
-              "name": "options",
-              "type": "Object",
-              "description": "Object with the configured options defined and used to create a series.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 249,
-                  "column": 12
-                },
-                "end": {
-                  "line": 251,
-                  "column": 13
-                }
-              },
-              "metadata": {
-                "polymer": {}
               }
             },
             {
               "name": "additionalOptions",
-              "type": "Object",
+              "type": "Object | null | undefined",
               "description": "Represents additional JSON configuration.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 256,
+                  "line": 255,
                   "column": 12
                 },
                 "end": {
-                  "line": 259,
+                  "line": 258,
                   "column": 13
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "Object"
+                }
               }
             }
           ],
@@ -295,16 +331,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 271,
+                  "line": 270,
                   "column": 8
                 },
                 "end": {
-                  "line": 276,
+                  "line": 275,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "setSeries",
@@ -312,11 +351,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 282,
+                  "line": 281,
                   "column": 8
                 },
                 "end": {
-                  "line": 287,
+                  "line": 283,
                   "column": 9
                 }
               },
@@ -326,7 +365,10 @@
                   "name": "series",
                   "description": "Object of type `Highcharts.Series`"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__valuesObserver",
@@ -334,16 +376,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 289,
+                  "line": 285,
                   "column": 8
                 },
                 "end": {
-                  "line": 293,
+                  "line": 289,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__additionalOptionsObserver",
@@ -351,16 +396,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 295,
+                  "line": 291,
                   "column": 8
                 },
                 "end": {
-                  "line": 299,
+                  "line": 295,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__valueMinObserver",
@@ -368,16 +416,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 301,
+                  "line": 297,
                   "column": 8
                 },
                 "end": {
-                  "line": 316,
+                  "line": 312,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__valueMaxObserver",
@@ -385,16 +436,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 318,
+                  "line": 314,
                   "column": 8
                 },
                 "end": {
-                  "line": 333,
+                  "line": 329,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__typeObserver",
@@ -402,16 +456,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 335,
+                  "line": 331,
                   "column": 8
                 },
                 "end": {
-                  "line": 341,
+                  "line": 337,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__titleObserver",
@@ -419,16 +476,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 343,
+                  "line": 339,
                   "column": 8
                 },
                 "end": {
-                  "line": 349,
+                  "line": 345,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__stackObserver",
@@ -436,16 +496,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 351,
+                  "line": 347,
                   "column": 8
                 },
                 "end": {
-                  "line": 359,
+                  "line": 355,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__neckPositionOberserver",
@@ -453,16 +516,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 361,
+                  "line": 357,
                   "column": 8
                 },
                 "end": {
-                  "line": 368,
+                  "line": 364,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__neckWidthOberserver",
@@ -470,16 +536,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 370,
+                  "line": 366,
                   "column": 8
                 },
                 "end": {
-                  "line": 377,
+                  "line": 373,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__unitObserver",
@@ -487,16 +556,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 379,
+                  "line": 375,
                   "column": 8
                 },
                 "end": {
-                  "line": 394,
+                  "line": 390,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__hasSeriesConfig",
@@ -504,11 +576,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 396,
+                  "line": 392,
                   "column": 8
                 },
                 "end": {
-                  "line": 398,
+                  "line": 394,
                   "column": 9
                 }
               },
@@ -521,11 +593,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 400,
+                  "line": 396,
                   "column": 8
                 },
                 "end": {
-                  "line": 406,
+                  "line": 402,
                   "column": 9
                 }
               },
@@ -538,16 +610,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 408,
+                  "line": 404,
                   "column": 8
                 },
                 "end": {
-                  "line": 418,
+                  "line": 414,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__showWarn",
@@ -555,11 +630,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 438,
+                  "line": 434,
                   "column": 8
                 },
                 "end": {
-                  "line": 440,
+                  "line": 436,
                   "column": 9
                 }
               },
@@ -571,7 +646,10 @@
                 {
                   "name": "acceptedValues"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             }
           ],
           "staticMethods": [],
@@ -584,11 +662,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 75,
+              "line": 74,
               "column": 6
             },
             "end": {
-              "line": 441,
+              "line": 437,
               "column": 7
             }
           },
@@ -597,196 +675,196 @@
           "name": "Vaadin.ChartSeriesElement",
           "attributes": [
             {
+              "name": "options",
+              "description": "Object with the configured options defined and used to create a series.",
+              "sourceRange": {
+                "start": {
+                  "line": 79,
+                  "column": 8
+                },
+                "end": {
+                  "line": 126,
+                  "column": 9
+                }
+              },
+              "metadata": {},
+              "type": "Object | null | undefined"
+            },
+            {
               "name": "values",
               "description": "An array of data used by the series.\nFormat depends on the chart type and can be:\n  - An array of numerical values `[y0, y1, y2, y3,...]`\n  - An array of arrays with 2 values (`x`, `y`) `[ [x0, y0], [x1, y1], [x2, y2], ... ]`\n  - An array of objects, each one describing one point `[ {x: x0, y: y0, name: 'Point0', color: '#FF0000'}, {...}, ...]`\n\n See more in [API Site](https://api.highcharts.com/highcharts/series)\n\nNote that you should always use [Polymer API](https://www.polymer-project.org/2.0/docs/devguide/model-data#array-mutation)\nto mutate the values array in order to make the component aware of the\nchange and be able to synchronize it.",
               "sourceRange": {
                 "start": {
-                  "line": 144,
+                  "line": 143,
                   "column": 12
                 },
                 "end": {
-                  "line": 147,
+                  "line": 146,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "Array"
+              "type": "Array | null | undefined"
             },
             {
               "name": "value-min",
               "description": "Value-axis minimum-value.\n Sets the value to a series bound by 'unit' property.\n Otherwise sets the value to the first series.\n Undefined by default (determined from data).",
               "sourceRange": {
                 "start": {
-                  "line": 155,
+                  "line": 154,
                   "column": 12
                 },
                 "end": {
-                  "line": 159,
+                  "line": 158,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "number"
+              "type": "number | null | undefined"
             },
             {
               "name": "value-max",
               "description": "Value-axis maximum-value.\n See the 'valueMin'",
               "sourceRange": {
                 "start": {
-                  "line": 165,
+                  "line": 164,
                   "column": 12
                 },
                 "end": {
-                  "line": 169,
+                  "line": 168,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "number"
+              "type": "number | null | undefined"
             },
             {
               "name": "type",
               "description": "A string with the type of the series.\n Defaults to `'line'` in case no type is set for the chart.\nNote that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type on `<vaadin-chart>`.",
               "sourceRange": {
                 "start": {
-                  "line": 176,
+                  "line": 175,
                   "column": 12
                 },
                 "end": {
-                  "line": 180,
+                  "line": 179,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "title",
               "description": "The name of the series as shown in the legend, tooltip etc.",
               "sourceRange": {
                 "start": {
-                  "line": 185,
+                  "line": 184,
                   "column": 12
                 },
                 "end": {
-                  "line": 189,
+                  "line": 188,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "markers",
               "description": "Shows/hides data-point markers for line-like series.\nAcceptable input are:\n - `shown`: markers are always visible\n - `hidden`: markers are always hidden\n - `auto`: markers are visible for widespread data and hidden, when data is dense *(default)*",
               "sourceRange": {
                 "start": {
-                  "line": 198,
+                  "line": 197,
                   "column": 12
                 },
                 "end": {
-                  "line": 202,
+                  "line": 201,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "unit",
               "description": "Used to connect the series to an axis; if multiple series have the same “unit”, they will share axis.\nDisplayed as a title for the axis.\nIf no unit is defined, then series will be connected to the first axis.",
               "sourceRange": {
                 "start": {
-                  "line": 208,
+                  "line": 207,
                   "column": 12
                 },
                 "end": {
-                  "line": 212,
+                  "line": 211,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "stack",
               "description": "Used to group series in a different stacks.\n\"stacking\" property should be specified either for each series or in plotOptions.\nIt is recommended to place series in a single stack, when they belong to the same yAxis.",
               "sourceRange": {
                 "start": {
-                  "line": 218,
+                  "line": 217,
                   "column": 12
                 },
                 "end": {
-                  "line": 222,
+                  "line": 221,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "neck-position",
               "description": "The height of the neck, the lower part of the funnel.\nA number defines pixel width, a percentage string defines a percentage of the plot area height. Defaults to 30%.\nNote that this property only applies for \"funnel\" charts.",
               "sourceRange": {
                 "start": {
-                  "line": 228,
+                  "line": 227,
                   "column": 12
                 },
                 "end": {
-                  "line": 232,
+                  "line": 231,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "neck-width",
               "description": "The width of the neck, the lower part of the funnel.\nA number defines pixel width, a percentage string defines a percentage of the plot area width. Defaults to 30%.\nNote that this property only applies for \"funnel\" charts.",
               "sourceRange": {
                 "start": {
-                  "line": 238,
+                  "line": 237,
                   "column": 12
                 },
                 "end": {
-                  "line": 242,
+                  "line": 241,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
-            },
-            {
-              "name": "options",
-              "description": "Object with the configured options defined and used to create a series.",
-              "sourceRange": {
-                "start": {
-                  "line": 249,
-                  "column": 12
-                },
-                "end": {
-                  "line": 251,
-                  "column": 13
-                }
-              },
-              "metadata": {},
-              "type": "Object"
+              "type": "string | null | undefined"
             },
             {
               "name": "additional-options",
               "description": "Represents additional JSON configuration.",
               "sourceRange": {
                 "start": {
-                  "line": 256,
+                  "line": 255,
                   "column": 12
                 },
                 "end": {
-                  "line": 259,
+                  "line": 258,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "Object"
+              "type": "Object | null | undefined"
             }
           ],
           "events": [],
@@ -803,333 +881,478 @@
           "path": "vaadin-chart.html",
           "properties": [
             {
+              "name": "options",
+              "type": "?",
+              "description": "",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 538,
+                  "column": 8
+                },
+                "end": {
+                  "line": 638,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__chartEventNames",
+              "type": "?",
+              "description": " Name of the chart events to add to the configuration and its corresponding event for the chart element",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 643,
+                  "column": 8
+                },
+                "end": {
+                  "line": 733,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__seriesEventNames",
+              "type": "?",
+              "description": " Name of the series events to add to the configuration and its corresponding event for the chart element",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 738,
+                  "column": 8
+                },
+                "end": {
+                  "line": 797,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__pointEventNames",
+              "type": "?",
+              "description": " Name of the point events to add to the configuration and its corresponding event for the chart element",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 802,
+                  "column": 8
+                },
+                "end": {
+                  "line": 861,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__xAxesEventNames",
+              "type": "?",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 863,
+                  "column": 8
+                },
+                "end": {
+                  "line": 873,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "__yAxesEventNames",
+              "type": "?",
+              "description": "",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 875,
+                  "column": 8
+                },
+                "end": {
+                  "line": 885,
+                  "column": 9
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
               "name": "configuration",
               "type": "Object",
               "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 319,
+                  "line": 317,
                   "column": 12
                 },
                 "end": {
-                  "line": 319,
+                  "line": 317,
                   "column": 33
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "Object"
+                }
               }
             },
             {
               "name": "categories",
-              "type": "Object",
+              "type": "Object | null | undefined",
               "description": "If categories are present names are used instead of numbers for the category axis.\nThe format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`\nor a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 326,
+                  "line": 324,
                   "column": 12
                 },
                 "end": {
-                  "line": 330,
+                  "line": 328,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateCategories\""
+                  "observer": "\"__updateCategories\"",
+                  "attributeType": "Object"
                 }
               }
             },
             {
               "name": "categoryMax",
-              "type": "number",
+              "type": "number | null | undefined",
               "description": "Category-axis maximum value. Defaults to `undefined`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 335,
+                  "line": 333,
                   "column": 12
                 },
                 "end": {
-                  "line": 339,
+                  "line": 337,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateCategoryMax\""
+                  "observer": "\"__updateCategoryMax\"",
+                  "attributeType": "Number"
                 }
               }
             },
             {
               "name": "categoryMin",
-              "type": "number",
+              "type": "number | null | undefined",
               "description": "Category-axis minimum value. Defaults to `undefined`.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 344,
+                  "line": 342,
                   "column": 12
                 },
                 "end": {
-                  "line": 348,
+                  "line": 346,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateCategoryMin\""
+                  "observer": "\"__updateCategoryMin\"",
+                  "attributeType": "Number"
                 }
               }
             },
             {
               "name": "categoryPosition",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "The position of the category axis. Acceptable values are `left`, `right`, `top` and `bottom`\nexcept for bar charts which only accept `left` and `right`.\nWith the default value, charts appear as though they have `category-position=\"bottom\"`\nexcept for bar charts that appear as though they have `category-position=\"left\"`.\n\nDefaults to `undefined`",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 358,
+                  "line": 356,
                   "column": 12
                 },
                 "end": {
-                  "line": 362,
+                  "line": 360,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateCategoryPosition\""
+                  "observer": "\"__updateCategoryPosition\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "noLegend",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additionalOptions property",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 368,
+                  "line": 366,
                   "column": 12
                 },
                 "end": {
-                  "line": 372,
+                  "line": 370,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__hideLegend\""
+                  "observer": "\"__hideLegend\"",
+                  "attributeType": "Boolean"
                 }
               }
             },
             {
               "name": "stacking",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Specifies how series are stacked on top of each other.\nPossible values are null, \"normal\" or \"percent\".\nIf \"stack\" property is not defined on the vaadin-chart-series elements, then series will be put into\nthe default stack.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 380,
+                  "line": 378,
                   "column": 12
                 },
                 "end": {
-                  "line": 384,
+                  "line": 382,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__stackingObserver\""
+                  "observer": "\"__stackingObserver\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "timeline",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Specifies whether the chart is a normal chart or a timeline chart.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 389,
+                  "line": 387,
                   "column": 12
                 },
                 "end": {
-                  "line": 392,
-                  "column": 13
-                }
-              },
-              "metadata": {
-                "polymer": {}
-              }
-            },
-            {
-              "name": "title",
-              "type": "string",
-              "description": "Represents the title of the chart.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 397,
-                  "column": 12
-                },
-                "end": {
-                  "line": 401,
+                  "line": 390,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateTitle\""
+                  "attributeType": "Boolean"
+                }
+              }
+            },
+            {
+              "name": "title",
+              "type": "string | null | undefined",
+              "description": "Represents the title of the chart.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 395,
+                  "column": 12
+                },
+                "end": {
+                  "line": 399,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"__updateTitle\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "tooltip",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Whether or not to show tooltip when hovering data points.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 406,
+                  "line": 404,
                   "column": 12
                 },
                 "end": {
-                  "line": 410,
+                  "line": 408,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__tooltipObserver\""
+                  "observer": "\"__tooltipObserver\"",
+                  "attributeType": "Boolean"
                 }
               }
             },
             {
               "name": "type",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Sets the default series type of the chart.\nNote that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 416,
+                  "line": 414,
                   "column": 12
                 },
                 "end": {
-                  "line": 420,
+                  "line": 418,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateType\""
+                  "observer": "\"__updateType\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "subtitle",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Represents the subtitle of the chart.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 425,
+                  "line": 423,
                   "column": 12
                 },
                 "end": {
-                  "line": 429,
+                  "line": 427,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__updateSubtitle\""
+                  "observer": "\"__updateSubtitle\"",
+                  "attributeType": "String"
                 }
               }
             },
             {
               "name": "chart3d",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via `additionalOptions`.\nThe thickness of a Pie chart can be set on `additionalOptions` through `plotOptions.pie.depth`.\n3D is supported by Bar, Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 439,
+                  "line": 437,
                   "column": 12
                 },
                 "end": {
-                  "line": 443,
+                  "line": 441,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__chart3dObserver\""
+                  "observer": "\"__chart3dObserver\"",
+                  "attributeType": "Boolean"
                 }
               }
             },
             {
               "name": "emptyText",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Specifies the message displayed on a chart without displayable data.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 448,
+                  "line": 446,
                   "column": 12
                 },
                 "end": {
-                  "line": 453,
+                  "line": 451,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__emptyTextObserver\""
+                  "observer": "\"__emptyTextObserver\"",
+                  "attributeType": "String"
                 }
               },
               "defaultValue": "\" \""
             },
             {
               "name": "additionalOptions",
-              "type": "Object",
+              "type": "Object | null | undefined",
               "description": "Represents additional JSON configuration.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 458,
+                  "line": 456,
                   "column": 12
                 },
                 "end": {
-                  "line": 461,
-                  "column": 13
-                }
-              },
-              "metadata": {
-                "polymer": {}
-              }
-            },
-            {
-              "name": "polar",
-              "type": "boolean",
-              "description": "When present, cartesian charts like line, spline, area and column are transformed\ninto the polar coordinate system.",
-              "privacy": "public",
-              "sourceRange": {
-                "start": {
-                  "line": 467,
-                  "column": 12
-                },
-                "end": {
-                  "line": 471,
+                  "line": 459,
                   "column": 13
                 }
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"__polarObserver\""
+                  "attributeType": "Object"
+                }
+              }
+            },
+            {
+              "name": "polar",
+              "type": "boolean | null | undefined",
+              "description": "When present, cartesian charts like line, spline, area and column are transformed\ninto the polar coordinate system.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 465,
+                  "column": 12
+                },
+                "end": {
+                  "line": 469,
+                  "column": 13
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"__polarObserver\"",
+                  "attributeType": "Boolean"
                 }
               }
             }
@@ -1141,16 +1364,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 519,
+                  "line": 517,
                   "column": 8
                 },
                 "end": {
-                  "line": 538,
+                  "line": 536,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__reflow",
@@ -1158,16 +1384,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 889,
+                  "line": 887,
                   "column": 8
                 },
                 "end": {
-                  "line": 896,
+                  "line": 894,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__mutationCallback",
@@ -1175,16 +1404,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 898,
+                  "line": 896,
                   "column": 8
                 },
                 "end": {
-                  "line": 905,
+                  "line": 903,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__addChildObserver",
@@ -1192,16 +1424,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 907,
+                  "line": 905,
                   "column": 8
                 },
                 "end": {
-                  "line": 914,
+                  "line": 912,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__filterSeriesNodes",
@@ -1209,11 +1444,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 916,
+                  "line": 914,
                   "column": 8
                 },
                 "end": {
-                  "line": 918,
+                  "line": 916,
                   "column": 9
                 }
               },
@@ -1230,11 +1465,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 920,
+                  "line": 918,
                   "column": 8
                 },
                 "end": {
-                  "line": 953,
+                  "line": 951,
                   "column": 9
                 }
               },
@@ -1243,7 +1478,10 @@
                 {
                   "name": "series"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__setYAxisProps",
@@ -1251,11 +1489,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 955,
+                  "line": 953,
                   "column": 8
                 },
                 "end": {
-                  "line": 961,
+                  "line": 959,
                   "column": 9
                 }
               },
@@ -1270,7 +1508,10 @@
                 {
                   "name": "props"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__isSeriesEmpty",
@@ -1278,11 +1519,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 963,
+                  "line": 961,
                   "column": 8
                 },
                 "end": {
-                  "line": 965,
+                  "line": 963,
                   "column": 9
                 }
               },
@@ -1299,11 +1540,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 967,
+                  "line": 965,
                   "column": 8
                 },
                 "end": {
-                  "line": 983,
+                  "line": 981,
                   "column": 9
                 }
               },
@@ -1312,7 +1553,10 @@
                 {
                   "name": "series"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initChart",
@@ -1320,11 +1564,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 985,
+                  "line": 983,
                   "column": 8
                 },
                 "end": {
-                  "line": 994,
+                  "line": 992,
                   "column": 9
                 }
               },
@@ -1333,7 +1577,10 @@
                 {
                   "name": "options"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "disconnectedCalllback",
@@ -1341,16 +1588,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 997,
+                  "line": 995,
                   "column": 8
                 },
                 "end": {
-                  "line": 1001,
+                  "line": 999,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__getAxis",
@@ -1358,11 +1608,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1009,
+                  "line": 1007,
                   "column": 8
                 },
                 "end": {
-                  "line": 1016,
+                  "line": 1014,
                   "column": 9
                 }
               },
@@ -1386,11 +1636,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1024,
+                  "line": 1022,
                   "column": 8
                 },
                 "end": {
-                  "line": 1029,
+                  "line": 1027,
                   "column": 9
                 }
               },
@@ -1414,11 +1664,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1036,
+                  "line": 1034,
                   "column": 8
                 },
                 "end": {
-                  "line": 1046,
+                  "line": 1044,
                   "column": 9
                 }
               },
@@ -1429,7 +1679,10 @@
                   "type": "Boolean",
                   "description": "indicates if it will remove x or y axes. Defaults to `false`."
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "update",
@@ -1437,11 +1690,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 1083,
+                  "line": 1081,
                   "column": 8
                 },
                 "end": {
-                  "line": 1121,
+                  "line": 1119,
                   "column": 9
                 }
               },
@@ -1457,7 +1710,10 @@
                   "type": "Boolean",
                   "description": "Optional boolean that should be set to true if no other chart configuration was set before or\n   if existing configuration should be discarded."
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__makeConfigurationBuffer",
@@ -1465,11 +1721,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1123,
+                  "line": 1121,
                   "column": 8
                 },
                 "end": {
-                  "line": 1132,
+                  "line": 1130,
                   "column": 9
                 }
               },
@@ -1489,11 +1745,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1134,
+                  "line": 1132,
                   "column": 8
                 },
                 "end": {
-                  "line": 1149,
+                  "line": 1147,
                   "column": 9
                 }
               },
@@ -1508,7 +1764,10 @@
                 {
                   "name": "entry"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__inflateFunctions",
@@ -1516,11 +1775,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1151,
+                  "line": 1149,
                   "column": 8
                 },
                 "end": {
-                  "line": 1167,
+                  "line": 1165,
                   "column": 9
                 }
               },
@@ -1529,7 +1788,10 @@
                 {
                   "name": "jsonConfiguration"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initEventsListeners",
@@ -1537,11 +1799,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1169,
+                  "line": 1167,
                   "column": 8
                 },
                 "end": {
-                  "line": 1175,
+                  "line": 1173,
                   "column": 9
                 }
               },
@@ -1550,7 +1812,10 @@
                 {
                   "name": "configuration"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initChartEventsListeners",
@@ -1558,11 +1823,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1177,
+                  "line": 1175,
                   "column": 8
                 },
                 "end": {
-                  "line": 1179,
+                  "line": 1177,
                   "column": 9
                 }
               },
@@ -1571,7 +1836,10 @@
                 {
                   "name": "configuration"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initSeriesEventsListeners",
@@ -1579,11 +1847,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1181,
+                  "line": 1179,
                   "column": 8
                 },
                 "end": {
-                  "line": 1183,
+                  "line": 1181,
                   "column": 9
                 }
               },
@@ -1592,7 +1860,10 @@
                 {
                   "name": "configuration"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initPointsEventsListeners",
@@ -1600,11 +1871,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1185,
+                  "line": 1183,
                   "column": 8
                 },
                 "end": {
-                  "line": 1187,
+                  "line": 1185,
                   "column": 9
                 }
               },
@@ -1613,7 +1884,10 @@
                 {
                   "name": "configuration"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__initAxisEventsListeners",
@@ -1621,11 +1895,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1189,
+                  "line": 1187,
                   "column": 8
                 },
                 "end": {
-                  "line": 1205,
+                  "line": 1203,
                   "column": 9
                 }
               },
@@ -1637,7 +1911,10 @@
                 {
                   "name": "isXAxis"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__createEventListeners",
@@ -1645,11 +1922,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1207,
+                  "line": 1205,
                   "column": 8
                 },
                 "end": {
-                  "line": 1320,
+                  "line": 1319,
                   "column": 9
                 }
               },
@@ -1667,7 +1944,10 @@
                 {
                   "name": "eventType"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__ensureObjectPath",
@@ -1675,11 +1955,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1322,
+                  "line": 1321,
                   "column": 8
                 },
                 "end": {
-                  "line": 1332,
+                  "line": 1331,
                   "column": 9
                 }
               },
@@ -1699,11 +1979,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1334,
+                  "line": 1333,
                   "column": 8
                 },
                 "end": {
-                  "line": 1340,
+                  "line": 1339,
                   "column": 9
                 }
               },
@@ -1712,7 +1992,10 @@
                 {
                   "name": "credits"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateOrAddAxes",
@@ -1720,11 +2003,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1342,
+                  "line": 1341,
                   "column": 8
                 },
                 "end": {
-                  "line": 1355,
+                  "line": 1354,
                   "column": 9
                 }
               },
@@ -1736,7 +2019,10 @@
                 {
                   "name": "isX"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateOrAddSeries",
@@ -1744,11 +2030,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1357,
+                  "line": 1356,
                   "column": 8
                 },
                 "end": {
-                  "line": 1365,
+                  "line": 1364,
                   "column": 9
                 }
               },
@@ -1757,7 +2043,10 @@
                 {
                   "name": "series"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateOrAddSeriesInstance",
@@ -1765,11 +2054,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1367,
+                  "line": 1366,
                   "column": 8
                 },
                 "end": {
-                  "line": 1374,
+                  "line": 1373,
                   "column": 9
                 }
               },
@@ -1789,16 +2078,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1376,
+                  "line": 1375,
                   "column": 8
                 },
                 "end": {
-                  "line": 1384,
+                  "line": 1383,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateCategoryMax",
@@ -1806,16 +2098,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1386,
+                  "line": 1385,
                   "column": 8
                 },
                 "end": {
-                  "line": 1399,
+                  "line": 1398,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateCategoryMin",
@@ -1823,16 +2118,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1401,
+                  "line": 1400,
                   "column": 8
                 },
                 "end": {
-                  "line": 1414,
+                  "line": 1413,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__shouldInvert",
@@ -1840,11 +2138,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1416,
+                  "line": 1415,
                   "column": 8
                 },
                 "end": {
-                  "line": 1427,
+                  "line": 1426,
                   "column": 9
                 }
               },
@@ -1857,11 +2155,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1429,
+                  "line": 1428,
                   "column": 8
                 },
                 "end": {
-                  "line": 1433,
+                  "line": 1432,
                   "column": 9
                 }
               },
@@ -1874,16 +2172,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1435,
+                  "line": 1434,
                   "column": 8
                 },
                 "end": {
-                  "line": 1456,
+                  "line": 1455,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__hideLegend",
@@ -1891,11 +2192,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1458,
+                  "line": 1457,
                   "column": 8
                 },
                 "end": {
-                  "line": 1468,
+                  "line": 1467,
                   "column": 9
                 }
               },
@@ -1904,7 +2205,10 @@
                 {
                   "name": "newValue"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateTitle",
@@ -1912,11 +2216,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1470,
+                  "line": 1469,
                   "column": 8
                 },
                 "end": {
-                  "line": 1478,
+                  "line": 1477,
                   "column": 9
                 }
               },
@@ -1925,7 +2229,10 @@
                 {
                   "name": "newValue"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__tooltipObserver",
@@ -1933,11 +2240,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1480,
+                  "line": 1479,
                   "column": 8
                 },
                 "end": {
-                  "line": 1486,
+                  "line": 1485,
                   "column": 9
                 }
               },
@@ -1946,7 +2253,10 @@
                 {
                   "name": "newValue"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateType",
@@ -1954,11 +2264,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1488,
+                  "line": 1487,
                   "column": 8
                 },
                 "end": {
-                  "line": 1500,
+                  "line": 1499,
                   "column": 9
                 }
               },
@@ -1967,7 +2277,10 @@
                 {
                   "name": "newValue"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateSubtitle",
@@ -1975,11 +2288,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1502,
+                  "line": 1501,
                   "column": 8
                 },
                 "end": {
-                  "line": 1514,
+                  "line": 1513,
                   "column": 9
                 }
               },
@@ -1988,7 +2301,10 @@
                 {
                   "name": "newValue"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateAdditionalOptions",
@@ -1996,16 +2312,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1516,
+                  "line": 1515,
                   "column": 8
                 },
                 "end": {
-                  "line": 1520,
+                  "line": 1519,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__isStackingValid",
@@ -2013,11 +2332,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1522,
+                  "line": 1521,
                   "column": 8
                 },
                 "end": {
-                  "line": 1528,
+                  "line": 1527,
                   "column": 9
                 }
               },
@@ -2030,16 +2349,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1530,
+                  "line": 1529,
                   "column": 8
                 },
                 "end": {
-                  "line": 1547,
+                  "line": 1546,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__chart3dObserver",
@@ -2047,16 +2369,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1592,
+                  "line": 1591,
                   "column": 8
                 },
                 "end": {
-                  "line": 1623,
+                  "line": 1622,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__polarObserver",
@@ -2064,16 +2389,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1580,
+                  "line": 1579,
                   "column": 8
                 },
                 "end": {
-                  "line": 1590,
+                  "line": 1589,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__emptyTextObserver",
@@ -2081,16 +2409,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1625,
+                  "line": 1624,
                   "column": 8
                 },
                 "end": {
-                  "line": 1637,
+                  "line": 1636,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__callChartFunction",
@@ -2098,11 +2429,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1639,
+                  "line": 1638,
                   "column": 8
                 },
                 "end": {
-                  "line": 1647,
+                  "line": 1646,
                   "column": 9
                 }
               },
@@ -2111,7 +2442,10 @@
                 {
                   "name": "functionName"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__callSeriesFunction",
@@ -2119,11 +2453,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1649,
+                  "line": 1648,
                   "column": 8
                 },
                 "end": {
-                  "line": 1658,
+                  "line": 1657,
                   "column": 9
                 }
               },
@@ -2135,7 +2469,10 @@
                 {
                   "name": "seriesIndex"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__callAxisFunction",
@@ -2143,11 +2480,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1660,
+                  "line": 1659,
                   "column": 8
                 },
                 "end": {
-                  "line": 1693,
+                  "line": 1692,
                   "column": 9
                 }
               },
@@ -2162,7 +2499,10 @@
                 {
                   "name": "axisIndex"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__callPointFunction",
@@ -2170,11 +2510,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1695,
+                  "line": 1694,
                   "column": 8
                 },
                 "end": {
-                  "line": 1704,
+                  "line": 1703,
                   "column": 9
                 }
               },
@@ -2189,7 +2529,10 @@
                 {
                   "name": "pointIndex"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "__updateStyles",
@@ -2197,16 +2540,19 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 1709,
+                  "line": 1708,
                   "column": 8
                 },
                 "end": {
-                  "line": 1730,
+                  "line": 1729,
                   "column": 9
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             }
           ],
           "staticMethods": [],
@@ -2219,11 +2565,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 286,
+              "line": 284,
               "column": 6
             },
             "end": {
-              "line": 1731,
+              "line": 1730,
               "column": 7
             }
           },
@@ -2236,11 +2582,11 @@
               "description": "Configuration object that exposes the JS Api to configure the chart.\n\nMost important methods are:\n- `addSeries (Object options, [Boolean redraw], [Mixed animation])`\n- `addAxis (Object options, [Boolean isX], [Boolean redraw], [Mixed animation])`\n- `setTitle (Object title, object subtitle, Boolean redraw)`\n\nMost important properties are:\n- `configuration.series`: An array of the chart's series. Detailed API for Series object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Series)\n- `configuration.xAxis`: An array of the chart's x axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.yAxis`: An array of the chart's y axes. Detailed API for Axis object is\n    available in [API Site](http://api.highcharts.com/class-reference/Highcharts.Axis)\n- `configuration.title`: The chart title.\n\nFor detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)",
               "sourceRange": {
                 "start": {
-                  "line": 319,
+                  "line": 317,
                   "column": 12
                 },
                 "end": {
-                  "line": 319,
+                  "line": 317,
                   "column": 33
                 }
               },
@@ -2252,240 +2598,240 @@
               "description": "If categories are present names are used instead of numbers for the category axis.\nThe format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`\nor a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.",
               "sourceRange": {
                 "start": {
-                  "line": 326,
+                  "line": 324,
                   "column": 12
                 },
                 "end": {
-                  "line": 330,
+                  "line": 328,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "Object"
+              "type": "Object | null | undefined"
             },
             {
               "name": "category-max",
               "description": "Category-axis maximum value. Defaults to `undefined`.",
               "sourceRange": {
                 "start": {
-                  "line": 335,
+                  "line": 333,
                   "column": 12
                 },
                 "end": {
-                  "line": 339,
+                  "line": 337,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "number"
+              "type": "number | null | undefined"
             },
             {
               "name": "category-min",
               "description": "Category-axis minimum value. Defaults to `undefined`.",
               "sourceRange": {
                 "start": {
-                  "line": 344,
+                  "line": 342,
                   "column": 12
                 },
                 "end": {
-                  "line": 348,
+                  "line": 346,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "number"
+              "type": "number | null | undefined"
             },
             {
               "name": "category-position",
               "description": "The position of the category axis. Acceptable values are `left`, `right`, `top` and `bottom`\nexcept for bar charts which only accept `left` and `right`.\nWith the default value, charts appear as though they have `category-position=\"bottom\"`\nexcept for bar charts that appear as though they have `category-position=\"left\"`.\n\nDefaults to `undefined`",
               "sourceRange": {
                 "start": {
-                  "line": 358,
+                  "line": 356,
                   "column": 12
                 },
                 "end": {
-                  "line": 362,
+                  "line": 360,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "no-legend",
               "description": "Specifies whether to hide legend or show.\nLegend configuration can be set up via additionalOptions property",
               "sourceRange": {
                 "start": {
-                  "line": 368,
+                  "line": 366,
                   "column": 12
                 },
                 "end": {
-                  "line": 372,
+                  "line": 370,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "stacking",
               "description": "Specifies how series are stacked on top of each other.\nPossible values are null, \"normal\" or \"percent\".\nIf \"stack\" property is not defined on the vaadin-chart-series elements, then series will be put into\nthe default stack.",
               "sourceRange": {
                 "start": {
-                  "line": 380,
+                  "line": 378,
                   "column": 12
                 },
                 "end": {
-                  "line": 384,
+                  "line": 382,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "timeline",
               "description": "Specifies whether the chart is a normal chart or a timeline chart.",
               "sourceRange": {
                 "start": {
-                  "line": 389,
+                  "line": 387,
                   "column": 12
                 },
                 "end": {
-                  "line": 392,
+                  "line": 390,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "title",
               "description": "Represents the title of the chart.",
               "sourceRange": {
                 "start": {
-                  "line": 397,
+                  "line": 395,
                   "column": 12
                 },
                 "end": {
-                  "line": 401,
+                  "line": 399,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "tooltip",
               "description": "Whether or not to show tooltip when hovering data points.",
               "sourceRange": {
                 "start": {
-                  "line": 406,
+                  "line": 404,
                   "column": 12
                 },
                 "end": {
-                  "line": 410,
+                  "line": 408,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "type",
               "description": "Sets the default series type of the chart.\nNote that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type.",
               "sourceRange": {
                 "start": {
-                  "line": 416,
+                  "line": 414,
                   "column": 12
                 },
                 "end": {
-                  "line": 420,
+                  "line": 418,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "subtitle",
               "description": "Represents the subtitle of the chart.",
               "sourceRange": {
                 "start": {
-                  "line": 425,
+                  "line": 423,
                   "column": 12
                 },
                 "end": {
-                  "line": 429,
+                  "line": 427,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "chart3d",
               "description": "Specifies whether to show chart in 3 or in 2 dimensions.\nSome display angles are added by default to the \"chart.options3d\" (`{alpha: 15, beta: 15, depth: 50}`).\n3D display options can be modified via `additionalOptions`.\nThe thickness of a Pie chart can be set on `additionalOptions` through `plotOptions.pie.depth`.\n3D is supported by Bar, Column, Pie and Scatter3D charts.\nMore info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).",
               "sourceRange": {
                 "start": {
-                  "line": 439,
+                  "line": 437,
                   "column": 12
                 },
                 "end": {
-                  "line": 443,
+                  "line": 441,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "empty-text",
               "description": "Specifies the message displayed on a chart without displayable data.",
               "sourceRange": {
                 "start": {
-                  "line": 448,
+                  "line": 446,
                   "column": 12
                 },
                 "end": {
-                  "line": 453,
+                  "line": 451,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "additional-options",
               "description": "Represents additional JSON configuration.",
               "sourceRange": {
                 "start": {
-                  "line": 458,
+                  "line": 456,
                   "column": 12
                 },
                 "end": {
-                  "line": 461,
+                  "line": 459,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "Object"
+              "type": "Object | null | undefined"
             },
             {
               "name": "polar",
               "description": "When present, cartesian charts like line, spline, area and column are transformed\ninto the polar coordinate system.",
               "sourceRange": {
                 "start": {
-                  "line": 467,
+                  "line": 465,
                   "column": 12
                 },
                 "end": {
-                  "line": 471,
+                  "line": 469,
                   "column": 13
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             }
           ],
           "events": [
@@ -2679,13 +3025,12 @@
               "description": "",
               "name": "",
               "range": {
-                "file": "vaadin-chart.html",
                 "start": {
-                  "line": 68,
+                  "line": 66,
                   "column": 4
                 },
                 "end": {
-                  "line": 68,
+                  "line": 66,
                   "column": 27
                 }
               }
@@ -2697,140 +3042,6 @@
     }
   ],
   "classes": [
-    {
-      "description": "",
-      "summary": "",
-      "path": "chart-deep-merger.js",
-      "properties": [],
-      "methods": [],
-      "staticMethods": [
-        {
-          "name": "__isObject",
-          "description": "",
-          "privacy": "private",
-          "sourceRange": {
-            "start": {
-              "line": 12,
-              "column": 2
-            },
-            "end": {
-              "line": 14,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "item"
-            }
-          ]
-        },
-        {
-          "name": "__deepMerge",
-          "description": "",
-          "privacy": "private",
-          "sourceRange": {
-            "start": {
-              "line": 16,
-              "column": 2
-            },
-            "end": {
-              "line": 32,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "target"
-            },
-            {
-              "name": "source"
-            }
-          ]
-        }
-      ],
-      "demos": [],
-      "metadata": {},
-      "sourceRange": {
-        "start": {
-          "line": 10,
-          "column": 39
-        },
-        "end": {
-          "line": 33,
-          "column": 1
-        }
-      },
-      "privacy": "public"
-    },
-    {
-      "description": "",
-      "summary": "",
-      "path": "chart-deep-merger.js",
-      "properties": [],
-      "methods": [],
-      "staticMethods": [
-        {
-          "name": "__isObject",
-          "description": "",
-          "privacy": "private",
-          "sourceRange": {
-            "start": {
-              "line": 12,
-              "column": 2
-            },
-            "end": {
-              "line": 14,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "item"
-            }
-          ]
-        },
-        {
-          "name": "__deepMerge",
-          "description": "",
-          "privacy": "private",
-          "sourceRange": {
-            "start": {
-              "line": 16,
-              "column": 2
-            },
-            "end": {
-              "line": 32,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "target"
-            },
-            {
-              "name": "source"
-            }
-          ]
-        }
-      ],
-      "demos": [],
-      "metadata": {},
-      "sourceRange": {
-        "start": {
-          "line": 10,
-          "column": 39
-        },
-        "end": {
-          "line": 33,
-          "column": 1
-        }
-      },
-      "privacy": "public"
-    },
     {
       "description": "",
       "summary": "",

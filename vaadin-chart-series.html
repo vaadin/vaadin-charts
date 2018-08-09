@@ -15,11 +15,11 @@ MAGI ADD END -->
 
 <dom-module id="vaadin-chart-series">
   <script>
-    if (!Polymer.Element) {
-      throw new Error(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
-    }
+    (() => {
+      if (!Polymer.Element) {
+        throw new Error(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
+      }
 
-    {
       /**
        * `<vaadin-chart-series>` is a Polymer 2 element for creating series for Vaadin Charts.
        *
@@ -280,9 +280,6 @@ MAGI ADD END -->
          * @param series Object of type `Highcharts.Series`
          */
         setSeries(series) {
-          if (!(series instanceof Highcharts.Series)) {
-            throw new TypeError('series should be Highcharts.Series');
-          }
           this._series = series;
         }
 
@@ -442,10 +439,12 @@ MAGI ADD END -->
 
       customElements.define(ChartSeriesElement.is, ChartSeriesElement);
 
+      window.Vaadin = window.Vaadin || {};
+
       /**
        * @namespace Vaadin
        */
       window.Vaadin.ChartSeriesElement = ChartSeriesElement;
-    }
+    })();
   </script>
 </dom-module>
