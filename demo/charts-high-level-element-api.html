@@ -255,3 +255,31 @@
     customElements.define(ChartsHighLevelElementApi.is, ChartsHighLevelElementApi);
   </script>
 </dom-module>
+
+// Workaround: doesn't seem to work inside demo snippet.
+<dom-module id="speedometer" theme-for="vaadin-chart">
+  <template>
+    <style include="vaadin-chart-default-theme">
+      :host(.speedometer) .highcharts-minor-tick {
+        stroke: #339;
+        stroke-width: 1;
+      }
+      :host(.speedometer) .highcharts-tick,
+      :host(.speedometer) .highcharts-axis-line {
+        stroke: #339;
+        stroke-width: 2;
+      }
+      :host(.speedometer) .highcharts-label {
+        fill: #339;
+      }
+      :host(.speedometer) .highcharts-grid-line,
+      :host(.speedometer) .highcharts-minor-grid-line {
+        stroke: none;
+      }
+      :host(.speedometer) .highcharts-color-0 .highcharts-pivot {
+        fill: #000;
+        stroke: #000;
+      }
+    </style>
+  </template>
+</dom-module>
