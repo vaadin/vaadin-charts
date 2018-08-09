@@ -11,6 +11,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <link rel="import" href="../polymer/lib/utils/flattened-nodes-observer.html">
 <link rel="import" href="../polymer/lib/utils/render-status.html">
 <link rel="import" href="../vaadin-themable-mixin/vaadin-themable-mixin.html">
+<link rel="import" href="../vaadin-license-checker/vaadin-license-checker.html">
 <link rel="import" href="../vaadin-element-mixin/vaadin-element-mixin.html">
 
 <link rel="import" href="vaadin-chart-default-theme.html">
@@ -1255,6 +1256,7 @@ MAGI ADD END -->
                   // the 'after print' event.
                   if (!this.tempBodyStyle) {
                     let effectiveCss = '';
+                    // eslint-disable-next-line no-undef
                     const isNativeShadowDom = typeof nativeShadow !== 'undefined' ? nativeShadow : window.ShadyCSS.nativeShadow;
                     if (isNativeShadowDom) {
                       const shadowStyles = self.shadowRoot.querySelectorAll('style');
@@ -1269,6 +1271,7 @@ MAGI ADD END -->
                         return matchesFn.call(self, selector) ? '' : match;
                       });
                     } else {
+                      // eslint-disable-next-line no-undef
                       const Shim = typeof ScopingShim !== 'undefined' ? ScopingShim : window.ShadyCSS.ScopingShim;
                       effectiveCss = Shim.styleAstToString(
                         Shim._styleInfoForNode(self)._getStyleRules());
@@ -1585,39 +1588,6 @@ MAGI ADD END -->
           this.configuration.update({
             chart: {
               polar: this.polar
-            }
-          });
-        }
-
-        __chart3dObserver() {
-          Polymer.RenderStatus.afterNextRender(this, () => {
-            if (!this.configuration) {
-              return;
-            }
-
-            if (this.chart3d) {
-              this.configuration.update({
-                chart: {
-                  options3d: Object.assign(
-                    {},
-                    this._baseChart3d,
-                    (
-                      this.additionalOptions
-                      && this.additionalOptions.chart
-                      && this.additionalOptions.chart.options3d
-                    ),
-                    {enabled: true}
-                  )
-                }
-              });
-            } else {
-              this.configuration.update({
-                chart: {
-                  options3d: {
-                    enabled: false
-                  }
-                }
-              });
             }
           });
         }
