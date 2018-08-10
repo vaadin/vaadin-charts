@@ -30,7 +30,6 @@
 
       it('should have no title', done => {
         setTimeout(() => {
-          expect(element.$.chart.querySelector('.highcharts-title').textContent).to.be.empty;
           const title = element.$.chart.querySelector('.highcharts-title');
           if (title) {
             expect(title.textContent).to.be.empty;

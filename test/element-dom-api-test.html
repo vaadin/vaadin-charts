@@ -30,7 +30,6 @@
 
         container.appendChild(vaadinChart);
         setTimeout(() => {
-          expect(vaadinChart.$.chart.querySelector('.highcharts-title').textContent).to.be.empty;
           const title = vaadinChart.$.chart.querySelector('.highcharts-title');
           if (title) {
             expect(title.textContent).to.be.empty;

@@ -391,7 +391,7 @@ MAGI ADD END -->
         }
 
         __hasSeriesConfig() {
-          return this._series instanceof Highcharts.Series;
+          return !!this._series;
         }
 
         __isMarkersValid() {
