@@ -1257,6 +1257,7 @@ MAGI ADD END -->
                     let effectiveCss = '';
                     // eslint-disable-next-line no-undef
                     const isNativeShadowDom = typeof nativeShadow !== 'undefined' ? nativeShadow : window.ShadyCSS.nativeShadow;
+
                     if (isNativeShadowDom) {
                       const shadowStyles = self.shadowRoot.querySelectorAll('style');
                       for (let i = 0; i < shadowStyles.length; i++) {
@@ -1271,7 +1272,8 @@ MAGI ADD END -->
                       });
                     } else {
                       // eslint-disable-next-line no-undef
-                      const Shim = typeof ScopingShim !== 'undefined' ? ScopingShim : window.ShadyCSS.ScopingShim;
+                      const Shim = typeof ScopingShim !== 'undefined' ? ScopingShim.prototype : window.ShadyCSS.ScopingShim;
+
                       effectiveCss = Shim.styleAstToString(
                         Shim._styleInfoForNode(self)._getStyleRules());
 

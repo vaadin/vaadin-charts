@@ -4,7 +4,7 @@ const fs = require('fs');
 const rules = {
   'vaadin-chart.js': [
     {
-      text: `import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`,
+      text: `import 'highcharts/js/es-modules/masters/highstock.src.js';`,
       replacement: `import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
 import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
 import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`
@@ -38,7 +38,7 @@ Object.entries(rules).forEach(rule => {
     }
 
     const result = rule[1].reduce((acc, current) =>
-        data.replace(current.text, current.replacement), data);
+      data.replace(current.text, current.replacement), data);
 
     fs.writeFile(rule[0], result, 'utf8', err => {
       if (err) {
