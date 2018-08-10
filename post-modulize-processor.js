@@ -6,11 +6,23 @@ fs.readFile('vaadin-chart.js', 'utf8', function(err, data) {
     return console.log(err);
   }
 
-  data = data.replace('import \'highcharts/js/es-modules/masters/highstock.src.js\';',
+  const result = data.replace('import \'highcharts/js/es-modules/masters/highstock.src.js\';',
 
     'import { nativeShadow } from \'@webcomponents/shadycss/src/style-settings.js\';\n' +
       'import ScopingShim from \'@webcomponents/shadycss/src/scoping-shim.js\';\n' +
       'import Highcharts from \'highcharts/js/es-modules/masters/highstock.src.js\';');
+
+  fs.writeFile('vaadin-chart.js', result, 'utf8', function(err) {
+    if (err) {
+      return console.log(err);
+    }
+  });
+});
+
+fs.readFile('vaadin-chart-default-theme.js', 'utf8', function(err, data) {
+  if (err) {
+    return console.log(err);
+  }
 
   const result = data.replace('/*\n' +
       '  FIXME(polymer-modulizer): the above comments were extracted\n' +
@@ -18,7 +30,7 @@ fs.readFile('vaadin-chart.js', 'utf8', function(err, data) {
       '  then delete this comment!\n' +
       '*/', '');
 
-  fs.writeFile('vaadin-chart.js', result, 'utf8', function(err) {
+  fs.writeFile('vaadin-chart-default-theme.js', result, 'utf8', function(err) {
     if (err) {
       return console.log(err);
     }
