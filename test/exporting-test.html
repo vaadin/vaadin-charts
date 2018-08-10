@@ -71,10 +71,10 @@
       let chartContainer;
 
       before(function(done) {
-        const el = document.querySelector('exporting-test');
-        chart = el.$.mychart;
-        chartContainer = chart.$.chart;
         setTimeout(() => {
+          const el = document.querySelector('exporting-test');
+          chart = el.$.mychart;
+          chartContainer = chart.$.chart;
           done();
         }, 100);
       });
