@@ -22,9 +22,9 @@ import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`
     }
   ],
 
-  'test/exporting-test.js': [
+  'test/exporting-test.html': [
     {
-      text: `import '../vaadin-chart.js';`,
+      text: /import '..\/vaadin-chart.js';/g,
       replacement: `import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';
 import '../vaadin-chart.js';`
     }
@@ -32,7 +32,7 @@ import '../vaadin-chart.js';`
 };
 
 Object.entries(rules).forEach(rule => {
-  fs.readFile(rule[0], 'utf8', function(err, data) {
+  fs.readFile(rule[0], 'utf8', (err, data) => {
     if (err) {
       return console.log(err);
     }
@@ -40,7 +40,7 @@ Object.entries(rules).forEach(rule => {
     const result = rule[1].reduce((acc, current) =>
         data.replace(current.text, current.replacement), data);
 
-    fs.writeFile(rule[0], result, 'utf8', function(err) {
+    fs.writeFile(rule[0], result, 'utf8', err => {
       if (err) {
         return console.log(err);
       }
