@@ -1,20 +1,22 @@
 <dom-module id="scatter" theme-for="vaadin-chart">
   <template>
     <style include="vaadin-chart-default-theme">
-      :host([theme~="scatter"]) .femaleSeries, :host([theme~="scatter"]) .femaleSeries .highcharts-point {
+      :host([theme~="scatter"]) .femaleSeries,
+      :host([theme~="scatter"]) .femaleSeries .highcharts-point {
         fill: rgba(223, 83, 83, .5);
         stroke: rgba(223, 83, 83, .5);
       }
 
-      :host([theme~="scatter"]) .maleSeries, :host([theme~="scatter"]) .maleSeries .highcharts-point {
+      :host([theme~="scatter"]) .maleSeries,
+      :host([theme~="scatter"]) .maleSeries .highcharts-point {
         fill: rgba(119, 152, 191, .5);
         stroke: rgba(119, 152, 191, .5);
       }
 
       :host([theme~="scatter"]) .highcharts-legend-box {
-        fill: #FFFFFF;
+        fill: #FFF;
         stroke-width: 1px;
-        stroke: #000000;
+        stroke: #000;
       }
     </style>
   </template>
