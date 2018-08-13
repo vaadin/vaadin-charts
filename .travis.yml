@@ -32,7 +32,7 @@ script:
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
         xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs;
       else
-        xvfb-run -s '-screen 0 1024x768x24' wct;
+        xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs-quick;
       fi &&
       if [[ "$TRAVIS_EVENT_TYPE" = "cron" && "$TEST_SUITE" = "unit_tests" ]]; then
         xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs-cron;
@@ -47,7 +47,7 @@ script:
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
         xvfb-run -s '-screen 0 1024x768x24' wct --module-resolution=node --npm --env saucelabs;
       else
-        xvfb-run -s '-screen 0 1024x768x24' wct --module-resolution=node --npm;
+        xvfb-run -s '-screen 0 1024x768x24' wct --module-resolution=node --npm --env saucelabs-quick;
       fi;
     fi
 
