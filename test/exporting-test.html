@@ -53,13 +53,11 @@
 
     <script>
       addEventListener('WebComponentsReady', () => {
-        class ExportingTestElement extends Polymer.Element {
+        customElements.define('exporting-test', class extends Polymer.Element {
           static get is() {
             return 'exporting-test';
           }
-        }
-
-        customElements.define(ExportingTestElement.is, ExportingTestElement);
+        });
       });
     </script>
   </dom-module>
@@ -71,12 +69,12 @@
       let chartContainer;
 
       before(function(done) {
-        setTimeout(() => {
+        customElements.whenDefined('exporting-test').then(() => {
           const el = document.querySelector('exporting-test');
           chart = el.$.mychart;
           chartContainer = chart.$.chart;
           done();
-        }, 200);
+        });
       });
 
       it('should temporarily copy shadow styles to the body before export', function(done) {
