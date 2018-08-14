@@ -30,24 +30,24 @@ script:
       gulp lint version:check &&
       polymer lint --rules polymer-2 --input ./src/*.html ./theme/**/*.html &&
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-        xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs;
+        wct --env saucelabs;
       else
-        xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs-quick;
+        wct --env saucelabs-quick;
       fi &&
       if [[ "$TRAVIS_EVENT_TYPE" = "cron" && "$TEST_SUITE" = "unit_tests" ]]; then
-        xvfb-run -s '-screen 0 1024x768x24' wct --env saucelabs-cron;
+        wct --env saucelabs-cron;
       fi;
     fi
   - if [[ "$POLYMER" = "3" ]]; then
       npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer &&
       rm -rf node_modules &&
       magi p3-convert --out . --import-style=name &&
-      node post-modulize-processor.js &&
+      node magi-p3-post.js && rm -f magi-p3-post.js &&
       yarn install --flat &&
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-        xvfb-run -s '-screen 0 1024x768x24' wct --module-resolution=node --npm --env saucelabs;
+        wct --module-resolution=node --npm --env saucelabs;
       else
-        xvfb-run -s '-screen 0 1024x768x24' wct --module-resolution=node --npm --env saucelabs-quick;
+        wct --module-resolution=node --npm --env saucelabs-quick;
       fi;
     fi
 

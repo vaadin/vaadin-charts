@@ -2,7 +2,15 @@
 const fs = require('fs');
 
 const rules = {
-  'vaadin-chart.js': [
+  'src/vaadin-chart.js': [
+    {
+      text: `window.ShadyCSS.nativeShadow`,
+      replacement: `nativeShadow`
+    },
+    {
+      text: /window.ShadyCSS.ScopingShim/g,
+      replacement: `ScopingShim.prototype`
+    },
     {
       text: `import 'highcharts/js/es-modules/masters/highstock.src.js';`,
       replacement: `import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
@@ -11,7 +19,7 @@ import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`
     }
   ],
 
-  'vaadin-chart-default-theme.js': [
+  'theme/vaadin-chart-default-theme.js': [
     {
       text: `/*
   FIXME(polymer-modulizer): the above comments were extracted

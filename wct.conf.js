@@ -3,6 +3,11 @@ var env = envIndex ? process.argv[envIndex] : undefined;
 
 module.exports = {
   registerHooks: function(context) {
+
+    var quickPlatforms = [
+      'Windows 10/chrome@68'
+    ];
+
     var saucelabsPlatforms = [
       'macOS 10.13/safari@11.1',
       'Windows 10/firefox@59',
@@ -18,16 +23,12 @@ module.exports = {
       'macOS 10.12/iphone@10.3'
     ];
 
-    var quickPlatforms = [
-      'Windows 10/chrome@68'
-    ];
-
-    if (env === 'saucelabs') {
+    if (env === 'saucelabs-quick') {
+      context.options.plugins.sauce.browsers = quickPlatforms;
+    } else if (env === 'saucelabs') {
       context.options.plugins.sauce.browsers = saucelabsPlatforms;
     } else if (env === 'saucelabs-cron') {
       context.options.plugins.sauce.browsers = cronPlatforms;
-    } else if (env === 'saucelabs-quick') {
-      context.options.plugins.sauce.browsers = quickPlatforms;
     }
   }
 };
