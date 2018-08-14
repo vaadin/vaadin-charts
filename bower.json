@@ -52,7 +52,6 @@
     "iron-media-query": "2.0.0",
     "iron-pages": "2.0.0",
     "paper-button": "2.0.0",
-    "vaadin-icons": "4.1.4",
     "vaadin-split-layout": "4.0.0"
   },
   "resolutions": {
