@@ -16,22 +16,7 @@ module.exports = {
           '-headless'
         ]
       }
-    },
-    // MAGI REMOVE START
-    istanbul: {
-      dir: './coverage',
-      reporters: ['text-summary', 'lcov'],
-      include: [
-        '**/vaadin-charts/src/*.html'
-      ],
-      exclude: [],
-      thresholds: {
-        global: {
-          statements: 75
-        }
-      }
     }
-    // MAGI REMOVE END
   },
 
   registerHooks: function(context) {
