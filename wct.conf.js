@@ -2,30 +2,73 @@ var envIndex = process.argv.indexOf('--env') + 1;
 var env = envIndex ? process.argv[envIndex] : undefined;
 
 module.exports = {
+  testTimeout: 180 * 1000,
+  verbose: false,
+  plugins: {
+    local: {
+      browserOptions: {
+        chrome: [
+          'headless',
+          'disable-gpu',
+          'no-sandbox'
+        ],
+        firefox: [
+          '-headless'
+        ]
+      }
+    },
+    // MAGI REMOVE START
+    istanbul: {
+      dir: './coverage',
+      reporters: ['text-summary', 'lcov'],
+      include: [
+        '**/vaadin-charts/src/*.html'
+      ],
+      exclude: [],
+      thresholds: {
+        global: {
+          statements: 100
+        }
+      }
+    }
+    // MAGI REMOVE END
+  },
+
   registerHooks: function(context) {
+    // const saucelabsPlatformsMobile = [
+    //   'iOS Simulator/iphone@11.3',
+    //   'iOS Simulator/iphone@9.3'
+    // ];
+    //
+    // const saucelabsPlatformsMicrosoft = [
+    //   'Windows 10/microsoftedge@17',
+    //   'Windows 10/internet explorer@11'
+    // ];
 
-    var quickPlatforms = [
-      'Windows 10/chrome@68'
+    const saucelabsPlatformsDesktop = [
+      'macOS 10.13/safari@11.1'
     ];
 
-    var saucelabsPlatforms = [
-      'macOS 10.13/safari@11.1',
-      'Windows 10/firefox@59',
-      'Windows 10/microsoftedge@16'
+    const saucelabsPlatforms = [
+      // ...saucelabsPlatformsMobile,
+      // ...saucelabsPlatformsMicrosoft,
+      ...saucelabsPlatformsDesktop
     ];
 
-    var cronPlatforms = [
-      'Android/chrome',
-      'Windows 10/chrome@68',
-      'Windows 10/firefox@59',
-      'Windows 10/internet explorer@11',
-      'macOS 10.12/ipad@11.0',
-      'macOS 10.12/iphone@10.3'
+    const cronPlatforms = [
+      {
+        deviceName: 'Android GoogleAPI Emulator',
+        platformName: 'Android',
+        platformVersion: '7.1',
+        browserName: 'chrome'
+      },
+      'iOS Simulator/ipad@11.3',
+      'iOS Simulator/iphone@10.3',
+      'Windows 10/chrome@latest',
+      'Windows 10/firefox@latest'
     ];
 
-    if (env === 'saucelabs-quick') {
-      context.options.plugins.sauce.browsers = quickPlatforms;
-    } else if (env === 'saucelabs') {
+    if (env === 'saucelabs') {
       context.options.plugins.sauce.browsers = saucelabsPlatforms;
     } else if (env === 'saucelabs-cron') {
       context.options.plugins.sauce.browsers = cronPlatforms;

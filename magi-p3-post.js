@@ -1,57 +1,40 @@
-/* eslint-disable no-console */
-const fs = require('fs');
-
-const rules = {
-  'src/vaadin-chart.js': [
-    {
-      text: `window.ShadyCSS.nativeShadow`,
-      replacement: `nativeShadow`
-    },
-    {
-      text: /window.ShadyCSS.ScopingShim/g,
-      replacement: `ScopingShim.prototype`
-    },
-    {
-      text: `import 'highcharts/js/es-modules/masters/highstock.src.js';`,
-      replacement: `import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
-import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
-import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`
-    }
+module.exports = {
+  files: [
+    'src/vaadin-chart.js',
+    'theme/vaadin-chart-default-theme.js',
+    'test/exporting-test.html'
   ],
 
-  'theme/vaadin-chart-default-theme.js': [
-    {
-      text: `/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/`,
-      replacement: ''
-    }
+  from: [
+    `window.ShadyCSS.nativeShadow`,
+
+    /window.ShadyCSS.ScopingShim/g,
+
+    'import \'highcharts/js/es-modules/masters/highstock.src.js\';',
+
+    '/*\n' +
+    '  FIXME(polymer-modulizer): the above comments were extracted\n' +
+    '  from HTML and may be out of place here. Review them and\n' +
+    '  then delete this comment!\n' +
+    '*/',
+
+    /import '..\/vaadin-chart.js';/g
   ],
 
-  'test/exporting-test.html': [
-    {
-      text: /import '..\/vaadin-chart.js';/g,
-      replacement: `import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';
-import '../vaadin-chart.js';`
-    }
+  to: [
+    `nativeShadow`,
+
+    `ScopingShim.prototype`,
+
+    `import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
+    
+     import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
+     
+     import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';`,
+
+    ``,
+
+    `import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';
+     import '../vaadin-chart.js';`
   ]
 };
-
-Object.entries(rules).forEach(rule => {
-  fs.readFile(rule[0], 'utf8', (err, data) => {
-    if (err) {
-      return console.log(err);
-    }
-
-    const result = rule[1].reduce((acc, current) =>
-      data.replace(current.text, current.replacement), data);
-
-    fs.writeFile(rule[0], result, 'utf8', err => {
-      if (err) {
-        return console.log(err);
-      }
-    });
-  });
-});
