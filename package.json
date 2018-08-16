@@ -16,13 +16,5 @@
   "bugs": {
     "url": "https://github.com/vaadin/vaadin-charts/issues"
   },
-  "homepage": "https://vaadin.com/charts",
-  "scripts": {
-    "test": "wct",
-    "analyze": "polymer analyze vaadin-chart.html > analysis.json",
-    "preversion": "gulp version:update"
-  },
-  "devDependencies": {
-    "@vaadin/vaadin-component-dev-dependencies": "^1.0.0"
-  }
+  "homepage": "https://vaadin.com/charts"
 }

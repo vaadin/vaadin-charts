@@ -4,29 +4,27 @@
     {
       "name": "High-level Element API",
       "url": "charts-high-level-element-api",
-      "src": "charts-high-level-element-api.html",
+      "src": "charts-high-level-element-api.js",
       "meta": {
         "title": "vaadin-charts High-level Element API",
         "description": "",
         "image": ""
       }
-    }
-    ,
+    },
     {
       "name": "JS API",
       "url": "charts-js-api",
-      "src": "charts-js-api.html",
+      "src": "charts-js-api.js",
       "meta": {
         "title": "vaadin-charts JS API",
         "description": "",
         "image": ""
       }
-    }
-    ,
+    },
     {
       "name": "JS JSON API",
       "url": "charts-js-json-api",
-      "src": "charts-js-json-api.html",
+      "src": "charts-js-json-api.js",
       "meta": {
         "title": "vaadin-charts JS JSON API",
         "description": "",
