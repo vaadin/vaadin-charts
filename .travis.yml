@@ -3,6 +3,10 @@ dist: trusty
 language: node_js
 node_js: 8.11
 
+cache:
+  directories:
+    - node_modules
+
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_ccccac989772_key -iv $encrypted_ccccac989772_iv
     -in deploy_rsa.enc -out /tmp/deploy_rsa -d
@@ -48,7 +52,7 @@ jobs:
 
 script:
   - if [[ "$POLYMER" = "2" ]]; then
-      npm -q i && npm i -q -g bower polymer-cli && bower -q i &&
+      npm -q i && npm i -q --no-save bower polymer-cli && bower -q i &&
       gulp lint version:check &&
       polymer lint --rules polymer-2 --input ./src/*.html ./theme/**/*.html &&
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
@@ -75,6 +79,3 @@ script:
         wct --npm;
       fi;
     fi
-
-after_success:
-  - "cat ${TRAVIS_BUILD_DIR}/coverage/lcov.info | coveralls"
