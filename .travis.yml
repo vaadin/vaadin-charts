@@ -3,10 +3,6 @@ dist: trusty
 language: node_js
 node_js: 8.11
 
-cache:
-  directories:
-    - node_modules
-
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_ccccac989772_key -iv $encrypted_ccccac989772_iv
     -in deploy_rsa.enc -out /tmp/deploy_rsa -d
@@ -79,3 +75,6 @@ script:
         wct --npm;
       fi;
     fi
+
+after_success:
+  - "cat ${TRAVIS_BUILD_DIR}/coverage/lcov.info | coveralls"
