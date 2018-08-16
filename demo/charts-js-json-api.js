@@ -1,5 +1,8 @@
-<dom-module id="charts-js-json-api">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ChartsJsJsonApi extends DemoReadyEventEmitter(ChartsDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -8,10 +11,10 @@
 
     <h3>Using JS JSON API</h3>
     <vaadin-demo-snippet id="charts-js-json-api-example">
-      <template preserve-content>
+      <template preserve-content="">
         <js-json-api-demo></js-json-api-demo>
         <dom-module id="js-json-api-demo">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart id="mychart"></vaadin-chart>
           </template>
 
@@ -23,7 +26,7 @@
                 }
                 connectedCallback() {
                   super.connectedCallback();
-                  this.$.mychart.update({
+                  this.\$.mychart.update({
                     title: {
                       text: 'Column chart'
                     },
@@ -44,7 +47,7 @@
                 customElements.define(JSJSONApiDemoElement.is, JSJSONApiDemoElement);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
       </template>
     </vaadin-demo-snippet>
@@ -52,10 +55,10 @@
 
     <h3>Using JS JSON API with bar type</h3>
     <vaadin-demo-snippet id="charts-js-json-api-with-bar-type-example">
-      <template preserve-content>
+      <template preserve-content="">
         <js-json-api-bar-demo> </js-json-api-bar-demo>
         <dom-module id="js-json-api-bar-demo">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart id="barchart"></vaadin-chart>
           </template>
 
@@ -67,7 +70,7 @@
                 }
                 connectedCallback() {
                   super.connectedCallback();
-                  this.$.barchart.update({
+                  this.\$.barchart.update({
                     title: {
                       text: 'Bar chart'
                     },
@@ -85,18 +88,15 @@
                 customElements.define(JSJSONApiBarDemoElement.is, JSJSONApiBarDemoElement);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ChartsJsJsonApi extends DemoReadyEventEmitter(ChartsDemo(Polymer.Element)) {
-      static get is() {
-        return 'charts-js-json-api';
-      }
-    }
-    customElements.define(ChartsJsJsonApi.is, ChartsJsJsonApi);
-  </script>
-</dom-module>
+  static get is() {
+    return 'charts-js-json-api';
+  }
+}
+customElements.define(ChartsJsJsonApi.is, ChartsJsJsonApi);

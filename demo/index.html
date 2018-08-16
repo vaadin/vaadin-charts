@@ -4,23 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
   <title>vaadin-charts Examples</title>
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-  <link rel="import" href="../../polymer/polymer.html">
-  <link rel="import" href="../../vaadin-demo-helpers/vaadin-component-demo.html">
-  <link rel="import" href="../../vaadin-demo-helpers/vaadin-demo-snippet.html">
-  <script src="../../vaadin-demo-helpers/vaadin-demo-ready-event-emitter.js"></script>
+  <script type="module" src="../../../@polymer/polymer/polymer-legacy.js"></script>
+  <script type="module" src="../../../@vaadin/vaadin-demo-helpers/vaadin-component-demo.js"></script>
+  <script type="module" src="../../../@vaadin/vaadin-demo-helpers/vaadin-demo-snippet.js"></script>
+  <script src="../../../@vaadin/vaadin-demo-helpers/vaadin-demo-ready-event-emitter.js"></script>
 
   <script src="./charts-demo.js"></script>
 
-  <link rel="import" href="../vaadin-chart.html">
+  <script type="module" src="../vaadin-chart.js"></script>
 
-  <custom-style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
     <style include="vaadin-component-demo-shared-styles"></style>
-  </custom-style>
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 </head>
 
 <body>
-  <vaadin-component-demo config-src="demos.json"></vaadin-component-demo>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<vaadin-component-demo config-src="demos.json"></vaadin-component-demo>`;
+document.body.appendChild($_documentContainer.content);
+</script>
 </body>
 </html>

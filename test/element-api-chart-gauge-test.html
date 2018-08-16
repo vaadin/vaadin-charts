@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>vaadin-chart tests</title>
-  <script src="../../web-component-tester/browser.js"></script>
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../test-fixture/test-fixture.html">
-  <link rel="import" href="../../polymer/lib/utils/flush.html">
-  <link rel="import" href="../vaadin-chart.html">
+  <script src="../../../wct-browser-legacy/browser.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
+  <script type="module" src="../../../@polymer/polymer/lib/utils/flush.js"></script>
+  <script type="module" src="../vaadin-chart.js"></script>
 </head>
 
 <body>
@@ -20,28 +20,32 @@
     </template>
   </test-fixture>
 
-  <script>
-    describe('High-level API for gauge series', function() {
-      var element;
-      var chartContainer;
+  <script type="module">
+import '@polymer/test-fixture/test-fixture.js';
+import '@polymer/polymer/lib/utils/flush.js';
+import '../vaadin-chart.js';
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
+describe('High-level API for gauge series', function() {
+  var element;
+  var chartContainer;
 
-      beforeEach(done => {
-        element = fixture('default');
-        chartContainer = element.$.chart;
-        setTimeout(() => {
-          done();
-        }, 100);
-      });
+  beforeEach(done => {
+    element = fixture('default');
+    chartContainer = element.$.chart;
+    setTimeout(() => {
+      done();
+    }, 100);
+  });
 
-      it('should have one gauge series', done => {
-        Polymer.RenderStatus.afterNextRender(chartContainer, () => {
-          const series = chartContainer.querySelectorAll('.highcharts-data-labels.highcharts-gauge-series');
-          expect(series).to.have.length(1);
-          const text = Array.from(series).map(node => node.textContent);
-          expect(text).to.be.deep.equal(['80']);
-          done();
-        });
-      });
+  it('should have one gauge series', done => {
+    afterNextRender(chartContainer, () => {
+      const series = chartContainer.querySelectorAll('.highcharts-data-labels.highcharts-gauge-series');
+      expect(series).to.have.length(1);
+      const text = Array.from(series).map(node => node.textContent);
+      expect(text).to.be.deep.equal(['80']);
+      done();
     });
-  </script>
+  });
+});
+</script>
 </body>

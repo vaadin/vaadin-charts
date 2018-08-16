@@ -2,25 +2,20 @@ sudo: true
 dist: trusty
 language: node_js
 node_js: 8.11
-
 cache:
   directories:
     - node_modules
-
 before_deploy:
-  - openssl aes-256-cbc -K $encrypted_ccccac989772_key -iv $encrypted_ccccac989772_iv
-    -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - openssl aes-256-cbc -K $encrypted_ccccac989772_key -iv $encrypted_ccccac989772_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
-
 deploy:
   - provider: script
-    script: "./.travis.deploy.sh"
+    script: ./.travis.deploy.sh
     skip_cleanup: true
-    on:
+    'on':
       branch: master
-
 addons:
   firefox: latest
   chrome: stable
@@ -28,7 +23,6 @@ addons:
   sauce_connect:
     username: $SAUCE_USERNAME
     access_key: $SAUCE_ACCESS_KEY
-
 jobs:
   include:
     - if: type = push
@@ -49,33 +43,7 @@ jobs:
         chrome: stable
     - if: type = cron
       env: TEST_SUITE=unit_tests POLYMER=2
-
 script:
-  - if [[ "$POLYMER" = "2" ]]; then
-      npm -q i && npm i -q -g bower polymer-cli && bower -q i &&
-      gulp lint version:check &&
-      echo "SKIPPING POLYMER LINT..." &&
-      if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-        if [[ "$TEST_SUITE" = "visual_tests" ]]; then
-          echo "SKIPPING VISUAL TESTS...";
-        else
-          wct --env saucelabs;
-        fi;
-      else
-        wct;
-      fi &&
-      if [[ "$TRAVIS_EVENT_TYPE" = "cron" && "$TEST_SUITE" = "unit_tests" ]]; then
-        wct --env saucelabs-cron;
-      fi;
-    fi
-  - if [[ "$POLYMER" = "3" ]]; then
-      npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer &&
-      rm -rf node_modules &&
-      magi p3-convert --out . --import-style=name &&
-      yarn install --flat &&
-      if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-        wct --npm --env saucelabs;
-      else
-        wct --npm;
-      fi;
-    fi
+  - 'if [[ "$POLYMER" = "2" ]]; then npm -q i && npm i -q -g polymer-cli && -q i && gulp lint version:check && echo "SKIPPING POLYMER LINT..." && if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then if [[ "$TEST_SUITE" = "visual_tests" ]]; then echo "SKIPPING VISUAL TESTS..."; else wct --module-resolution=node --npm --env saucelabs; fi; else wct; fi && if [[ "$TRAVIS_EVENT_TYPE" = "cron" && "$TEST_SUITE" = "unit_tests" ]]; then wct --env saucelabs-cron; fi; fi'
+  - 'if [[ "$POLYMER" = "3" ]]; then npm --no-save -q install -g yarn bower magi-cli web-component-tester polymer-modulizer && rm -rf node_modules && magi p3-convert --out . --import-style=name && yarn install --flat && if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then wct --module-resolution=node --npm --env saucelabs; else wct --npm; fi; fi'
+

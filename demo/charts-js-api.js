@@ -1,5 +1,8 @@
-<dom-module id="charts-js-api">
-  <template>
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class ChartsJsApi extends DemoReadyEventEmitter(ChartsDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -8,10 +11,10 @@
 
     <h3>Using configuration property and JS API</h3>
     <vaadin-demo-snippet id="charts-js-api-example">
-      <template preserve-content>
+      <template preserve-content="">
         <js-api-demo></js-api-demo>
         <dom-module id="js-api-demo">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart id="mychart"></vaadin-chart>
           </template>
 
@@ -24,7 +27,7 @@
                 connectedCallback() {
                   super.connectedCallback();
                   Polymer.RenderStatus.beforeNextRender(this, () => {
-                    var configuration = this.$.mychart.configuration;
+                    var configuration = this.\$.mychart.configuration;
                     configuration.setTitle({
                       text: 'The chart title'
                     });
@@ -41,18 +44,15 @@
                 customElements.define(JSApiDemoElement.is, JSApiDemoElement);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ChartsJsApi extends DemoReadyEventEmitter(ChartsDemo(Polymer.Element)) {
-      static get is() {
-        return 'charts-js-api';
-      }
-    }
-    customElements.define(ChartsJsApi.is, ChartsJsApi);
-  </script>
-</dom-module>
+  static get is() {
+    return 'charts-js-api';
+  }
+}
+customElements.define(ChartsJsApi.is, ChartsJsApi);

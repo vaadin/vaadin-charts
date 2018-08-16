@@ -1,5 +1,42 @@
-<dom-module id="charts-high-level-element-api">
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="speedometer" theme-for="vaadin-chart">
   <template>
+    <style include="vaadin-chart-default-theme">
+      :host(.speedometer) .highcharts-minor-tick {
+        stroke: #339;
+        stroke-width: 1;
+      }
+
+      :host(.speedometer) .highcharts-tick,
+      :host(.speedometer) .highcharts-axis-line {
+        stroke: #339;
+        stroke-width: 2;
+      }
+
+      :host(.speedometer) .highcharts-label {
+        fill: #339;
+      }
+
+      :host(.speedometer) .highcharts-grid-line,
+      :host(.speedometer) .highcharts-minor-grid-line {
+        stroke: none;
+      }
+
+      :host(.speedometer) .highcharts-color-0 .highcharts-pivot {
+        fill: #000;
+        stroke: #000;
+      }
+    </style>
+  </template>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+class ChartsHighLevelElementApi extends DemoReadyEventEmitter(ChartsDemo(PolymerElement)) {
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -8,10 +45,9 @@
 
     <h3>Using the high-level Element API</h3>
     <vaadin-demo-snippet id="charts-high-level-element-api-example">
-      <template preserve-content>
-        <vaadin-chart title="Custom Title" no-legend subtitle="Custom Subtitle" categories="[2010, 2011, 2012, 2013, 2014]" tooltip
-                      additional-options='{"yAxis": [{"id": "Rainfall (mm)", "title": {"text": "Rainfall (mm)"}},{"id": "Temperature", "opposite": true, "title": {"text": "Temperature"}}],"credits": {"enabled": true, "text": "Vaadin Ltd", "href": "https://vaadin.com/elements"}}'>
-          <vaadin-chart-series type="column" title="Tokyo" values="[19,12,9,24,5]" unit="Rainfall (mm)" value-labels='["Mon", "Tue", "Wed", "Thur", "Fri"]'></vaadin-chart-series>
+      <template preserve-content="">
+        <vaadin-chart title="Custom Title" no-legend="" subtitle="Custom Subtitle" categories="[2010, 2011, 2012, 2013, 2014]" tooltip="" additional-options="{&quot;yAxis&quot;: [{&quot;id&quot;: &quot;Rainfall (mm)&quot;, &quot;title&quot;: {&quot;text&quot;: &quot;Rainfall (mm)&quot;}},{&quot;id&quot;: &quot;Temperature&quot;, &quot;opposite&quot;: true, &quot;title&quot;: {&quot;text&quot;: &quot;Temperature&quot;}}],&quot;credits&quot;: {&quot;enabled&quot;: true, &quot;text&quot;: &quot;Vaadin Ltd&quot;, &quot;href&quot;: &quot;https://vaadin.com/elements&quot;}}">
+          <vaadin-chart-series type="column" title="Tokyo" values="[19,12,9,24,5]" unit="Rainfall (mm)" value-labels="[&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thur&quot;, &quot;Fri&quot;]"></vaadin-chart-series>
           <vaadin-chart-series title="Miami" values="[9,2,29,4,35]" markers="hidden" unit="Temperature"></vaadin-chart-series>
           <vaadin-chart-series title="Rio" values="[39,22,9,14,5]" value-min="-10"></vaadin-chart-series>
         </vaadin-chart>
@@ -20,7 +56,7 @@
 
     <h3>Gauge chart</h3>
     <vaadin-demo-snippet id="charts-high-level-element-api-example">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="speedometer" theme-for="vaadin-chart">
           <template>
             <style include="vaadin-chart-default-theme">
@@ -51,13 +87,13 @@
             </style>
           </template>
         </dom-module>
-        <vaadin-chart class="speedometer" title="Speedometer" type="gauge" additional-options='{"yAxis": {
-              "min": 0,
-              "max": 220,
-              "minorTickLength": 5,
-              "offset": -10,
-              "tickLength": 5
-            }, "pane": {"startAngle": -150, "endAngle": 150}}'>
+        <vaadin-chart class="speedometer" title="Speedometer" type="gauge" additional-options="{&quot;yAxis&quot;: {
+              &quot;min&quot;: 0,
+              &quot;max&quot;: 220,
+              &quot;minorTickLength&quot;: 5,
+              &quot;offset&quot;: -10,
+              &quot;tickLength&quot;: 5
+            }, &quot;pane&quot;: {&quot;startAngle&quot;: -150, &quot;endAngle&quot;: 150}}">
           <vaadin-chart-series title="Speed" values="[89]"></vaadin-chart-series>
         </vaadin-chart>
       </template>
@@ -65,10 +101,10 @@
 
     <h3>Using the DOM API</h3>
     <vaadin-demo-snippet id="charts-using-the-dom-api">
-      <template preserve-content>
+      <template preserve-content="">
         <wc-api-demo></wc-api-demo>
         <dom-module id="wc-api-demo">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart id="mychart" title="Custom Title" subtitle="Custom Subtitle">
               <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
             </vaadin-chart>
@@ -86,12 +122,12 @@
                 }
 
                 _removeSeries() {
-                  const series = this.$.mychart.querySelector('vaadin-chart-series');
-                  series && this.$.mychart.removeChild(series);
+                  const series = this.\$.mychart.querySelector('vaadin-chart-series');
+                  series && this.\$.mychart.removeChild(series);
                 }
 
                 _changeSeries() {
-                  const series = this.$.mychart.querySelector('vaadin-chart-series');
+                  const series = this.\$.mychart.querySelector('vaadin-chart-series');
                   if (series) {
                     series.values = this._valuesGenerator;
                   }
@@ -100,7 +136,7 @@
                 _addSeries() {
                   const newSeries = document.createElement('vaadin-chart-series');
                   newSeries.values = this._valuesGenerator;
-                  this.$.mychart.appendChild(newSeries);
+                  this.\$.mychart.appendChild(newSeries);
                 }
 
                 _addMultipleSeries() {
@@ -112,7 +148,7 @@
 
                     frag.appendChild(newSeries);
                   }
-                  this.$.mychart.appendChild(frag);
+                  this.\$.mychart.appendChild(frag);
                 }
 
                 get _valuesGenerator() {
@@ -123,18 +159,18 @@
                 customElements.define(WCApiDemoElement.is, WCApiDemoElement);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
       </template>
     </vaadin-demo-snippet>
 
     <h3>Multiple series with dom-repeat</h3>
     <vaadin-demo-snippet id="charts-multiple-series-with-dom-repeat">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="chart-series-dom-repeat">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart id="mychart">
-              <template is="dom-repeat" items="{{series}}" preserve-content>
+              <template is="dom-repeat" items="{{series}}" preserve-content="">
                 <vaadin-chart-series values="{{item.data}}"></vaadin-chart-series>
               </template>
             </vaadin-chart>
@@ -166,7 +202,7 @@
                 customElements.define(ChartSeriesDomRepeatElement.is, ChartSeriesDomRepeatElement);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
         <chart-series-dom-repeat></chart-series-dom-repeat>
       </template>
@@ -174,9 +210,9 @@
 
     <h3>Adding event listeners <small>(Try clicking at chart background and any series point)</small></h3>
     <vaadin-demo-snippet id="charts-add-event-listeners">
-      <template preserve-content>
+      <template preserve-content="">
         <dom-module id="chart-event-listeners">
-          <template preserve-content>
+          <template preserve-content="">
             <vaadin-chart title="Chart with events" id="mychart" on-chart-click="__onChartClick">
               <vaadin-chart-series values="[10,20,30]"></vaadin-chart-series>
             </vaadin-chart>
@@ -196,14 +232,14 @@
 
                 connectedCallback() {
                   super.connectedCallback();
-                  this.$.mychart.addEventListener('point-click', (event) => {
+                  this.\$.mychart.addEventListener('point-click', (event) => {
                     const {chartX, chartY} = event.detail.originalEvent;
                     this.showLabel('[POINT-CLICK] (x: ' + chartX + ', y: ' + chartY + ')', chartX, chartY);
                   });
                 }
 
                 showLabel(message, xPixels, yPixels) {
-                  const label = this.$.mychart.configuration.renderer.label(message, xPixels, yPixels)
+                  const label = this.\$.mychart.configuration.renderer.label(message, xPixels, yPixels)
                     .attr({
                       padding: 10,
                       r: 5,
@@ -222,7 +258,7 @@
                 customElements.define(ChartEventListeners.is, ChartEventListeners);
               }
             });
-          </script>
+          &lt;/script>
         </dom-module>
         <chart-event-listeners></chart-event-listeners>
       </template>
@@ -230,8 +266,8 @@
 
     <h3>3D column chart with stacks</h3>
     <vaadin-demo-snippet id="charts-add-event-listeners">
-      <template preserve-content>
-        <vaadin-chart type="column" chart3d categories='["Apples", "Oranges"]' stacking="normal">
+      <template preserve-content="">
+        <vaadin-chart type="column" chart3d="" categories="[&quot;Apples&quot;, &quot;Oranges&quot;]" stacking="normal">
           <vaadin-chart-series title="John" values="[5,3]" stack="male"></vaadin-chart-series>
           <vaadin-chart-series title="Joe" values="[1,2]" stack="male"></vaadin-chart-series>
           <vaadin-chart-series title="Jane" values="[4,16]" stack="female"></vaadin-chart-series>
@@ -242,52 +278,17 @@
 
     <h3>3D pie chart</h3>
     <vaadin-demo-snippet id="charts-add-event-listeners">
-      <template preserve-content>
-        <vaadin-chart type="pie" chart3d additional-options='{"plotOptions": {"pie": {"depth": 50}}}'>
-          <vaadin-chart-series values='[["Firefox", 45.0], ["IE", 26.8], ["Chrome", 12.8], ["Safari", 8.5], ["Opera", 6.2], ["Others", 0.7]]'></vaadin-chart-series>
+      <template preserve-content="">
+        <vaadin-chart type="pie" chart3d="" additional-options="{&quot;plotOptions&quot;: {&quot;pie&quot;: {&quot;depth&quot;: 50}}}">
+          <vaadin-chart-series values="[[&quot;Firefox&quot;, 45.0], [&quot;IE&quot;, 26.8], [&quot;Chrome&quot;, 12.8], [&quot;Safari&quot;, 8.5], [&quot;Opera&quot;, 6.2], [&quot;Others&quot;, 0.7]]"></vaadin-chart-series>
         </vaadin-chart>
       </template>
     </vaadin-demo-snippet>
+`;
+  }
 
-  </template>
-  <script>
-    class ChartsHighLevelElementApi extends DemoReadyEventEmitter(ChartsDemo(Polymer.Element)) {
-      static get is() {
-        return 'charts-high-level-element-api';
-      }
-    }
-    customElements.define(ChartsHighLevelElementApi.is, ChartsHighLevelElementApi);
-  </script>
-</dom-module>
-
-// Workaround: doesn't seem to work inside demo snippet.
-<dom-module id="speedometer" theme-for="vaadin-chart">
-  <template>
-    <style include="vaadin-chart-default-theme">
-      :host(.speedometer) .highcharts-minor-tick {
-        stroke: #339;
-        stroke-width: 1;
-      }
-
-      :host(.speedometer) .highcharts-tick,
-      :host(.speedometer) .highcharts-axis-line {
-        stroke: #339;
-        stroke-width: 2;
-      }
-
-      :host(.speedometer) .highcharts-label {
-        fill: #339;
-      }
-
-      :host(.speedometer) .highcharts-grid-line,
-      :host(.speedometer) .highcharts-minor-grid-line {
-        stroke: none;
-      }
-
-      :host(.speedometer) .highcharts-color-0 .highcharts-pivot {
-        fill: #000;
-        stroke: #000;
-      }
-    </style>
-  </template>
-</dom-module>
+  static get is() {
+    return 'charts-high-level-element-api';
+  }
+}
+customElements.define(ChartsHighLevelElementApi.is, ChartsHighLevelElementApi);
