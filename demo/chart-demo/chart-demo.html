@@ -48,7 +48,15 @@
             while (demoContent.childNodes.length > 0) {
               demoPlusSourcesArea.appendChild(demoContent.childNodes[0]);
             }
+
             this.shadowRoot.appendChild(demoPlusSourcesArea);
+
+            const theme = demoPlusSourcesArea.querySelector('[theme-for=vaadin-chart]');
+            if (theme) {
+              const themeContent = theme.children[0].content;
+              Polymer.dom(demoPlusSourcesArea.querySelector('vaadin-chart').root).appendChild(themeContent);
+            }
+
             this.__initialized = true;
           });
         }

@@ -96,6 +96,7 @@
       </div>
       <vaadin-split-layout id="layout" orientation="vertical">
         <demo-area id="example" header="[[header]]">
+          <slot></slot>
         </demo-area>
       </vaadin-split-layout>
     </div>
@@ -135,7 +136,6 @@
 
       ready() {
         super.ready();
-        this.$.example.innerHTML = this.innerHTML;
         this.htmlSource = this.innerHTML;
         this.classList.add('hiddensplitter');
         this.updateStyles();
@@ -186,6 +186,7 @@
 
       connectedCallback() {
         super.connectedCallback();
+        console.log('connected')
       }
 
     }
