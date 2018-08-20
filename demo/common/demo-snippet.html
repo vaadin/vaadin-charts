@@ -51,6 +51,14 @@
 
         var snippet = this.source;
 
+        // avoid &quot; in HTML attribute values
+        snippet = snippet.replace(/="[^"]+"/g, (match) => {
+          if (match.indexOf('&quot;') > -1) {
+            match = match.replace(/"/g, `'`).replace(/&quot;/g, `"`);
+          }
+          return match;
+        });
+
         // Boolean properties are displayed as checked="", so remove the ="" bit.
         snippet = snippet.replace(/=""/g, '');
         this._markdown = this._unindent(snippet);
