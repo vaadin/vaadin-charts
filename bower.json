@@ -34,7 +34,7 @@
     "polymer": "^2.0.0",
     "vaadin-themable-mixin": "vaadin/vaadin-themable-mixin#^1.2.1",
     "vaadin-license-checker": "vaadin/license-checker#2.1.0-alpha1",
-    "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^1.1.2"
+    "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "^3.0.0",
@@ -54,5 +54,10 @@
     "paper-button": "2.0.0",
     "vaadin-split-layout": "^4.1.0-beta2",
     "vaadin-icons": "^4.2.0-beta2"
+  },
+  "resolutions": {
+    "vaadin-element-mixin": "^2.0.0",
+    "vaadin-development-mode-detector": "^2.0.0",
+    "vaadin-usage-statistics": "^2.0.1"
   }
 }
