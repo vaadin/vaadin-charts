@@ -43,15 +43,8 @@
           var resolvedDemoUrl = this.resolveUrl('../demos/' + (this.category ? this.category + '/' : '') + this.demo + '.html');
           Polymer.importHref(resolvedDemoUrl, (result) => {
             const template = result.target.import.querySelector('template');
-
-            let demoContent;
-            if (template) {
-              demoContent = document.importNode(template.content, true);
-            } else {
-              demoContent = result.target.import.body ? result.target.import.body : result.target.import;
-            }
-
-            var demoPlusSourcesArea = document.createElement('demo-plus-sources-area');
+            const demoContent = document.importNode(template.content, true);
+            const demoPlusSourcesArea = document.createElement('demo-plus-sources-area');
             while (demoContent.childNodes.length > 0) {
               demoPlusSourcesArea.appendChild(demoContent.childNodes[0]);
             }

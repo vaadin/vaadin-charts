@@ -1,47 +1,50 @@
-<dom-module id="solidgauge" theme-for="vaadin-chart">
-  <template>
-    <style include="vaadin-chart-default-theme">
-      :host([theme~="solidgauge"]) .highcharts-yaxis-grid .highcharts-grid-line {
-        display: none;
-      }
-    </style>
-  </template>
-</dom-module>
-<vaadin-chart
-    title="Speed"
-    type="solidgauge"
-    theme="solidgauge"
-    tooltip
-    additional-options='{
-      "pane": {
-        "center": ["50%","85%"],
-        "startAngle": -90,
-        "endAngle": 90,
-        "background": {
-          "innerRadius": "60%",
-          "outerRadius": "100%",
-          "shape":"arc"
+<template preserve-content>
+  <dom-module id="solidgauge" theme-for="vaadin-chart">
+    <template>
+      <style include="vaadin-chart-default-theme">
+        :host([theme~="solidgauge"]) .highcharts-yaxis-grid .highcharts-grid-line {
+          display: none;
         }
-      },
-      "yAxis": {
-        "min": 0,
-        "max": 200,
-        "minorTickInterval": null,
-        "tickAmount": 2,
-        "title": {
-          "y":-70
+      </style>
+    </template>
+  </dom-module>
+  <vaadin-chart
+      title="Speed"
+      type="solidgauge"
+      theme="solidgauge"
+      tooltip
+      additional-options='{
+        "pane": {
+          "center": ["50%","85%"],
+          "startAngle": -90,
+          "endAngle": 90,
+          "background": {
+            "innerRadius": "60%",
+            "outerRadius": "100%",
+            "shape":"arc"
+          }
         },
-        "labels": {
-          "y":16
+        "yAxis": {
+          "min": 0,
+          "max": 200,
+          "minorTickInterval": null,
+          "tickAmount": 2,
+          "title": {
+            "y":-70
+          },
+          "labels": {
+            "y":16
+          }
         }
-      }
-    }'>
-  <vaadin-chart-series
-    name="Speed"
-    values='[{"y": 80, "colorIndex": 2}]'
-    additional-options='{
-      "dataLabels": {
-        "format": "<div style=\"text-align:center\"><span style=\"font-size:25px;color:black\">{y}</span><br/><span style=\"font-size:12px;color:silver\">km/h</span></div>"
-      }
-    }'></vaadin-chart-series>
-</vaadin-chart>
+      }'>
+    <vaadin-chart-series
+      name="Speed"
+      values='[{"y": 80, "colorIndex": 2}]'
+      additional-options='{
+        "dataLabels": {
+          "format": "<div style=\"text-align:center\"><span style=\"font-size:25px;color:black\">{y}</span><br/><span style=\"font-size:12px;color:silver\">km/h</span></div>"
+        }
+      }'>
+    </vaadin-chart-series>
+  </vaadin-chart>
+</template>
