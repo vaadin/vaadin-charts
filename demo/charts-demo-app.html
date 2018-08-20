@@ -10,6 +10,7 @@
 <link rel="import" href="demo-menu.html">
 <link rel="import" href="common/header-bar.html">
 <link rel="import" href="chart-demo/chart-demo.html">
+<link rel="import" href="404/404.html">
 
 <dom-module id="charts-demo-app">
   <template>
@@ -279,7 +280,7 @@
 
     <!-- Main content -->
     <div id="content">
-      <iron-pages id="iron-pages" selected="[[page]]" attr-for-selected="demo" fallback-selection="view404" role="main">
+      <iron-pages id="iron-pages" selected="[[page]]" attr-for-selected="demo" role="main">
         <template is="dom-repeat" id="categories" items="[[categories]]" as="category">
           <template is="dom-if" if="{{_isSubMenu(category)}}">
             <template is="dom-repeat" items="[[category.demos]]" as="demo">
@@ -290,6 +291,7 @@
             <chart-demo id="[[category.component]]" demo="[[category.component]]"></chart-demo>
           </template>
         </template>
+        <my-view404 demo="404"></my-view404>
       </iron-pages>
     </div>
   </template>
@@ -482,11 +484,15 @@
         // var resolvedPageUrl = this.resolveUrl( 'chart-demo/chart-demo.html');
         // Polymer.importHref(resolvedPageUrl, null,
         // this._showPage404.bind(this), true);
-        if (page) {
+        if (page && page !== '404') {
           // For the first load, it needs to wait for the components to load
           Polymer.RenderStatus.beforeNextRender(this, () => {
             const chartDemo = this.shadowRoot.querySelector('#' + page);
-            chartDemo.loadDemoContent();
+            if (chartDemo) {
+              chartDemo.loadDemoContent();
+            } else {
+              this._showPage404();
+            }
           });
         }
         this._closeMenu();

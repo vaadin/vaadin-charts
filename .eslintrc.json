@@ -1,8 +1,5 @@
 {
   "extends": "vaadin",
-  "rules": {
-    "linebreak-style": 0
-  },
   "env": {
     "browser": true,
     "node": true,
