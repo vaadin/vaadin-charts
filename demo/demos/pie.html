@@ -5,14 +5,15 @@
       tooltip
       additional-options='{
         "tooltip": {
-          "pointFormat": "{series.name}: <b>{point.percentage:.1f}%</b>"},
-          "plotOptions": {
-            "pie": {
+          "pointFormat": "{series.name}: &lt;b&gt;{point.percentage:.1f}%&lt;/b&gt;"
+        },
+        "plotOptions": {
+          "pie": {
             "allowPointSelect":true,
             "cursor": "pointer",
             "dataLabels": {
               "enabled":true,
-              "format": "<b>{point.name}</b>: {point.percentage:.1f} %"
+              "format": "&lt;b&gt;{point.name}&lt;/b&gt;: {point.percentage:.1f} %"
             }
           }
         }
