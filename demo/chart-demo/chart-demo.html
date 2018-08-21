@@ -3,7 +3,7 @@
 <link rel="import" href="../../vaadin-chart.html">
 <link rel="import" href="../../../iron-ajax/iron-ajax.html">
 <link rel="import" href="../../../vaadin-grid/vaadin-grid.html">
-
+<link rel="import" href="../common/demo-styles.html">
 <dom-module id="chart-demo">
   <template>
     <style>
@@ -44,12 +44,6 @@
             }
 
             this.shadowRoot.appendChild(demoPlusSourcesArea);
-
-            const theme = demoPlusSourcesArea.querySelector('[theme-for=vaadin-chart]');
-            if (theme) {
-              const themeContent = theme.children[0].content;
-              Polymer.dom(demoPlusSourcesArea.querySelector('vaadin-chart').root).appendChild(themeContent);
-            }
 
             this.__initialized = true;
           });
