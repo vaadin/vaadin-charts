@@ -33,10 +33,10 @@ import '../vaadin-chart.js';`
     {
       text: `"resolutions": {`,
       replacement: `"resolutions": {
-        "@webcomponents/webcomponentsjs": "2.0.4",
-        "@vaadin/vaadin-element-mixin": "1.1.2",
-        "@vaadin/vaadin-usage-statistics": "1.1.0-beta1",
-        "@vaadin/vaadin-development-mode-detector": "1.1.0-beta1",`
+    "@webcomponents/webcomponentsjs": "2.0.4",
+    "@vaadin/vaadin-element-mixin": "1.1.2",
+    "@vaadin/vaadin-usage-statistics": "1.1.0-beta1",
+    "@vaadin/vaadin-development-mode-detector": "1.1.0-beta1",`
     }
   ]
 };
