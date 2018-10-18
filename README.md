@@ -16,7 +16,7 @@
 
 ### Install Vaadin Charts
 ```
-$ bower install --save vaadin-charts#6.1.0
+$ bower install --save vaadin-charts#6.1.1
 ```
 
 ### Import Vaadin Charts
