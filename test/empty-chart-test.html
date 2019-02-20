@@ -28,14 +28,11 @@
         expect(element.constructor.is).to.be.equal(element.localName);
       });
 
-      it('should have no title', done => {
-        setTimeout(() => {
-          const title = element.$.chart.querySelector('.highcharts-title');
-          if (title) {
-            expect(title.textContent).to.be.empty;
-          }
-          done();
-        }, 50);
+      it('should have no title', () => {
+        const title = element.$.chart.querySelector('.highcharts-title');
+        if (title) {
+          expect(title.textContent).to.be.empty;
+        }
       });
 
     });
