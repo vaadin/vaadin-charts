@@ -33,7 +33,7 @@
     "highcharts": "^5.0.0",
     "polymer": "^2.0.0",
     "vaadin-themable-mixin": "^1.0.0",
-    "vaadin-license-checker": "vaadin/license-checker#^2.0.1",
+    "vaadin-license-checker": "vaadin/license-checker#2.0.1",
     "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^1.0.1"
   },
   "devDependencies": {
@@ -42,7 +42,8 @@
     "iron-demo-helpers": "^2.0.0",
     "webcomponentsjs": "^1.0.0",
     "web-component-tester": "^6.1.5",
-    "vaadin-board": "^2.0.0",
-    "vaadin-grid": "4.1.7"
+    "vaadin-board": "2.0.0",
+    "vaadin-grid": "4.1.7",
+    "vaadin-ordered-layout": "1.0.2"
   }
 }

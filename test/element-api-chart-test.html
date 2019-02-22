@@ -18,8 +18,12 @@
     describe('High-level API', function() {
       var element;
 
-      beforeEach(function() {
+      beforeEach(function(done) {
         element = fixture('default');
+
+        setTimeout(function() {
+          done();
+        }, 50);
       });
 
       it('should be defined', function() {
