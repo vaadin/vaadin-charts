@@ -42,7 +42,7 @@
     </script>
   </dom-module>
   <chart-series-api-demo></chart-series-api-demo>
- 
+
   <script>
     describe('High-level Charts Series API', function() {
       let chart;
@@ -78,7 +78,7 @@
           expect(series).to.have.lengthOf(1);
 
           const firstSeries = series[0];
-          // IE11 doesn't support SVGElement.classList 
+          // IE11 doesn't support SVGElement.classList
           expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
           expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
 
