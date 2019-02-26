@@ -266,8 +266,16 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         /** @private */
         disconnectedCallback() {
           super.disconnectedCallback();
-          if (this.__hasSeriesConfig() && !this.parentNode) {
-            this._series.remove();
+          const isFirefox = /Firefox/.test(navigator.userAgent);
+
+          if (isFirefox) {
+            if (this.__hasSeriesConfig() && !this.parentNode) {
+              this._series.remove();
+            }
+          } else {
+            if (this.__hasSeriesConfig()) {
+              this._series.remove();
+            }
           }
         }
 
