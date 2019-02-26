@@ -36,10 +36,7 @@ module.exports = {
     ];
 
     const saucelabsPlatforms = [
-      ...saucelabsPlatformsDesktop,
-      ...saucelabsPlatformsMicrosoft,
-      'Windows 10/chrome@latest',
-      'Windows 10/firefox@latest',
+      ...saucelabsPlatformsDesktop
     ];
 
     const cronPlatforms = [
