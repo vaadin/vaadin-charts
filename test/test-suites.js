@@ -11,7 +11,7 @@ window.VaadinChartsSuites = [
   'element-dom-api-test.html',
   'element-height-test.html',
   'element-events-test.html',
-  // 'exporting-test.html',
+  'exporting-test.html',
   'js-api-chart-test.html',
   'js-json-api-chart-test.html',
   'js-private-api-chart-test.html',
