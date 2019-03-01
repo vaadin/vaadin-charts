@@ -36,7 +36,9 @@ module.exports = {
     ];
 
     const saucelabsPlatforms = [
-      ...saucelabsPlatformsDesktop
+      ...saucelabsPlatformsDesktop,
+      ...saucelabsPlatformsMobile,
+      'Windows 10/microsoftedge@17'
     ];
 
     const cronPlatforms = [
