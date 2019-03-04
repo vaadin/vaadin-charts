@@ -65,9 +65,9 @@
 
       it('should have custom title', function(done) {
         setTimeout(function() {
-          expect(chart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
+          expect(chart.$.chart.querySelector('.highcharts-title').textContent).to.be.equal('The chart title');
           done();
-        });
+        }, 100);
       });
 
       it('should have one column series and twelve points', function(done) {
