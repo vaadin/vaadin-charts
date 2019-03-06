@@ -999,6 +999,8 @@ MAGI ADD END -->
             return;
           }
 
+          series.forEach(s => s._series.remove());
+
           this.__removeAxisIfEmpty();
 
           // Best effort to make chart display custom empty-text messages when series are removed.
