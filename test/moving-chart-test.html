@@ -37,7 +37,7 @@
       it('should keep chart configuration if element is moved to a new parent node', (done) => {
 
         expect(element.configuration.series.length).to.be.equal(element.childElementCount);
-        newContainer.append(element);
+        newContainer.appendChild(element);
         setTimeout(() => {
           expect(element.configuration.series.length).to.be.equal(element.childElementCount);
           done();
