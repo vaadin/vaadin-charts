@@ -68,6 +68,10 @@ MAGI ADD END -->
   </template>
 
   <script>
+    if (!Polymer.Element) {
+      console.warn(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
+    }
+
     (() => {
       /**
        * `<vaadin-chart>` is a Web Component for creating high quality charts.
