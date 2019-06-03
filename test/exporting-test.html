@@ -68,12 +68,6 @@
       let chartContainer;
 
       before(function(done) {
-        // FIX-ME: Temporarily skipping IE that is causing timeout
-        const isIE = /trident/i.test(navigator.userAgent);
-        if (isIE) {
-          this.skip();
-        }
-
         customElements.whenDefined('exporting-test').then(() => {
           const el = document.querySelector('exporting-test');
           chart = el.$.mychart;
