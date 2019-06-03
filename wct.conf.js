@@ -35,7 +35,8 @@ module.exports = {
     ];
 
     const saucelabsPlatforms = [
-      ...saucelabsPlatformsDesktop
+      ...saucelabsPlatformsDesktop,
+      ...saucelabsPlatformsMicrosoft
     ];
 
     const cronPlatforms = [
