@@ -117,14 +117,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           ];
         }
 
-        /** @private */
-        disconnectedCallback() {
-          super.disconnectedCallback();
-          if (this.__hasSeriesConfig() && !this.parentNode) {
-            this._series.remove();
-          }
-        }
-
         /**
          * Method to attach a series object of type `Highcharts.Series`.
          * @param series Object of type `Highcharts.Series`

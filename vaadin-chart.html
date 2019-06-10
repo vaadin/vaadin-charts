@@ -638,6 +638,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this._childObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
               this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+              this.__removeSeries(info.removedNodes.filter(this.__filterSeriesNodes));
             });
           });
         }
@@ -660,6 +661,17 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 
             seriesElement.setSeries(seriesConfiguration);
           }
+        }
+
+        __removeSeries(seriesNodes) {
+          if (this.__isSeriesEmpty(seriesNodes)) {
+            return;
+          }
+          seriesNodes.forEach(series => {
+            if (series instanceof Vaadin.ChartSeriesElement) {
+              series._series.remove();
+            }
+          });
         }
 
         __isSeriesEmpty(series) {
