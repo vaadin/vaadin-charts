@@ -11,8 +11,6 @@ var grepContents = require('gulp-grep-contents');
 var clip = require('gulp-clip-empty-files');
 var git = require('gulp-git');
 
-gulp.task('lint', ['lint:js', 'lint:html', 'lint:css']);
-
 gulp.task('lint:js', function() {
   return gulp.src([
     '*.js',
@@ -54,6 +52,8 @@ gulp.task('lint:css', function() {
     }));
 });
 
+gulp.task('lint', gulp.parallel('lint:js', 'lint:html', 'lint:css'));
+
 gulp.task('version:check', function() {
   const expectedVersion = new RegExp('^' + require('./package.json').version + '$');
   return gulp.src(['*.html'])
@@ -65,7 +65,7 @@ gulp.task('version:check', function() {
     .pipe(expect({reportUnexpected: true}, []));
 });
 
-gulp.task('version:update', ['version:check'], function() {
+gulp.task('version:update', gulp.series('version:check'), function() {
   // Should be run from 'preversion'
   // Assumes that the old version is in package.json and the new version in the `npm_package_version` environment variable
   const oldversion = require('./package.json').version;
