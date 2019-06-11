@@ -19,8 +19,9 @@
   </test-fixture>
 
   <script>
-    describe('Empty chart', function() {
+    describe('Moving chart', function() {
       var element, newContainer;
+
       beforeEach(function(done) {
         const testElements = fixture('default');
         element = testElements[0];
@@ -29,11 +30,12 @@
           done();
         }, 50);
       });
+
       it('should keep chart configuration if element is moved to a new parent node', (done) => {
-        expect(element.configuration.series.length).to.be.equal(element.childElementCount);
+        expect(element.configuration.series.length).to.be.equal(element.childElementCount, 'Initially with two series');
         newContainer.appendChild(element);
         setTimeout(() => {
-          expect(element.configuration.series.length).to.be.equal(element.childElementCount);
+          expect(element.configuration.series.length).to.be.equal(element.childElementCount, 'Should keep both series after moving');
           done();
         }, 50);
       });
