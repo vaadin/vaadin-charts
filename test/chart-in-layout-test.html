@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <test-fixture id="chart-in-layout">
     <template>
       <style>
         #mylayout {
@@ -36,7 +36,7 @@
       let firstChart;
       let secondChart;
       before(function(done) {
-        mylayout = fixture('default')[1];
+        mylayout = fixture('chart-in-layout')[1];
         firstChart = mylayout.querySelector('#firstChart');
         secondChart = mylayout.querySelector('#secondChart');
         setTimeout(() => {

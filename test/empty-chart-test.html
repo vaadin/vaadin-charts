@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <test-fixture id="empty-chart">
     <template>
       <vaadin-chart></vaadin-chart>
     </template>
@@ -19,7 +19,7 @@
       var element;
 
       beforeEach(function() {
-        element = fixture('default');
+        element = fixture('empty-chart');
       });
 
       it('should be defined', function() {

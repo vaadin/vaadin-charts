@@ -8,11 +8,7 @@
 </head>
 
 <body>
-  <script>
-    // Add workaround described in https://github.com/Polymer/tools/issues/3154
-    void(0);
-  </script>
-  <test-fixture id="default">
+  <test-fixture id="element-dom-api">
     <template>
       <div></div>
     </template>
@@ -23,7 +19,7 @@
       var container;
 
       beforeEach(function() {
-        container = fixture('default');
+        container = fixture('element-dom-api');
       });
 
       it('should be able to create a chart through DOM API', done => {

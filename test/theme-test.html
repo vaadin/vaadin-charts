@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <test-fixture id="empty-chart">
+  <test-fixture id="theme">
     <template>
       <vaadin-chart>
       </vaadin-chart>
@@ -20,7 +20,7 @@
       var chart;
 
       beforeEach(done => {
-        chart = fixture('empty-chart');
+        chart = fixture('theme');
         Polymer.flush();
         setTimeout(() => {
           done();

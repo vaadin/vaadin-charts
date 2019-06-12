@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <test-fixture id="moving-chart">
     <template>
       <vaadin-chart>
         <vaadin-chart-series value="[0,1,2]"></vaadin-chart-series>
@@ -23,7 +23,7 @@
       var element, newContainer;
 
       beforeEach(function(done) {
-        const testElements = fixture('default');
+        const testElements = fixture('moving-chart');
         element = testElements[0];
         newContainer = testElements[1];
         setTimeout(function() {
