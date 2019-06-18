@@ -17,7 +17,7 @@
       height: 300px;
     }
   </style>
-  <test-fixture id="default">
+  <test-fixture id="element-height">
     <template>
       <vaadin-chart></vaadin-chart>
     </template>
@@ -28,7 +28,7 @@
       var element;
 
       beforeEach(function() {
-        element = fixture('default');
+        element = fixture('element-height');
       });
 
       it('should have the same height as defined', function(done) {

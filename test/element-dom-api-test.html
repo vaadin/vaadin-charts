@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <test-fixture id="element-dom-api">
     <template>
       <div></div>
     </template>
@@ -19,7 +19,7 @@
       var container;
 
       beforeEach(function() {
-        container = fixture('default');
+        container = fixture('element-dom-api');
       });
 
       it('should be able to create a chart through DOM API', done => {

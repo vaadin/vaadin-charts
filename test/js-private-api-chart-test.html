@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <test-fixture id="js-private-api-chart">
     <template>
       <vaadin-chart title="Custom Title" subtitle="Custom Subtitle">
         <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
@@ -21,7 +21,7 @@
       var chart;
 
       beforeEach(done => {
-        chart = fixture('default');
+        chart = fixture('js-private-api-chart');
         setTimeout(() => {
           done();
         }, 150);

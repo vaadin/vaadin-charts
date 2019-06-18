@@ -38,6 +38,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
       :host {
         display: block;
         width: 100%;
+        overflow: hidden;
       }
 
       :host([hidden]) {
@@ -637,6 +638,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           Polymer.RenderStatus.beforeNextRender(this, () => {
             this._childObserver = new Polymer.FlattenedNodesObserver(this.$.slot, (info) => {
               this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+              this.__removeSeries(info.removedNodes.filter(this.__filterSeriesNodes));
             });
           });
         }
@@ -661,6 +663,17 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
+        __removeSeries(seriesNodes) {
+          if (this.__isSeriesEmpty(seriesNodes)) {
+            return;
+          }
+          seriesNodes.forEach(series => {
+            if (series instanceof Vaadin.ChartSeriesElement) {
+              series._series.remove();
+            }
+          });
+        }
+
         __isSeriesEmpty(series) {
           return series === null || series.length === 0;
         }
@@ -677,10 +690,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
         }
 
         /** @private */
-        disconnectedCalllback() {
-          super.disconnectedCalllback();
-          this.__mutationObserver.disconnect();
-          this._childObserver.disconnect();
+        disconnectedCallback() {
+          super.disconnectedCallback();
+          this.__mutationObserver && this.__mutationObserver.disconnect();
+          this._childObserver && this._childObserver.disconnect();
         }
 
         /**

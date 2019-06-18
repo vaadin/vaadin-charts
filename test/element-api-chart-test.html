@@ -8,7 +8,10 @@
 </head>
 
 <body>
-  <test-fixture id="default">
+  <script>
+    void 0;
+  </script>
+  <test-fixture id="element-api-chart">
     <template>
       <vaadin-chart title="My title" subtitle="My subtitle"></vaadin-chart>
     </template>
@@ -18,8 +21,12 @@
     describe('High-level API', function() {
       var element;
 
-      beforeEach(function() {
-        element = fixture('default');
+      beforeEach(function(done) {
+        element = fixture('element-api-chart');
+
+        setTimeout(function() {
+          done();
+        }, 50);
       });
 
       it('should be defined', function() {

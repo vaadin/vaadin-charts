@@ -17,7 +17,7 @@
       height: 300px;
     }
   </style>
-  <test-fixture id="default">
+  <test-fixture id="element-json-merge">
     <template>
       <vaadin-chart>
         <vaadin-chart-series data="[10,20,30]"></vaadin-chart-series>
@@ -30,7 +30,7 @@
       var element;
 
       beforeEach(function() {
-        element = fixture('default');
+        element = fixture('element-json-merge');
       });
 
       it('should not lose configuration if called multiple times', function(done) {
