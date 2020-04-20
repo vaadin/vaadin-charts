@@ -117,7 +117,7 @@ MAGI ADD END -->
        * ```
        * 1. Install Vaadin Charts
        * ```
-       * npm i @vaadin/vaadin-charts@6.2.3 --save
+       * npm i @vaadin/vaadin-charts@6.2.4 --save
        * ```
        * 1. Import `<vaadin-chart>` to your app
        * Edit the file `src/my-app/my-app.js` and add the following snipped on the top, after the first `import` declaration
@@ -302,7 +302,7 @@ MAGI ADD END -->
        * ### RTL support
        *
        * `vaadin-charts` as well as [Highcharts](https://www.highcharts.com/) by itself are not adjusting the layout
-       * based on the `dir` attribute. In order to make `vaadin-charts` display RTL content properly additional 
+       * based on the `dir` attribute. In order to make `vaadin-charts` display RTL content properly additional
        * JSON configuration should be used.
        * Each chart should be updated based on the specific needs, but general recommendations are:
        *
@@ -314,8 +314,9 @@ MAGI ADD END -->
        *
        * ```html
        *  <vaadin-chart title="۱- عنوان نمودار" subtitle="۲- عنوان فرعی نمودار"
-       *    additional-options='{"title": {"useHTML": true}, "tooltip": {"useHTML": true}, "subtitle": {"useHTML": true}, "legend": {"rtl": true},
-       *    "yAxis": [{"id": "۴- مقادیر", "title": {"text": "۴- مقادیر", "useHTML": true}}], "xAxis": {"reversed": true}}'>
+       *    additional-options='{"title": {"useHTML": true}, "tooltip": {"useHTML": true}, "subtitle": {"useHTML": true},
+       *    "legend": {"rtl": true}, "yAxis": [{"id": "۴- مقادیر", "title": {"text": "۴- مقادیر", "useHTML": true}}],
+       *    "xAxis": {"reversed": true}}'>
        *    <vaadin-chart-series
        *          type= "column"
        *          title="۳- عنوان ردیف"
@@ -345,7 +346,7 @@ MAGI ADD END -->
         }
 
         static get version() {
-          return '6.2.3';
+          return '6.2.4';
         }
 
         static get properties() {
