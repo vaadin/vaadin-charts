@@ -46,7 +46,6 @@ MAGI ADD END -->
 
 <script src="../chart-deep-merger.js"></script>
 <script src="../chart-exporting.js"></script>
-<script src="../chart-3d-stacking.js"></script>
 
 <link rel="import" href="vaadin-chart-series.html">
 
@@ -1070,28 +1069,11 @@ MAGI ADD END -->
 
         __initChart(options) {
           this.__initEventsListeners(options);
-          // Workaround for https://github.com/highcharts/highcharts/issues/7523
-          this.__ensureObjectPath(options, 'drilldown.activeDataLabelStyle');
           if (this.timeline) {
             this.configuration = Highcharts.stockChart(this.$.chart, options);
           } else {
             this.configuration = Highcharts.chart(this.$.chart, options);
           }
-
-          // Workaround for https://github.com/highcharts/highcharts/issues/9978
-          const elementsToChange = [
-            ...Array.from(this.$.chart.getElementsByTagName('h4'))
-              .filter(el => el.style.left === '-9999px'),
-            this.configuration.screenReaderRegion,
-            this.configuration.tabExitAnchor
-          ];
-
-          elementsToChange.forEach(el => {
-            if (el && el.style) {
-              el.style.left = '';
-              el.style.top = '-999em';
-            }
-          });
         }
 
         /** @private */
