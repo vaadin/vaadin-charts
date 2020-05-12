@@ -258,6 +258,8 @@ MAGI ADD END -->
        * to validate your license by signing in to vaadin.com.
        *
        * @memberof Vaadin
+       * @mixes Vaadin.ThemableMixin
+       * @mixes Vaadin.ElementMixin
        * @demo demo/index.html
        */
       class ChartElement extends Vaadin.ElementMixin(Vaadin.ThemableMixin(Polymer.Element)) {
@@ -291,7 +293,7 @@ MAGI ADD END -->
              * For detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)
              * @readonly
              * @public
-             * @type {Object}
+             * @type {!Chart}
              */
             configuration: Object,
 
@@ -299,6 +301,7 @@ MAGI ADD END -->
              * If categories are present names are used instead of numbers for the category axis.
              * The format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`
              * or a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.
+             * @type {ChartCategories | undefined}
              */
             categories: {
               type: Object,
@@ -328,6 +331,8 @@ MAGI ADD END -->
              * except for bar charts that appear as though they have `category-position="left"`.
              *
              * Defaults to `undefined`
+             *
+             * @type {ChartCategoryPosition | undefined}
              */
             categoryPosition: {
               type: String,
@@ -348,6 +353,7 @@ MAGI ADD END -->
              * Possible values are null, "normal" or "percent".
              * If "stack" property is not defined on the vaadin-chart-series elements, then series will be put into
              * the default stack.
+             * @type {ChartStacking | undefined}
              */
             stacking: {
               type: String,
@@ -364,6 +370,7 @@ MAGI ADD END -->
 
             /**
              * Represents the title of the chart.
+             * @type {string}
              */
             title: {
               type: String,
@@ -389,6 +396,7 @@ MAGI ADD END -->
 
             /**
              * Represents the subtitle of the chart.
+             * @type {string}
              */
             subtitle: {
               type: String,
@@ -410,6 +418,7 @@ MAGI ADD END -->
 
             /**
              * Specifies the message displayed on a chart without displayable data.
+             * @type {string}
              */
             emptyText: {
               type: String,
@@ -419,6 +428,7 @@ MAGI ADD END -->
 
             /**
              * Represents additional JSON configuration.
+             * @type {Options | undefined}
              */
             additionalOptions: {
               type: Object,
@@ -530,9 +540,12 @@ MAGI ADD END -->
           });
         }
 
+        /**
+         * @return {!Options}
+         */
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          Vaadin.Charts.ChartDeepMerger.__deepMerge(options, this.additionalOptions);
+          Vaadin.Charts.deepMerge(options, this.additionalOptions);
 
           if (this.type) {
             options.chart = options.chart || {};
@@ -1007,8 +1020,8 @@ MAGI ADD END -->
         /**
          * Search for axis with given `id`.
          *
-         * @param {String} id contains the id that will be searched
-         * @param {Boolean} isXAxis indicates if it will remove x or y axes. Defaults to `false`.
+         * @param {string} id contains the id that will be searched
+         * @param {boolean} isXAxis indicates if it will remove x or y axes. Defaults to `false`.
          */
         __getAxis(id, isXAxis) {
           id = Number.parseInt(id) || id;
@@ -1023,7 +1036,7 @@ MAGI ADD END -->
          * Add an axis with given options
          *
          * @param {Object} options axis options
-         * @param {Boolean} isXAxis indicates if axis is X (`true`) or Y (`false`). Defaults to `false`.
+         * @param {boolean} isXAxis indicates if axis is X (`true`) or Y (`false`). Defaults to `false`.
          */
         __addAxis(options, isXAxis) {
           if (this.configuration) {
@@ -1035,7 +1048,7 @@ MAGI ADD END -->
         /**
          * Iterates over axes (y or x) and removes whenever it doesn't contain any series and was created for unit
          *
-         * @param {Boolean}  isXAxis indicates if it will remove x or y axes. Defaults to `false`.
+         * @param {boolean}  isXAxis indicates if it will remove x or y axes. Defaults to `false`.
          */
         __removeAxisIfEmpty(isXAxis) {
           if (this.configuration) {
@@ -1056,7 +1069,7 @@ MAGI ADD END -->
          * Styling properties specified in this configuration will be ignored. To learn about chart styling
          * please see the CSS Styling section above.
          *
-         * @param {Object} jsonConfiguration Object chart configuration. Most important properties are:
+         * @param {!Options} jsonConfiguration Object chart configuration. Most important properties are:
          *
          * - chart `Object` with options regarding the chart area and plot area as well as general chart options.
          *    Detailed API for chart object is available in [API Site](http://api.highcharts.com/highcharts/chart)
@@ -1081,7 +1094,7 @@ MAGI ADD END -->
          * - zAxis `Object[]` The Z axis or depth axis for 3D plots.
          *    Detailed API for zAxis object is available in [API Site](http://api.highcharts.com/highcharts/zAxis)
          *
-         * @param {Boolean} resetConfiguration Optional boolean that should be set to true if no other chart configuration was set before or
+         * @param {boolean=} resetConfiguration Optional boolean that should be set to true if no other chart configuration was set before or
          *    if existing configuration should be discarded.
          */
         update(jsonConfiguration, resetConfiguration) {
@@ -1089,7 +1102,7 @@ MAGI ADD END -->
             this._jsonConfigurationBuffer = {};
           }
 
-          const configCopy = Vaadin.Charts.ChartDeepMerger.__deepMerge({}, jsonConfiguration);
+          const configCopy = Vaadin.Charts.deepMerge({}, jsonConfiguration);
           this.__inflateFunctions(configCopy);
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
 

@@ -1,0 +1,27 @@
+{
+  "excludeFiles": [
+    "wct.conf.js",
+    "index.html",
+    "vaadin-chart-default-theme.js",
+    "demo/**/*",
+    "test/**/*",
+    "theme/**/*"
+  ],
+  "autoImport": {
+    "highcharts": [
+      "Chart",
+      "Options",
+      "PointOptionsObject",
+      "Series",
+      "SeriesOptionsType"
+    ],
+    "./@types/interfaces": [
+      "ChartCategories",
+      "ChartCategoryPosition",
+      "ChartSeriesMarkers",
+      "ChartSeriesOptions",
+      "ChartSeriesValues",
+      "ChartStacking"
+    ]
+  }
+}

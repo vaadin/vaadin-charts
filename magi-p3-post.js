@@ -2,7 +2,8 @@ module.exports = {
   files: [
     'src/vaadin-chart.js',
     'theme/vaadin-chart-default-theme.js',
-    'test/exporting-test.html'
+    'test/exporting-test.html',
+    'vaadin-chart.js'
   ],
 
   from: [
@@ -18,7 +19,9 @@ module.exports = {
     '  then delete this comment!\n' +
     '*/',
 
-    /import '..\/vaadin-chart.js';/g
+    /import '..\/vaadin-chart.js';/g,
+
+    /import '\.\/src\/vaadin-(.+)\.js';/
   ],
 
   to: [
@@ -35,6 +38,8 @@ module.exports = {
     ``,
 
     `import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
-     import '../vaadin-chart.js';`
+     import '../vaadin-chart.js';`,
+
+    `import './src/vaadin-$1.js';\nexport * from './src/vaadin-$1.js';`
   ]
 };
