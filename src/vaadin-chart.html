@@ -611,7 +611,7 @@ MAGI ADD END -->
 
         get options() {
           const options = Object.assign({}, this._baseConfig);
-          Vaadin.Charts.ChartDeepMerger.__deepMerge(options, this.additionalOptions);
+          Vaadin.Charts.deepMerge(options, this.additionalOptions);
 
           if (this.type) {
             options.chart = options.chart || {};
@@ -1168,7 +1168,7 @@ MAGI ADD END -->
             this._jsonConfigurationBuffer = {};
           }
 
-          const configCopy = Vaadin.Charts.ChartDeepMerger.__deepMerge({}, jsonConfiguration);
+          const configCopy = Highcharts.merge(jsonConfiguration);
           this.__inflateFunctions(configCopy);
           this._jsonConfigurationBuffer = this.__makeConfigurationBuffer(this._jsonConfigurationBuffer, configCopy);
 
