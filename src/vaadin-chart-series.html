@@ -280,18 +280,21 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this._series = series;
         }
 
+        /** @private */
         __valuesObserver(splices, series) {
           if (series) {
             series.setData(this.values);
           }
         }
 
+        /** @private */
         __additionalOptionsObserver(additionalOptions, series) {
           if (series && additionalOptions.value) {
             series.update(additionalOptions.value);
           }
         }
 
+        /** @private */
         __updateAxis(series, value, key) {
           if (!isFinite(value)) {
             this.__showWarn(`value-${key}`, 'Numbers or null');
@@ -303,6 +306,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
+        /** @private */
         __valueMinObserver(valueMin, series) {
           if (valueMin === undefined || series === undefined) {
             return;
@@ -311,6 +315,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__updateAxis(series, valueMin, 'min');
         }
 
+        /** @private */
         __valueMaxObserver(valueMax, series) {
           if (valueMax === undefined || series === undefined) {
             return;
@@ -319,12 +324,14 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           this.__updateAxis(series, valueMax, 'max');
         }
 
+        /** @private */
         __typeObserver(type, series) {
           if (type && series) {
             series.update({type});
           }
         }
 
+        /** @private */
         __titleObserver(title, series) {
           if (title === undefined || series === undefined) {
             return;
@@ -332,6 +339,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           series.update({name: title});
         }
 
+        /** @private */
         __stackObserver(stack, series) {
           if (stack === undefined || series === undefined) {
             return;
@@ -339,6 +347,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           series.update({stack});
         }
 
+        /** @private */
         __neckPositionObserver(neckPosition, series) {
           if (neckPosition === undefined || series === undefined) {
             return;
@@ -347,6 +356,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           series.update({neckHeight: neckPosition});
         }
 
+        /** @private */
         __neckWidthObserver(neckWidth, series) {
           if (neckWidth === undefined || series === undefined) {
             return;
@@ -355,6 +365,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           series.update({neckWidth});
         }
 
+        /** @private */
         __unitObserver(unit, valueMin, valueMax, series) {
           if (series && unit !== this.__oldUnit) {
             this.__oldUnit = unit;
@@ -381,6 +392,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           }
         }
 
+        /** @private */
         __isMarkersValid() {
           if (['shown', 'hidden', 'auto'].indexOf(this.markers) === -1) {
             this.__showWarn('markers', '"shown", "hidden" or "auto"');
@@ -389,6 +401,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return true;
         }
 
+        /** @private */
         __markersObserver(markers, series) {
           if (markers === undefined || series === undefined) {
             return;
@@ -404,6 +417,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           });
         }
 
+        /** @private */
         get __markersConfiguration() {
           const config = {};
           switch (this.markers) {
@@ -422,6 +436,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
           return config;
         }
 
+        /** @private */
         __showWarn(propertyName, acceptedValues) {
           console.warn('<vaadin-chart-series> Acceptable values for "' + propertyName + '" are ' + acceptedValues);
         }

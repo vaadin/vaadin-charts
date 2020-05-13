@@ -1335,6 +1335,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __ensureObjectPath(object, path) {
           if (typeof path !== 'string') {
             return;
@@ -1347,6 +1348,7 @@ MAGI ADD END -->
           }, object);
         }
 
+        /** @private */
         __updateOrAddCredits(credits) {
           if (this.configuration.credits) {
             this.configuration.credits.update(credits);
@@ -1355,6 +1357,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateOrAddAxes(axes, isX) {
           if (!Array.isArray(axes)) {
             axes = [axes];
@@ -1370,6 +1373,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateOrAddSeries(series) {
           if (!Array.isArray(series)) {
             throw new Error('The type of jsonConfiguration.series should be Object[]');
@@ -1380,6 +1384,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateOrAddSeriesInstance(seriesOptions, position) {
           if (this.configuration.series[position]) {
             this.configuration.series[position].update(seriesOptions);
@@ -1389,6 +1394,7 @@ MAGI ADD END -->
           return this.configuration.series[position];
         }
 
+        /** @private */
         __updateCategories(categories, config) {
           if (categories === undefined || !config) {
             return;
@@ -1397,6 +1403,7 @@ MAGI ADD END -->
           this.__updateOrAddAxes([{categories}], true);
         }
 
+        /** @private */
         __updateCategoryMax(max, config) {
           if (max === undefined || !config) {
             return;
@@ -1410,6 +1417,7 @@ MAGI ADD END -->
           this.__updateOrAddAxes([{max}], true);
         }
 
+        /** @private */
         __updateCategoryMin(min, config) {
           if (min === undefined || !config) {
             return;
@@ -1423,6 +1431,7 @@ MAGI ADD END -->
           this.__updateOrAddAxes([{min}], true);
         }
 
+        /** @private */
         __shouldInvert() {
           // A bar chart will never be inverted, consider using a column chart.
           // See https://stackoverflow.com/questions/11235251#answer-21739793
@@ -1436,12 +1445,14 @@ MAGI ADD END -->
           return inverted.indexOf(this.categoryPosition) >= 0;
         }
 
+        /** @private */
         __shouldFlipOpposite() {
           const opposite = ['top', 'right'];
           const oppositeBar = ['right'];
           return (this.type === 'bar' ? oppositeBar : opposite).indexOf(this.categoryPosition) >= 0;
         }
 
+        /** @private */
         __updateCategoryPosition(categoryPosition, config) {
           if (categoryPosition === undefined || !config) {
             return;
@@ -1465,6 +1476,7 @@ MAGI ADD END -->
           }));
         }
 
+        /** @private */
         __hideLegend(noLegend, config) {
           if (noLegend === undefined || !config) {
             return;
@@ -1477,6 +1489,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateTitle(title, config) {
           if (title === undefined || !config) {
             return;
@@ -1487,6 +1500,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __tooltipObserver(tooltip, config) {
           if (tooltip === undefined || !config) {
             return;
@@ -1495,6 +1509,7 @@ MAGI ADD END -->
           config.tooltip.update({enabled: tooltip});
         }
 
+        /** @private */
         __updateType(type, config) {
           if (type === undefined || !config) {
             return;
@@ -1507,6 +1522,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateSubtitle(subtitle, config) {
           if (subtitle === undefined || !config) {
             return;
@@ -1521,12 +1537,14 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __updateAdditionalOptions() {
           if (this.configuration) {
             this.update(this.additionalOptions);
           }
         }
 
+        /** @private */
         __isStackingValid() {
           if (['normal', 'percent', null].indexOf(this.stacking) === -1) {
             this.__showWarn('stacking', '"normal", "percent" or null');
@@ -1535,6 +1553,7 @@ MAGI ADD END -->
           return true;
         }
 
+        /** @private */
         __stackingObserver(stacking, config) {
           if (stacking === undefined || !config) {
             return;
@@ -1552,6 +1571,7 @@ MAGI ADD END -->
           });
         }
 
+        /** @private */
         __chart3dObserver(chart3d, config) {
           if (chart3d === undefined || !config) {
             return;
@@ -1583,6 +1603,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __polarObserver(polar, config) {
           if (polar === undefined || !config) {
             return;
@@ -1593,6 +1614,7 @@ MAGI ADD END -->
           });
         }
 
+        /** @private */
         __emptyTextObserver(emptyText, config) {
           if (emptyText === undefined || !config) {
             return;
@@ -1607,6 +1629,7 @@ MAGI ADD END -->
           config.showNoData(emptyText);
         }
 
+        /** @private */
         __callChartFunction(functionName) {
           if (this.configuration) {
             const functionToCall = this.configuration[functionName];
@@ -1617,6 +1640,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __callSeriesFunction(functionName, seriesIndex) {
           if (this.configuration && this.configuration.series[seriesIndex]) {
             const series = this.configuration.series[seriesIndex];
@@ -1628,6 +1652,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __callAxisFunction(functionName, axisCategory, axisIndex) {
           /*
            * axisCategory:
@@ -1663,6 +1688,7 @@ MAGI ADD END -->
           }
         }
 
+        /** @private */
         __callPointFunction(functionName, seriesIndex, pointIndex) {
           if (this.configuration && this.configuration.series[seriesIndex] && this.configuration.series[seriesIndex].data[pointIndex]) {
             const point = this.configuration.series[seriesIndex].data[pointIndex];
@@ -1676,6 +1702,7 @@ MAGI ADD END -->
 
         /**
          * Updates chart container and current chart style property depending on flex status
+         * @private
          */
         __updateStyles() {
           // Chrome returns default value if property is not set
