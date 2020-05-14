@@ -58,7 +58,7 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
        * @memberof Vaadin
        * @demo demo/index.html
        */
-      class ChartSeriesElement extends Polymer.Element {
+      class ChartSeriesElement extends (class extends Polymer.Element {}) {
         static get is() {
           return 'vaadin-chart-series';
         }

@@ -1,6 +1,7 @@
 module.exports = {
   files: [
     'src/vaadin-chart.js',
+    'src/vaadin-chart-series.js',
     'theme/vaadin-chart-default-theme.js',
     'test/exporting-test.html',
     'vaadin-chart.js'
@@ -21,7 +22,9 @@ module.exports = {
 
     /import '..\/vaadin-chart.js';/g,
 
-    /import '\.\/src\/vaadin-(.+)\.js';/
+    /import '\.\/src\/vaadin-(.+)\.js';/,
+
+    'class ChartSeriesElement extends (class extends PolymerElement {}) {'
   ],
 
   to: [
@@ -40,6 +43,8 @@ module.exports = {
     `import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
      import '../vaadin-chart.js';`,
 
-    `import './src/vaadin-$1.js';\nexport * from './src/vaadin-$1.js';`
+    `import './src/vaadin-$1.js';\nexport * from './src/vaadin-$1.js';`,
+
+    'class ChartSeriesElement extends PolymerElement {'
   ]
 };
