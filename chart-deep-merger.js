@@ -7,7 +7,7 @@ window.Vaadin = window.Vaadin || {};
  */
 Vaadin.Charts = Vaadin.Charts || {};
 
-/** @protected */
+/** @private */
 Vaadin.Charts.deepMerge = function deepMerge(target, source) {
   const isObject = item => (item && typeof item === 'object' && !Array.isArray(item));
 
