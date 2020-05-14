@@ -140,7 +140,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
              * Sets the value to a series bound by 'unit' property.
              * Otherwise sets the value to the first series.
              * Undefined by default (determined from data).
-             * @type {number | null}
              */
             valueMin: {
               type: Number,
@@ -150,7 +149,6 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
             /**
              * Value-axis maximum-value.
              * See the 'valueMin'
-             * @type {number | null}
              */
             valueMax: {
               type: Number,
@@ -250,6 +248,10 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
               reflectToAttribute: true
             },
 
+            /**
+             * @type {!Series | undefined}
+             * @protected
+             */
             _series: {
               type: Object
             }

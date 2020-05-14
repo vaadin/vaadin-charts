@@ -9,6 +9,7 @@
   ],
   "autoImport": {
     "highcharts": [
+      "Axis",
       "Chart",
       "Options",
       "PointOptionsObject",
