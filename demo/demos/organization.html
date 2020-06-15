@@ -2,12 +2,18 @@
   <vaadin-chart
       type="organization"
       title="Highcharts Org charts"
-      tooltip="true"
       additional-options='{"chart": {
         "height": 600,
         "inverted": true,
-        "styledMode": true
-        }}'  >
+        "styledMode": false
+        },
+        "exporting": {
+            "allowHTML": true,
+            "sourceWidth": 800,
+            "sourceHeight": 600
+        },
+        "tooltip": { "outside": true}
+    }'  >
     <vaadin-chart-series
         title="Highsoft"
         values='[
@@ -126,15 +132,7 @@
                 "color": "white"
             },
             "borderColor": "white",
-            "nodeWidth": 65,
-            "tooltip": {
-                "outside": true
-            },
-            "exporting": {
-                "allowHTML": true,
-                "sourceWidth": 800,
-                "sourceHeight": 600
-            }
+            "nodeWidth": 65
 }' ></vaadin-chart-series>
   </vaadin-chart>
 <script>/*
