@@ -1,7 +1,7 @@
 <template preserve-content>
   <vaadin-chart
       type="organization"
-      title="Highcharts Org charts"
+      title="Acme organization chart"
       additional-options='{"chart": {
         "inverted": true,
         "styledMode": false
@@ -16,7 +16,6 @@
     <vaadin-chart-series
         title="Highsoft"
         values='[
-            ["Acme", "Management Team"],
             ["Acme", "Head Office"],
             ["Acme", "Labs"],
             ["Head Office", "Coyote Building"],
@@ -35,9 +34,7 @@
             ["Joseph Miler", "Vaughn Whiting"],
             ["Erik Perez", "Lisa Warner"],
             ["Ewan Herbert", "Molly Dodd"],
-            ["Ewan Herbert", "Natasha Kelly"],
-            ["MD&apos;s Office", "Managing Director"],
-            ["Sally Brown", "Managing Director"]
+            ["Ewan Herbert", "Natasha Kelly"]
         ]'
       additional-options='{
             "keys": [
@@ -74,7 +71,6 @@
             ],
             "nodes": [
                 { "id": "Acme" },
-                { "id":"Management Team", "color": "#f5f8cb" },
                 { "id":"Head Office" },
                 { "id":"Labs" },
                 { "id":"Coyote Building" },
@@ -84,21 +80,20 @@
                 { "id":"Accounting" },
                 { "id":"Administration" },
                 { "id":"MD&apos;s Office" },
-                { "id":"Joseph Miler" },
-                { "id":"Erik Perez" },
-                { "id":"Emily Fox" },
-                { "id":"Ewan Herbert" },
-                { "id":"Sally Brown" },
+                { "id":"Joseph Miler", "title": "Head of Sales" },
+                { "id":"Erik Perez", "title": "Head of Marketing" },
+                { "id":"Emily Fox", "title": "Head of Accounting" },
+                { "id":"Ewan Herbert", "title": "Head of Admin" },
+                { "id":"Lisa Warner" },
                 { "id":"Kate Kirby" },
                 { "id":"Vaughn Whiting" },
-                { "id":"Lisa Warner" },
                 { "id":"Molly Dodd" },
                 { "id":"Natasha Kelly" },
                 {
-                    "id": "Managing Director",
-                    "description": "Organisational Role",
-                    "color": "#e4b651",
-                    "column": 5
+                    "id": "Sally Brown",
+                    "title": "Managing Director",
+                    "name": "Sally Brown",
+                    "color": "#e4b651"
                 }
             ],
             "colorByPoint": false,
