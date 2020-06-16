@@ -16,17 +16,28 @@
     <vaadin-chart-series
         title="Highsoft"
         values='[
-            ["Shareholders", "Board"],
-            ["Board", "CEO"],
-            ["CEO", "CTO"],
-            ["CEO", "CPO"],
-            ["CEO", "CSO"],
-            ["CEO", "CMO"],
-            ["CEO", "HR"],
-            ["CTO", "Product"],
-            ["CTO", "Web"],
-            ["CSO", "Sales"],
-            ["CMO", "Market"]
+            ["Acme", "Management Team"],
+            ["Acme", "Head Office"],
+            ["Acme", "Labs"],
+            ["Head Office", "Coyote Building"],
+            ["Head Office", "Road Runner Building"],
+            ["Coyote Building", "Sales"],
+            ["Coyote Building", "Marketing"],
+            ["Coyote Building", "Accounting"],
+            ["Road Runner Building", "Administration"],
+            ["Road Runner Building", "MD&apos;s Office"],
+            ["Sales", "Joseph Miler"],
+            ["Marketing", "Erik Perez"],
+            ["Accounting", "Emily Fox"],
+            ["Administration", "Ewan Herbert"],
+            ["MD&apos;s Office", "Sally Brown"],
+            ["Joseph Miler", "Kate Kirby"],
+            ["Joseph Miler", "Vaughn Whiting"],
+            ["Erik Perez", "Lisa Warner"],
+            ["Ewan Herbert", "Molly Dodd"],
+            ["Ewan Herbert", "Natasha Kelly"],
+            ["MD&apos;s Office", "Managing Director"],
+            ["Sally Brown", "Managing Director"]
         ]'
       additional-options='{
             "keys": [
@@ -36,99 +47,64 @@
             "levels": [
                 {
                 "level": 0,
-                "color": "silver",
-                "dataLabels": {
-                    "color": "black"
-                },
+                "color": "#99aed3",
                 "height": 25
                 },
                 {
                 "level": 1,
-                "color": "silver",
-                "dataLabels": {
-                    "color": "black"
-                },
+                "color": "#cce6c3",
                 "height": 25
                 },
                 {
                 "level": 2,
-                "color": "#980104"
+                "color": "#e1f39d"
+                },
+                {
+                "level": 3,
+                "color": "#cce6c3"
                 },
                 {
                 "level": 4,
-                "color": "#359154"
+                "color": "#cabedc"
+                },
+                {
+                "level": 5,
+                "color": "#cabdd4"
                 }
             ],
             "nodes": [
-                { "id": "Shareholders" },
-                { "id": "Board" },
+                { "id": "Acme" },
+                { "id":"Management Team", "color": "#f5f8cb" },
+                { "id":"Head Office" },
+                { "id":"Labs" },
+                { "id":"Coyote Building" },
+                { "id":"Road Runner Building" },
+                { "id":"Sales" },
+                { "id":"Marketing" },
+                { "id":"Accounting" },
+                { "id":"Administration" },
+                { "id":"MD&apos;s Office" },
+                { "id":"Joseph Miler" },
+                { "id":"Erik Perez" },
+                { "id":"Emily Fox" },
+                { "id":"Ewan Herbert" },
+                { "id":"Sally Brown" },
+                { "id":"Kate Kirby" },
+                { "id":"Vaughn Whiting" },
+                { "id":"Lisa Warner" },
+                { "id":"Molly Dodd" },
+                { "id":"Natasha Kelly" },
                 {
-                    "id": "CEO",
-                    "title": "CEO",
-                    "name": "Grethe Hjetland",
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12132317/Grethe.jpg"
-                },
-                {
-                    "id": "HR",
-                    "title": "HR/CFO",
-                    "name": "Anne Jorunn Fjærestad",
-                    "color": "#007ad0",
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12132314/AnneJorunn.jpg",
-                    "column": 3,
-                    "offset": "75%"
-                },
-                {
-                    "id": "CTO",
-                    "title": "CTO",
-                    "name": "Christer Vasseng",
-                    "column": 4,
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12140620/Christer.jpg",
-                    "layout": "hanging"
-                },
-                {
-                    "id": "CPO",
-                    "title": "CPO",
-                    "name": "Torstein Hønsi",
-                    "column": 4,
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12131849/Torstein1.jpg"
-                },
-                {
-                    "id": "CSO",
-                    "title": "CSO",
-                    "name": "Anita Nesse",
-                    "column": 4,
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12132313/Anita.jpg",
-                    "layout": "hanging"
-                },
-                {
-                    "id": "CMO",
-                    "title": "CMO",
-                    "name": "Vidar Brekke",
-                    "column": 4,
-                    "image": "https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/13105551/Vidar.jpg",
-                    "layout": "hanging"
-                },
-                {
-                    "id": "Product",
-                    "name": "Product developers"
-                },
-                {
-                    "id": "Web",
-                    "name": "Web devs, sys admin"
-                },
-                {
-                    "id": "Sales",
-                    "name": "Sales team"
-                },
-                {
-                    "id": "Market",
-                    "name": "Marketing team"
+                    "id": "Managing Director",
+                    "description": "Organisational Role",
+                    "color": "#e4b651",
+                    "column": 5
                 }
             ],
             "colorByPoint": false,
             "color": "#007ad0",
             "dataLabels": {
-                "color": "white"
+                "color": "black"
             },
             "borderColor": "white",
             "nodeWidth": 65
