@@ -90,7 +90,17 @@
       </vaadin-chart>
     </template>
   </test-fixture>
-
+  <test-fixture id="withoutaccessibility">
+    <template>
+      <vaadin-chart additional-options='{
+        "accessibility": {
+          "enabled": false
+        }
+      }'>
+          <vaadin-chart-series id="additional-series" values="[10,20,30]" title="series-title"></vaadin-chart-series>
+        </vaadin-chart>
+    </template>
+  </test-fixture>
   <script>
     describe('High-level API', function() {
       var chart, chartContainer;
@@ -465,6 +475,15 @@
             done();
           });
         });
+      });
+
+      it('should not fail with accessibility disabled', function(done) {
+        // Test for regression caused by RTL workaround https://github.com/vaadin/vaadin-charts-flow/issues/378
+        const chart = fixture('withoutaccessibility');
+        setTimeout(function() {
+          expect(chart.configuration.options.accessibility.enabled).to.be.false;
+          done();
+        }, 120);
       });
     });
   </script>
