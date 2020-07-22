@@ -1084,8 +1084,10 @@ MAGI ADD END -->
           ];
 
           elementsToChange.forEach(el => {
-            el.style.left = '';
-            el.style.top = '-999em';
+            if (el && el.style) {
+              el.style.left = '';
+              el.style.top = '-999em';
+            }
           });
         }
 
