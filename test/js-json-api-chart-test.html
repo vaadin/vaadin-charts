@@ -146,8 +146,8 @@
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
             testContainer.removeChild(unattachedChart);
             done();
-          }, 150);
-        }, 200);
+          }, 80);
+        }, 20);
       });
 
       it('should not reset chart configured with html', function(done) {
