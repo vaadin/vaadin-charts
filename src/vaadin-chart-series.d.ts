@@ -1,7 +1,3 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {ChartElement} from './vaadin-chart.js';
-
 /**
  * `<vaadin-chart-series>` is a custom element for creating series for Vaadin Charts.
  *
@@ -45,7 +41,7 @@ import {ChartElement} from './vaadin-chart.js';
  *  chart.removeChild(seriesToBeRemoved);
  * ```
  */
-declare class ChartSeriesElement extends PolymerElement {
+declare class ChartSeriesElement extends HTMLElement {
 
   /**
    * Object with the configured options defined and used to create a series.

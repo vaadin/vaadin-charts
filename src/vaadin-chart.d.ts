@@ -1,16 +1,6 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-
-import {beforeNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-
 import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 
 import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
-
-import {ChartSeriesElement} from './vaadin-chart-series.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 /**
  * `<vaadin-chart>` is a Web Component for creating high quality charts.
@@ -200,7 +190,7 @@ import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 declare class ChartElement extends
   ThemableMixin(
   ElementMixin(
-  PolymerElement)) {
+  HTMLElement)) {
   readonly options: Options;
 
   /**

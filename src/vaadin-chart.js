@@ -261,7 +261,7 @@ if (!PolymerElement) {
  * When using Vaadin Charts in a development environment, you will see a pop-up that asks you
  * to validate your license by signing in to vaadin.com.
  *
- * @extends PolymerElement
+ * @extends HTMLElement
  * @mixes ThemableMixin
  * @mixes ElementMixin
  */
