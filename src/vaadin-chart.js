@@ -6,20 +6,16 @@ This program is available under Commercial Vaadin Developer License 4.0 (CVDLv4)
 See the file LICENSE.md distributed with this software for more information about licensing.
 See <a href="https://vaadin.com/license/cvdl-4.0">the website</a> for the complete license.
 */
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { beforeNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 import '@vaadin/vaadin-license-checker/vaadin-license-checker.js';
 import { ChartSeriesElement } from './vaadin-chart-series.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
-
-     import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
-
-     import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
+import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
+import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
 import 'highcharts/es-modules/masters/modules/accessibility.src.js';
 import 'highcharts/es-modules/masters/highcharts-more.src.js';
 import 'highcharts/es-modules/masters/highcharts-3d.src.js';

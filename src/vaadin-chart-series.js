@@ -7,8 +7,8 @@ See the file LICENSE.md distributed with this software for more information abou
 See <a href="https://vaadin.com/license/cvdl-4.0">the website</a> for the complete license.
 */
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-
 import { deepMerge, ChartElement } from './vaadin-chart.js';
+
 /**
  * `<vaadin-chart-series>` is a custom element for creating series for Vaadin Charts.
  *
