@@ -13,8 +13,6 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 import '@vaadin/vaadin-license-checker/vaadin-license-checker.js';
 import { ChartSeriesElement } from './vaadin-chart-series.js';
-import { nativeShadow } from '@webcomponents/shadycss/src/style-settings.js';
-import ScopingShim from '@webcomponents/shadycss/src/scoping-shim.js';
 import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
 import 'highcharts/es-modules/masters/modules/accessibility.src.js';
 import 'highcharts/es-modules/masters/highcharts-more.src.js';
@@ -67,9 +65,6 @@ if (Highcharts) {
       }
     );
   });
-}
-if (!PolymerElement) {
-  console.warn(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
 }
 
 /**
@@ -1335,35 +1330,18 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
             // the 'after print' event.
             if (!this.tempBodyStyle) {
               let effectiveCss = '';
-              if (nativeShadow) {
-                const shadowStyles = self.shadowRoot.querySelectorAll('style');
-                for (let i = 0; i < shadowStyles.length; i++) {
-                  effectiveCss = effectiveCss + shadowStyles[i].textContent;
-                }
 
-                // Strip off host selectors that target individual instances
-                effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, match => {
-                  const selector = match.substr(6, match.length - 7);
-                  const matchesFn = self.matches || self.msMatchesSelector;
-                  return matchesFn.call(self, selector) ? '' : match;
-                });
-              } else {
-                effectiveCss = ScopingShim.prototype.styleAstToString(
-                  ScopingShim.prototype._styleInfoForNode(self)._getStyleRules());
-
-                // Remove the style scopes added by ShadyCSS
-                // e.g. '.vaadin-chart-1 .highcharts-container.vaadin-chart'
-                //   -> '.highcharts-container'
-
-                // 1. Web Component instance scope
-                const match = self.className.match(/\bvaadin-chart-\d+\b/);
-                if (match) {
-                  effectiveCss = effectiveCss.replace(new RegExp('\\.' + match[0], 'g'), '');
-                }
-
-                // 2. Web Component tag scope
-                effectiveCss = effectiveCss.replace(/\.vaadin-chart/g, '');
+              const shadowStyles = self.shadowRoot.querySelectorAll('style');
+              for (let i = 0; i < shadowStyles.length; i++) {
+                effectiveCss = effectiveCss + shadowStyles[i].textContent;
               }
+
+              // Strip off host selectors that target individual instances
+              effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, match => {
+                const selector = match.substr(6, match.length - 7);
+                const matchesFn = self.matches || self.msMatchesSelector;
+                return matchesFn.call(self, selector) ? '' : match;
+              });
 
               // Zoom out a bit to avoid clipping the chart's edge on paper
               effectiveCss = effectiveCss +
