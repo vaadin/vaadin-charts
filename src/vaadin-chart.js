@@ -509,11 +509,6 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   constructor() {
     super();
 
-    /**
-     * List of properties that will always be copied from the chart element to the container div
-     **/
-    this._copyStyleProperties = ['flex', '-webkit-flex', '-ms-flex'];
-
     this._baseConfig = {
       chart: {
         styledMode: true
@@ -1747,12 +1742,11 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   __updateStyles() {
     // Chrome returns default value if property is not set
     // check if flex is defined for chart, and different than default value
-    const isFlex = this._copyStyleProperties.some(property =>
-      getComputedStyle(this)[property] && getComputedStyle(this)[property] != '0 1 auto', this);
+    const isFlex = getComputedStyle(this).flex != '0 1 auto';
 
     // If chart element is a flexible item the chartContainer should be flex too
     if (isFlex) {
-      this.$.chart.setAttribute('style', 'flex: 1; -webkit-flex: 1; -ms-flex: 1; ');
+      this.$.chart.setAttribute('style', 'flex: 1; ');
       let style = '';
       if (this.hasAttribute('style')) {
         style = this.getAttribute('style');
@@ -1760,7 +1754,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
           style += ';';
         }
       }
-      style += 'display: -ms-flexbox; display: -webkit-flex; display: flex;';
+      style += 'display: flex;';
       this.setAttribute('style', style);
     } else {
       this.$.chart.setAttribute('style', 'height:100%; width:100%;');
