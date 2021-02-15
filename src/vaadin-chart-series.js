@@ -289,8 +289,8 @@ class ChartSeriesElement extends PolymerElement {
 
   /** @private */
   __additionalOptionsObserver(additionalOptions, series) {
-    if (series && additionalOptions.value) {
-      series.update(additionalOptions.value);
+    if (series && additionalOptions.base) {
+      series.update(additionalOptions.base);
     }
   }
 

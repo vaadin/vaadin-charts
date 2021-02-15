@@ -501,6 +501,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     const devModeCallback = window.Vaadin.developmentModeCallback;
     const licenseChecker = devModeCallback && devModeCallback['vaadin-license-checker'];
+    /* c8 ignore next 3 */
     if (typeof licenseChecker === 'function') {
       licenseChecker(ChartElement);
     }
