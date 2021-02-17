@@ -916,9 +916,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     if (!this.configuration) {
       return;
     }
-    beforeNextRender(this, () => {
-      this.configuration.reflow();
-    });
+    this.configuration.reflow();
   }
 
   /** @private */
@@ -933,12 +931,10 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
   /** @private */
   __addChildObserver() {
-    beforeNextRender(this, () => {
-      this._childObserver = new FlattenedNodesObserver(this.$.slot, (info) => {
-        this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
-        this.__removeSeries(info.removedNodes.filter(this.__filterSeriesNodes));
-        this.__cleanupAfterSeriesRemoved(info.removedNodes.filter(this.__filterSeriesNodes));
-      });
+    this._childObserver = new FlattenedNodesObserver(this.$.slot, (info) => {
+      this.__addSeries(info.addedNodes.filter(this.__filterSeriesNodes));
+      this.__removeSeries(info.removedNodes.filter(this.__filterSeriesNodes));
+      this.__cleanupAfterSeriesRemoved(info.removedNodes.filter(this.__filterSeriesNodes));
     });
   }
 
