@@ -49,16 +49,14 @@ export const deepMerge = function deepMerge(target, source) {
   return target;
 };
 
-if (Highcharts) {
-  ['exportChart', 'exportChartLocal', 'getSVG'].forEach((methodName) => {
-    Highcharts.wrap(Highcharts.Chart.prototype, methodName, function (proceed) {
-      Highcharts.fireEvent(this, 'beforeExport');
-      const result = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-      Highcharts.fireEvent(this, 'afterExport');
-      return result;
-    });
+['exportChart', 'exportChartLocal', 'getSVG'].forEach((methodName) => {
+  Highcharts.wrap(Highcharts.Chart.prototype, methodName, function (proceed) {
+    Highcharts.fireEvent(this, 'beforeExport');
+    const result = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+    Highcharts.fireEvent(this, 'afterExport');
+    return result;
   });
-}
+});
 
 /**
  * `<vaadin-chart>` is a Web Component for creating high quality charts.
