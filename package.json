@@ -27,8 +27,10 @@
   ],
   "scripts": {
     "debug": "web-test-runner test/*.test.js --watch",
+    "screenshots": "hermione test/visual/test.js --update-refs",
     "test": "web-test-runner test/*.test.js --coverage",
-    "test:sauce": "TEST_ENV=sauce npm test"
+    "test:sauce": "TEST_ENV=sauce npm test",
+    "test:visual": "hermione test/visual/test.js"
   },
   "dependencies": {
     "highcharts": "8.1.2",
@@ -43,6 +45,9 @@
     "@polymer/iron-component-page": "^4.0.0",
     "@web/test-runner": "^0.12.7",
     "@web/test-runner-saucelabs": "^0.4.1",
+    "hermione": "^3.9.0",
+    "hermione-esm": "^0.4.0",
+    "hermione-sauce": "^0.1.0",
     "sinon": "^9.2.4"
   }
 }
