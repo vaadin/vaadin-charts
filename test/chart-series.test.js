@@ -386,7 +386,7 @@ describe('vaadin-chart-series', () => {
     });
 
     it('should not hide on click when toggling is disabled', () => {
-      chart['_visibilityTogglingDisabled'] = true;
+      chart._visibilityTogglingDisabled = true;
       legend.dispatchEvent(new MouseEvent('click'));
       expect(legend.classList.contains(HIDDEN)).to.be.false;
     });
@@ -394,7 +394,7 @@ describe('vaadin-chart-series', () => {
     it('should not show on click when toggling is disabled', () => {
       legend.dispatchEvent(new MouseEvent('click'));
 
-      chart['_visibilityTogglingDisabled'] = true;
+      chart._visibilityTogglingDisabled = true;
       legend.dispatchEvent(new MouseEvent('click'));
       expect(legend.classList.contains(HIDDEN)).to.be.true;
     });

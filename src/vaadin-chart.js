@@ -1215,20 +1215,18 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
   /** @private */
   __createEventListeners(eventList, configuration, pathToAdd, eventType) {
-    const self = this;
     const eventObject = this.__ensureObjectPath(configuration, pathToAdd);
 
     for (let keys = Object.keys(eventList), i = 0; i < keys.length; i++) {
       const key = keys[i];
       if (!eventObject[key]) {
-        const chart = this;
-        eventObject[key] = function (event) {
+        eventObject[key] = (event) => {
           const customEvent = {
             bubbles: false,
             composed: true,
             detail: {
               originalEvent: event,
-              [eventType]: this
+              [eventType]: event.target
             }
           };
 
@@ -1266,7 +1264,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
             if (!this.tempBodyStyle) {
               let effectiveCss = '';
 
-              const shadowStyles = self.shadowRoot.querySelectorAll('style');
+              const shadowStyles = this.shadowRoot.querySelectorAll('style');
               for (let i = 0; i < shadowStyles.length; i++) {
                 effectiveCss = effectiveCss + shadowStyles[i].textContent;
               }
@@ -1274,8 +1272,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
               // Strip off host selectors that target individual instances
               effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, (match) => {
                 const selector = match.substr(6, match.length - 7);
-                const matchesFn = self.matches || self.msMatchesSelector;
-                return matchesFn.call(self, selector) ? '' : match;
+                return this.matches(selector) ? '' : match;
               });
 
               // Zoom out a bit to avoid clipping the chart's edge on paper
@@ -1301,9 +1298,9 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
             }
           }
 
-          self.dispatchEvent(new CustomEvent(eventList[key], customEvent));
+          this.dispatchEvent(new CustomEvent(eventList[key], customEvent));
 
-          if (event.type === 'legendItemClick' && chart['_visibilityTogglingDisabled']) {
+          if (event.type === 'legendItemClick' && this._visibilityTogglingDisabled) {
             return false;
           }
         };

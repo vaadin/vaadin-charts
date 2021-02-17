@@ -33,6 +33,8 @@ describe('vaadin-chart events', () => {
       });
       await aTimeout(20);
       expect(spy.calledOnce).to.be.true;
+      const event = spy.firstCall.args[0];
+      expect(event.detail.chart).to.be.deep.equal(event.detail.originalEvent.target);
     });
 
     it('should trigger series-show event on series show', () => {
@@ -40,6 +42,8 @@ describe('vaadin-chart events', () => {
       chart.addEventListener('series-show', spy);
       chart.configuration.series[0].show();
       expect(spy.calledOnce).to.be.true;
+      const event = spy.firstCall.args[0];
+      expect(event.detail.series).to.be.deep.equal(event.detail.originalEvent.target);
     });
 
     it('should trigger point-click event on point click', () => {
@@ -47,6 +51,8 @@ describe('vaadin-chart events', () => {
       chart.addEventListener('point-click', spy);
       chart.configuration.series[0].points[0].firePointEvent('click');
       expect(spy.calledOnce).to.be.true;
+      const event = spy.firstCall.args[0];
+      expect(event.detail.point).to.be.deep.equal(event.detail.originalEvent.target);
     });
 
     it('should trigger point-update event on point update', () => {
