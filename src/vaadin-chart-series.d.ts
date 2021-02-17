@@ -1,3 +1,7 @@
+import { Series, SeriesOptionsType } from 'highcharts';
+
+import { ChartSeriesMarkers, ChartSeriesOptions, ChartSeriesValues } from '../@types/interfaces';
+
 /**
  * `<vaadin-chart-series>` is a custom element for creating series for Vaadin Charts.
  *
@@ -133,6 +137,7 @@ declare class ChartSeriesElement extends HTMLElement {
    * Represents additional JSON configuration.
    */
   additionalOptions: SeriesOptionsType | null | undefined;
+
   _series: Series | undefined;
 
   /**
@@ -150,13 +155,3 @@ declare global {
 }
 
 export { ChartSeriesElement };
-
-import { ChartSeriesOptions } from '../@types/interfaces';
-
-import { ChartSeriesValues } from '../@types/interfaces';
-
-import { ChartSeriesMarkers } from '../@types/interfaces';
-
-import { SeriesOptionsType } from 'highcharts';
-
-import { Series } from 'highcharts';

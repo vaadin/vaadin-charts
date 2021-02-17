@@ -12,4 +12,4 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
 export * from './src/vaadin-chart.js';
-export * from './@types/interfaces';
+export * from './src/interfaces';

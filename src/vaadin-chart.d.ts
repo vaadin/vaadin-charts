@@ -2,6 +2,10 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
 
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
+import { Axis, Chart, Options } from 'highcharts';
+
+import { ChartCategories, ChartCategoryPosition, ChartStacking } from '../@types/interfaces';
+
 /**
  * `<vaadin-chart>` is a Web Component for creating high quality charts.
  *
@@ -309,9 +313,6 @@ declare class ChartElement extends ThemableMixin(ElementMixin(HTMLElement)) {
    * into the polar coordinate system.
    */
   polar: boolean | null | undefined;
-  static _finalizeClass(): void;
-  connectedCallback(): void;
-  disconnectedCallback(): void;
 
   /**
    * Search for axis with given `id`.
@@ -380,15 +381,3 @@ declare global {
 }
 
 export { ChartElement };
-
-import { Options } from 'highcharts';
-
-import { Chart } from 'highcharts';
-
-import { ChartCategories } from '../@types/interfaces';
-
-import { ChartCategoryPosition } from '../@types/interfaces';
-
-import { ChartStacking } from '../@types/interfaces';
-
-import { Axis } from 'highcharts';

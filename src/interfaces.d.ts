@@ -8,7 +8,7 @@ export type ChartSeriesMarkers = 'shown' | 'hidden' | 'auto';
 
 export interface ChartSeriesConfig {
   data?: ChartSeriesValues;
-  marker?: { enabled: boolean | null }
+  marker?: { enabled: boolean | null };
   name?: string;
   neckWidth?: number | string;
   neckHeight?: number | string;
@@ -21,6 +21,6 @@ export interface ChartSeriesConfig {
 
 export type ChartSeriesOptions = ChartSeriesConfig & SeriesOptionsType;
 
-export type ChartSeriesValues = Array<number|Array<number>|PointOptionsObject>;
+export type ChartSeriesValues = Array<number | Array<number> | PointOptionsObject>;
 
 export type ChartStacking = 'normal' | 'percent' | null;
