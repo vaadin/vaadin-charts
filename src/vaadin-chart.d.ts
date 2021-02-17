@@ -99,58 +99,14 @@ import { ChartCategories, ChartCategoryPosition, ChartStacking } from '../@types
  * It should be noted that chart style customization cannot be done via the JS or JSON API.
  * Styling properties in the JSON configuration will be ignored. The following section discusses chart styling.
  *
- *
  * ### CSS Styling
+ *
  * Chart appearance is primarily controlled by CSS style rules.
  * A comprehensive list of the supported style classes can be found at
  * https://www.highcharts.com/docs/chart-design-and-style/style-by-css
  *
- *
- * ### Steps for styling a chart
- *
- * 1. Create a theme file (for example `shared-styles.html`). The theme's dom-module must declare `theme-for=vaadin-chart`.
- * 2. Import `vaadin-chart-default-theme.html` and declare `include="vaadin-chart-default-theme"`
- * on the theme module's style tag to customize Chart's default theme. If there are multiple theme
- * modules *only one* of them should declare this `include`.
- * 3. Specify the desired CSS rules in the theme file.
- * 4. If multiple charts are present, each one can be specifically targeted using the host selector e.g `:host(.my-chart-class)`.
- * 5. Import the theme file.
- *
- *
- * ### Example: Two Charts with a Red Title but only one with a Blue Subtitle
- *
- * ```html
- * <link rel="import" href="shared-styles.html">
- * ...
- * <vaadin-chart title="Red Title" subtitle="Not Styled">
- *   <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
- * </vaadin-chart>
- *
- * <vaadin-chart class="blue-subtitle" title="Red Title" subtitle="Blue Subtitle">
- *   <vaadin-chart-series values="[19,12,9,24,5]"></vaadin-chart-series>
- * </vaadin-chart>
- * ```
- *
- * shared-styles.html
- *
- * ```html
- * <link rel="import" href="../bower_components/vaadin-charts/theme/vaadin-chart-default-theme.html">
- *
- * <dom-module id="css-style-example" theme-for="vaadin-chart">
- *    <template>
- *      <style include="vaadin-chart-default-theme">
- *        .highcharts-title {
- *          fill: red;
- *          font-size: xx-large;
- *        }
- *
- *        :host(.blue-subtitle) .highcharts-subtitle {
- *          fill: blue;
- *        }
- *      </style>
- *    </template>
- * </dom-module>
- * ```
+ * See also the documentation for styling Vaadin components at
+ * https://vaadin.com/docs/v14/themes/themes-and-styling-overview.html
  *
  * ### RTL support
  *
