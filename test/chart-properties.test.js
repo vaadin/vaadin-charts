@@ -175,7 +175,7 @@ describe('vaadin-chart properties', () => {
           <vaadin-chart-series values="[1,2,3,4]"></vaadin-chart-series>
         </vaadin-chart>
       `);
-      await aTimeout(20);
+      await oneEvent(chart, 'chart-load');
     });
 
     it('should not have tooltips by default', () => {

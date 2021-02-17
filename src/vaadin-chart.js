@@ -1560,9 +1560,9 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   }
 
   /** @private */
-  __updateAdditionalOptions() {
-    if (this.configuration) {
-      this.update(this.additionalOptions);
+  __updateAdditionalOptions(options) {
+    if (this.configuration && options.base) {
+      this.update(options.base);
     }
   }
 

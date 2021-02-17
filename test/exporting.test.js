@@ -2,7 +2,8 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { registerStyles, css } from '@vaadin/vaadin-themable-mixin/register-styles.js';
-import { aTimeout, fixtureSync, oneEvent } from '@open-wc/testing-helpers';
+import { fixtureSync, oneEvent } from '@open-wc/testing-helpers';
+import { nextRender } from './helpers.js';
 import Highcharts from 'highcharts/es-modules/masters/highstock.src.js';
 import '../vaadin-chart.js';
 
@@ -98,7 +99,7 @@ describe('vaadin-chart exporting', () => {
     pngExportButton.onclick();
 
     expect(fireEventSpy.firstCall.args[1]).to.be.equal('beforeExport');
-    await aTimeout(20);
+    await nextRender(chart);
     expect(styleCopiedToBody).to.be.true;
   });
 
@@ -127,7 +128,7 @@ describe('vaadin-chart exporting', () => {
     pngExportButton.onclick();
 
     expect(fireEventSpy.lastCall.args[1]).to.be.equal('afterExport');
-    await aTimeout(20);
+    await nextRender(chart);
     expect(styleRemovedFromBody).to.be.true;
   });
 

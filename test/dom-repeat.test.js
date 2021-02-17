@@ -1,7 +1,8 @@
 import { expect } from '@esm-bundle/chai';
-import { aTimeout, fixtureSync, oneEvent } from '@open-wc/testing-helpers';
+import { fixtureSync, oneEvent } from '@open-wc/testing-helpers';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/polymer/lib/elements/dom-repeat.js';
+import { nextRender } from './helpers.js';
 import '../vaadin-chart.js';
 
 customElements.define(
@@ -62,7 +63,7 @@ describe('vaadin-chart in dom-repeat', () => {
 
   it('should create new series on push in seriesData', async () => {
     element.push('seriesData', { data: [1, 2, 3, 4, 5] });
-    await aTimeout(1);
+    await nextRender(chart);
     expect(chart.configuration.series.length).to.be.equal(4);
   });
 
