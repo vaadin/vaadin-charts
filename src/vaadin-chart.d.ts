@@ -36,7 +36,7 @@ import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.
  * 1. Add a function that uses `configuration` property (JS Api) to set chart title, categories and data
  * ```js
  * initChartWithJSApi() {
- *     Polymer.RenderStatus.beforeNextRender(this, () => {
+ *     requestAnimationFrame(() => {
  *        const configuration = this.$.mychart.configuration;
  *        configuration.setTitle({ text: 'The chart title' });
  *        // By default there is one x axis, it is referenced by configuration.xAxis[0].
