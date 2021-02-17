@@ -1,11 +1,8 @@
 /**
-@license
-Vaadin Charts
-Copyright (C) 2015 - 2020 Vaadin Ltd
-This program is available under Commercial Vaadin Developer License 4.0 (CVDLv4).
-See the file LICENSE.md distributed with this software for more information about licensing.
-See <a href="https://vaadin.com/license/cvdl-4.0">the website</a> for the complete license.
-*/
+ * @license
+ * Copyright (c) 2015 - 2021 Vaadin Ltd
+ * This program is available under Commercial Vaadin Developer License 4.0, available at https://vaadin.com/license/cvdl-4.0.
+ */
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { deepMerge, ChartElement } from './vaadin-chart.js';
 
