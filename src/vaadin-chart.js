@@ -30,18 +30,18 @@ import 'highcharts/es-modules/masters/modules/bullet.src.js';
 
 /** @private */
 export const deepMerge = function deepMerge(target, source) {
-  const isObject = item => (item && typeof item === 'object' && !Array.isArray(item));
+  const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
 
   if (isObject(source) && isObject(target)) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (!target[key]) {
-          Object.assign(target, {[key]: {}});
+          Object.assign(target, { [key]: {} });
         }
 
         deepMerge(target[key], source[key]);
       } else {
-        Object.assign(target, {[key]: source[key]});
+        Object.assign(target, { [key]: source[key] });
       }
     }
   }
@@ -50,17 +50,13 @@ export const deepMerge = function deepMerge(target, source) {
 };
 
 if (Highcharts) {
-  ['exportChart', 'exportChartLocal', 'getSVG'].forEach(methodName => {
-    Highcharts.wrap(
-      Highcharts.Chart.prototype,
-      methodName,
-      function(proceed) {
-        Highcharts.fireEvent(this, 'beforeExport');
-        const result = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
-        Highcharts.fireEvent(this, 'afterExport');
-        return result;
-      }
-    );
+  ['exportChart', 'exportChartLocal', 'getSVG'].forEach((methodName) => {
+    Highcharts.wrap(Highcharts.Chart.prototype, methodName, function (proceed) {
+      Highcharts.fireEvent(this, 'beforeExport');
+      const result = proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+      Highcharts.fireEvent(this, 'afterExport');
+      return result;
+    });
   });
 }
 
@@ -256,20 +252,20 @@ if (Highcharts) {
 class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   static get template() {
     return html`
-    <style>
-      :host {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-      }
+      <style>
+        :host {
+          display: block;
+          width: 100%;
+          overflow: hidden;
+        }
 
-      :host([hidden]) {
-        display: none !important;
-      }
-    </style>
-    <div id="chart"></div>
-    <slot id="slot"></slot>
-`;
+        :host([hidden]) {
+          display: none !important;
+        }
+      </style>
+      <div id="chart"></div>
+      <slot id="slot"></slot>
+    `;
   }
 
   static get is() {
@@ -287,7 +283,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     if (functionToCall && typeof functionToCall === 'function') {
       functionToCall.apply(this.configuration, argumentsForCall);
       if (redrawCharts) {
-        Highcharts.charts.forEach(c => c.redraw());
+        Highcharts.charts.forEach((c) => c.redraw());
       }
     }
   }
@@ -521,9 +517,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
         text: null
       },
       series: [],
-      xAxis: {
-
-      },
+      xAxis: {},
       yAxis: {
         axisGenerated: true
       }
@@ -555,7 +549,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       this._jsonConfigurationBuffer = null;
       this.__initChart(options);
       this.__addChildObserver();
-      const config = {attributes: true, characterData: true};
+      const config = { attributes: true, characterData: true };
       this.__mutationObserver = new MutationObserver(this.__mutationCallback);
       this.__mutationObserver.observe(this, config);
     });
@@ -645,7 +639,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       options.chart.inverted = this.__shouldInvert();
 
       if (Array.isArray(options.xAxis)) {
-        options.xAxis.forEach(e => e.opposite = this.__shouldFlipOpposite());
+        options.xAxis.forEach((e) => (e.opposite = this.__shouldFlipOpposite()));
       } else if (options.xAxis) {
         options.xAxis.opposite = this.__shouldFlipOpposite();
       }
@@ -672,7 +666,6 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
    */
   get __chartEventNames() {
     return {
-
       /**
        *
        * @event chart-add-series  Fired when a new series is added
@@ -901,7 +894,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} axis Point object where the event was sent from
        */
-      afterSetExtremes: 'xaxes-extremes-set',
+      afterSetExtremes: 'xaxes-extremes-set'
     };
   }
 
@@ -914,7 +907,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} axis Point object where the event was sent from
        */
-      afterSetExtremes: 'yaxes-extremes-set',
+      afterSetExtremes: 'yaxes-extremes-set'
     };
   }
 
@@ -930,8 +923,8 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
   /** @private */
   __mutationCallback() {
-    const {height: componentHeight} = this.getBoundingClientRect();
-    const {chartHeight} = this.configuration;
+    const { height: componentHeight } = this.getBoundingClientRect();
+    const { chartHeight } = this.configuration;
 
     if (componentHeight !== chartHeight) {
       this.__reflow();
@@ -968,19 +961,19 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     for (let i = 0, len = series.length; i < len; i++) {
       const seriesElement = series[i];
-      const {yAxis: unit, yAxisValueMin: valueMin, yAxisValueMax: valueMax} = seriesElement.options;
+      const { yAxis: unit, yAxisValueMin: valueMin, yAxisValueMax: valueMax } = seriesElement.options;
 
       const idxOnChildList = seriesNodes.indexOf(seriesElement);
-      if (!unit && !this.configuration.yAxis.some(e => e.userOptions.id === undefined)) {
-        yAxes[unit] = this.__addAxis({axisGenerated: true});
+      if (!unit && !this.configuration.yAxis.some((e) => e.userOptions.id === undefined)) {
+        yAxes[unit] = this.__addAxis({ axisGenerated: true });
       } else if (unit && !yAxes[unit]) {
-        yAxes[unit] = this.__addAxis({id: unit, title: {text: unit}, axisGenerated: true});
+        yAxes[unit] = this.__addAxis({ id: unit, title: { text: unit }, axisGenerated: true });
       }
       if (isFinite(valueMin)) {
-        this.__setYAxisProps(yAxes, unit, {min: valueMin});
+        this.__setYAxisProps(yAxes, unit, { min: valueMin });
       }
       if (isFinite(valueMax)) {
-        this.__setYAxisProps(yAxes, unit, {max: valueMax});
+        this.__setYAxisProps(yAxes, unit, { max: valueMax });
       }
 
       const seriesConfiguration = this.__updateOrAddSeriesInstance(seriesElement.options, idxOnChildList);
@@ -996,7 +989,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       return;
     }
 
-    seriesNodes.forEach(series => {
+    seriesNodes.forEach((series) => {
       if (series instanceof ChartSeriesElement) {
         series._series.remove();
       }
@@ -1028,8 +1021,9 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     // Best effort to make chart display custom empty-text messages when series are removed.
     // This is needed because Highcharts currently doesn't react. A condition not catered for is
     // when all points are removed from all series without removing any series.
-    const isEmpty = this.configuration.series.length === 0 ||
-        this.configuration.series.map(e => e.data.length === 0).reduce((e1, e2) => e1 && e2, true);
+    const isEmpty =
+      this.configuration.series.length === 0 ||
+      this.configuration.series.map((e) => e.data.length === 0).reduce((e1, e2) => e1 && e2, true);
     if (isEmpty) {
       this.configuration.hideNoData();
       this.configuration.showNoData(this.emptyText);
@@ -1064,9 +1058,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   __getAxis(id, isXAxis) {
     id = Number.parseInt(id) || id;
     if (this.configuration) {
-      return (isXAxis
-        ? this.configuration.xAxis
-        : this.configuration.yAxis).find((axis) => axis.options.id === id);
+      return (isXAxis ? this.configuration.xAxis : this.configuration.yAxis).find((axis) => axis.options.id === id);
     }
   }
 
@@ -1093,9 +1085,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
    */
   __removeAxisIfEmpty(isXAxis) {
     if (this.configuration) {
-      (isXAxis
-        ? this.configuration.xAxis
-        : this.configuration.yAxis).forEach(axis => {
+      (isXAxis ? this.configuration.xAxis : this.configuration.yAxis).forEach((axis) => {
         if (axis.userOptions.axisGenerated && axis.series.length === 0) {
           axis.remove();
         }
@@ -1211,6 +1201,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   /** @private */
   __inflateFunctions(jsonConfiguration) {
     for (const attr in jsonConfiguration) {
+      // eslint-disable-next-line no-prototype-builtins
       if (jsonConfiguration.hasOwnProperty(attr)) {
         const targetProperty = jsonConfiguration[attr];
         if (attr.indexOf('_fn_') === 0 && (typeof targetProperty === 'string' || targetProperty instanceof String)) {
@@ -1264,7 +1255,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     }
 
     if (Array.isArray(axes)) {
-      axes.forEach(axis => this.__createEventListeners(eventNames, axis, 'events', 'axis'));
+      axes.forEach((axis) => this.__createEventListeners(eventNames, axis, 'events', 'axis'));
     } else {
       this.__createEventListeners(eventNames, axes, 'events', 'axis');
     }
@@ -1279,7 +1270,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       const key = keys[i];
       if (!eventObject[key]) {
         const chart = this;
-        eventObject[key] = function(event) {
+        eventObject[key] = function (event) {
           const customEvent = {
             bubbles: false,
             composed: true,
@@ -1318,7 +1309,6 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
           // Workaround for https://github.com/vaadin/vaadin-charts/issues/389
           // Hook into beforePrint and beforeExport to ensure correct styling
           if (['beforePrint', 'beforeExport'].indexOf(event.type) >= 0) {
-
             // Guard against another print 'before print' event coming before
             // the 'after print' event.
             if (!this.tempBodyStyle) {
@@ -1330,19 +1320,20 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
               }
 
               // Strip off host selectors that target individual instances
-              effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, match => {
+              effectiveCss = effectiveCss.replace(/:host\(.+?\)/g, (match) => {
                 const selector = match.substr(6, match.length - 7);
                 const matchesFn = self.matches || self.msMatchesSelector;
                 return matchesFn.call(self, selector) ? '' : match;
               });
 
               // Zoom out a bit to avoid clipping the chart's edge on paper
-              effectiveCss = effectiveCss +
-                  + 'body {' +
-                  '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
-                  '    zoom: 0.9;' + // Others
-                  '    zoom: 90%;' + // Webkit
-                  '}';
+              effectiveCss =
+                effectiveCss +
+                +'body {' +
+                '    -moz-transform: scale(0.9, 0.9);' + // Mozilla
+                '    zoom: 0.9;' + // Others
+                '    zoom: 90%;' + // Webkit
+                '}';
 
               this.tempBodyStyle = document.createElement('style');
               this.tempBodyStyle.textContent = effectiveCss;
@@ -1433,7 +1424,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       return;
     }
 
-    this.__updateOrAddAxes([{categories}], true);
+    this.__updateOrAddAxes([{ categories }], true);
   }
 
   /** @private */
@@ -1447,7 +1438,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       return;
     }
 
-    this.__updateOrAddAxes([{max}], true);
+    this.__updateOrAddAxes([{ max }], true);
   }
 
   /** @private */
@@ -1461,7 +1452,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       return;
     }
 
-    this.__updateOrAddAxes([{min}], true);
+    this.__updateOrAddAxes([{ min }], true);
   }
 
   /** @private */
@@ -1504,9 +1495,11 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       }
     });
 
-    config.xAxis.forEach(e => e.update({
-      opposite: this.__shouldFlipOpposite()
-    }));
+    config.xAxis.forEach((e) =>
+      e.update({
+        opposite: this.__shouldFlipOpposite()
+      })
+    );
   }
 
   /** @private */
@@ -1516,9 +1509,9 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     }
 
     if (config.legend) {
-      config.legend.update({enabled: !noLegend});
+      config.legend.update({ enabled: !noLegend });
     } else {
-      config.legend = {enabled: !noLegend};
+      config.legend = { enabled: !noLegend };
     }
   }
 
@@ -1529,7 +1522,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     }
 
     if (title && title.length > 0) {
-      config.title.update({text: title});
+      config.title.update({ text: title });
     }
   }
 
@@ -1539,7 +1532,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
       return;
     }
 
-    config.tooltip.update({enabled: tooltip});
+    config.tooltip.update({ enabled: tooltip });
   }
 
   /** @private */
@@ -1550,7 +1543,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     if (type && type.length > 0) {
       config.update({
-        chart: {type}
+        chart: { type }
       });
     }
   }
@@ -1563,9 +1556,9 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     if (subtitle && subtitle.length > 0) {
       if (!config.subtitle) {
-        config.setSubtitle({text: subtitle});
+        config.setSubtitle({ text: subtitle });
       } else {
-        config.subtitle.update({text: subtitle});
+        config.subtitle.update({ text: subtitle });
       }
     }
   }
@@ -1599,7 +1592,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
     config.update({
       plotOptions: {
-        series: {stacking}
+        series: { stacking }
       }
     });
   }
@@ -1616,12 +1609,8 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
           options3d: Object.assign(
             {},
             this._baseChart3d,
-            (
-              this.additionalOptions
-              && this.additionalOptions.chart
-              && this.additionalOptions.chart.options3d
-            ),
-            {enabled: true}
+            this.additionalOptions && this.additionalOptions.chart && this.additionalOptions.chart.options3d,
+            { enabled: true }
           )
         }
       });
@@ -1643,7 +1632,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     }
 
     config.update({
-      chart: {polar}
+      chart: { polar }
     });
   }
 
@@ -1723,7 +1712,11 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
 
   /** @private */
   __callPointFunction(functionName, seriesIndex, pointIndex) {
-    if (this.configuration && this.configuration.series[seriesIndex] && this.configuration.series[seriesIndex].data[pointIndex]) {
+    if (
+      this.configuration &&
+      this.configuration.series[seriesIndex] &&
+      this.configuration.series[seriesIndex].data[pointIndex]
+    ) {
       const point = this.configuration.series[seriesIndex].data[pointIndex];
       const functionToCall = point[functionName];
       const argumentsForCall = Array.prototype.splice.call(arguments, 3);

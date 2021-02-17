@@ -42,7 +42,6 @@
  * ```
  */
 declare class ChartSeriesElement extends HTMLElement {
-
   /**
    * Object with the configured options defined and used to create a series.
    */
@@ -61,7 +60,7 @@ declare class ChartSeriesElement extends HTMLElement {
    * to mutate the values array in order to make the component aware of the
    * change and be able to synchronize it.
    */
-  values: ChartSeriesValues|null;
+  values: ChartSeriesValues | null;
 
   /**
    * Value-axis minimum-value.
@@ -70,21 +69,21 @@ declare class ChartSeriesElement extends HTMLElement {
    * Undefined by default (determined from data).
    * @attr {number} value-min
    */
-  valueMin: number|null|undefined;
+  valueMin: number | null | undefined;
 
   /**
    * Value-axis maximum-value.
    * See the 'valueMin'
    * @attr {number} value-max
    */
-  valueMax: number|null|undefined;
+  valueMax: number | null | undefined;
 
   /**
    * A string with the type of the series.
    * Defaults to `'line'` in case no type is set for the chart.
    * Note that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type on `<vaadin-chart>`.
    */
-  type: string|null|undefined;
+  type: string | null | undefined;
 
   /**
    * The name of the series as shown in the legend, tooltip etc.
@@ -98,21 +97,21 @@ declare class ChartSeriesElement extends HTMLElement {
    *  - `hidden`: markers are always hidden
    *  - `auto`: markers are visible for widespread data and hidden, when data is dense *(default)*
    */
-  markers: ChartSeriesMarkers|null|undefined;
+  markers: ChartSeriesMarkers | null | undefined;
 
   /**
    * Used to connect the series to an axis; if multiple series have the same “unit”, they will share axis.
    * Displayed as a title for the axis.
    * If no unit is defined, then series will be connected to the first axis.
    */
-  unit: string|null|undefined;
+  unit: string | null | undefined;
 
   /**
    * Used to group series in a different stacks.
    * "stacking" property should be specified either for each series or in plotOptions.
    * It is recommended to place series in a single stack, when they belong to the same yAxis.
    */
-  stack: number|string;
+  stack: number | string;
 
   /**
    * The height of the neck, the lower part of the funnel.
@@ -120,7 +119,7 @@ declare class ChartSeriesElement extends HTMLElement {
    * Note that this property only applies for "funnel" charts.
    * @attr {number | string} neck-position
    */
-  neckPosition: number|string;
+  neckPosition: number | string;
 
   /**
    * The width of the neck, the lower part of the funnel.
@@ -128,13 +127,13 @@ declare class ChartSeriesElement extends HTMLElement {
    * Note that this property only applies for "funnel" charts.
    * @attr {number | string} neck-width
    */
-  neckWidth: number|string;
+  neckWidth: number | string;
 
   /**
    * Represents additional JSON configuration.
    */
-  additionalOptions: SeriesOptionsType|null|undefined;
-  _series: Series|undefined;
+  additionalOptions: SeriesOptionsType | null | undefined;
+  _series: Series | undefined;
 
   /**
    * Method to attach a series object of type `Highcharts.Series`.
@@ -145,20 +144,19 @@ declare class ChartSeriesElement extends HTMLElement {
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-chart-series": ChartSeriesElement;
+    'vaadin-chart-series': ChartSeriesElement;
   }
 }
 
-export {ChartSeriesElement};
+export { ChartSeriesElement };
 
-import {ChartSeriesOptions} from '../@types/interfaces';
+import { ChartSeriesOptions } from '../@types/interfaces';
 
-import {ChartSeriesValues} from '../@types/interfaces';
+import { ChartSeriesValues } from '../@types/interfaces';
 
-import {ChartSeriesMarkers} from '../@types/interfaces';
+import { ChartSeriesMarkers } from '../@types/interfaces';
 
-import {SeriesOptionsType} from 'highcharts';
+import { SeriesOptionsType } from 'highcharts';
 
-import {Series} from 'highcharts';
+import { Series } from 'highcharts';

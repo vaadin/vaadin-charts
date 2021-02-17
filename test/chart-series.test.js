@@ -125,7 +125,7 @@ describe('vaadin-chart-series', () => {
         await aTimeout(10);
         expect(markersVisible(chartContainer)).to.be.false;
       });
-    })
+    });
 
     describe('invalid value', () => {
       let chart, series;
@@ -153,7 +153,7 @@ describe('vaadin-chart-series', () => {
       it('should set invalid markers attribute value to auto', () => {
         expect(series.markers).to.equal('auto');
       });
-    })
+    });
   });
 
   describe('warning', () => {
@@ -295,7 +295,7 @@ describe('vaadin-chart-series', () => {
   });
 
   describe('unit', () => {
-    let chart, series;
+    let chart;
 
     const UNIT_1 = 'unit 1';
     const UNIT_2 = 'unit 2';
@@ -307,7 +307,6 @@ describe('vaadin-chart-series', () => {
         </vaadin-chart>
       `);
       await oneEvent(chart, 'chart-load');
-      series = chart.querySelector('vaadin-chart-series');
     });
 
     it('should accept different unit for different series', async () => {

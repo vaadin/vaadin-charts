@@ -265,7 +265,7 @@ class ChartSeriesElement extends PolymerElement {
       '__unitObserver(unit, valueMin, valueMax, _series)',
       '__valueMinObserver(valueMin, _series)',
       '__valueMaxObserver(valueMax, _series)',
-      '__valuesObserver(values.splices, _series)',
+      '__valuesObserver(values.splices, _series)'
     ];
   }
 
@@ -299,7 +299,7 @@ class ChartSeriesElement extends PolymerElement {
     }
 
     if (series && series.yAxis) {
-      series.yAxis.update({[key]: value});
+      series.yAxis.update({ [key]: value });
     }
   }
 
@@ -324,7 +324,7 @@ class ChartSeriesElement extends PolymerElement {
   /** @private */
   __typeObserver(type, series) {
     if (type && series) {
-      series.update({type});
+      series.update({ type });
     }
   }
 
@@ -333,7 +333,7 @@ class ChartSeriesElement extends PolymerElement {
     if (title === undefined || series === undefined) {
       return;
     }
-    series.update({name: title});
+    series.update({ name: title });
   }
 
   /** @private */
@@ -341,7 +341,7 @@ class ChartSeriesElement extends PolymerElement {
     if (stack === undefined || series === undefined) {
       return;
     }
-    series.update({stack});
+    series.update({ stack });
   }
 
   /** @private */
@@ -350,7 +350,7 @@ class ChartSeriesElement extends PolymerElement {
       return;
     }
 
-    series.update({neckHeight: neckPosition});
+    series.update({ neckHeight: neckPosition });
   }
 
   /** @private */
@@ -359,7 +359,7 @@ class ChartSeriesElement extends PolymerElement {
       return;
     }
 
-    series.update({neckWidth});
+    series.update({ neckWidth });
   }
 
   /** @private */
@@ -369,12 +369,11 @@ class ChartSeriesElement extends PolymerElement {
 
       const parent = this.parentNode instanceof ChartElement && this.parentNode;
       if (parent && parent instanceof ChartElement) {
-
         if (unit && !parent.__getAxis(unit)) {
-          const title = {title: {text: unit}};
-          parent.__addAxis(Object.assign({id: unit, axisGenerated: true}, title));
+          const title = { title: { text: unit } };
+          parent.__addAxis(Object.assign({ id: unit, axisGenerated: true }, title));
         }
-        series.update({yAxis: unit || 0});
+        series.update({ yAxis: unit || 0 });
 
         if (valueMin !== undefined) {
           this.__updateAxis(series, valueMin, 'min');

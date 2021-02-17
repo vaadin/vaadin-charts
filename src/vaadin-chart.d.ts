@@ -1,6 +1,6 @@
-import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
+import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 
-import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
+import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
 /**
  * `<vaadin-chart>` is a Web Component for creating high quality charts.
@@ -187,10 +187,7 @@ import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js
  * When using Vaadin Charts in a development environment, you will see a pop-up that asks you
  * to validate your license by signing in to vaadin.com.
  */
-declare class ChartElement extends
-  ThemableMixin(
-  ElementMixin(
-  HTMLElement)) {
+declare class ChartElement extends ThemableMixin(ElementMixin(HTMLElement)) {
   readonly options: Options;
 
   /**
@@ -212,26 +209,26 @@ declare class ChartElement extends
    *
    * For detailed documentation of available API check the [API site](http://api.highcharts.com/class-reference/classes.list)
    */
-  configuration: Chart|undefined;
+  configuration: Chart | undefined;
 
   /**
    * If categories are present names are used instead of numbers for the category axis.
    * The format of categories can be an `Array` with a list of categories, such as `['2010', '2011', '2012']`
    * or a mapping `Object`, like `{0:'1',9:'Target (10)', 15: 'Max'}`.
    */
-  categories: ChartCategories|null|undefined;
+  categories: ChartCategories | null | undefined;
 
   /**
    * Category-axis maximum value. Defaults to `undefined`.
    * @attr {number} category-max
    */
-  categoryMax: number|null|undefined;
+  categoryMax: number | null | undefined;
 
   /**
    * Category-axis minimum value. Defaults to `undefined`.
    * @attr {number} category-min
    */
-  categoryMin: number|null|undefined;
+  categoryMin: number | null | undefined;
 
   /**
    * The position of the category axis. Acceptable values are `left`, `right`, `top` and `bottom`
@@ -242,14 +239,14 @@ declare class ChartElement extends
    * Defaults to `undefined`
    * @attr {left|right|top|bottom} category-position
    */
-  categoryPosition: ChartCategoryPosition|null|undefined;
+  categoryPosition: ChartCategoryPosition | null | undefined;
 
   /**
    * Specifies whether to hide legend or show.
    * Legend configuration can be set up via additionalOptions property
    * @attr {boolean} no-legend
    */
-  noLegend: boolean|null|undefined;
+  noLegend: boolean | null | undefined;
 
   /**
    * Specifies how series are stacked on top of each other.
@@ -258,12 +255,12 @@ declare class ChartElement extends
    * the default stack.
    * @attr {normal|percent} stacking
    */
-  stacking: ChartStacking|null|undefined;
+  stacking: ChartStacking | null | undefined;
 
   /**
    * Specifies whether the chart is a normal chart or a timeline chart.
    */
-  timeline: boolean|null|undefined;
+  timeline: boolean | null | undefined;
 
   /**
    * Represents the title of the chart.
@@ -273,18 +270,18 @@ declare class ChartElement extends
   /**
    * Whether or not to show tooltip when hovering data points.
    */
-  tooltip: boolean|null|undefined;
+  tooltip: boolean | null | undefined;
 
   /**
    * Sets the default series type of the chart.
    * Note that `'bar'`, `'gauge'` and `'solidgauge'` should be set as default series type.
    */
-  type: string|null|undefined;
+  type: string | null | undefined;
 
   /**
    * Represents the subtitle of the chart.
    */
-  subtitle: string|undefined;
+  subtitle: string | undefined;
 
   /**
    * Specifies whether to show chart in 3 or in 2 dimensions.
@@ -294,7 +291,7 @@ declare class ChartElement extends
    * 3D is supported by Bar, Column, Pie and Scatter3D charts.
    * More info available at [Highcharts](https://www.highcharts.com/docs/chart-concepts/3d-charts).
    */
-  chart3d: boolean|null|undefined;
+  chart3d: boolean | null | undefined;
 
   /**
    * Specifies the message displayed on a chart without displayable data.
@@ -305,13 +302,13 @@ declare class ChartElement extends
   /**
    * Represents additional JSON configuration.
    */
-  additionalOptions: Options|null|undefined;
+  additionalOptions: Options | null | undefined;
 
   /**
    * When present, cartesian charts like line, spline, area and column are transformed
    * into the polar coordinate system.
    */
-  polar: boolean|null|undefined;
+  polar: boolean | null | undefined;
   static _finalizeClass(): void;
   connectedCallback(): void;
   disconnectedCallback(): void;
@@ -322,7 +319,7 @@ declare class ChartElement extends
    * @param id contains the id that will be searched
    * @param isXAxis indicates if it will remove x or y axes. Defaults to `false`.
    */
-  __getAxis(id: string, isXAxis: boolean): Axis|null;
+  __getAxis(id: string, isXAxis: boolean): Axis | null;
 
   /**
    * Add an axis with given options
@@ -330,7 +327,7 @@ declare class ChartElement extends
    * @param options axis options
    * @param isXAxis indicates if axis is X (`true`) or Y (`false`). Defaults to `false`.
    */
-  __addAxis(options: object|null, isXAxis: boolean): Axis;
+  __addAxis(options: object | null, isXAxis: boolean): Axis;
 
   /**
    * Iterates over axes (y or x) and removes whenever it doesn't contain any series and was created for unit
@@ -377,22 +374,21 @@ declare class ChartElement extends
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-chart": ChartElement;
+    'vaadin-chart': ChartElement;
   }
 }
 
-export {ChartElement};
+export { ChartElement };
 
-import {Options} from 'highcharts';
+import { Options } from 'highcharts';
 
-import {Chart} from 'highcharts';
+import { Chart } from 'highcharts';
 
-import {ChartCategories} from '../@types/interfaces';
+import { ChartCategories } from '../@types/interfaces';
 
-import {ChartCategoryPosition} from '../@types/interfaces';
+import { ChartCategoryPosition } from '../@types/interfaces';
 
-import {ChartStacking} from '../@types/interfaces';
+import { ChartStacking } from '../@types/interfaces';
 
-import {Axis} from 'highcharts';
+import { Axis } from 'highcharts';

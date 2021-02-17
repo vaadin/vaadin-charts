@@ -52,7 +52,7 @@ registerStyles(
     }
 
     .highcharts-background {
-      fill: #ffffff;
+      fill: #fff;
     }
 
     .highcharts-plot-border,
@@ -82,12 +82,12 @@ registerStyles(
 
     /* Titles */
     .highcharts-title {
-      fill: #333333;
+      fill: #333;
       font-size: 1.5em;
     }
 
     .highcharts-subtitle {
-      fill: #666666;
+      fill: #666;
     }
 
     /* Axes */
@@ -101,11 +101,11 @@ registerStyles(
     }
 
     .highcharts-axis-title {
-      fill: #666666;
+      fill: #666;
     }
 
     .highcharts-axis-labels {
-      fill: #666666;
+      fill: #666;
       cursor: default;
       font-size: 0.9em;
     }
@@ -116,7 +116,7 @@ registerStyles(
     }
 
     .highcharts-xaxis-grid .highcharts-grid-line {
-      stroke-width: 0px;
+      stroke-width: 0;
     }
 
     .highcharts-tick {
@@ -133,7 +133,7 @@ registerStyles(
 
     .highcharts-crosshair-thin {
       stroke-width: 1px;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     .highcharts-crosshair-category {
@@ -144,7 +144,7 @@ registerStyles(
     /* Credits */
     .highcharts-credits {
       cursor: pointer;
-      fill: #999999;
+      fill: #999;
       font-size: 0.7em;
       transition: fill 250ms, font-size 250ms;
     }
@@ -163,7 +163,7 @@ registerStyles(
     }
 
     .highcharts-tooltip text {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-tooltip .highcharts-header {
@@ -299,7 +299,7 @@ registerStyles(
 
     .highcharts-markers {
       stroke-width: 1px;
-      stroke: #ffffff;
+      stroke: #fff;
     }
 
     .highcharts-a11y-markers-hidden .highcharts-point:not(.highcharts-point-hover):not(.highcharts-a11y-marker-visible),
@@ -327,7 +327,7 @@ registerStyles(
 
     .highcharts-data-label text,
     text.highcharts-data-label {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-data-label-connector {
@@ -345,12 +345,12 @@ registerStyles(
 
     .highcharts-series:not(.highcharts-pie-series) .highcharts-point-select,
     .highcharts-markers .highcharts-point-select {
-      fill: #cccccc;
-      stroke: #000000;
+      fill: #ccc;
+      stroke: #000;
     }
 
     .highcharts-column-series rect.highcharts-point {
-      stroke: #ffffff;
+      stroke: #fff;
     }
 
     .highcharts-column-series .highcharts-point {
@@ -364,7 +364,7 @@ registerStyles(
 
     .highcharts-pie-series .highcharts-point {
       stroke-linejoin: round;
-      stroke: #ffffff;
+      stroke: #fff;
     }
 
     .highcharts-pie-series .highcharts-point-hover {
@@ -374,7 +374,7 @@ registerStyles(
 
     .highcharts-funnel-series .highcharts-point {
       stroke-linejoin: round;
-      stroke: #ffffff;
+      stroke: #fff;
     }
 
     .highcharts-funnel-series .highcharts-point-hover {
@@ -389,7 +389,7 @@ registerStyles(
 
     .highcharts-pyramid-series .highcharts-point {
       stroke-linejoin: round;
-      stroke: #ffffff;
+      stroke: #fff;
     }
 
     .highcharts-pyramid-series .highcharts-point-hover {
@@ -413,7 +413,7 @@ registerStyles(
     }
 
     .highcharts-treemap-series .highcharts-point-hover {
-      stroke: #999999;
+      stroke: #999;
       transition: stroke 25ms, fill 25ms, fill-opacity 25ms;
     }
 
@@ -445,7 +445,7 @@ registerStyles(
     }
 
     .highcharts-lollipop-stem {
-      stroke: #000000;
+      stroke: #000;
     }
 
     .highcharts-focus-border {
@@ -464,7 +464,7 @@ registerStyles(
     }
 
     .highcharts-legend-item > text {
-      fill: #333333;
+      fill: #333;
       font-weight: bold;
       font-size: 1em;
       cursor: pointer;
@@ -472,22 +472,22 @@ registerStyles(
     }
 
     .highcharts-legend-item:hover text {
-      fill: #000000;
+      fill: #000;
     }
 
     .highcharts-legend-item-hidden * {
-      fill: #cccccc !important;
-      stroke: #cccccc !important;
+      fill: #ccc !important;
+      stroke: #ccc !important;
       transition: fill 250ms;
     }
 
     .highcharts-legend-nav-active {
-      fill: #003399;
+      fill: #039;
       cursor: pointer;
     }
 
     .highcharts-legend-nav-inactive {
-      fill: #cccccc;
+      fill: #ccc;
     }
 
     circle.highcharts-legend-nav-active,
@@ -512,13 +512,13 @@ registerStyles(
     }
 
     .highcharts-bubble-legend-labels {
-      fill: #333333;
+      fill: #333;
     }
 
     /* Loading */
     .highcharts-loading {
       position: absolute;
-      background-color: #ffffff;
+      background-color: #fff;
       opacity: 0.5;
       text-align: center;
       z-index: 10;
@@ -541,19 +541,19 @@ registerStyles(
     /* Plot bands and polar pane backgrounds */
     .highcharts-plot-band,
     .highcharts-pane {
-      fill: #000000;
+      fill: #000;
       fill-opacity: 0.05;
     }
 
     .highcharts-plot-line {
       fill: none;
-      stroke: #999999;
+      stroke: #999;
       stroke-width: 1px;
     }
 
     /* Highcharts More and modules */
     .highcharts-boxplot-box {
-      fill: #ffffff;
+      fill: #fff;
     }
 
     .highcharts-boxplot-median {
@@ -565,16 +565,16 @@ registerStyles(
     }
 
     .highcharts-errorbar-series .highcharts-point {
-      stroke: #000000;
+      stroke: #000;
     }
 
     .highcharts-gauge-series .highcharts-data-label-box {
-      stroke: #cccccc;
+      stroke: #ccc;
       stroke-width: 1px;
     }
 
     .highcharts-gauge-series .highcharts-dial {
-      fill: #000000;
+      fill: #000;
       stroke-width: 0;
     }
 
@@ -584,7 +584,7 @@ registerStyles(
     }
 
     .highcharts-waterfall-series .highcharts-graph {
-      stroke: #333333;
+      stroke: #333;
       stroke-dasharray: 1, 3;
     }
 
@@ -604,13 +604,13 @@ registerStyles(
 
     .highcharts-venn-series .highcharts-point {
       fill-opacity: 0.75;
-      stroke: #cccccc;
+      stroke: #ccc;
       transition: stroke 250ms, fill-opacity 250ms;
     }
 
     .highcharts-venn-series .highcharts-point-hover {
       fill-opacity: 1;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     /* Highstock */
@@ -626,12 +626,12 @@ registerStyles(
     }
 
     .highcharts-navigator-outline {
-      stroke: #cccccc;
+      stroke: #ccc;
       fill: none;
     }
 
     .highcharts-navigator-handle {
-      stroke: #cccccc;
+      stroke: #ccc;
       fill: #f2f2f2;
       cursor: ew-resize;
     }
@@ -659,7 +659,7 @@ registerStyles(
     }
 
     .highcharts-navigator-xaxis.highcharts-axis-labels {
-      fill: #999999;
+      fill: #999;
     }
 
     .highcharts-navigator-yaxis .highcharts-grid-line {
@@ -667,23 +667,23 @@ registerStyles(
     }
 
     .highcharts-scrollbar-thumb {
-      fill: #cccccc;
-      stroke: #cccccc;
+      fill: #ccc;
+      stroke: #ccc;
       stroke-width: 1px;
     }
 
     .highcharts-scrollbar-button {
       fill: #e6e6e6;
-      stroke: #cccccc;
+      stroke: #ccc;
       stroke-width: 1px;
     }
 
     .highcharts-scrollbar-arrow {
-      fill: #666666;
+      fill: #666;
     }
 
     .highcharts-scrollbar-rifles {
-      stroke: #666666;
+      stroke: #666;
       stroke-width: 1px;
     }
 
@@ -695,43 +695,43 @@ registerStyles(
 
     .highcharts-button {
       fill: #f7f7f7;
-      stroke: #cccccc;
+      stroke: #ccc;
       cursor: default;
       stroke-width: 1px;
       transition: fill 250ms;
     }
 
     .highcharts-button text {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-button-hover {
       transition: fill 0ms;
       fill: #e6e6e6;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     .highcharts-button-hover text {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-button-pressed {
       font-weight: bold;
       fill: #e6ebf5;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     .highcharts-button-pressed text {
-      fill: #333333;
+      fill: #333;
       font-weight: bold;
     }
 
     .highcharts-button-disabled text {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-range-selector-buttons .highcharts-button {
-      stroke-width: 0px;
+      stroke-width: 0;
     }
 
     .highcharts-range-label rect {
@@ -739,7 +739,7 @@ registerStyles(
     }
 
     .highcharts-range-label text {
-      fill: #666666;
+      fill: #666;
     }
 
     .highcharts-range-input rect {
@@ -747,12 +747,12 @@ registerStyles(
     }
 
     .highcharts-range-input text {
-      fill: #333333;
+      fill: #333;
     }
 
     .highcharts-range-input {
       stroke-width: 1px;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     input.highcharts-range-selector {
@@ -768,7 +768,7 @@ registerStyles(
     }
 
     .highcharts-crosshair-label text {
-      fill: #ffffff;
+      fill: #fff;
       font-size: 1.1em;
     }
 
@@ -777,12 +777,12 @@ registerStyles(
     }
 
     .highcharts-candlestick-series .highcharts-point {
-      stroke: #000000;
+      stroke: #000;
       stroke-width: 1px;
     }
 
     .highcharts-candlestick-series .highcharts-point-up {
-      fill: #ffffff;
+      fill: #fff;
     }
 
     .highcharts-ohlc-series .highcharts-point-hover {
@@ -790,18 +790,18 @@ registerStyles(
     }
 
     .highcharts-flags-series .highcharts-point .highcharts-label-box {
-      stroke: #999999;
-      fill: #ffffff;
+      stroke: #999;
+      fill: #fff;
       transition: fill 250ms;
     }
 
     .highcharts-flags-series .highcharts-point-hover .highcharts-label-box {
-      stroke: #000000;
+      stroke: #000;
       fill: #ccd6eb;
     }
 
     .highcharts-flags-series .highcharts-point text {
-      fill: #000000;
+      fill: #000;
       font-size: 0.9em;
       font-weight: bold;
     }
@@ -809,7 +809,7 @@ registerStyles(
     /* Highmaps */
     .highcharts-map-series .highcharts-point {
       transition: fill 500ms, fill-opacity 500ms, stroke-width 250ms;
-      stroke: #cccccc;
+      stroke: #ccc;
     }
 
     .highcharts-map-series .highcharts-point-hover {
@@ -837,7 +837,7 @@ registerStyles(
     }
 
     .highcharts-coloraxis-marker {
-      fill: #999999;
+      fill: #999;
     }
 
     .highcharts-null-point {
@@ -851,7 +851,7 @@ registerStyles(
 
     /* Exporting module */
     .highcharts-contextbutton {
-      fill: #ffffff;
+      fill: #fff;
       /* needed to capture hover */
       stroke: none;
       stroke-linecap: round;
@@ -863,13 +863,13 @@ registerStyles(
     }
 
     .highcharts-button-symbol {
-      stroke: #666666;
+      stroke: #666;
       stroke-width: 3px;
     }
 
     .highcharts-menu {
-      border: 1px solid #999999;
-      background: #ffffff;
+      border: 1px solid #999;
+      background: #fff;
       padding: 5px 0;
       box-shadow: 3px 3px 10px #888;
     }
@@ -877,14 +877,14 @@ registerStyles(
     .highcharts-menu-item {
       padding: 0.5em 1em;
       background: none;
-      color: #333333;
+      color: #333;
       cursor: pointer;
       transition: background 250ms, color 250ms;
     }
 
     .highcharts-menu-item:hover {
       background: #335cad;
-      color: #ffffff;
+      color: #fff;
     }
 
     /* Drilldown module */
@@ -896,7 +896,7 @@ registerStyles(
     text.highcharts-drilldown-data-label,
     .highcharts-drilldown-axis-label {
       cursor: pointer;
-      fill: #003399;
+      fill: #039;
       font-weight: bold;
       text-decoration: underline;
     }
@@ -905,7 +905,7 @@ registerStyles(
     .highcharts-no-data text {
       font-weight: bold;
       font-size: 12px;
-      fill: #666666;
+      fill: #666;
     }
 
     /* Drag-panes module */
@@ -923,19 +923,19 @@ registerStyles(
     /* Lineargauge type series */
     .highcharts-lineargauge-target {
       stroke-width: 1px;
-      stroke: #333333;
+      stroke: #333;
     }
 
     .highcharts-lineargauge-target-line {
       stroke-width: 1px;
-      stroke: #333333;
+      stroke: #333;
     }
 
     /* Annotations module */
     .highcharts-annotation-label-box {
       stroke-width: 1px;
-      stroke: #000000;
-      fill: #000000;
+      stroke: #000;
+      fill: #000;
       fill-opacity: 0.75;
     }
 
