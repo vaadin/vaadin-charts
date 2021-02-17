@@ -26,11 +26,13 @@
     "theme"
   ],
   "scripts": {
+    "analyze": "polymer analyze vaadin-* > analysis.json",
     "check-version": "magi check-version",
     "debug": "web-test-runner test/*.test.js --watch",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:css": "stylelint src/*.js theme/*.js",
     "lint:js": "eslint src theme test",
+    "prestart": "npm run analyze",
     "preversion": "magi update-version",
     "screenshots": "hermione test/visual/test.js --update-refs",
     "start": "web-dev-server --node-resolve --open",
