@@ -121,8 +121,9 @@ describe('vaadin-chart-series', () => {
       });
 
       it('should not have markers when options are set', async () => {
-        chart.additionalOptions = { plotOptions: { series: { marker: { enabled: false } } } };
         series.values = [10, 20, 10, 30, 50];
+        await nextRender(chart);
+        chart.additionalOptions = { plotOptions: { series: { marker: { enabled: false } } } };
         await aTimeout(50);
         expect(markersVisible(chartContainer)).to.be.false;
       });
