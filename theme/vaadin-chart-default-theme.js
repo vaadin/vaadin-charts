@@ -1,13 +1,6 @@
-<!--
-@license
-Vaadin Charts
-Copyright (C) 2015 - 2020 Vaadin Ltd
-This program is available under Commercial Vaadin Developer License 4.0 (CVDLv4).
-See the file LICENSE.md distributed with this software for more information about licensing.
-See <a href="https://vaadin.com/license/cvdl-4.0">the website</a> for the complete license.
--->
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<dom-module id="vaadin-chart-default-theme" theme-for="vaadin-chart">
+const $_documentContainer = html`<dom-module id="vaadin-chart-default-theme" theme-for="vaadin-chart">
     <template>
       <style>
 /* When updating this file do not override vaadin-charts custom properties section */
@@ -977,4 +970,15 @@ text.highcharts-drilldown-data-label,
 /* stylelint-enable */
     </style>
   </template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+/**
+@license
+Vaadin Charts
+Copyright (C) 2015 - 2020 Vaadin Ltd
+This program is available under Commercial Vaadin Developer License 4.0 (CVDLv4).
+See the file LICENSE.md distributed with this software for more information about licensing.
+See <a href="https://vaadin.com/license/cvdl-4.0">the website</a> for the complete license.
+*/
