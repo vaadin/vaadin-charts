@@ -43,7 +43,7 @@ import { ChartCategories, ChartCategoryPosition, ChartEventMap, ChartStacking } 
  *     requestAnimationFrame(() => {
  *        const configuration = this.$.mychart.configuration;
  *        configuration.setTitle({ text: 'The chart title' });
- *        // By default there is one x axis, it is referenced by configuration.xAxis[0].
+ *        // By default there is one X axis, it is referenced by configuration.xAxis[0].
  *        configuration.xAxis[0].setCategories(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
  *        configuration.addSeries({
  *            type: 'column',

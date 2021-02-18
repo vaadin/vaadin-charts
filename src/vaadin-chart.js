@@ -95,7 +95,7 @@ export const deepMerge = function deepMerge(target, source) {
  *     requestAnimationFrame(() => {
  *        const configuration = this.$.mychart.configuration;
  *        configuration.setTitle({ text: 'The chart title' });
- *        // By default there is one x axis, it is referenced by configuration.xAxis[0].
+ *        // By default there is one X axis, it is referenced by configuration.xAxis[0].
  *        configuration.xAxis[0].setCategories(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
  *        configuration.addSeries({
  *            type: 'column',
@@ -580,7 +580,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     if (this.categories) {
       options.xAxis = options.xAxis || {};
       if (Array.isArray(options.xAxis)) {
-        // Set categories on first x axis
+        // Set categories on first X axis
         options.xAxis[0].categories = this.categories;
       } else {
         options.xAxis.categories = this.categories;
@@ -590,7 +590,7 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
     if (isFinite(this.categoryMin)) {
       options.xAxis = options.xAxis || {};
       if (Array.isArray(options.xAxis)) {
-        // Set category-min on first x axis
+        // Set category-min on first X axis
         options.xAxis[0].min = this.categoryMin;
       } else {
         options.xAxis.min = this.categoryMin;
