@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
-import { aTimeout, fixtureSync, oneEvent } from '@open-wc/testing-helpers';
+import { fixtureSync, oneEvent } from '@open-wc/testing-helpers';
 import '../vaadin-chart.js';
 
 describe('vaadin-chart events', () => {
@@ -31,8 +31,7 @@ describe('vaadin-chart events', () => {
           type: 'column'
         }
       });
-      await aTimeout(20);
-      expect(spy.calledOnce).to.be.true;
+      await oneEvent(chart, 'chart-redraw');
       const event = spy.firstCall.args[0];
       expect(event.detail.chart).to.be.deep.equal(event.detail.originalEvent.target);
     });
