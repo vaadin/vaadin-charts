@@ -146,6 +146,37 @@ import { ChartCategories, ChartCategoryPosition, ChartEventMap, ChartStacking } 
  *
  * When using Vaadin Charts in a development environment, you will see a pop-up that asks you
  * to validate your license by signing in to vaadin.com.
+ *
+ * @fires {CustomEvent} chart-add-series - Fired when a new series is added.
+ * @fires {CustomEvent} chart-after-export - Fired after a chart is exported.
+ * @fires {CustomEvent} chart-after-print - Fired after a chart is printed.
+ * @fires {CustomEvent} chart-before-export - Fired before a chart is exported.
+ * @fires {CustomEvent} chart-before-print - Fired before a chart is printed.
+ * @fires {CustomEvent} chart-click - Fired when clicking on the plot background.
+ * @fires {CustomEvent} chart-load - Fired when the chart has finished loading.
+ * @fires {CustomEvent} chart-drilldown - Fired when drilldown point is clicked.
+ * @fires {CustomEvent} chart-drillup - Fired when drilling up from a drilldown series.
+ * @fires {CustomEvent} chart-drillupall - Fired after all the drilldown series has been drilled up.
+ * @fires {CustomEvent} chart-redraw - Fired after the chart redraw.
+ * @fires {CustomEvent} chart-selection - Fired when an area of the chart has been selected.
+ * @fires {CustomEvent} series-after-animate - Fired when the series has finished its initial animation.
+ * @fires {CustomEvent} series-checkbox-click - Fired when the checkbox next to the series' name in the legend is clicked.
+ * @fires {CustomEvent} series-click - Fired when the series is clicked.
+ * @fires {CustomEvent} series-hide - Fired when the series is hidden after chart generation time.
+ * @fires {CustomEvent} series-legend-item-click - Fired when the legend item belonging to the series is clicked.
+ * @fires {CustomEvent} series-mouse-out - Fired when the mouse leaves the graph.
+ * @fires {CustomEvent} series-mouse-enter - Fired when the mouse enters the graph.
+ * @fires {CustomEvent} series-show - Fired when the series is shown after chart generation time.
+ * @fires {CustomEvent} point-click - Fired when the point is clicked.
+ * @fires {CustomEvent} point-legend-item-click - Fired when the legend item belonging to the point is clicked.
+ * @fires {CustomEvent} point-mouse-out - Fired when the mouse leaves the area close to the point.
+ * @fires {CustomEvent} point-mouse-over - Fired when the mouse enters the area close to the point.
+ * @fires {CustomEvent} point-remove - Fired when the point is removed from the series.
+ * @fires {CustomEvent} point-select -Fired when the point is selected either programmatically or by clicking on the point.
+ * @fires {CustomEvent} point-unselect - Fired when the point is unselected either programmatically or by clicking on the point.
+ * @fires {CustomEvent} point-update - Fired when the point is updated programmatically through `.update()` method.
+ * @fires {CustomEvent} xaxes-extremes-set - Fired when when the minimum and maximum is set for the X axis.
+ * @fires {CustomEvent} yaxes-extremes-set - Fired when when the minimum and maximum is set for the Y axis.
  */
 declare class ChartElement extends ThemableMixin(ElementMixin(HTMLElement)) {
   readonly options: Options;
