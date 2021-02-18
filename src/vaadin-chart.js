@@ -621,87 +621,97 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   get __chartEventNames() {
     return {
       /**
-       *
-       * @event chart-add-series  Fired when a new series is added
+       * Fired when a new series is added.
+       * @event chart-add-series
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       addSeries: 'chart-add-series',
+
       /**
-       *
-       * @event chart-after-export  Fired after a chart is exported
+       * Fired after a chart is exported.
+       * @event chart-after-export
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       afterExport: 'chart-after-export',
+
       /**
-       *
-       * @event chart-after-print  Fired after a chart is printed
+       * Fired after a chart is printed.
+       * @event chart-after-print
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       afterPrint: 'chart-after-print',
+
       /**
-       *
-       * @event chart-before-export  Fired before a chart is exported
+       * Fired before a chart is exported.
+       * @event chart-before-export
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       beforeExport: 'chart-before-export',
+
       /**
-       *
-       * @event chart-before-print  Fired before a chart is printed
+       * Fired before a chart is printed.
+       * @event chart-before-print
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       beforePrint: 'chart-before-print',
+
       /**
-       *
-       * @event chart-click  Fired when clicking on the plot background
+       * Fired when clicking on the plot background.
+       * @event chart-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       click: 'chart-click',
+
       /**
-       *
-       * @event chart-drilldown  Fired when drilldown point is clicked
+       * Fired when drilldown point is clicked.
+       * @event chart-drilldown
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       drilldown: 'chart-drilldown',
+
       /**
-       *
-       * @event chart-drillup  Fired when drilling up from a drilldown series
+       * Fired when drilling up from a drilldown series.
+       * @event chart-drillup
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       drillup: 'chart-drillup',
+
       /**
-       *
-       * @event chart-drillupall  Fired after all the series  has been drilled up
-       *                          if chart has multiple drilldown series
+       * Fired after all the series has been drilled up if chart has multiple drilldown series.
+       * @event chart-drillupall
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       drillupall: 'chart-drillupall',
+
       /**
-       *
-       * @event chart-load  Fired when the chart is finished loading
+       * Fired when the chart is finished loading.
+       * @event chart-load
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       load: 'chart-load',
+
       /**
-       *
-       * @event chart-redraw  Fired when the chart is redraw. Can be called after a `Chart.configuration.redraw()`
-       *                      or after an axis, series or point is modified with the `redraw` option set to `true`
+       * Fired when the chart is redraw. Can be called after a `Chart.configuration.redraw()`
+       * or after an axis, series or point is modified with the `redraw` option set to `true`.
+       * @event chart-redraw
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
       redraw: 'chart-redraw',
+
       /**
-       *
-       * @event chart-selection  Fired when an area of the chart has been selected
+       * Fired when an area of the chart has been selected.
+       * @event chart-selection
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} chart Chart object where the event was sent from
        */
@@ -716,57 +726,64 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   get __seriesEventNames() {
     return {
       /**
-       *
-       * @event series-after-animate  Fired when the series has finished its initial animation
+       * Fired when the series has finished its initial animation.
+       * @event series-after-animate
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       afterAnimate: 'series-after-animate',
+
       /**
-       *
-       * @event series-checkbox-click  Fired when the checkbox next to the series' name in the legend is clicked
+       * Fired when the checkbox next to the series' name in the legend is clicked.
+       * @event series-checkbox-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       checkboxClick: 'series-checkbox-click',
+
       /**
-       *
-       * @event series-click  Fired when the series is clicked
+       * Fired when the series is clicked.
+       * @event series-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       click: 'series-click',
+
       /**
-       *
-       * @event series-hide  Fired when the series is hidden after chart generation time
+       * Fired when the series is hidden after chart generation time.
+       * @event series-hide
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       hide: 'series-hide',
+
       /**
-       *
-       * @event series-legend-item-click  Fired when the legend item belonging to the series is clicked
+       * Fired when the legend item belonging to the series is clicked.
+       * @event series-legend-item-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       legendItemClick: 'series-legend-item-click',
+
       /**
-       *
-       * @event series-mouse-out  Fired when the mouses leave the graph
+       * Fired when the mouses leave the graph.
+       * @event series-mouse-out
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       mouseOut: 'series-mouse-out',
+
       /**
-       *
-       * @event series-mouse-over  Fired when the mouse enters the graph
+       * Fired when the mouse enters the graph.
+       * @event series-mouse-over
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
       mouseOver: 'series-mouse-over',
+
       /**
-       *
-       * @event series-show  Fired when the series is show after chart generation time
+       * Fired when the series is show after chart generation time.
+       * @event series-show
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} series Series object where the event was sent from
        */
@@ -781,57 +798,64 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   get __pointEventNames() {
     return {
       /**
-       *
-       * @event point-click  Fired when the point is clicked
+       * Fired when the point is clicked.
+       * @event point-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       click: 'point-click',
+
       /**
-       *
-       * @event point-legend-item-click  Fired when the legend item belonging to the point is clicked
+       * Fired when the legend item belonging to the point is clicked.
+       * @event point-legend-item-click
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       legendItemClick: 'point-legend-item-click',
+
       /**
-       *
-       * @event point-mouse-out  Fired when the mouse leaves the area close to the point
+       * Fired when the mouse leaves the area close to the point.
+       * @event point-mouse-out
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       mouseOut: 'point-mouse-out',
+
       /**
-       *
-       * @event point-mouse-over  Fired when the mouse enters the area close to the point
+       * Fired when the mouse enters the area close to the point.
+       * @event point-mouse-over
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       mouseOver: 'point-mouse-over',
+
       /**
-       *
-       * @event point-remove  Fired when the point is removed from the series
+       * Fired when the point is removed from the series.
+       * @event point-remove
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       remove: 'point-remove',
+
       /**
-       *
-       * @event point-select  Fired when the point is selected etheir programmatically or by clicking on the point
+       * Fired when the point is selected either programmatically or by clicking on the point.
+       * @event point-select
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       select: 'point-select',
+
       /**
-       *
-       * @event point-unselect  Fired when the point is unselected etheir programmatically or by clicking on the point
+       * Fired when the point is unselected either programmatically or by clicking on the point
+       * @event point-unselect
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
       unselect: 'point-unselect',
+
       /**
-       *
-       * @event point-update  Fired when the point is updated programmatically through `.update()` method
+       * Fired when the point is updated programmatically through `.update()` method.
+       * @event point-update
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} point Point object where the event was sent from
        */
@@ -843,8 +867,8 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   get __xAxesEventNames() {
     return {
       /**
-       *
-       * @event xaxes-extremes-set  Fired when when the minimum and maximum is set for the x axis
+       * Fired when when the minimum and maximum is set for the x axis.
+       * @event xaxes-extremes-set
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} axis Point object where the event was sent from
        */
@@ -856,8 +880,8 @@ class ChartElement extends ElementMixin(ThemableMixin(PolymerElement)) {
   get __yAxesEventNames() {
     return {
       /**
-       *
-       * @event yaxes-extremes-set  Fired when when the minimum and maximum is set for the y axis
+       * Fired when when the minimum and maximum is set for the y axis.
+       * @event yaxes-extremes-set
        * @param {Object} detail.originalEvent object with details about the event sent
        * @param {Object} axis Point object where the event was sent from
        */
