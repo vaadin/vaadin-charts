@@ -4,7 +4,7 @@ import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.
 
 import { Axis, Chart, Options } from 'highcharts';
 
-import { ChartCategories, ChartCategoryPosition, ChartStacking } from '../@types/interfaces';
+import { ChartCategories, ChartCategoryPosition, ChartEventMap, ChartStacking } from './interfaces';
 
 /**
  * `<vaadin-chart>` is a Web Component for creating high quality charts.
@@ -328,6 +328,18 @@ declare class ChartElement extends ThemableMixin(ElementMixin(HTMLElement)) {
    *    if existing configuration should be discarded.
    */
   update(jsonConfiguration: Options, resetConfiguration?: boolean): void;
+
+  addEventListener<K extends keyof ChartEventMap>(
+    type: K,
+    listener: (this: ChartElement, ev: ChartEventMap[K]) => void,
+    options?: boolean | AddEventListenerOptions
+  ): void;
+
+  removeEventListener<K extends keyof ChartEventMap>(
+    type: K,
+    listener: (this: ChartElement, ev: ChartEventMap[K]) => void,
+    options?: boolean | EventListenerOptions
+  ): void;
 }
 
 declare global {
