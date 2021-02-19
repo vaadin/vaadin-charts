@@ -347,4 +347,27 @@ describe('vaadin-chart', () => {
       expect(chart.$.chart.querySelector('.highcharts-credits').textContent).to.equal('Vaadin');
     });
   });
+
+  describe('RTL', () => {
+    let chart;
+
+    beforeEach(async () => {
+      chart = fixtureSync(`
+        <vaadin-chart>
+          <vaadin-chart-series values="[10, 20, 30, 40, 50]"></vaadin-chart-series>
+        </vaadin-chart>
+      `);
+      await oneEvent(chart, 'chart-load');
+    });
+
+    afterEach(() => {
+      document.documentElement.removeAttribute('dir');
+    });
+
+    it('should not create horizontal scroll when dir is set to RTL', () => {
+      const scrollWidth = document.documentElement.scrollWidth;
+      document.dir = 'rtl';
+      expect(scrollWidth).to.be.equal(document.documentElement.scrollWidth);
+    });
+  });
 });
