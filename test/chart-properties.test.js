@@ -184,19 +184,19 @@ describe('vaadin-chart properties', () => {
 
     it('should have tooltips when tooltip is set to true', async () => {
       chart.tooltip = true;
-      await aTimeout(20);
+      await aTimeout(50);
       expect(chart.configuration.tooltip.options.enabled).to.be.true;
     });
 
     it('should have tooltips when tooltip is set using additionalOptions', async () => {
       chart.set('additionalOptions', { tooltip: { enabled: true, pointFormat: 'custom' } });
-      await aTimeout(20);
+      await aTimeout(50);
       expect(chart.configuration.tooltip.options.enabled).to.be.true;
     });
 
     it('should have tooltips when tooltip is set using update', async () => {
       chart.update({ tooltip: { enabled: true, pointFormat: 'custom' } });
-      await aTimeout(20);
+      await aTimeout(50);
       expect(chart.configuration.tooltip.options.enabled).to.be.true;
     });
   });
