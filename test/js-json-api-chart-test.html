@@ -128,11 +128,11 @@
         unattachedChart.update({title: {text: 'Awesome chart'}});
         setTimeout(() => {
 
-          testContainer.appendChildElement(testContainer, unattachedChart);
+          document.body.appendChild(unattachedChart);
 
           setTimeout(() => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
-            testContainer.removeChild(unattachedChart);
+            document.body.removeChild(unattachedChart);
             done();
           }, 80);
         }, 20);
