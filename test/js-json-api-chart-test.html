@@ -53,6 +53,11 @@
   </dom-module>
   <js-json-api-demo></js-json-api-demo>
 
+  <test-fixture id="container">
+    <template>
+      <div></div>
+    </template>
+  </test-fixture>
   <script>
     describe('Basic JS API chart', function() {
       var testContainer;
@@ -124,15 +129,16 @@
       });
 
       it('should work if configured before connect', function(done) {
+        const container = fixture('container');
         const unattachedChart = document.createElement('vaadin-chart');
         unattachedChart.update({title: {text: 'Awesome chart'}});
         setTimeout(() => {
 
-          document.body.appendChild(unattachedChart);
+          container.appendChild(unattachedChart);
 
           setTimeout(() => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
-            document.body.removeChild(unattachedChart);
+            container.removeChild(unattachedChart);
             done();
           }, 80);
         }, 20);
@@ -149,17 +155,19 @@
       });
 
       it('should not reset configuration when attached to a new parent', function(done) {
+        const container = fixture('container');
+
         const div1 = document.createElement('div');
-        testContainer.appendChildElement(testContainer, div1);
+        container.appendChild(div1);
 
         const div2 = document.createElement('div');
-        testContainer.appendChildElement(testContainer, div2);
+        container.appendChild(div2);
 
         const floatingChart = document.createElement('vaadin-chart');
         floatingChart.update({title: {text: 'Awesome title'}, credits: {enabled: false}});
 
         setTimeout(() => {
-          testContainer.appendChildElement(div1, floatingChart);
+          div1.appendChild(floatingChart);
 
           setTimeout(() => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
@@ -167,7 +175,7 @@
 
             div1.removeChild(floatingChart);
             floatingChart.update({subtitle: {text: 'Awesome subtitle'}, credits: {enabled: true, text: 'Vaadin'}});
-            testContainer.appendChildElement(div2, floatingChart);
+            div2.appendChild(floatingChart);
 
             setTimeout(() => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
