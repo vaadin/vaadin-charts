@@ -63,7 +63,10 @@
   <exporting-test></exporting-test>
 
   <script>
-    describe('Chart Export', function() {
+    const {maxTouchPoints, platform, userAgent} = navigator;
+    const isIOS = (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) || (platform === 'MacIntel' && maxTouchPoints > 1);
+
+    (isIOS ? xdescribe : describe)('Chart Export', function() {
       let chart;
       let chartContainer;
 

@@ -3,6 +3,7 @@
     "WCT": false,
     "HTMLImports": false,
     "describe": false,
+    "xdescribe": false,
     "beforeEach": false,
     "before": false,
     "fixture": false,
