@@ -65,8 +65,9 @@
   <script>
     const {maxTouchPoints, platform, userAgent} = navigator;
     const isIOS = (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) || (platform === 'MacIntel' && maxTouchPoints > 1);
+    const isMSIE = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
 
-    (isIOS ? xdescribe : describe)('Chart Export', function() {
+    (isIOS || isMSIE ? xdescribe : describe)('Chart Export', function() {
       let chart;
       let chartContainer;
 
