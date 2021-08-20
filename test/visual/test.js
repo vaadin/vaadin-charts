@@ -23,7 +23,7 @@ gemini.suite('vaadin-charts', function(rootSuite) {
 
   gemini.suite('responsive', function(suite) {
     suite
-      .setUrl('/responsive.html')
+      .setUrl('responsive.html')
       .setCaptureElements('body')
       .capture('responsive');
   });
