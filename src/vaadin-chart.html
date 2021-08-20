@@ -62,6 +62,22 @@ MAGI ADD END -->
       :host([hidden]) {
         display: none !important;
       }
+
+      /* https://github.com/highcharts/highcharts/issues/4649 */
+      /* https://github.com/vaadin/web-components/issues/2171 */
+      :host {
+        position: relative;
+        height: 400px;
+      }
+
+      #chart {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
     </style>
     <div id="chart"></div>
     <slot id="slot"></slot>
