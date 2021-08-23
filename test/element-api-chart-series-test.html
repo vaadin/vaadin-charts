@@ -130,9 +130,30 @@
         chart = element.$.mychart;
         chartContainer = chart.$.chart;
         series = element.$.myseries;
-        setTimeout(function() {
-          done();
-        }, 100);
+        chart.additionalOptions = {
+          chart: {
+            animation: false,
+            events: {
+              load() {
+                setTimeout(() => {
+                  done();
+                }, 100);
+              }
+            }
+          },
+          plotOptions: {
+            series: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
+          drilldown: {
+            animation: {
+              duration: 0
+            }
+          }
+        };
       });
 
       it('should be defined', function() {
