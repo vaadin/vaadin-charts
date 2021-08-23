@@ -28,9 +28,31 @@
       beforeEach(done => {
         element = fixture('default');
         chartContainer = element.$.chart;
-        setTimeout(() => {
-          done();
-        }, 100);
+
+        element.additionalOptions = {
+          chart: {
+            animation: false,
+            events: {
+              load() {
+                setTimeout(() => {
+                  done();
+                }, 100);
+              }
+            }
+          },
+          plotOptions: {
+            series: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
+          drilldown: {
+            animation: {
+              duration: 0
+            }
+          }
+        };
       });
 
       it('should have one gauge series', done => {

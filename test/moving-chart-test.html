@@ -29,9 +29,30 @@
         element = testElements[0];
         newContainer = testElements[1];
 
-        setTimeout(function() {
-          done();
-        }, 50);
+        element.additionalOptions = {
+          chart: {
+            animation: false,
+            events: {
+              load() {
+                setTimeout(function() {
+                  done();
+                }, 50);
+              }
+            }
+          },
+          plotOptions: {
+            series: {
+              animation: {
+                duration: 0
+              }
+            }
+          },
+          drilldown: {
+            animation: {
+              duration: 0
+            }
+          }
+        };
       });
 
 
