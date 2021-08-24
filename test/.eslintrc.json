@@ -10,6 +10,7 @@
     "it": false,
     "expect": false,
     "gemini": false,
-    "sinon": false
+    "sinon": false,
+    "onChartRender": false
   }
 }

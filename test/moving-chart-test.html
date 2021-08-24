@@ -5,6 +5,7 @@
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./utils.js"></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../vaadin-chart.html">
 </head>
@@ -24,46 +25,23 @@
     describe('Empty chart', function() {
       var element, newContainer;
 
-      beforeEach(function(done) {
+      beforeEach(function() {
         const testElements = fixture('default');
         element = testElements[0];
         newContainer = testElements[1];
-
-        element.additionalOptions = {
-          chart: {
-            animation: false,
-            events: {
-              load() {
-                setTimeout(function() {
-                  done();
-                }, 50);
-              }
-            }
-          },
-          plotOptions: {
-            series: {
-              animation: {
-                duration: 0
-              }
-            }
-          },
-          drilldown: {
-            animation: {
-              duration: 0
-            }
-          }
-        };
       });
 
 
       it('should keep chart configuration if element is moved to a new parent node', (done) => {
-
-        expect(element.configuration.series.length).to.be.equal(element.childElementCount);
-        newContainer.appendChild(element);
-        setTimeout(() => {
+        onChartRender(element, () => {
           expect(element.configuration.series.length).to.be.equal(element.childElementCount);
-          done();
-        }, 50);
+          newContainer.appendChild(element);
+
+          onChartRender(element, () => {
+            expect(element.configuration.series.length).to.be.equal(element.childElementCount);
+            done();
+          });
+        });
       });
 
     });
