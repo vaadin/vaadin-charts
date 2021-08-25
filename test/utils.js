@@ -49,7 +49,7 @@ window.onChartRender = (function() {
     });
   }
 
-  return function onChartRender(vaadinChartEl, cb) {
+  return function onChartRender(vaadinChartEl, cb, wait) {
     mergeAdditionalOptions(vaadinChartEl);
 
     let timeoutId = null;
@@ -58,7 +58,7 @@ window.onChartRender = (function() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setTimeout(cb, 0);
-      }, 50);
+      }, wait || 50);
     }, {once: true});
 
     if (vaadinChartEl.configuration && vaadinChartEl.configuration.hasRendered) {
@@ -66,5 +66,3 @@ window.onChartRender = (function() {
     }
   };
 }());
-
-

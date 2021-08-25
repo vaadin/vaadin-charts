@@ -44,15 +44,18 @@
       });
 
       it('chart height container should react to container change', done => {
+        const {maxTouchPoints, platform, userAgent} = navigator;
+        const isIOS = (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) || (platform === 'MacIntel' && maxTouchPoints > 1);
+
         onChartRender(element, () => {
           element.classList.add('expand-height');
+
           onChartRender(element, () => {
             const boundingClientRectContainer = element.$.chart.getBoundingClientRect();
-
             expect(300).to.be.equal(boundingClientRectContainer.height);
             expect(300).to.be.equal(element.configuration.chartHeight);
             done();
-          });
+          }, isIOS ? 200 : 50);
         });
       });
 
