@@ -58,7 +58,7 @@ window.onChartRender = (function() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         setTimeout(cb, 0);
-      }, 30);
+      }, 50);
     }, {once: true});
 
     if (vaadinChartEl.configuration && vaadinChartEl.configuration.hasRendered) {
