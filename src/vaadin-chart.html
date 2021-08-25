@@ -65,12 +65,16 @@ MAGI ADD END -->
 
       /* https://github.com/highcharts/highcharts/issues/4649 */
       /* https://github.com/vaadin/web-components/issues/2171 */
-      :host {
+      .highcharts-container svg {
+        width: 100% !important;
+      }
+
+      :host(.ff-lt-68) {
         position: relative;
         height: 400px;
       }
 
-      #chart {
+      :host(.ff-lt-68) #chart {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -566,6 +570,15 @@ MAGI ADD END -->
 
         constructor() {
           super();
+
+          const isFirefox = window.navigator.userAgent.match(/Firefox\/([0-9]+)\./);
+          if (isFirefox) {
+            const fireFoxVersion = parseInt(isFirefox[1], 10);
+
+            if (fireFoxVersion < 68) {
+              this.classList.add('ff-lt-68');
+            }
+          }
 
           /**
            * List of properties that will always be copied from the chart element to the container div
