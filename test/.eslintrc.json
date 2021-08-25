@@ -3,12 +3,14 @@
     "WCT": false,
     "HTMLImports": false,
     "describe": false,
+    "xdescribe": false,
     "beforeEach": false,
     "before": false,
     "fixture": false,
     "it": false,
     "expect": false,
     "gemini": false,
-    "sinon": false
+    "sinon": false,
+    "onChartRender": false
   }
 }
