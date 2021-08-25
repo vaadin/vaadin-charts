@@ -5,6 +5,7 @@
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./utils.js"></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../vaadin-chart.html">
 </head>
@@ -125,14 +126,11 @@
       let series;
       let element;
 
-      beforeEach(function(done) {
+      beforeEach(function() {
         element = fixture('default');
         chart = element.$.mychart;
         chartContainer = chart.$.chart;
         series = element.$.myseries;
-        setTimeout(function() {
-          done();
-        }, 100);
       });
 
       it('should be defined', function() {
@@ -140,14 +138,14 @@
       });
 
       it('should have one series', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           expect(chart.configuration.series.length).to.be.equal(1);
           done();
-        }, 20);
+        });
       });
 
       it('should have one line series with 5 points', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
 
@@ -156,29 +154,29 @@
           expect(firstSeries.getAttribute('class')).to.include('highcharts-line-series');
           expect(chart.configuration.series[0].data).to.have.lengthOf(element.values.length);
           done();
-        }, 20);
+        });
       });
 
       it('should have same values as passed', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const values = chart.configuration.series[0].data.map(data => data.y);
           expect(values).to.have.lengthOf(element.values.length);
           expect(values).to.have.members(element.values);
           done();
-        }, 20);
+        });
       });
 
       it('should update values on change', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           element.changeValues();
           const changedValues = chart.configuration.series[0].data.map(data => data.y);
           expect(changedValues).to.have.members(element.values);
           done();
-        }, 10);
+        });
       });
 
       it('should disable series visibility toggling only when set', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const legend = chartContainer.querySelector('.highcharts-legend-item');
 
           // Series visibility toggling is enabled by default
@@ -202,11 +200,11 @@
           legend.dispatchEvent(new MouseEvent('click'));
           expect(legend.getAttribute('class')).to.include('highcharts-legend-item-hidden');
           done();
-        }, 20);
+        });
       });
 
       it('should remove series if element is removed from the tree', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
 
@@ -222,39 +220,39 @@
       });
 
       it('should have a custom type', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal('line');
           done();
-        }, 10);
+        });
       });
 
       it('should update type on property change', function(done) {
         const type = 'area';
         element.setAttribute('type', type);
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.type).to.be.equal(type);
           done();
-        }, 30);
+        });
       });
 
       it('should have a custom title', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.name).to.be.equal(element.title);
           done();
-        }, 20);
+        });
       });
 
       it('should update title on property change', function(done) {
         const title = 'new-series-title';
         element.setAttribute('title', title);
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const firstSeries = chart.configuration.series[0];
           expect(firstSeries.name).to.be.equal(title);
           done();
-        }, 70);
+        });
       });
 
       function markersVisible(container) {
@@ -266,283 +264,308 @@
       }
 
       it('should have markers by default for widespread data', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           expect(markersVisible(chartContainer)).to.be.true;
           done();
-        }, 100);
+        });
       });
 
       it('should not override chart plot options by default', function(done) {
         const additionalchart = fixture('additionalchart');
-        setTimeout(function() {
+        onChartRender(additionalchart, () => {
           const additionalChartContainer = additionalchart.$.chart;
           expect(markersVisible(additionalChartContainer)).to.be.false;
           done();
-        }, 120);
+        });
       });
 
       it('should not have markers by default for dense data', function(done) {
         element.changeValuesDense();
-
-        setTimeout(function() {
+        onChartRender(chart, () => {
           expect(markersVisible(chartContainer)).to.be.false;
           done();
-        }, 100);
+        });
       });
 
       it('should have markers when enabled', function(done) {
         series.markers = 'shown';
-        setTimeout(function() {
+        onChartRender(chart, () => {
           expect(markersVisible(chartContainer)).to.be.true;
           done();
-        }, 100);
+        });
       });
 
       it('should not have markers when disabled', function(done) {
         series.markers = 'hidden';
-        setTimeout(function() {
+        onChartRender(chart, () => {
           expect(markersVisible(chartContainer)).to.be.false;
           done();
-        }, 100);
+        });
       });
 
       it('should accept unit as string', function(done) {
         const unit = element.firstUnit;
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const yAxis = chart.configuration.yAxis[0];
           expect(yAxis.options.id).to.be.equal(unit);
           done();
-        }, 70);
+        });
       });
 
       it('should accept more than one unit', function(done) {
-        const unit = element.secondUnit;
+        onChartRender(chart, () => {
+          const unit = element.secondUnit;
 
-        const secondSeries = document.createElement('vaadin-chart-series');
-        secondSeries.setAttribute('values', '[20,30,40,50]');
-        secondSeries.setAttribute('unit', unit);
-        chart.appendChild(secondSeries);
+          const secondSeries = document.createElement('vaadin-chart-series');
+          secondSeries.setAttribute('values', '[20,30,40,50]');
+          secondSeries.setAttribute('unit', unit);
+          chart.appendChild(secondSeries);
 
-        setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(2);
-          const secondAxis = chart.configuration.yAxis[1];
-          expect(secondAxis.options.id).to.be.equal(unit);
-          done();
-        }, 20);
+          onChartRender(chart, () => {
+            expect(chart.configuration.yAxis).to.have.length(2);
+            const secondAxis = chart.configuration.yAxis[1];
+            expect(secondAxis.options.id).to.be.equal(unit);
+            done();
+          });
+        });
       });
 
       it('should make series goes to first y axis if no unit is defined', function(done) {
-        const unit = element.firstUnit;
+        onChartRender(chart, () => {
+          const unit = element.firstUnit;
 
-        const secondSeries = document.createElement('vaadin-chart-series');
-        secondSeries.setAttribute('values', '[20,30,40,50]');
-        chart.appendChild(secondSeries);
+          const secondSeries = document.createElement('vaadin-chart-series');
+          secondSeries.setAttribute('values', '[20,30,40,50]');
+          chart.appendChild(secondSeries);
 
-        setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(1);
-          const secondAxis = chart.configuration.yAxis[0];
-          expect(secondAxis.options.id).to.be.equal(unit);
-          done();
-        }, 200);
+          onChartRender(chart, () => {
+            expect(chart.configuration.yAxis).to.have.length(1);
+            const secondAxis = chart.configuration.yAxis[0];
+            expect(secondAxis.options.id).to.be.equal(unit);
+            done();
+          });
+        });
       });
 
       it('should make series goes to first y axis if unit is removed', function(done) {
-        const unit = element.secondUnit;
+        onChartRender(chart, () => {
+          const unit = element.secondUnit;
 
-        const secondSeries = document.createElement('vaadin-chart-series');
-        secondSeries.setAttribute('values', '[20,30,40,50]');
-        secondSeries.setAttribute('unit', unit);
-        chart.appendChild(secondSeries);
+          const secondSeries = document.createElement('vaadin-chart-series');
+          secondSeries.setAttribute('values', '[20,30,40,50]');
+          secondSeries.setAttribute('unit', unit);
+          chart.appendChild(secondSeries);
 
-        setTimeout(function() {
-          expect(chart.configuration.yAxis).to.have.length(2);
-          secondSeries.removeAttribute('unit');
-          setTimeout(function() {
-            expect(chart.configuration.yAxis).to.have.length(1);
-            const secondAxis = chart.configuration.yAxis[0];
-            expect(secondAxis.options.id).to.be.equal(element.firstUnit);
-            done();
-          }, 40);
-        }, 40);
+          onChartRender(chart, () => {
+            expect(chart.configuration.yAxis).to.have.length(2);
+            secondSeries.removeAttribute('unit');
+            onChartRender(chart, () => {
+              expect(chart.configuration.yAxis).to.have.length(1);
+              const secondAxis = chart.configuration.yAxis[0];
+              expect(secondAxis.options.id).to.be.equal(element.firstUnit);
+              done();
+            });
+          });
+        });
       });
 
       it('should not remove user generated axis', function(done) {
         const multipleAxesChart = fixture('multipleaxes');
-        setTimeout(function() {
+        onChartRender(multipleAxesChart, () => {
           expect(multipleAxesChart.configuration.yAxis).to.have.length(2);
           const [firstAxis, secondAxis] = multipleAxesChart.configuration.yAxis;
           expect(firstAxis.series).to.have.length(1);
           expect(secondAxis.series).to.have.length(0);
           done();
-        }, 150);
+        });
       });
 
       it('should work value-min initially', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        setTimeout(function() {
+        onChartRender(yAxisValuesChart, () => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const firstAxis = yAxisValuesChart.configuration.yAxis[0];
           expect(firstAxis.paddedTicks[0]).to.be.closeTo(0, 5);
           done();
-        }, 150);
+        });
       });
 
       it('should be available to change value-min', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        const seriesWithValue = yAxisValuesChart.children[2];
-        seriesWithValue.valueMin = -20;
-        setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const firstAxis = yAxisValuesChart.configuration.yAxis[0];
-          expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
-          done();
-        }, 150);
+        onChartRender(yAxisValuesChart, () => {
+          const seriesWithValue = yAxisValuesChart.children[2];
+          seriesWithValue.valueMin = -20;
+          onChartRender(yAxisValuesChart, () => {
+            expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
+            const firstAxis = yAxisValuesChart.configuration.yAxis[0];
+            expect(firstAxis.paddedTicks[0]).to.be.closeTo(-20, 5);
+            done();
+          });
+        });
       });
 
       it('should be available initially to set value-max', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        setTimeout(function() {
+        onChartRender(yAxisValuesChart, () => {
           expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
           const secondAxis = yAxisValuesChart.configuration.yAxis[1];
           expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(40, 5);
           done();
-        }, 150);
+        });
       });
 
       it('should be available to change value-max', function(done) {
         const yAxisValuesChart = fixture('y-axis-values');
-        const seriesWithValue = yAxisValuesChart.children[1];
-        seriesWithValue.valueMax = 10;
-        setTimeout(function() {
-          expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
-          const secondAxis = yAxisValuesChart.configuration.yAxis[1];
-          expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(10, 5);
-          done();
-        }, 150);
+        onChartRender(yAxisValuesChart, () => {
+          const seriesWithValue = yAxisValuesChart.children[1];
+          seriesWithValue.valueMax = 10;
+          onChartRender(yAxisValuesChart, () => {
+            expect(yAxisValuesChart.configuration.yAxis).to.have.length(2);
+            const secondAxis = yAxisValuesChart.configuration.yAxis[1];
+            expect(secondAxis.paddedTicks.slice(-1)[0]).to.be.closeTo(10, 5);
+            done();
+          });
+        });
       });
 
       it('should be available initially to set stack with default stacking in plotOptions', function(done) {
         const stackChart = fixture('stack');
-        setTimeout(function() {
+        onChartRender(stackChart, () => {
           expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(10);
           expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
           done();
-        }, 150);
+        });
       });
 
       it('should be available to change stack with default stacking in plotOptions', function(done) {
         const stackChart = fixture('stack');
-        stackChart.children[2].stack = '0';
-        stackChart.children[3].stack = '0';
-        setTimeout(function() {
-          expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
-          expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
-          expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
-          expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
-          done();
-        }, 150);
+        onChartRender(stackChart, () => {
+          stackChart.children[2].stack = '0';
+          stackChart.children[3].stack = '0';
+          onChartRender(stackChart, () => {
+            expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
+            expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
+            expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
+            expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
+            done();
+          });
+        });
       });
 
       it('should be available initially to set stack with default stacking', function(done) {
         const stackChart = fixture('stack');
-        setTimeout(function() {
+        onChartRender(stackChart, () => {
           expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(10);
           expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
           expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
           done();
-        }, 150);
+        });
       });
 
       it('should be available to change stack with default stacking', function(done) {
         const stackChart = fixture('stack');
-        stackChart.children[2].stack = '0';
-        stackChart.children[3].stack = '0';
-        setTimeout(function() {
-          expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
-          expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
-          expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
-          expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
-          done();
-        }, 150);
+        onChartRender(stackChart, () => {
+          stackChart.children[2].stack = '0';
+          stackChart.children[3].stack = '0';
+          onChartRender(stackChart, () => {
+            expect(stackChart.configuration.series[0].data[3].stackY).to.be.equal(40);
+            expect(stackChart.configuration.series[1].data[3].stackY).to.be.equal(30);
+            expect(stackChart.configuration.series[2].data[3].stackY).to.be.equal(20);
+            expect(stackChart.configuration.series[3].data[3].stackY).to.be.equal(10);
+            done();
+          });
+        });
       });
 
       it('should have additional-options', done => {
         const chart = fixture('additionalseries');
-
-        setTimeout(() => {
+        onChartRender(chart, () => {
           const hcSeries = chart.configuration.series[0];
           expect(hcSeries.type).to.be.equal('column');
           done();
-        }, 200);
+        });
       });
 
       it('additional-options should not overwrite top-level element properties', done => {
         const chart = fixture('additionalseries');
-
-        setTimeout(() => {
+        onChartRender(chart, () => {
           const hcSeries = chart.configuration.series[0];
           expect(hcSeries.name).to.be.equal('series-title');
           done();
-        }, 200);
+        });
       });
 
       it('should react to additionalOptions object change', done => {
         const chart = fixture('additionalseries');
-        const series = chart.querySelector('vaadin-chart-series');
-        series.additionalOptions = {type: 'line'};
-
-        setTimeout(() => {
-          const hcSeries = chart.configuration.series[0];
-          expect(hcSeries.type).to.be.equal('line');
-          done();
-        }, 200);
+        onChartRender(chart, () => {
+          const series = chart.querySelector('vaadin-chart-series');
+          series.additionalOptions = {type: 'line'};
+          onChartRender(chart, () => {
+            const hcSeries = chart.configuration.series[0];
+            expect(hcSeries.type).to.be.equal('line');
+            done();
+          });
+        });
       });
 
       it('should react to additionalOptions subproperty change', done => {
         const chart = fixture('additionalseries');
-        const series = chart.querySelector('vaadin-chart-series');
-        series.additionalOptions.type = 'line';
+        onChartRender(chart, () => {
+          const series = chart.querySelector('vaadin-chart-series');
+          series.set('additionalOptions.type', 'line');
+          onChartRender(chart, () => {
+            const hcSeries = chart.configuration.series[0];
+            expect(hcSeries.type).to.be.equal('line');
+            done();
+          });
+        });
+      });
 
-        setTimeout(() => {
-          const hcSeries = chart.configuration.series[0];
-          expect(hcSeries.type).to.be.equal('line');
+      it('should be able to set neck-width', (done) => {
+        onChartRender(chart, () => {
+          const {neckWidth} = series._series.options;
+          expect(neckWidth).to.be.equal(element.neckWidth);
           done();
-        }, 200);
+        });
       });
 
-      it('should be able to set neck-width', () => {
-        const {neckWidth} = series._series.options;
-        expect(neckWidth).to.be.equal(element.neckWidth);
+      it('should be able to change neck-width', (done) => {
+        onChartRender(chart, () => {
+          let {neckWidth} = series._series.options;
+          expect(neckWidth).to.be.equal(element.neckWidth);
+
+          const newNeckWidth = 100;
+          element.neckWidth = newNeckWidth;
+          neckWidth = series._series.options.neckWidth;
+
+          expect(neckWidth).to.be.equal(newNeckWidth);
+          done();
+        });
       });
 
-      it('should be able to change neck-width', () => {
-        let {neckWidth} = series._series.options;
-        expect(neckWidth).to.be.equal(element.neckWidth);
-
-        const newNeckWidth = 100;
-        element.neckWidth = newNeckWidth;
-        neckWidth = series._series.options.neckWidth;
-
-        expect(neckWidth).to.be.equal(newNeckWidth);
+      it('should be able to set neck-position', (done) => {
+        onChartRender(chart, () => {
+          const {neckHeight} = series._series.options;
+          expect(neckHeight).to.be.equal(element.neckPosition);
+          done();
+        });
       });
 
-      it('should be able to set neck-position', () => {
-        const {neckHeight} = series._series.options;
-        expect(neckHeight).to.be.equal(element.neckPosition);
-      });
+      it('should be able to change neck-position', (done) => {
+        onChartRender(chart, () => {
+          let {neckHeight} = series._series.options;
+          expect(neckHeight).to.be.equal(element.neckPosition);
 
-      it('should be able to change neck-position', () => {
-        let {neckHeight} = series._series.options;
-        expect(neckHeight).to.be.equal(element.neckPosition);
+          const newNeckPosition = 100;
+          element.neckPosition = newNeckPosition;
+          neckHeight = series._series.options.neckHeight;
 
-        const newNeckPosition = 100;
-        element.neckPosition = newNeckPosition;
-        neckHeight = series._series.options.neckHeight;
-
-        expect(neckHeight).to.be.equal(newNeckPosition);
+          expect(neckHeight).to.be.equal(newNeckPosition);
+          done();
+        });
       });
 
     });
