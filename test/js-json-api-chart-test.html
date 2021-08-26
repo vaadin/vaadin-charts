@@ -5,6 +5,7 @@
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./utils.js"></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../vaadin-chart.html">
 </head>
@@ -82,21 +83,21 @@
       });
 
       it('should have custom title', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, function() {
           expect(chartContainer.querySelector('.highcharts-title > tspan').textContent).to.be.equal('The chart title');
           done();
-        }, 50);
+        });
       });
 
       it('should not have credits by default', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, function() {
           expect(chartContainer.querySelector('.highcharts-credits')).to.be.null;
           done();
         });
       });
 
       it('should have one column series and twelve points', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, function() {
           const series = chartContainer.querySelectorAll('.highcharts-series');
           expect(series).to.have.lengthOf(1);
           const firstSeries = series[0];
@@ -108,7 +109,7 @@
       });
 
       it('should have month names as categories', function(done) {
-        setTimeout(function() {
+        onChartRender(chart, () => {
           const categories = Array.from(chartContainer.querySelectorAll('.highcharts-xaxis-labels > text')).map(text => text.textContent);
           expect(categories).to.have.lengthOf(12);
           expect(categories).to.have.members(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
@@ -117,16 +118,18 @@
       });
 
       it('should have no title if resetConfiguration is true', function(done) {
-        // initialConfig true should reset the config
-        chart.update({}, true);
+        onChartRender(chart, () => {
+          // initialConfig true should reset the config
+          chart.update({}, true);
 
-        setTimeout(function() {
-          const title = chartContainer.querySelector('.highcharts-title');
-          if (title) {
-            expect(title.textContent).to.be.empty;
-          }
-          done();
-        }, 150);
+          onChartRender(chart, () => {
+            const title = chartContainer.querySelector('.highcharts-title');
+            if (title) {
+              expect(title.textContent).to.be.empty;
+            }
+            done();
+          });
+        });
       });
 
       it('should work if configured before connect', function(done) {
@@ -137,22 +140,22 @@
 
           container.appendChild(unattachedChart);
 
-          setTimeout(() => {
+          onChartRender(unattachedChart, () => {
             expect(unattachedChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
             container.removeChild(unattachedChart);
             done();
-          }, 80);
-        }, 20);
+          });
+        }, 50);
       });
 
       it('should not reset chart configured with html', function(done) {
         const htmlChart = testContainer.$.htmlChart;
         htmlChart.update({title: {text: 'Awesome chart'}});
-        setTimeout(() => {
+        onChartRender(htmlChart, () => {
           expect(htmlChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome chart');
           expect(htmlChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('My subtitle');
           done();
-        }, 80);
+        });
       });
 
       it('should not reset configuration when attached to a new parent', function(done) {
@@ -170,7 +173,7 @@
         setTimeout(() => {
           div1.appendChild(floatingChart);
 
-          setTimeout(() => {
+          onChartRender(floatingChart, () => {
             expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
             expect(floatingChart.$.chart.querySelector('.highcharts-credits')).to.be.null;
 
@@ -178,45 +181,45 @@
             floatingChart.update({subtitle: {text: 'Awesome subtitle'}, credits: {enabled: true, text: 'Vaadin'}});
             div2.appendChild(floatingChart);
 
-            setTimeout(() => {
+            onChartRender(floatingChart, () => {
               expect(floatingChart.$.chart.querySelector('.highcharts-title > tspan').textContent).to.equal('Awesome title');
               expect(floatingChart.$.chart.querySelector('.highcharts-subtitle > tspan').textContent).to.equal('Awesome subtitle');
               expect(floatingChart.$.chart.querySelector('.highcharts-credits').textContent).to.equal('Vaadin');
               div2.removeChild(floatingChart);
               done();
-            }, 100);
-          }, 100);
-        }, 20);
+            });
+          });
+        }, 50);
       });
 
       it('should inflate whole function strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': 'function() {return "awesome chart"}'}};
         chart.__inflateFunctions(config);
-        setTimeout(() => {
+        onChartRender(chart, () => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        }, 50);
+        });
       });
 
       it('should inflate function body strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': 'return "awesome chart"'}};
         chart.__inflateFunctions(config);
-        setTimeout(() => {
+        onChartRender(chart, () => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        }, 50);
+        });
       });
 
       it('should inflate empty function strings', function(done) {
         const config = {'tooltip': {'_fn_formatter': ''}};
         chart.__inflateFunctions(config);
-        setTimeout(() => {
+        onChartRender(chart, () => {
           expect(config.tooltip.formatter).to.be.a('function');
           expect(config.tooltip).to.not.have.property('_fn_formatter');
           done();
-        }, 50);
+        });
       });
     });
   </script>

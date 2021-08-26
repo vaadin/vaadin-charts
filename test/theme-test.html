@@ -5,6 +5,7 @@
   <title>vaadin-chart tests</title>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./utils.js"></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../vaadin-chart.html">
 </head>
@@ -21,18 +22,16 @@
   <script>
     describe('Test defaults in theme', function() {
       var chart;
+      var chartContainer;
 
-      beforeEach(done => {
-        chart = fixture('pie-with-labels').$.chart;
-        setTimeout(() => {
-          done();
-        }, 100);
+      beforeEach(() => {
+        chart = fixture('pie-with-labels');
+        chartContainer = chart.$.chart;
       });
 
-
       it('data label connectors should have no fill', function(done) {
-        Polymer.RenderStatus.afterNextRender(chart, () => {
-          const connectors = Array.from(chart.querySelectorAll('.highcharts-data-label-connector'));
+        onChartRender(chart, () => {
+          const connectors = Array.from(chartContainer.querySelectorAll('.highcharts-data-label-connector'));
           expect(connectors).to.have.lengthOf(5);
           connectors.forEach(connector => expect(window.getComputedStyle(connector).fill).to.equal('none'));
           done();
@@ -40,14 +39,16 @@
       });
 
       it('should hide charts by adding hidden attribute', function() {
-        const chartVisibleSize = chart.getBoundingClientRect();
-        expect(chartVisibleSize.width).to.be.above(0);
-        expect(chartVisibleSize.height).to.be.above(0);
+        onChartRender(chart, () => {
+          const chartVisibleSize = chart.getBoundingClientRect();
+          expect(chartVisibleSize.width).to.be.above(0);
+          expect(chartVisibleSize.height).to.be.above(0);
 
-        chart.hidden = true;
-        const chartHiddenSize = chart.getBoundingClientRect();
-        expect(chartHiddenSize.width).to.be.equal(0);
-        expect(chartHiddenSize.height).to.be.equal(0);
+          chart.hidden = true;
+          const chartHiddenSize = chart.getBoundingClientRect();
+          expect(chartHiddenSize.width).to.be.equal(0);
+          expect(chartHiddenSize.height).to.be.equal(0);
+        });
       });
 
     });

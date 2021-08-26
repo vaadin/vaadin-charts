@@ -21,4 +21,11 @@ gemini.suite('vaadin-charts', function(rootSuite) {
       .capture('empty-chart');
   });
 
+  gemini.suite('responsive', function(suite) {
+    suite
+      .setUrl('responsive.html')
+      .setCaptureElements('body')
+      .capture('responsive');
+  });
+
 });
