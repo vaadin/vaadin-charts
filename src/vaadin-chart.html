@@ -65,8 +65,17 @@ MAGI ADD END -->
 
       /* https://github.com/highcharts/highcharts/issues/4649 */
       /* https://github.com/vaadin/web-components/issues/2171 */
+      /* Constrain SVG size to container size, which prevents
+          overflow if the container is a flex child without
+          explicit overflow attribute */
       .highcharts-container svg {
-        width: 100% !important;
+        max-width: 100%;
+      }
+
+      /* Do not constrain size if an explicit width has been set
+          on the chart */
+      :host([has-explicit-width]) .highcharts-container svg {
+        max-width: unset;
       }
 
       :host(.ff-lt-68) {
@@ -1103,6 +1112,8 @@ MAGI ADD END -->
           } else {
             this.configuration = Highcharts.chart(this.$.chart, options);
           }
+          this.__patchSetSize();
+          this.__updateExplicitSizeAttribute();
 
           // Workaround for https://github.com/highcharts/highcharts/issues/9978
           const elementsToChange = [
@@ -1118,6 +1129,33 @@ MAGI ADD END -->
               el.style.top = '-999em';
             }
           });
+        }
+
+        __patchSetSize() {
+          if (!this.configuration) {
+            return;
+          }
+          // Patch HighCharts.Chart.setSize to get notified about resizes
+          const self = this;
+          const origSetSize = this.configuration.setSize.bind(this.configuration);
+          this.configuration.setSize = function setSize() {
+            origSetSize.apply(this.configuration, arguments);
+            self.__updateExplicitSizeAttribute();
+          };
+        }
+
+        __updateExplicitSizeAttribute() {
+          if (!this.configuration) {
+            return;
+          }
+
+          const hasExplicitWidth = !!this.configuration.options.chart.width;
+
+          if (hasExplicitWidth) {
+            this.setAttribute('has-explicit-width', '');
+          } else {
+            this.removeAttribute('has-explicit-width');
+          }
         }
 
         /** @private */
@@ -1231,6 +1269,7 @@ MAGI ADD END -->
             }
 
             this.configuration.update(this._jsonConfigurationBuffer);
+            this.__updateExplicitSizeAttribute();
             if (this._jsonConfigurationBuffer.credits) {
               this.__updateOrAddCredits(this._jsonConfigurationBuffer.credits);
             }
