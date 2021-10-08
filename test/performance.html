@@ -23,7 +23,7 @@
       before((done) => {
         chart = fixture('performance-demo');
 
-        Polymer.RenderStatus.afterNextRender(this, () => {
+        Polymer.RenderStatus.afterNextRender(chart, () => {
           redrawSpy = sinon.spy(chart.configuration, 'redraw');
           done();
         });
@@ -54,7 +54,7 @@
           ]
         });
 
-        Polymer.RenderStatus.afterNextRender(this, () => {
+        Polymer.RenderStatus.afterNextRender(chart, () => {
           expect(redrawSpy.calledOnce).to.be.true;
           done();
         });
