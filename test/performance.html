@@ -54,7 +54,7 @@
           ]
         });
 
-        Polymer.RenderStatus.afterNextRender(chart, () => {
+        Polymer.RenderStatus.beforeNextRender(chart, () => {
           expect(redrawSpy.callCount).to.equal(1);
           done();
         });
