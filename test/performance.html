@@ -55,7 +55,7 @@
         });
 
         Polymer.RenderStatus.beforeNextRender(chart, () => {
-          expect(redrawSpy.callCount).to.equal(1);
+          expect(redrawSpy.calledOnce).to.be.true;
           done();
         });
       });
