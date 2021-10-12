@@ -10,9 +10,21 @@
 </head>
 
 <body>
-  <test-fixture id="performance-demo">
+  <test-fixture id="chart">
     <template>
       <vaadin-chart></vaadin-chart>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="chart-series-1">
+    <template>
+      <vaadin-chart-series values="[1, 2, 3, 4]"></vaadin-chart-series>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="chart-series-2">
+    <template>
+      <vaadin-chart-series values="[1, 2]"></vaadin-chart-series>
     </template>
   </test-fixture>
 
@@ -20,10 +32,10 @@
     describe('Performance', () => {
       let chart, redrawSpy;
 
-      before((done) => {
-        chart = fixture('performance-demo');
+      beforeEach((done) => {
+        chart = fixture('chart');
 
-        Polymer.RenderStatus.afterNextRender(chart, () => {
+        Polymer.RenderStatus.beforeNextRender(chart, () => {
           redrawSpy = sinon.spy(chart.configuration, 'redraw');
           done();
         });
@@ -57,6 +69,40 @@
         Polymer.RenderStatus.beforeNextRender(chart, () => {
           expect(redrawSpy.calledOnce).to.be.true;
           done();
+        });
+      });
+
+      describe('adding a series', () => {
+        it('should redraw the chart only 1 time', (done) => {
+          const series = fixture('chart-series-1');
+          chart.appendChild(series);
+
+          requestAnimationFrame(() => {
+            expect(redrawSpy.callCount).to.equal(1);
+            done();
+          });
+        });
+      });
+
+      describe('replacing a series', () => {
+        beforeEach((done) => {
+          const series = fixture('chart-series-1');
+          chart.appendChild(series);
+
+          requestAnimationFrame(() => {
+            redrawSpy.reset();
+            done();
+          });
+        });
+
+        it('should redraw the chart only 3 times', (done) => {
+          const series = fixture('chart-series-2');
+          chart.replaceChild(series, chart.firstElementChild);
+
+          requestAnimationFrame(() => {
+            expect(redrawSpy.callCount).to.equal(3);
+            done();
+          });
         });
       });
     });
