@@ -1203,7 +1203,7 @@ MAGI ADD END -->
 
             this.configuration.update(this._jsonConfigurationBuffer, false);
             if (this._jsonConfigurationBuffer.credits) {
-              this.__updateOrAddCredits(this._jsonConfigurationBuffer.credits, false);
+              this.__updateOrAddCredits(this._jsonConfigurationBuffer.credits);
             }
             if (this._jsonConfigurationBuffer.xAxis) {
               this.__updateOrAddAxes(this._jsonConfigurationBuffer.xAxis, true, false);
@@ -1430,11 +1430,11 @@ MAGI ADD END -->
           }, object);
         }
 
-        __updateOrAddCredits(credits, redraw) {
+        __updateOrAddCredits(credits) {
           if (this.configuration.credits) {
-            this.configuration.credits.update(credits, redraw);
+            this.configuration.credits.update(credits);
           } else {
-            this.configuration.addCredits(credits, redraw);
+            this.configuration.addCredits(credits);
           }
         }
 
