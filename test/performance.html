@@ -77,7 +77,7 @@
           const series = fixture('chart-series-1');
           chart.appendChild(series);
 
-          requestAnimationFrame(() => {
+          setTimeout(() => {
             expect(redrawSpy.callCount).to.equal(1);
             done();
           });
@@ -89,7 +89,7 @@
           const series = fixture('chart-series-1');
           chart.appendChild(series);
 
-          requestAnimationFrame(() => {
+          setTimeout(() => {
             redrawSpy.reset();
             done();
           });
@@ -99,7 +99,7 @@
           const series = fixture('chart-series-2');
           chart.replaceChild(series, chart.firstElementChild);
 
-          requestAnimationFrame(() => {
+          setTimeout(() => {
             expect(redrawSpy.callCount).to.equal(3);
             done();
           });
