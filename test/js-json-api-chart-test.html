@@ -136,7 +136,7 @@
         const container = fixture('container');
         const unattachedChart = document.createElement('vaadin-chart');
         unattachedChart.update({title: {text: 'Awesome chart'}});
-        setTimeout(() => {
+        Polymer.RenderStatus.beforeNextRender(chart, () => {
 
           container.appendChild(unattachedChart);
 
@@ -145,7 +145,7 @@
             container.removeChild(unattachedChart);
             done();
           });
-        }, 50);
+        });
       });
 
       it('should not reset chart configured with html', function(done) {
@@ -170,7 +170,7 @@
         const floatingChart = document.createElement('vaadin-chart');
         floatingChart.update({title: {text: 'Awesome title'}, credits: {enabled: false}});
 
-        setTimeout(() => {
+        Polymer.RenderStatus.beforeNextRender(chart, () => {
           div1.appendChild(floatingChart);
 
           onChartRender(floatingChart, () => {
@@ -189,7 +189,7 @@
               done();
             });
           });
-        }, 50);
+        });
       });
 
       it('should inflate whole function strings', function(done) {

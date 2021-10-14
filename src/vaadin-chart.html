@@ -1016,11 +1016,13 @@ MAGI ADD END -->
               this.__setYAxisProps(yAxes, unit, {max: valueMax});
             }
 
-            const seriesConfiguration = this.__updateOrAddSeriesInstance(seriesElement.options, idxOnChildList);
+            const seriesConfiguration = this.__updateOrAddSeriesInstance(seriesElement.options, idxOnChildList, false);
 
             seriesElement.setSeries(seriesConfiguration);
           }
           this.__removeAxisIfEmpty();
+
+          this.configuration.redraw();
         }
 
         __removeSeries(seriesNodes) {
