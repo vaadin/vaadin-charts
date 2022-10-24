@@ -13,6 +13,7 @@
   ],
   "author": "Vaadin Ltd",
   "license": "SEE LICENSE IN LICENSE.txt",
+  "cvdlName": "vaadin-chart",
   "bugs": {
     "url": "https://github.com/vaadin/vaadin-charts/issues"
   },
