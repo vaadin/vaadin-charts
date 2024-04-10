@@ -20,5 +20,6 @@ window.VaadinChartsSuites = [
   'theme-test.html',
   'moving-chart-test.html',
   'chart-in-rtl-test.html',
-  'performance.html'
+  'performance.html',
+  'charts-options-test.html',
 ];
