@@ -44,6 +44,8 @@ See <a href="https://vaadin.com/license/cval-3">the website</a> for the complete
 <script src="../../highcharts/js/es-modules/masters/modules/no-data-to-display.src.js"></script>
 MAGI ADD END -->
 
+<script src="../../dompurify/dist/purify.min.js"></script>
+<script src="../options-sanitizer.js"></script>
 <script src="../chart-deep-merger.js"></script>
 <script src="../chart-exporting.js"></script>
 <script src="../chart-3d-stacking.js"></script>
@@ -71,6 +73,9 @@ MAGI ADD END -->
     if (!Polymer.Element) {
       console.warn(`Unexpected Polymer version ${Polymer.version} is used, expected v2.0.0 or later.`);
     }
+
+    // eslint-disable-next-line no-undef
+    sanitizeHighchartsAPI(Highcharts, DOMPurify);
 
     (() => {
       /**
