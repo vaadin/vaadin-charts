@@ -13,7 +13,7 @@
         "@vaadin/vaadin-element-mixin": "^2.3.2",
         "@vaadin/vaadin-license-checker": "^2.1.0",
         "@vaadin/vaadin-themable-mixin": "^1.5.2",
-        "dompurify": "3.0.9",
+        "dompurify": "2.0.5",
         "highcharts": "6.1.4"
       },
       "devDependencies": {
@@ -4538,9 +4538,9 @@
       }
     },
     "node_modules/dompurify": {
-      "version": "3.0.9",
-      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-3.0.9.tgz",
-      "integrity": "sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ=="
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.0.5.tgz",
+      "integrity": "sha512-DErslJjzL8PoJOkPm3mfQsBPH9Kn05WdGyV7yxX/KpSf9r54TfnUf12HfBYL55KBlM/DUin2y9FkuPlI5OxRlQ=="
     },
     "node_modules/dot-prop": {
       "version": "4.2.1",
@@ -17172,9 +17172,9 @@
       }
     },
     "dompurify": {
-      "version": "3.0.9",
-      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-3.0.9.tgz",
-      "integrity": "sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ=="
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.0.5.tgz",
+      "integrity": "sha512-DErslJjzL8PoJOkPm3mfQsBPH9Kn05WdGyV7yxX/KpSf9r54TfnUf12HfBYL55KBlM/DUin2y9FkuPlI5OxRlQ=="
     },
     "dot-prop": {
       "version": "4.2.1",
