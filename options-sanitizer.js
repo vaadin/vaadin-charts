@@ -10,6 +10,10 @@ window.sanitizeHighchartsAPI = (Highcharts, DOMPurify) => {
       return DOMPurify.sanitize(obj);
     }
 
+    if (typeof obj !== 'object') {
+      return obj;
+    }
+
     Object.keys(obj).forEach((key) => {
       if (typeof obj[key] === 'string') {
         obj[key] = DOMPurify.sanitize(obj[key]);
