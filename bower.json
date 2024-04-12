@@ -34,7 +34,7 @@
   "dependencies": {
     "highcharts": "6.1.4",
     "polymer": "^2.0.0",
-    "dompurify": "3.0.9",
+    "dompurify": "2.0.5",
     "vaadin-themable-mixin": "vaadin/vaadin-themable-mixin#^1.5.2",
     "vaadin-license-checker": "vaadin/license-checker#^2.1.0",
     "vaadin-element-mixin": "vaadin/vaadin-element-mixin#^2.3.2"
