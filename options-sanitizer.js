@@ -1,7 +1,10 @@
 window.sanitizeHighchartsAPI = (Highcharts, DOMPurify) => {
-  DOMPurify.setConfig({
-    FORCE_BODY: true,
-  });
+  var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+  if (isIE11) {
+    DOMPurify.setConfig({
+      FORCE_BODY: true,
+    });
+  }
   // This function will recursively sanitize all strings in the options object
   // Source: https://jsfiddle.net/highcharts/zd3wcm5L/
   function stripHTMLRecurse(obj) {
