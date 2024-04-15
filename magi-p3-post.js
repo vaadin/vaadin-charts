@@ -18,7 +18,9 @@ module.exports = {
     '  then delete this comment!\n' +
     '*/',
 
-    /import '..\/vaadin-chart.js';/g
+    /import '..\/vaadin-chart.js';/g,
+
+    'import \'dompurify/dist/purify.min.js\';'
   ],
 
   to: [
@@ -35,6 +37,8 @@ module.exports = {
     ``,
 
     `import Highcharts from 'highcharts/js/es-modules/masters/highstock.src.js';
-     import '../vaadin-chart.js';`
+     import '../vaadin-chart.js';`,
+
+    `import DOMPurify from 'dompurify';`
   ]
 };
