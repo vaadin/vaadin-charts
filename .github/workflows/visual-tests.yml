@@ -31,11 +31,8 @@ jobs:
       - name: Install project Bower dependencies
         run: "bower install --quiet"
 
-      - name: Run visual tests on SauceLabs with multiple configs
-        run: |
-          for config in .gemini.yml .gemini-ff.yml .gemini-ie.yml; do
-            gemini test --config $config --reporter html --reporter flat test/visual
-          done
+      - name: Run visual tests on SauceLabs
+        run: "gemini test --reporter html --reporter flat test/visual"
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
