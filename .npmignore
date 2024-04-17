@@ -6,6 +6,7 @@ bower_components
 .travis.yml
 .gemini.yml
 .gemini-ie.yml
+.gemini-ff.yml
 deploy_rsa.enc
 wct.conf.js
 analysis.json
