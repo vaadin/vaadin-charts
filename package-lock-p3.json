@@ -1,18 +1,19 @@
 {
   "name": "@vaadin/vaadin-charts",
-  "version": "6.3.3",
+  "version": "6.3.4",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@vaadin/vaadin-charts",
-      "version": "6.3.3",
+      "version": "6.3.4",
       "license": "SEE LICENSE IN LICENSE.txt",
       "dependencies": {
         "@polymer/polymer": "^3.0.0",
         "@vaadin/vaadin-element-mixin": "^2.3.2",
         "@vaadin/vaadin-license-checker": "^2.1.0",
         "@vaadin/vaadin-themable-mixin": "^1.5.2",
+        "dompurify": "2.0.5",
         "highcharts": "6.1.4"
       },
       "devDependencies": {
@@ -4535,6 +4536,11 @@
         "clone": "^2.1.0",
         "parse5": "^4.0.0"
       }
+    },
+    "node_modules/dompurify": {
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.0.5.tgz",
+      "integrity": "sha512-DErslJjzL8PoJOkPm3mfQsBPH9Kn05WdGyV7yxX/KpSf9r54TfnUf12HfBYL55KBlM/DUin2y9FkuPlI5OxRlQ=="
     },
     "node_modules/dot-prop": {
       "version": "4.2.1",
@@ -17164,6 +17170,11 @@
         "clone": "^2.1.0",
         "parse5": "^4.0.0"
       }
+    },
+    "dompurify": {
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.0.5.tgz",
+      "integrity": "sha512-DErslJjzL8PoJOkPm3mfQsBPH9Kn05WdGyV7yxX/KpSf9r54TfnUf12HfBYL55KBlM/DUin2y9FkuPlI5OxRlQ=="
     },
     "dot-prop": {
       "version": "4.2.1",

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>vaadin-chart tests</title>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="./utils.js"></script>
+  <link rel="import" href="../../test-fixture/test-fixture.html" />
+  <link rel="import" href="../vaadin-chart.html" />
+</head>
+
+<body>
+  <test-fixture id="default">
+    <template>
+      <div>
+        <vaadin-chart id="chart">
+        </vaadin-chart>
+        <vaadin-chart id="stockChart" timeline>
+        </vaadin-chart>
+      </div>
+    </template>
+  </test-fixture>
+  <script>
+    describe('DOM sanitization', function() {
+      let chart;
+      let stockChart;
+
+      before(function() {
+        const parent = fixture('default');
+
+        chart = parent.querySelector('#chart');
+        stockChart = parent.querySelector('#stockChart');
+      });
+
+      describe('initial render', function() {
+        before(function(done) {
+          [chart, stockChart].forEach((c) =>
+            c.update(
+              {
+                xAxis: {
+                  categories: [
+                    'Apples',
+                    '<a href="javascript:console.log(document.domain)" class="test-anchors">CATEGORY</a>',
+                    'Bananas',
+                    '<span style="color: orange">Oranges</span>',
+                  ],
+                  labels: {
+                    useHTML: true,
+                  },
+                  title: {
+                    text: '<a href="javascript:console.log(document.domain)" class="test-anchors">Y AXIS</a>',
+                    useHTML: true,
+                  },
+                },
+                title: {
+                  text: '<a href="javascript:console.log(document.domain)" class="test-anchors">TITLE</a>',
+                  useHTML: true,
+                },
+                subtitle: {
+                  text: '<a href="javascript:console.log(document.domain)" class="test-anchors">SUBTITLE</a>',
+                  useHTML: true,
+                },
+                legend: {
+                  enabled: true,
+                  useHTML: true,
+                  title: {
+                    text: '<a href="javascript:console.log(document.domain)" class="test-anchors">LEGEND</a>',
+                  },
+                },
+                tooltip: {
+                  useHTML: true,
+                  pointFormat:
+                    '<a href="javascript:console.log(document.domain)" class="test-anchors">TOOLTIP {point.y}</a>',
+                },
+                series: [
+                  {
+                    data: [1, 4, 3, 5],
+                    type: 'column',
+                  },
+                ],
+              },
+              true
+            )
+          );
+
+          onChartRender(chart, () => {
+            onChartRender(stockChart, done);
+          });
+        });
+
+        it('should not render unsafe html content in chart', function() {
+          const anchors = chart.$.chart.querySelectorAll('.test-anchors');
+          expect(anchors.length).to.equal(6);
+          anchors.forEach((a) => {
+            expect(a.getAttribute('href')).to.be.null;
+          });
+        });
+      });
+
+      describe('after update', function() {
+        beforeEach((done) => {
+          [chart, stockChart].forEach((c) =>
+            c.update(
+              {
+                xAxis: {
+                  categories: [
+                    'Apples',
+                    '<button onclick="javascript:console.log(document.domain)" class="test-button">CATEGORY</button>',
+                    'Bananas',
+                    '<span style="color: orange">Oranges</span>',
+                  ],
+                  labels: {
+                    useHTML: true,
+                  },
+                  title: {
+                    text: '<button onclick="javascript:console.log(document.domain)" class="test-button">TITLE</button>',
+                    useHTML: true,
+                  },
+                },
+                title: {
+                  text: '<button onclick="javascript:console.log(document.domain)" class="test-button">TITLE</button>',
+                  useHTML: true,
+                },
+                subtitle: {
+                  text: '<button onclick="javascript:console.log(document.domain)" class="test-button">SUBTITLE</button>',
+                  useHTML: true,
+                },
+                legend: {
+                  enabled: true,
+                  useHTML: true,
+                  title: {
+                    text: '<button onclick="javascript:console.log(document.domain)" class="test-button">LEGEND</button>',
+                  },
+                },
+                tooltip: {
+                  useHTML: true,
+                  pointFormat:
+                    '<a onclick="javascript:console.log(document.domain)" class="test-button">TOOLTIP {point.y}</a>',
+                },
+                series: [
+                  {
+                    data: [1, 4, 3, 5],
+                    type: 'column',
+                  },
+                ],
+              }
+            )
+          );
+
+          onChartRender(chart, () => {
+            onChartRender(stockChart, done);
+          });
+        });
+
+        it('should not render unsafe html content in chart after update', function() {
+          const buttons = chart.$.chart.querySelectorAll('.test-button');
+          expect(buttons.length).to.equal(5);
+          buttons.forEach((b) => {
+            expect(b.getAttribute('onclick')).to.be.null;
+          });
+        });
+
+        it('should not render unsafe html content calling update methods in differents', function() {
+          chart.configuration.xAxis[0].update({
+            categories: [
+              'Apples',
+              '<button onclick="javascript:console.log(document.domain)" class="test-button-updated">CATEGORY</button>',
+              'Bananas',
+              '<span style="color: orange">Oranges</span>',
+            ],
+            title: {
+              text: '<button onclick="javascript:console.log(document.domain)" class="test-button-updated">TITLE</button>',
+              useHTML: true,
+            },
+          });
+          ['title', 'subtitle', 'legend', 'tooltip'].forEach((key) => {
+            chart.configuration[key].update({
+              text: '<button onclick="javascript:console.log(document.domain)" class="test-button-updated">TITLE</button>',
+              useHTML: true,
+            });
+          });
+          const buttons = chart.$.chart.querySelectorAll('.test-button-updated');
+          buttons.forEach((b) => {
+            expect(b.getAttribute('onclick')).to.be.null;
+          });
+        });
+      });
+    });
+  </script>
+</body>
