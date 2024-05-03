@@ -20,7 +20,7 @@ module.exports = {
 
     /import '..\/vaadin-chart.js';/g,
 
-    'import \'dompurify/dist/purify.min.js\';'
+    'import \'DOMPurify/dist/purify.min.js\';'
   ],
 
   to: [
