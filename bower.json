@@ -1,9 +1,14 @@
 {
   "name": "vaadin-charts",
   "homepage": "https://vaadin.com/charts",
-  "authors": ["Vaadin Ltd"],
+  "authors": [
+    "Vaadin Ltd"
+  ],
   "description": "vaadin-charts",
-  "main": ["vaadin-chart.html", "vaadin-chart-series.html"],
+  "main": [
+    "vaadin-chart.html",
+    "vaadin-chart-series.html"
+  ],
   "keywords": [
     "Vaadin",
     "vaadin-chart",
