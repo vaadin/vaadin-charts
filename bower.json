@@ -52,6 +52,7 @@
     "iron-iconset-svg": "^2.1.0",
     "iron-pages": "2.0.0",
     "paper-button": "2.0.0",
+    "test-fixture": "^3.0.0",
     "vaadin-split-layout": "^4.2.0",
     "vaadin-icons": "^4.2.0",
     "vaadin-button": "^2.3.0-alpha1",
