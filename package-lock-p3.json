@@ -10,7 +10,6 @@
       "license": "SEE LICENSE IN LICENSE.txt",
       "dependencies": {
         "@polymer/polymer": "^3.0.0",
-        "@polymer/test-fixture": "^3.0.0-pre.21",
         "@vaadin/vaadin-element-mixin": "^2.3.2",
         "@vaadin/vaadin-license-checker": "^2.1.0",
         "@vaadin/vaadin-themable-mixin": "^1.5.2",
@@ -25,6 +24,7 @@
         "@polymer/iron-iconset-svg": "^3.0.0",
         "@polymer/iron-pages": "^3.0.0",
         "@polymer/paper-button": "^3.0.0",
+        "@polymer/test-fixture": "^4.0.0",
         "@vaadin/vaadin-button": "^2.3.0-alpha1",
         "@vaadin/vaadin-demo-helpers": "^3.1.0",
         "@vaadin/vaadin-grid": "^5.6.0",
@@ -1399,9 +1399,10 @@
       "dev": true
     },
     "node_modules/@polymer/test-fixture": {
-      "version": "3.0.0-pre.21",
-      "resolved": "https://registry.npmjs.org/@polymer/test-fixture/-/test-fixture-3.0.0-pre.21.tgz",
-      "integrity": "sha512-IxzUe6YzaORzUksafHAXHprV29YncOJgr0+1zNAifl0/f+cb5iAd4IWUrnsnVFHG5UGTLjvis5RgV6vvIZPDrA=="
+      "version": "4.0.2",
+      "resolved": "https://registry.npmjs.org/@polymer/test-fixture/-/test-fixture-4.0.2.tgz",
+      "integrity": "sha512-tLX8tFE4mkc4p84YG5239G0hbgTVv2irZYrSyO0OblUqIRbRoCPmbydm3HRFQkJeAB3rPCtyeZ2roJULsmTG3A==",
+      "dev": true
     },
     "node_modules/@types/babel-generator": {
       "version": "6.25.5",
