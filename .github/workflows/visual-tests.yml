@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node 12.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 12.x
 
       - name: Check out the source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install latest npm
         # magi-cli 1.0 requires npm 7 or higher
@@ -39,7 +39,7 @@ jobs:
 
       - name: Publish the Visual Tests failures report as an Artifact for this Workflow run
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Visual tests failures report
           path: gemini-report/
