@@ -1,12 +1,12 @@
 {
   "name": "@vaadin/vaadin-charts",
-  "version": "6.3.6",
+  "version": "6.3.7",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@vaadin/vaadin-charts",
-      "version": "6.3.6",
+      "version": "6.3.7",
       "license": "SEE LICENSE IN LICENSE.txt",
       "dependencies": {
         "@polymer/polymer": "^3.0.0",
