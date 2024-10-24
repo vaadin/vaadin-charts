@@ -28,6 +28,9 @@ module.exports = {
         platformName: 'Android',
         platformVersion: '11.0',
         browserName: 'Chrome',
+        'appium:chromeDriver': {
+          w3c: false,
+        },
       },
       'iOS Simulator/iphone@10.3', // should be 9.x, but SauceLabs does not provide that
       'macOS 11/safari@latest',
