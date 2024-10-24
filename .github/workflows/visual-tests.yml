@@ -8,10 +8,10 @@ jobs:
     name: Polymer 2 on SauceLabs
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node 12.x
+      - name: Set up Node 14.x
         uses: actions/setup-node@v4
         with:
-          node-version: 12.x
+          node-version: 14.x
 
       - name: Check out the source code
         uses: actions/checkout@v4
