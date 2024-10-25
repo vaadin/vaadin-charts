@@ -13,7 +13,7 @@
         "@vaadin/vaadin-element-mixin": "^2.3.2",
         "@vaadin/vaadin-license-checker": "^2.1.0",
         "@vaadin/vaadin-themable-mixin": "^1.5.2",
-        "dompurify": "2.0.5",
+        "dompurify": "2.5.7",
         "highcharts": "6.1.4"
       },
       "devDependencies": {
@@ -4409,9 +4409,9 @@
       }
     },
     "node_modules/dompurify": {
-      "version": "2.0.5",
-      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.0.5.tgz",
-      "integrity": "sha512-DErslJjzL8PoJOkPm3mfQsBPH9Kn05WdGyV7yxX/KpSf9r54TfnUf12HfBYL55KBlM/DUin2y9FkuPlI5OxRlQ=="
+      "version": "2.5.7",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-2.5.7.tgz",
+      "integrity": "sha512-2q4bEI+coQM8f5ez7kt2xclg1XsecaV9ASJk/54vwlfRRNQfDqJz2pzQ8t0Ix/ToBpXlVjrRIx7pFC/o8itG2Q=="
     },
     "node_modules/dot-prop": {
       "version": "4.2.1",
