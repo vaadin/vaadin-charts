@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@vaadin/vaadin-component-dev-dependencies": "^3.2.0",
-    "gemini": "^4.0.0",
+    "gemini": "^7.5.2",
     "gemini-sauce": "^1.0.0",
     "gemini-polyserve": "^1.0.0"
   }
