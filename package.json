@@ -44,9 +44,11 @@
     "preversion": "magi update-version"
   },
   "devDependencies": {
-    "@vaadin/vaadin-component-dev-dependencies": "^3.2.0",
-    "gemini": "^4.0.0",
-    "gemini-sauce": "^1.0.0",
-    "gemini-polyserve": "^1.0.0"
+    "@vaadin/vaadin-component-dev-dependencies": "^3.2.0"
+  },
+  "overrides": {
+    "wct-sauce": {
+      "sauce-connect-launcher": "vaadin/sauce-connect-launcher#upgrade-sauce-connect-5"
+    }
   }
 }
