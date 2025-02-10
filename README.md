@@ -111,6 +111,9 @@ If the license is valid, it will be saved to the local storage of the browser an
 
 ## Running tests from the command line
 
+> [!WARNING]
+> Running tests locally from the CLI does not work due to outdated dependencies. Run tests via SauceLabs or in the browser instead.
+
 1. When in the `vaadin-charts` directory, run `polymer test`
 
 
